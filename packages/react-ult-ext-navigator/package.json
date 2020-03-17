@@ -1,0 +1,43 @@
+{
+  "name": "react-ult-ext-navigator",
+  "version": "0.1.4",
+  "description": "ULT navigation extension",
+  "keywords": [
+    "cross-platform",
+    "react",
+    "native",
+    "stack",
+    "ult"
+  ],
+  "homepage": "https://ult.dev",
+  "types": "dist/web/Navigator.d.ts",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "url": "https://github.com/kat-tax/ult.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kat-tax/ult/issues"
+  },
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm i && npm run build"
+  },
+  "peerDependencies": {
+    "react-ult": "^0.1.4"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "reactxp-experimental-navigation": "1.0.14",
+    "rebound": "^0.1.0"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^12.12.14",
+    "@types/react-dom": "^16.9.5",
+    "@types/react-native": "^0.60.23",
+    "react-ult": "^0.1.4",
+    "typescript": "^3.7.2"
+  },
+  "gitHead": "1256e6549432aa4eba9603b1a7ab8b92c3ff01c7"
+}
