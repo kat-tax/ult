@@ -10,6 +10,10 @@
     "macos": "react-native run-macos",
     "windows": "react-native run-windows"
   },
+  "browserslist": {
+    "production": ">0.2%, not dead, not op_mini all",
+    "development": "last 2 versions"
+  },
   "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
@@ -19,9 +23,13 @@
     "react-ult": "^0.1.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.7",
-    "@babel/runtime": "^7.8.7",
+    "@babel/core": "^7.9.0",
+    "@babel/runtime": "^7.9.2",
+    "@types/node": "^13.9.2",
+    "@types/react-redux": "^7.1.7",
     "metro-react-native-babel-preset": "^0.59.0",
-    "rnpm-plugin-windows": "^0.5.1-0"
+    "rnpm-plugin-windows": "^0.5.1-0",
+    "typescript": "^3.8.3",
+    "ult-scripts": "0.2.1"
   }
 }

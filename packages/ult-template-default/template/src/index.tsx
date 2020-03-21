@@ -6,6 +6,6 @@ const main = () => (
   <AppFrame/>
 );
 
-UserInterface.registerRootView('demo', main);
+UserInterface.registerRootView('HelloWorld', main);
 UserInterface.setMainView(main());
 App.initialize(true, true);

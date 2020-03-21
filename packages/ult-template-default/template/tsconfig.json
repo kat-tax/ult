@@ -1,0 +1,26 @@
+{
+  "include": [
+    "./src/*"
+  ],
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "jsx": "preserve",
+    "target": "es2015",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "strict": false,
+    "allowJs": true,
+    "noEmit": true,
+    "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "module": "esnext",
+    "moduleResolution": "node"
+  }
+}
