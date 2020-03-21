@@ -1,7 +1,7 @@
 {
   "name": "ult-scripts",
   "description": "Configuration and scripts for ULT",
-  "version": "0.1.7",
+  "version": "0.2.0",
   "license": "MIT",
   "types": "./lib/ult.d.ts",
   "bin": {
@@ -34,7 +34,7 @@
     "webpack": "4.42.0",
     "webpack-dev-server": "3.10.3",
     "webpack-manifest-plugin": "2.2.0",
-    "workbox-webpack-plugin": "5.0.0"
+    "workbox-webpack-plugin": "4.3.1"
   },
   "devDependencies": {
     "react": "^16.13.0",
