@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const chalk = require('chalk');
+
 const native = require('../lib/native');
 const install = require('../lib/install');
 const windows = require('../lib/windows');
@@ -28,11 +29,9 @@ async function main() {
     await install(name, base);
     console.log('Finishing installation...');
     await windows(name, base);
-    console.log(chalk.green(`Successfully created ${name}!`));
-    console.log();
+    console.log(chalk.green(`Successfully created ${name}!\n`));
     console.log(chalk.bold('1) Navigate to your project:'));
-    console.log(`$ ${chalk.yellow(`cd ${name.toLowerCase()}`)}`);
-    console.log();
+    console.log(`$ ${chalk.yellow(`cd ${name.toLowerCase()}`)}\n`);
     console.log(chalk.bold('2) Choose a command below:'));
     console.log(`$ ${chalk.yellow('npm run web')}`);
     console.log(`$ ${chalk.yellow('npm run android')}`);

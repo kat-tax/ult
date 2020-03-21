@@ -1,0 +1,27 @@
+{
+  "name": "HelloWorld",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "web": "ult-scripts start",
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "macos": "react-native run-macos",
+    "windows": "react-native run-windows"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-native": "^0.60.0-0",
+    "react-native-macos": "^0.60.0-microsoft.57",
+    "react-native-windows": "^0.60.0-vnext.150",
+    "react-ult": "^0.1.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/runtime": "^7.8.7",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "rnpm-plugin-windows": "^0.5.1-0"
+  }
+}

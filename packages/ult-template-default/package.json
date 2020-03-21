@@ -1,0 +1,9 @@
+{
+  "name": "ult-template-default",
+  "description": "The default project template for ULT.",
+  "version": "0.0.1",
+  "files": [
+    "template",
+    "template.config.js"
+  ]
+}

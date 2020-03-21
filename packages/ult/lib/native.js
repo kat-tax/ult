@@ -8,7 +8,7 @@ module.exports = (name, template) => {
     const cmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';
     spawn(cmd, [
       'react-native', 'init', name,
-      '--template', `ult-tpl-${template}`,
+      '--template', `ult-template-${template}`,
       '--version', REACT_NATIVE_VERSION,
     ], {cwd})
       .once('exit', e => (e === 0 ? resolve() : reject(e)));
