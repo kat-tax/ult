@@ -1,6 +1,6 @@
 {
   "name": "ult",
-  "version": "0.2.2",
+  "version": "0.2.6",
   "description": "The Ultimate Dev Stack",
   "homepage": "https://ult.dev",
   "license": "MIT",
@@ -18,7 +18,6 @@
     "default": "node ./bin/ult.js"
   },
   "dependencies": {
-    "@react-native-community/cli": "^2.10.0",
     "chalk": "^3.0.0"
   },
   "repository": {

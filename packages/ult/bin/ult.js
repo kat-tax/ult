@@ -23,8 +23,7 @@ async function main() {
   try {
     console.log('Creating new project, please wait...');
     await native(name, template);
-    // console.log('Setting up Windows...');
-    // await windows(name, template);
+    await windows();
     console.log(chalk.green(`Successfully created ${name}!\n`));
     console.log(chalk.bold('1) Navigate to your project:'));
     console.log(`$ ${chalk.yellow(`cd ${name.toLowerCase()}`)}\n`);
