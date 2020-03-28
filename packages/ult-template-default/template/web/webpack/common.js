@@ -26,7 +26,7 @@ const buildConfig = (_env, argv) => ({
 
 module.exports = {
   buildConfig,
-  APP_PATH,
   DIST_PATH,
+  APP_PATH,
   WEB_PATH,
 };
