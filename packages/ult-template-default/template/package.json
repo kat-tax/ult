@@ -25,7 +25,7 @@
     "react-native": "0.60.0",
     "react-native-windows": "^0.60.0-vnext.154",
     "react-native-macos": "^0.60.0-microsoft.57",
-    "react-ult": "^0.1.5"
+    "reactxp": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
