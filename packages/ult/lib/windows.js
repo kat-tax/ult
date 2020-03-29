@@ -5,7 +5,7 @@ module.exports = (name, _template) => {
   return new Promise((resolve, reject) => {
     const cmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';
     const cwd = path.resolve(process.cwd(), name.toLowerCase());
-    spawn(cmd, ['react-native', 'windows', '--template', 'beta'], {cwd})
+    spawn(cmd, ['react-native', 'windows'], {cwd})
       .once('exit', e => (e === 0 ? resolve() : reject(e)));
   });
 };
