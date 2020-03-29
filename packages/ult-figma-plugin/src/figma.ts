@@ -4,7 +4,7 @@ export function getCode(component) {
   const {code, deps, styles} = getContent([...component.children]);
   const root = {tag: 'View', slug: 'root', style: getStyle(component)};
   const name = getName(component.name);
-  const dependencies = ['Style', 'View', ...deps].join(', ');
+  const dependencies = ['Styles', 'View', ...deps].join(', ');
   const writer = new CodeBlockWriter({
     newLine: "\r\n",         // default: "\n"
     useTabs: false,          // default: false
@@ -51,7 +51,7 @@ export function getCode(component) {
       .keys(root.style)
       .filter(c => root.style[c] !== undefined);
     if (properties.length > 0) {
-      writer.write(`${root.slug}: Style.create${root.tag}Style({`).indent(() => {
+      writer.write(`${root.slug}: Styles.create${root.tag}Style({`).indent(() => {
         properties.forEach(property => {
           const value = root.style[property];
           writer.write(`${property}: `);
@@ -73,7 +73,7 @@ export function getCode(component) {
           .keys(child.style)
           .filter(c => child.style[c] !== undefined);
         if (properties.length > 0) {
-          writer.write(`${slug}: Style.create${child.tag}Style({`).indent(() => {
+          writer.write(`${slug}: Styles.create${child.tag}Style({`).indent(() => {
             properties.forEach(property => {
               const value = child.style[property];
               writer.write(`${property}: `);

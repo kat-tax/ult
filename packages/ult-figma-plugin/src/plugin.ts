@@ -3,7 +3,7 @@ import {getCode, getTarget} from './figma';
 figma.ui.on('message', onMessage);
 figma.on('selectionchange', onUpdate);
 figma.on('currentpagechange', onNavigate);
-figma.showUI(__html__, {width: 350, height: 650});
+figma.showUI(__html__, {width: 340, height: 440});
 setInterval(onUpdate, 500);
 
 let EDITOR_LOADED = false;
