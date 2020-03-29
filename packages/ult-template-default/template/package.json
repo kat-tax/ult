@@ -20,10 +20,10 @@
     "development": "last 2 versions"
   },
   "dependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-native": "0.61.5",
-    "react-native-windows": "^0.61.0-beta.75",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-native": "0.60.0",
+    "react-native-windows": "^0.60.0-vnext.154",
     "react-native-macos": "^0.60.0-microsoft.57",
     "react-ult": "^0.1.4"
   },

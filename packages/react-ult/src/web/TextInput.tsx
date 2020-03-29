@@ -249,6 +249,7 @@ export class TextInput extends React.Component<Types.TextInputProps, TextInputSt
           title={this.props.title}
           tabIndex={this.props.tabIndex}
           className={className}
+          autoCapitalize={this.props.autoCapitalize}
           autoCorrect={this.props.autoCorrect === false ? 'off' : undefined}
           spellCheck={spellCheck}
           disabled={!editable}

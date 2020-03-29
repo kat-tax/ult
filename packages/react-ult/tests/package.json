@@ -10,30 +10,26 @@
     "android": "node node_modules/react-native/local-cli/cli.js run-android",
     "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
     "windows": "node node_modules/react-native/local-cli/cli.js run-windows",
-    "web": "webpack-dev-server",
-    "lint": "tslint --project tsconfig.json -r tslint.json -r ./node_modules/tslint-microsoft-contrib"
+    "web": "webpack-dev-server"
   },
   "dependencies": {
-    "react": "16.12.0",
-    "react-dom": "16.12.0",
-    "react-native": "0.61.4",
-    "react-native-windows": "^0.60.0-vnext.75",
-    "react-ult": "^0.0.5"
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "react-native": "0.60.0",
+    "react-native-windows": "^0.60.0-vnext.154",
+    "react-ult": "^0.1.4"
   },
   "devDependencies": {
-    "@types/node": "^12.12.12",
-    "@types/webpack": "^4.41.0",
+    "@types/node": "^13.9.5",
+    "@types/webpack": "^4.41.8",
     "awesome-typescript-loader": "^5.2.1",
-    "rnpm-plugin-windows": "^0.3.8",
+    "rnpm-plugin-windows": "^0.6.1",
     "source-map-loader": "^0.2.4",
     "sync-glob": "^1.4.0",
-    "ts-node": "^8.5.2",
-    "tslint": "^5.20.1",
-    "tslint-loader": "^3.5.4",
-    "tslint-microsoft-contrib": "^6.2.0",
-    "typescript": "^3.7.2",
-    "webpack": "^4.41.2",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.9.0"
+    "ts-node": "^8.8.1",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   }
 }
