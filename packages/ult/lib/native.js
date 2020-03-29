@@ -1,4 +1,5 @@
 const spawn = require('child_process').spawn;
+
 module.exports = (name, template) => {
   return new Promise((resolve, reject) => {
     const cmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';

@@ -22,9 +22,9 @@
   "dependencies": {
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-native": "^0.60.0-0",
+    "react-native": "0.61.5",
+    "react-native-windows": "^0.61.0-beta.75",
     "react-native-macos": "^0.60.0-microsoft.57",
-    "react-native-windows": "^0.60.0-vnext.150",
     "react-ult": "^0.1.4"
   },
   "devDependencies": {
@@ -32,6 +32,7 @@
     "@babel/runtime": "^7.9.2",
     "@babel/plugin-proposal-decorators": "7.7.4",
     "@babel/preset-env": "7.7.4",
+    "@react-native-community/cli": "3.2.1",
     "@types/node": "^13.9.2",
     "@types/react": "^16.9.26",
     "babel-loader": "8.0.6",
