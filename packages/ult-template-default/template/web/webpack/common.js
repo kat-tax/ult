@@ -11,7 +11,10 @@ const WEB_PATH = path.join(ROOT_PATH, 'web');
 
 const buildConfig = (_env, argv) => ({
   entry: ROOT_PATH,
-  resolve: {extensions: ['.ts', '.tsx', '.js']},
+  resolve: {
+    extensions: ['.ts', '.tsx', '.js'],
+    modules: [APP_PATH, 'node_modules'],
+  },
   module: {
     rules: [
       {test: /\.tsx?$/, loader: 'babel-loader', include: APP_PATH}
