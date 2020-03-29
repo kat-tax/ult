@@ -42,12 +42,12 @@ After everything installs, use `npm run [task]`
 ### Technologies
 
 - [TypeScript](https://www.typescriptlang.org/) *(language)*
-- [Webpack](https://webpack.js.org/) *(web bundler)*
 - [Metro](https://facebook.github.io/metro/) *(native bundler)*
+- [Webpack](https://webpack.js.org/) *(web bundler)*
 - [React](https://reactjs.org/) *(view abstraction)*
 - [ReactXP](https://microsoft.github.io/reactxp/) *(cross-platform layer)*
 - [ReactNative](https://reactnative.dev/) & [RNW](https://microsoft.github.io/react-native-windows/) *(native bridge)*
-- Bring your own state library!
+- **Bring your own state library!**
   - [Redux](https://redux.js.org/)
   - [MobX](https://mobx.js.org/)
   - [XState](https://xstate.js.org/)
