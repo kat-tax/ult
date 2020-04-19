@@ -8,8 +8,8 @@
     "ios": "react-native run-ios",
     "macos": "react-native run-macos",
     "windows": "react-native run-windows",
-    "web": "cross-env platform=web webpack-dev-server --config=web/webpack/development.js --progress --colors --mode=development",
-    "build:web": "cross-env platform=web webpack --config=web/webpack/production.js --progress --colors --mode=production",
+    "web": "ult-scripts start",
+    "build-web": "ult-scripts build",
     "build-android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "build-ios": "react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ios/app/src/main/assets/index.ios.bundle --assets-dest ios/app/src/main/res",
     "build-macos": "react-native bundle --platform macos --dev false --entry-file index.js --bundle-output macos/app/src/main/assets/index.macos.bundle --assets-dest macos/app/src/main/res",
@@ -22,10 +22,8 @@
   "dependencies": {
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-native": "0.60.0",
-    "react-native-windows": "^0.60.0-vnext.154",
-    "react-native-macos": "^0.60.0-microsoft.57",
-    "reactxp": "^2.0.0"
+    "react-native": "0.61.5",
+    "react-ult": "^0.1.5"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
@@ -35,17 +33,9 @@
     "@react-native-community/cli": "^3.2.1",
     "@types/node": "^13.9.2",
     "@types/react": "^16.9.26",
-    "babel-loader": "^8.0.6",
     "cross-env": "^6.0.3",
-    "compression-webpack-plugin": "^3.0.0",
-    "fork-ts-checker-webpack-plugin": "^3.1.1",
-    "html-webpack-plugin": "^3.2.0",
     "metro-react-native-babel-preset": "^0.59.0",
-    "rnpm-plugin-windows": "^0.5.1-0",
     "typescript": "^3.8.3",
-    "webpack": "4.41.2",
-    "webpack-cli": "3.3.10",
-    "webpack-dev-server": "3.9.0",
-    "webpack-merge": "4.2.2"
+    "ult-scripts": "0.2.1"
   }
 }

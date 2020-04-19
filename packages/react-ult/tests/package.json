@@ -1,0 +1,35 @@
+{
+  "name": "tests",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "sync": "sync-glob '../dist' ./node_modules/react-ult/dist",
+    "web-watch": "webpack --progress --colors --watch",
+    "rn-watch": "tsc --watch",
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "android": "node node_modules/react-native/local-cli/cli.js run-android",
+    "ios": "node node_modules/react-native/local-cli/cli.js run-ios",
+    "windows": "node node_modules/react-native/local-cli/cli.js run-windows",
+    "web": "webpack-dev-server"
+  },
+  "dependencies": {
+    "react": "16.9.0",
+    "react-dom": "16.9.0",
+    "react-native": "0.60.0",
+    "react-native-windows": "^0.60.0-vnext.154",
+    "react-ult": "^0.1.4"
+  },
+  "devDependencies": {
+    "@types/node": "^13.9.5",
+    "@types/webpack": "^4.41.8",
+    "awesome-typescript-loader": "^5.2.1",
+    "rnpm-plugin-windows": "^0.6.1",
+    "source-map-loader": "^0.2.4",
+    "sync-glob": "^1.4.0",
+    "ts-node": "^8.8.1",
+    "typescript": "^3.8.3",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}

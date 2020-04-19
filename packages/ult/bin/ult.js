@@ -7,8 +7,8 @@ const windows = require('../lib/windows');
 const args = process.argv.slice(2);
 const opts = args.find(e => e.slice(0,2) !== '--');
 const flag = args.find(e => e.slice(0,2) === '--');
-const name = opts ? opts.trim() : '';
 const template = flag ? flag.substr(2) : 'default';
+const name = opts ? opts.trim() : '';
 
 async function main() {
   if (!name)
@@ -23,7 +23,7 @@ async function main() {
   try {
     console.log('Creating new project, please wait...');
     await native(name, template);
-    console.log('Adding Windows project...');
+    console.log('Initializing Windows project...');
     await windows(name, template);
     // TODO: MacOS project generation
     console.log(chalk.green(`Successfully created ${name}!\n`));

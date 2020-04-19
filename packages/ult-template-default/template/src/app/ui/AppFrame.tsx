@@ -1,5 +1,5 @@
 import React from 'react';
-import {Styles, View, Text} from 'reactxp';
+import {Styles, View, Text} from 'react-ult';
 
 export function AppFrame() {
   return (
@@ -12,12 +12,12 @@ export function AppFrame() {
 }
 
 export const styles = {
-  root: Styles.createViewStyle({
+  root: Styles.View({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   }),
-  welcome: Styles.createTextStyle({
+  welcome: Styles.Text({
     textAlign: 'center',
   }),
 };
