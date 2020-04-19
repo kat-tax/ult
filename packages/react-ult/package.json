@@ -1,6 +1,6 @@
 {
   "name": "react-ult",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "React compatibility layer that powers ULT",
   "keywords": [
     "cross-platform",
@@ -27,8 +27,7 @@
   "peerDependencies": {
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-native": "^0.60.0",
-    "react-native-windows": "^0.60.0-vnext.154"
+    "react-native": "^0.61.5"
   },
   "dependencies": {
     "lodash": "^4.17.15",
