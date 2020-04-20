@@ -1,6 +1,6 @@
 {
   "name": "react-ult-ext-virtualize",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "ULT virtualized list extension",
   "keywords": [
     "cross-platform",
@@ -24,7 +24,7 @@
     "prepublishOnly": "npm i && npm run build"
   },
   "peerDependencies": {
-    "react-ult": "^0.1.6"
+    "react-ult": "^0.1.7"
   },
   "dependencies": {
     "lodash": "^4.17.15"
@@ -34,7 +34,7 @@
     "@types/node": "^13.9.5",
     "@types/react-dom": "^16.9.5",
     "@types/react-native": "^0.60.31",
-    "react-ult": "^0.1.6",
+    "react-ult": "^0.1.7",
     "tslib": "^1.10.0",
     "typescript": "^3.8.3"
   }
