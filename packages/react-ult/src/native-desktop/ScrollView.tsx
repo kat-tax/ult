@@ -6,10 +6,12 @@
 
 import * as React from 'react';
 import * as RN from 'react-native';
+
 import EventHelpers from '../native-common/utils/EventHelpers';
-import {ScrollView as ScrollViewBase} from '../native-common/ScrollView';
+import { ScrollView as ScrollViewBase } from '../native-common/ScrollView';
 
 type ScrollViewProps = RN.ScrollViewProps & React.Props<RN.ScrollView>;
+
 const isNativeWindows = RN.Platform.OS === 'windows';
 
 export class ScrollView extends ScrollViewBase {
@@ -32,7 +34,7 @@ export class ScrollView extends ScrollViewBase {
         if (this.props.onKeyPress) {
             this.props.onKeyPress(EventHelpers.toKeyboardEvent(e));
         }
-    }
+    };
 }
 
 export default ScrollView;

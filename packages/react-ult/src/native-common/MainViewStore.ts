@@ -9,16 +9,16 @@ import * as React from 'react';
 import SubscribableEvent from 'subscribableevent';
 
 export class MainViewStore extends SubscribableEvent<() => void> {
-  private _mainView: React.ReactElement<any> | undefined;
+    private _mainView: React.ReactElement<any> | undefined;
 
-  getMainView() {
-    return this._mainView;
-  }
+    getMainView(): React.ReactElement<any> | undefined {
+        return this._mainView;
+    }
 
-  setMainView(view: React.ReactElement<any>) {
-    this._mainView = view;
-    this.fire();
-  }
+    setMainView(view: React.ReactElement<any>): void {
+        this._mainView = view;
+        this.fire();
+    }
 }
 
 export default new MainViewStore();

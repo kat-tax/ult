@@ -9,56 +9,59 @@
  * but the user has not intereacted with the app in the last 60 seconds
  */
 
-import * as Ult from '../common/Interfaces';
+import * as RX from '../common/Interfaces';
+
 import AppVisibilityUtils from './utils/AppVisibilityUtils';
 
-export class UserPresence extends Ult.UserPresence {
-  private _isPresent: boolean;
-  constructor() {
-    super();
-    // Handle test environment where document is not defined.
-    if (typeof(document) !== 'undefined') {
-      this._isPresent = AppVisibilityUtils.hasFocusAndActive();
-      AppVisibilityUtils.onFocusedEvent.subscribe(this._handleFocus.bind(this));
-      AppVisibilityUtils.onBlurredEvent.subscribe(this._handleBlur.bind(this));
-      AppVisibilityUtils.onWakeUpEvent.subscribe(this._handleWakeup.bind(this));
-      AppVisibilityUtils.onIdleEvent.subscribe(this._handleIdle.bind(this));
-    } else {
-      this._isPresent = false;
+export class UserPresence extends RX.UserPresence {
+    private _isPresent: boolean;
+
+    constructor() {
+        super();
+        // Handle test environment where document is not defined.
+        if (typeof(document) !== 'undefined') {
+            this._isPresent = AppVisibilityUtils.hasFocusAndActive();
+            AppVisibilityUtils.onFocusedEvent.subscribe(this._handleFocus.bind(this));
+            AppVisibilityUtils.onBlurredEvent.subscribe(this._handleBlur.bind(this));
+            AppVisibilityUtils.onWakeUpEvent.subscribe(this._handleWakeup.bind(this));
+            AppVisibilityUtils.onIdleEvent.subscribe(this._handleIdle.bind(this));
+        } else {
+            this._isPresent = false;
+        }
     }
-  }
 
-  isUserPresent(): boolean {
-    // Handle test environment where document is not defined.
-    if (typeof(document) !== 'undefined') {
-      return this._isPresent;
-    } else {
-      return true;
+    isUserPresent(): boolean {
+        // Handle test environment where document is not defined.
+        if (typeof(document) !== 'undefined') {
+            return this._isPresent;
+        } else {
+            return true;
+        }
     }
-  }
 
-  private _setUserPresent(isPresent: boolean) {
-    if (this._isPresent !== isPresent) {
-      this._isPresent = isPresent;
-      this.userPresenceChangedEvent.fire(isPresent);
+    private _setUserPresent(isPresent: boolean): void {
+        if (this._isPresent !== isPresent) {
+            this._isPresent = isPresent;
+
+            this.userPresenceChangedEvent.fire(isPresent);
+        }
     }
-  }
 
-  private _handleWakeup(): void {
-    this._setUserPresent(true);
-  }
+    private _handleWakeup(): void {
+        this._setUserPresent(true);
+    }
 
-  private _handleIdle(): void {
-    this._setUserPresent(false);
-  }
+    private _handleIdle(): void {
+        this._setUserPresent(false);
+    }
 
-  private _handleFocus(): void {
-    this._setUserPresent(true);
-  }
+    private _handleFocus(): void {
+        this._setUserPresent(true);
+    }
 
-  private _handleBlur(): void {
-    this._setUserPresent(false);
-  }
+    private _handleBlur(): void {
+        this._setUserPresent(false);
+    }
 }
 
 const instance = new UserPresence();

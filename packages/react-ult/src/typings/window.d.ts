@@ -1,5 +1,5 @@
 
 interface Window {
-  // Allow us to put arbitrary objects in window
-  [key: string]: any;
+    // Allow us to put arbitrary objects in window
+    [key: string]: any;
 }

@@ -4,12 +4,12 @@
  * MacOS implementation of Input interface.
  */
 
-import * as Ult from '../common/Interfaces';
+import * as RX from '../common/Interfaces';
 
-export class Input extends Ult.Input {
-  constructor() {
-    super();
-  }
+export class Input extends RX.Input {
+    constructor() {
+        super();
+    }
 }
 
 export default new Input();

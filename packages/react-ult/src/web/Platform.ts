@@ -4,17 +4,17 @@
  * Web-specific implementation of Platform interface.
  */
 
-import * as Ult from '../common/Interfaces';
+import * as RX from '../common/Interfaces';
 
-export class Platform extends Ult.Platform {
-  getType(): Ult.Types.PlatformType {
-    return 'web';
-  }
+export class Platform extends RX.Platform {
+    getType(): RX.Types.PlatformType {
+        return 'web';
+    }
 
-  select<T>(specifics: {[platform in Ult.Types.PlatformType | 'default']?: T}): T | undefined {
-    const platformType = this.getType();
-    return platformType in specifics ? specifics[platformType] : specifics.default;
-  }
+    select<T>(specifics: { [ platform in RX.Types.PlatformType | 'default' ]?: T }): T | undefined {
+        const platformType = this.getType();
+        return platformType in specifics ? specifics[platformType] : specifics.default;
+    }
 }
 
 export default new Platform();

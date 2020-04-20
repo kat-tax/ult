@@ -7,28 +7,30 @@
 
 import React = require('react');
 import RN = require('react-native');
+
 import AccessibilityUtil from '../native-common/AccessibilityUtil';
 import ActivityIndicatorImpl from '../native-common/ActivityIndicator';
 import AlertImpl from '../native-common/Alert';
-import {CommonAnimatedClasses, makeAnimated} from '../native-common/Animated';
+import { CommonAnimatedClasses, makeAnimated } from '../native-common/Animated';
 import ClipboardImpl from '../native-common/Clipboard';
 import ImageImpl from '../native-common/Image';
 import InputImpl from '../native-desktop/Input';
-import UltInterfaces = require('../common/Interfaces');
+import RXInterfaces = require('../common/Interfaces');
 import InternationalImpl from '../native-common/International';
 import LinkingImpl from '../native-common/Linking';
 import LocationImpl from '../common/Location';
 import ModalImpl from '../native-common/Modal';
-import UltModuleInterface = require('../common/ModuleInterface');
+import RXModuleInterface = require('../common/ModuleInterface');
 import PickerImpl from '../native-common/Picker';
 import PlatformImpl from '../native-common/Platform';
 import PopupImpl from '../native-common/Popup';
 import ScrollViewImpl from '../native-desktop/ScrollView';
 import StorageImpl from '../native-common/Storage';
 import StylesImpl from '../native-common/Styles';
-import UltTypes = require('../common/Types');
+import RXTypes = require('../common/Types');
 import UserInterfaceImpl from '../native-common/UserInterface';
 import UserPresenceImpl from '../native-common/UserPresence';
+
 import AccessibilityImpl from './Accessibility';
 import AccessibilityPlatformUtil from './AccessibilityUtil';
 import AppImpl from './App';
@@ -46,90 +48,90 @@ AccessibilityUtil.setAccessibilityPlatformUtil(AccessibilityPlatformUtil);
 // See web/ULT.tsx for more details.
 
 module ULT {
-  export type Accessibility = UltInterfaces.Accessibility;
-  export let Accessibility: UltInterfaces.Accessibility = AccessibilityImpl;
-  export type ActivityIndicator = UltInterfaces.ActivityIndicator;
-  export let ActivityIndicator: typeof UltInterfaces.ActivityIndicator = ActivityIndicatorImpl;
-  export type Alert = UltInterfaces.Alert;
-  export let Alert: UltInterfaces.Alert = AlertImpl;
-  export type App = UltInterfaces.App;
-  export let App: UltInterfaces.App = AppImpl;
-  export type Button = UltInterfaces.Button;
-  export let Button: typeof UltInterfaces.Button = ButtonImpl;
-  export type Picker = UltInterfaces.Picker;
-  export let Picker: typeof UltInterfaces.Picker = PickerImpl;
-  export type Clipboard = UltInterfaces.Clipboard;
-  export let Clipboard: UltInterfaces.Clipboard = ClipboardImpl;
-  export type GestureView = UltInterfaces.GestureView;
-  export let GestureView: typeof UltInterfaces.GestureView = GestureViewImpl;
-  export type Image = UltInterfaces.Image;
-  export let Image: UltInterfaces.ImageConstructor = ImageImpl;
-  export type Input = UltInterfaces.Input;
-  export let Input: UltInterfaces.Input = InputImpl;
-  export type International = UltInterfaces.International;
-  export let International: UltInterfaces.International = InternationalImpl;
-  export type Link = UltInterfaces.Link;
-  export let Link: typeof UltInterfaces.Link = LinkImpl;
-  export type Linking = UltInterfaces.Linking;
-  export let Linking: UltInterfaces.Linking = LinkingImpl;
-  export type Location = UltInterfaces.Location;
-  export let Location: UltInterfaces.Location = LocationImpl;
-  export type Modal = UltInterfaces.Modal;
-  export let Modal: UltInterfaces.Modal = ModalImpl;
-  export type Platform = UltInterfaces.Platform;
-  export let Platform: UltInterfaces.Platform = PlatformImpl;
-  export type Popup = UltInterfaces.Popup;
-  export let Popup: UltInterfaces.Popup = PopupImpl;
-  export type ScrollView = UltInterfaces.ScrollView;
-  export let ScrollView: UltInterfaces.ScrollViewConstructor = ScrollViewImpl;
-  export type StatusBar = UltInterfaces.StatusBar;
-  export let StatusBar: UltInterfaces.StatusBar = StatusBarImpl;
-  export type Storage = UltInterfaces.Storage;
-  export let Storage: UltInterfaces.Storage = StorageImpl;
-  export type Styles = UltInterfaces.Styles;
-  export let Styles: UltInterfaces.Styles = StylesImpl;
-  export type Text = UltInterfaces.Text;
-  export let Text: typeof UltInterfaces.Text = TextImpl;
-  export type TextInput = UltInterfaces.TextInput;
-  export let TextInput: typeof UltInterfaces.TextInput = TextInputImpl;
-  export type UserInterface = UltInterfaces.UserInterface;
-  export let UserInterface: UltInterfaces.UserInterface = UserInterfaceImpl;
-  export type UserPresence = UltInterfaces.UserPresence;
-  export let UserPresence: UltInterfaces.UserPresence = UserPresenceImpl;
-  export type View = UltInterfaces.View;
-  export let View: typeof UltInterfaces.View = ViewImpl;
+    export type Accessibility = RXInterfaces.Accessibility;
+    export let Accessibility: RXInterfaces.Accessibility = AccessibilityImpl;
+    export type ActivityIndicator = RXInterfaces.ActivityIndicator;
+    export let ActivityIndicator: typeof RXInterfaces.ActivityIndicator = ActivityIndicatorImpl;
+    export type Alert = RXInterfaces.Alert;
+    export let Alert: RXInterfaces.Alert = AlertImpl;
+    export type App = RXInterfaces.App;
+    export let App: RXInterfaces.App = AppImpl;
+    export type Button = RXInterfaces.Button;
+    export let Button: typeof RXInterfaces.Button = ButtonImpl;
+    export type Picker = RXInterfaces.Picker;
+    export let Picker: typeof RXInterfaces.Picker = PickerImpl;
+    export type Clipboard = RXInterfaces.Clipboard;
+    export let Clipboard: RXInterfaces.Clipboard = ClipboardImpl;
+    export type GestureView = RXInterfaces.GestureView;
+    export let GestureView: typeof RXInterfaces.GestureView = GestureViewImpl;
+    export type Image = RXInterfaces.Image;
+    export let Image: RXInterfaces.ImageConstructor = ImageImpl;
+    export type Input = RXInterfaces.Input;
+    export let Input: RXInterfaces.Input = InputImpl;
+    export type International = RXInterfaces.International;
+    export let International: RXInterfaces.International = InternationalImpl;
+    export type Link = RXInterfaces.Link;
+    export let Link: typeof RXInterfaces.Link = LinkImpl;
+    export type Linking = RXInterfaces.Linking;
+    export let Linking: RXInterfaces.Linking = LinkingImpl;
+    export type Location = RXInterfaces.Location;
+    export let Location: RXInterfaces.Location = LocationImpl;
+    export type Modal = RXInterfaces.Modal;
+    export let Modal: RXInterfaces.Modal = ModalImpl;
+    export type Platform = RXInterfaces.Platform;
+    export let Platform: RXInterfaces.Platform = PlatformImpl;
+    export type Popup = RXInterfaces.Popup;
+    export let Popup: RXInterfaces.Popup = PopupImpl;
+    export type ScrollView = RXInterfaces.ScrollView;
+    export let ScrollView: RXInterfaces.ScrollViewConstructor = ScrollViewImpl;
+    export type StatusBar = RXInterfaces.StatusBar;
+    export let StatusBar: RXInterfaces.StatusBar = StatusBarImpl;
+    export type Storage = RXInterfaces.Storage;
+    export let Storage: RXInterfaces.Storage = StorageImpl;
+    export type Styles = RXInterfaces.Styles;
+    export let Styles: RXInterfaces.Styles = StylesImpl;
+    export type Text = RXInterfaces.Text;
+    export let Text: typeof RXInterfaces.Text = TextImpl;
+    export type TextInput = RXInterfaces.TextInput;
+    export let TextInput: typeof RXInterfaces.TextInput = TextInputImpl;
+    export type UserInterface = RXInterfaces.UserInterface;
+    export let UserInterface: RXInterfaces.UserInterface = UserInterfaceImpl;
+    export type UserPresence = RXInterfaces.UserPresence;
+    export let UserPresence: RXInterfaces.UserPresence = UserPresenceImpl;
+    export type View = RXInterfaces.View;
+    export let View: typeof RXInterfaces.View = ViewImpl;
 
-  const windowsAnimatedClasses =  {
-    ...CommonAnimatedClasses,
-    View: RN.Animated.createAnimatedComponent(ViewImpl),
-    TextInput:  RN.Animated.createAnimatedComponent(TextInputImpl),
-    Text:  RN.Animated.createAnimatedComponent(TextImpl)
-  };
+    const windowsAnimatedClasses =  {
+        ...CommonAnimatedClasses,
+        View: RN.Animated.createAnimatedComponent(ViewImpl),
+        TextInput:  RN.Animated.createAnimatedComponent(TextInputImpl),
+        Text:  RN.Animated.createAnimatedComponent(TextImpl),
+    };
 
-  export const Animated = makeAnimated(windowsAnimatedClasses, true);
-  export import CommonProps = UltTypes.CommonProps;
-  export import CommonStyledProps = UltTypes.CommonStyledProps;
-  export import Stateless = UltTypes.Stateless;
-  export import Types = UltTypes;
+    export const Animated = makeAnimated(windowsAnimatedClasses, true);
+    export import CommonProps = RXTypes.CommonProps;
+    export import CommonStyledProps = RXTypes.CommonStyledProps;
+    export import Stateless = RXTypes.Stateless;
+    export import Types = RXTypes;
 
-  export import Component = React.Component;
-  export import ComponentBase = UltTypes.ComponentBase;
-  export import createElement = React.createElement;
-  export import Children = React.Children;
-  export let __spread = (React as any).__spread;
-  export import Fragment = React.Fragment;
+    export import Component = React.Component;
+    export import ComponentBase = RXTypes.ComponentBase;
+    export import createElement = React.createElement;
+    export import Children = React.Children;
+    export let __spread = (React as any).__spread;
+    export import Fragment = React.Fragment;
 }
 
 // -- STRANGE THINGS GOING ON HERE --
 // See web/ULT.tsx for more details.
 
-let _ultImplementsUltInterface: typeof UltModuleInterface.ULT = ULT;
-_ultImplementsUltInterface = _ultImplementsUltInterface;
+let _rxImplementsRxInterface: typeof RXModuleInterface.ULT = ULT;
+_rxImplementsRxInterface = _rxImplementsRxInterface;
 export = ULT;
 
 /*
-var ult = module.exports;
-Object.keys(ult)
-  .filter(key => ult[key] && ult[key].prototype instanceof React.Component && !ult[key].displayName)
-  .forEach(key => ult[key].displayName = 'Ult.' + key + '');
+var rx = module.exports;
+Object.keys(rx)
+    .filter(key => rx[key] && rx[key].prototype instanceof React.Component && !rx[key].displayName)
+    .forEach(key => rx[key].displayName = 'RX.' + key + '');
 */

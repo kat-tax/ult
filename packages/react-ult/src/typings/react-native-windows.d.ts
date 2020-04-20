@@ -6,68 +6,68 @@
  */
 
 declare module 'react-native-windows' {
-  import * as React from 'react';
-  import * as RN from 'react-native';
+    import * as React from 'react';
+    import * as RN from 'react-native';
 
-  interface TextWindowsSelectionChangeEventData {
-    selectedText: string;
-  }
+    interface TextWindowsSelectionChangeEventData {
+        selectedText: string;
+    }
 
-  interface TextWindowsProps {
-    children?: React.ReactNode;
-    onSelectionChange?: (e: RN.NativeSyntheticEvent<TextWindowsSelectionChangeEventData>) => void;
-  }
+    interface TextWindowsProps {
+        children?: React.ReactNode;
+        onSelectionChange?: (e: RN.NativeSyntheticEvent<TextWindowsSelectionChangeEventData>) => void;
+    }
 
-  interface AccessibilityEvents {
-    onAccessibilityTap?: (e: RN.NativeSyntheticEvent<any>) => void;
-  }
+    interface AccessibilityEvents {
+        onAccessibilityTap?: (e: RN.NativeSyntheticEvent<any>) => void;
+    }
 
-  interface ViewProps {
-    tabNavigation?: 'cycle' | 'local';
-  }
+    interface ViewProps {
+        tabNavigation?: 'cycle' | 'local';
+    }
 
-  //
-  // Focusable view related declarations
-  // ----------------------------------------------------------------------
-  type FocusableWindowsProps<P = {}> = P & {
-    ref?: (current: any) => void;
-    isTabStop?: boolean;
-    tabIndex?: number;
-    tabNavigation?: 'local' | 'cycle' | 'once';
-    disableSystemFocusVisuals?: boolean;
-    onFocus?: Function;
-    onBlur?: Function;
-    handledKeyDownKeys?: number[];
-    handledKeyUpKeys?: number[];
-    onKeyDown?: Function;
-    onKeyUp?: Function;
-    componentRef?: Function;
-  };
+    //
+    // Focusable view related declarations
+    // ----------------------------------------------------------------------
+    type FocusableWindowsProps<P = {}> = P & {
+        ref?: (current: any) => void;
+        isTabStop?: boolean;
+        tabIndex?: number;
+        tabNavigation?: 'local' | 'cycle' | 'once';
+        disableSystemFocusVisuals?: boolean;
+        onFocus?: Function;
+        onBlur?: Function;
+        handledKeyDownKeys?: number[];
+        handledKeyUpKeys?: number[];
+        onKeyDown?: Function;
+        onKeyUp?: Function;
+        componentRef?: Function;
+    };
 
-  interface FocusableWindows<P> extends RN.ReactNativeBaseComponent<FocusableWindowsProps<P>, {}>{
-    focus(): void;
-    blur(): void;
-  }
+    interface FocusableWindows<P> extends RN.ReactNativeBaseComponent<FocusableWindowsProps<P>, {}>{
+        focus(): void;
+        blur(): void;
+    }
 
-  type FocusableComponentConstructor<P> = new() => FocusableWindows<P>;
+    type FocusableComponentConstructor<P> = new() => FocusableWindows<P>;
 
-  function createFocusableComponent<P>(Component: any): FocusableComponentConstructor<P>;
+    function createFocusableComponent<P>(Component: any): FocusableComponentConstructor<P>;
 
-  type HyperlinkWindowsProps = RN.TextProps & {
-    onFocus?: Function;
-    onBlur?: Function;
-  }
+    type HyperlinkWindowsProps = RN.TextProps & {
+        onFocus?: Function;
+        onBlur?: Function;
+    };
 
-  class HyperlinkWindows extends RN.ReactNativeBaseComponent<HyperlinkWindowsProps, {}> {
-    focus(): void;
-    blur(): void;
-  }
+    class HyperlinkWindows extends RN.ReactNativeBaseComponent<HyperlinkWindowsProps, {}> {
+        focus(): void;
+        blur(): void;
+    }
 
-  type RootInputViewWindowsProps = RN.ViewProps & {
-    onAccelKeyDown?: Function;
-    onAccelKeyUp?: Function;
-    onTouchStartCapture?: Function;
-  }
+    type RootInputViewWindowsProps = RN.ViewProps & {
+        onAccelKeyDown?: Function;
+        onAccelKeyUp?: Function;
+        onTouchStartCapture?: Function;
+    };
 
-  class RootInputViewWindows extends RN.ReactNativeBaseComponent<RootInputViewWindowsProps, {}> {}
+    class RootInputViewWindows extends RN.ReactNativeBaseComponent<RootInputViewWindowsProps, {}> {}
 }

@@ -5,16 +5,17 @@
  */
 
 import * as RN from 'react-native';
-import * as Ult from '../common/Interfaces';
 
-export class Clipboard extends Ult.Clipboard  {
-  setText(text: string) {
-    RN.Clipboard.setString(text);
-  }
+import * as RX from '../common/Interfaces';
 
-  getText(): Promise<string> {
-    return RN.Clipboard.getString();
-  }
+export class Clipboard extends RX.Clipboard  {
+    setText(text: string): void {
+        RN.Clipboard.setString(text);
+    }
+
+    getText(): Promise<string> {
+        return RN.Clipboard.getString();
+    }
 }
 
 export default new Clipboard();
