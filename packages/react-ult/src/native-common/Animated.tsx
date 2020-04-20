@@ -1,0 +1,226 @@
+/**
+ * Animated.tsx
+ *
+ * Copyright (c) Microsoft Corporation. All rights reserved.
+ * Licensed under the MIT license.
+ *
+ * RN-specific implementation of the cross-platform Animation abstraction.
+ */
+
+import * as React from 'react';
+import * as RN from 'react-native';
+
+import Easing from '../common/Easing';
+import * as RX from '../common/Interfaces';
+
+import RXImage from './Image';
+import RXText from './Text';
+import RXTextInput from './TextInput';
+import RXView from './View';
+
+export interface AnimatedClasses {
+    Image: typeof RN.ReactNativeBaseComponent;
+    Text: typeof RN.ReactNativeBaseComponent;
+    TextInput: typeof RN.ReactNativeBaseComponent;
+    View: typeof RN.ReactNativeBaseComponent;
+}
+
+export const CommonAnimatedClasses: AnimatedClasses = {
+    Image: RN.Animated.createAnimatedComponent(RXImage) as any,
+    Text: RN.Animated.createAnimatedComponent(RXText) as any,
+    TextInput: RN.Animated.createAnimatedComponent(RXTextInput) as any,
+    View: RN.Animated.createAnimatedComponent(RXView)  as any,
+};
+
+let animatedClasses: AnimatedClasses = CommonAnimatedClasses;
+
+class AnimatedWrapper<P, T, C> extends RX.AnimatedComponent<P, T, C> {
+    protected _mountedComponent: RN.ReactNativeBaseComponent<any, any> | undefined;
+
+    setNativeProps(props: P) {
+        if (this._mountedComponent && this._mountedComponent.setNativeProps) {
+            this._mountedComponent.setNativeProps(props);
+        }
+    }
+
+    focus() {
+        const innerComponent = this._mountedComponent ? (this._mountedComponent as any)._component : undefined;
+        if (innerComponent && innerComponent.focus) {
+            innerComponent.focus();
+        }
+    }
+
+    requestFocus() {
+        const innerComponent = this._mountedComponent ? (this._mountedComponent as any)._component : undefined;
+        if (innerComponent && innerComponent.requestFocus) {
+            innerComponent.requestFocus();
+        }
+    }
+
+    blur() {
+        const innerComponent = this._mountedComponent ? (this._mountedComponent as any)._component : undefined;
+        if (innerComponent && innerComponent.blur) {
+            innerComponent.blur();
+        }
+    }
+
+    protected _onMount = (component: RN.ReactNativeBaseComponent<any, any> | null) => {
+        this._mountedComponent = component || undefined;
+    };
+}
+
+class AnimatedImage extends AnimatedWrapper<RX.Types.AnimatedImageProps, RX.Types.Stateless, RX.AnimatedImage> {
+    render() {
+        const additionalProps = { ref: this._onMount, style: this.props.style };
+        return (
+            <animatedClasses.Image
+                { ...this.props }
+                { ... additionalProps }
+            >
+                { this.props.children }
+            </animatedClasses.Image>
+        );
+    }
+}
+
+class AnimatedText extends AnimatedWrapper<RX.Types.AnimatedTextProps, RX.Types.Stateless, RX.AnimatedText>  {
+    render() {
+        const additionalProps = { ref: this._onMount, style: this.props.style };
+        return (
+            <animatedClasses.Text
+                { ...this.props }
+                { ... additionalProps }
+            >
+                { this.props.children }
+            </animatedClasses.Text>
+        );
+    }
+}
+
+class AnimatedTextInput extends AnimatedWrapper<RX.Types.AnimatedTextInputProps, RX.Types.Stateless, RX.AnimatedTextInput>   {
+    render() {
+        const additionalProps = {ref: this._onMount, style: this.props.style };
+        return (
+            <animatedClasses.TextInput
+                { ...this.props }
+                { ... additionalProps }
+            >
+                { this.props.children }
+            </animatedClasses.TextInput>
+        );
+    }
+}
+
+class AnimatedView extends AnimatedWrapper<RX.Types.AnimatedViewProps, RX.Types.Stateless, RX.AnimatedView> {
+    setFocusRestricted(restricted: boolean) {
+        // Nothing to do.
+    }
+
+    setFocusLimited(limited: boolean) {
+        // Nothing to do.
+    }
+
+    render() {
+        const additionalProps = {ref: this._onMount, style: this.props.style };
+        return (
+            <animatedClasses.View
+                { ...this.props }
+                { ... additionalProps }
+            >
+                { this.props.children }
+            </animatedClasses.View>
+        );
+    }
+}
+
+class FocusRestrictedAnimatedView extends AnimatedView {
+    setFocusRestricted(restricted: boolean) {
+        const innerComponent = this._mountedComponent ? (this._mountedComponent as any)._component : undefined;
+        if (innerComponent && innerComponent.setFocusRestricted) {
+            innerComponent.setFocusRestricted(restricted);
+        }
+    }
+
+    setFocusLimited(limited: boolean) {
+        const innerComponent = this._mountedComponent ? (this._mountedComponent as any)._component : undefined;
+        if (innerComponent && innerComponent.setFocusLimited) {
+            innerComponent.setFocusLimited(limited);
+        }
+    }
+}
+
+const timing = function(
+        value: RX.Types.AnimatedValue,
+        config: RX.Types.Animated.TimingAnimationConfig): RX.Types.Animated.CompositeAnimation {
+
+    let isLooping = config.loop !== undefined && config.loop !== null;
+    return {
+        start: function(onEnd?: RX.Types.Animated.EndCallback): void {
+            function animate(): void {
+                const timingConfig: RN.Animated.TimingAnimationConfig = {
+                    toValue: config.toValue,
+                    easing: config.easing ? config.easing.function : undefined,
+                    duration: config.duration,
+                    delay: config.delay,
+                    isInteraction: config.isInteraction,
+                    useNativeDriver: config.useNativeDriver as any,
+                };
+
+                RN.Animated.timing(value as RN.Animated.Value, timingConfig).start(result => {
+                    if (onEnd) {
+                        onEnd(result);
+                    }
+
+                    if (isLooping) {
+                        value.setValue(config.loop!.restartFrom);
+                        // Hack to get into the loop
+                        animate();
+                    }
+                });
+            }
+
+            // Trigger animation loop (hack for now)
+            animate();
+        },
+
+        stop: function(): void {
+            isLooping = false;
+            (value as any).stopAnimation();
+        },
+    };
+};
+
+export const AnimatedCommon = {
+    Easing: Easing as RX.Types.Animated.Easing,
+
+    timing: timing,
+    parallel: RN.Animated.parallel,
+    sequence: RN.Animated.sequence,
+
+    Value: RN.Animated.Value,
+    createValue: (initialValue: number) => new RN.Animated.Value(initialValue),
+    interpolate: (animatedValue: RX.Types.AnimatedValue, inputRange: number[], outputRange: string[]) => animatedValue.interpolate({
+        inputRange: inputRange,
+        outputRange: outputRange,
+    }),
+};
+
+export function makeAnimated(nativeAnimatedClasses: AnimatedClasses, useFocusRestrictedView?: boolean): RX.Animated {
+    if (nativeAnimatedClasses) {
+        animatedClasses = nativeAnimatedClasses;
+    }
+
+    const animated: RX.Animated = {
+        // platform specific animated components
+        Image: AnimatedImage,
+        Text: AnimatedText,
+        TextInput: AnimatedTextInput,
+        View: useFocusRestrictedView ? FocusRestrictedAnimatedView :  AnimatedView,
+        // common stuff
+        ...AnimatedCommon,
+    };
+
+    return animated;
+}
+
+export default AnimatedCommon;
