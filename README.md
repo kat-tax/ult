@@ -45,7 +45,7 @@ After everything installs, use `npm run [task]`
 - [Metro](https://facebook.github.io/metro/) *(native bundler)*
 - [Webpack](https://webpack.js.org/) *(web bundler)*
 - [React](https://reactjs.org/) *(view abstraction)*
-- [ReactNative](https://reactnative.dev/) & [RNW](https://microsoft.github.io/react-native-windows/) *(native bridge)*
+- [ReactNative](https://reactnative.dev/) & [RNW](https://microsoft.github.io/react-native-windows/) *(native UI)*
 - **Bring your own state library!**
   - [Redux](https://redux.js.org/)
   - [MobX](https://mobx.js.org/)
