@@ -1,0 +1,41 @@
+{
+  "name": "HelloWorld",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "react-native start --reset-cache",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "macos": "react-native run-macos",
+    "windows": "react-native run-windows",
+    "web": "ult-scripts start",
+    "build-web": "ult-scripts build",
+    "build-android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
+    "build-ios": "react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ios/app/src/main/assets/index.ios.bundle --assets-dest ios/app/src/main/res",
+    "build-macos": "react-native bundle --platform macos --dev false --entry-file index.js --bundle-output macos/app/src/main/assets/index.macos.bundle --assets-dest macos/app/src/main/res",
+    "build-windows": "react-native bundle --platform windows --dev false --entry-file index.js --bundle-output windows/app/src/main/assets/index.windows.bundle --assets-dest windows/app/src/main/res"
+  },
+  "browserslist": {
+    "production": ">0.2%, not dead, not op_mini all",
+    "development": "last 2 versions"
+  },
+  "dependencies": {
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-native": "^0.61.5",
+    "react-ult": "^2.0.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/runtime": "^7.9.2",
+    "@babel/plugin-proposal-decorators": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@react-native-community/cli": "^3.2.1",
+    "@types/node": "^13.9.2",
+    "@types/react": "^16.9.26",
+    "cross-env": "^6.0.3",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "typescript": "^3.8.3",
+    "ult-scripts": "0.2.1"
+  }
+}

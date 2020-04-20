@@ -1,0 +1,28 @@
+{
+    "compilerOptions": {
+        "forceConsistentCasingInFileNames": true,
+        "strictPropertyInitialization": true,
+        "experimentalDecorators": true,
+        "noImplicitReturns": true,
+        "strictNullChecks": true,
+        "noImplicitThis": true,
+        "noImplicitAny": true,
+        "skipLibCheck": true,
+        "declaration": true,
+        "noResolve": false,
+        "target": "es5",
+        "module": "commonjs",
+        "outDir": "dist",
+        "jsx": "react",
+        "lib": ["es2015.promise", "es5", "DOM"]
+    },
+
+    "include": [
+        "src/**/*"
+    ],
+
+    "exclude": [
+        "node_modules",
+        "dist"
+    ]
+}

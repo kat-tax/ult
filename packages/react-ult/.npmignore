@@ -1,0 +1,9 @@
+/node_modules
+/src/.vs
+/src/bin
+/src/obj
+/samples
+/extensions
+/docs
+*.user
+.eslintrc
