@@ -46,7 +46,7 @@ setSortAndFilterFunc(FocusManager.sortAndFilterAutoFocusCandidates);
 // -- STRANGE THINGS GOING ON HERE --
 //
 // 1) 'export type Foo = FooImpl; export var Foo = FooImpl;'
-//    If the var 'Foo' was exported alone then the name 'RX.Foo' would not be valid in a type position: 'function takesFoo(foo: RX.Foo)'.
+//    If the var 'Foo' was exported alone then the name 'ULT.Foo' would not be valid in a type position: 'function takesFoo(foo: ULT.Foo)'.
 //    To avoid this problem, the type information is also exported. TypeScript will merge the var and type together (if the types match).
 
 module ULT {
@@ -125,9 +125,9 @@ AppImpl.activationStateChangedEvent.subscribe(newState => {
 // -- STRANGE THINGS GOING ON HERE --
 //
 // 1) Unused variable
-//    This forces TypeScript to type-check the above RX module against the common RX interface. Missing/incorrect types will cause errors.
-//    Note: RX must be a module so 'RX.Foo' can be a valid value ('new RX.Foo') and valid type ('var k: RX.Foo'), but modules cannot
-//    implement an interface. If RX was a class or variable then it could directly check this, but then 'RX.Foo' would not be a valid type.
+//    This forces TypeScript to type-check the above ULT module against the common ULT interface. Missing/incorrect types will cause errors.
+//    Note: ULT must be a module so 'ULT.Foo' can be a valid value ('new ULT.Foo') and valid type ('var k: ULT.Foo'), but modules cannot
+//    implement an interface. If ULT was a class or variable then it could directly check this, but then 'ULT.Foo' would not be a valid type.
 
 let _ultImplementsUltInterface: typeof UltModuleInterface.ULT = ULT;
 _ultImplementsUltInterface = _ultImplementsUltInterface;
@@ -135,8 +135,8 @@ export = ULT;
 
 /*
 
-var rx = module.exports;
-Object.keys(rx)
-    .filter(key => rx[key] && rx[key].prototype instanceof React.Component && !rx[key].displayName)
-    .forEach(key => rx[key].displayName = 'RX.' + key + '');
+var ult = module.exports;
+Object.keys(ult)
+    .filter(key => ult[key] && ult[key].prototype instanceof React.Component && !ult[key].displayName)
+    .forEach(key => ult[key].displayName = 'ULT.' + key + '');
 */

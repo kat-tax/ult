@@ -127,8 +127,8 @@ _ultImplementsUltInterface = _ultImplementsUltInterface;
 export = ULT;
 
 /*
-var rx = module.exports;
-Object.keys(rx)
-    .filter(key => rx[key] && rx[key].prototype instanceof React.Component && !rx[key].displayName)
-    .forEach(key => rx[key].displayName = 'RX.' + key + '');
+var ult = module.exports;
+Object.keys(ult)
+    .filter(key => ult[key] && ult[key].prototype instanceof React.Component && !ult[key].displayName)
+    .forEach(key => ult[key].displayName = 'ULT.' + key + '');
 */
