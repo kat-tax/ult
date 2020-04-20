@@ -35,7 +35,7 @@ const _activeOpacityAnimationDuration = 0;
 const _hideUnderlayTimeout = 100;
 const _underlayInactive = 'transparent';
 
-const safeInsetsStyle = Styles.createViewStyle({ flex: 1, alignSelf: 'stretch' });
+const safeInsetsStyle = Styles.View({ flex: 1, alignSelf: 'stretch' });
 
 function noop() { /* noop */ }
 
@@ -388,7 +388,7 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
                 if (this._defaultOpacityValue !== opacityValueFromProps) {
                     this._defaultOpacityValue = opacityValueFromProps;
                     this._opacityAnimatedValue = new Animated.Value(this._defaultOpacityValue);
-                    this._opacityAnimatedStyle = Styles.createAnimatedViewStyle({
+                    this._opacityAnimatedStyle = Styles.AnimatedView({
                         opacity: this._opacityAnimatedValue,
                     });
                 }

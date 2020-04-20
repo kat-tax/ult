@@ -13,7 +13,7 @@ import Styles from '../native-common/Styles';
 import { Text as CommonText } from '../native-common/Text';
 
 const _styles = {
-    defaultText: Styles.createTextStyle({
+    defaultText: Styles.Text({
         includeFontPadding: false,
         textAlignVertical: 'center',
     }),
