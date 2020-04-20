@@ -5,20 +5,22 @@
  */
 
 import SubscribableEvent from 'subscribableevent';
+
 import * as Ult from '../common/Interfaces';
 
 export abstract class Accessibility extends Ult.Accessibility {
-  abstract isScreenReaderEnabled(): boolean;
-  screenReaderChangedEvent = new SubscribableEvent<(isEnabled: boolean) => void>();
+    abstract isScreenReaderEnabled(): boolean;
 
-  isHighContrastEnabled(): boolean {
-    return false;
-  }
+    screenReaderChangedEvent = new SubscribableEvent<(isEnabled: boolean) => void>();
 
-  newAnnouncementReadyEvent = new SubscribableEvent<(announcement: string) => void>();
-  announceForAccessibility(announcement: string): void {
-    this.newAnnouncementReadyEvent.fire(announcement);
-  }
+    isHighContrastEnabled(): boolean {
+        return false;
+    }
+
+    newAnnouncementReadyEvent = new SubscribableEvent<(announcement: string) => void>();
+    announceForAccessibility(announcement: string): void {
+        this.newAnnouncementReadyEvent.fire(announcement);
+    }
 }
 
 export default Accessibility;

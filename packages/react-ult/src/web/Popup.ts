@@ -6,31 +6,35 @@
 
 import assert from '../common/assert';
 import * as Ult from '../common/Interfaces';
+
 import FrontLayerViewManager from './FrontLayerViewManager';
 
 export class Popup extends Ult.Popup {
-  show(options: Ult.Types.PopupOptions, popupId: string, delay?: number): boolean {
-    assert(popupId, `popupId must be a non-empty string. Actual: ${popupId}`);
-    return FrontLayerViewManager.showPopup(options, popupId, delay);
-  }
+    show(options: Ult.Types.PopupOptions, popupId: string, delay?: number): boolean {
+        assert(popupId, `popupId must be a non-empty string. Actual: ${ popupId }`);
 
-  autoDismiss(popupId: string, delay?: number): void {
-    assert(popupId, `popupId must be a non-empty string. Actual: ${popupId}`);
-    FrontLayerViewManager.autoDismissPopup(popupId, delay);
-  }
+        return FrontLayerViewManager.showPopup(options, popupId, delay);
+    }
 
-  dismiss(popupId: string): void {
-    assert(popupId, `popupId must be a non-empty string. Actual: ${popupId}`);
-    FrontLayerViewManager.dismissPopup(popupId);
-  }
+    autoDismiss(popupId: string, delay?: number): void {
+        assert(popupId, `popupId must be a non-empty string. Actual: ${ popupId }`);
 
-  dismissAll(): void {
-    FrontLayerViewManager.dismissAllPopups();
-  }
+        FrontLayerViewManager.autoDismissPopup(popupId, delay);
+    }
 
-  isDisplayed(popupId?: string): boolean {
-    return FrontLayerViewManager.isPopupDisplayed(popupId);
-  }
+    dismiss(popupId: string): void {
+        assert(popupId, `popupId must be a non-empty string. Actual: ${ popupId }`);
+
+        FrontLayerViewManager.dismissPopup(popupId);
+    }
+
+    dismissAll(): void {
+        FrontLayerViewManager.dismissAllPopups();
+    }
+
+    isDisplayed(popupId?: string): boolean {
+        return FrontLayerViewManager.isPopupDisplayed(popupId);
+    }
 }
 
 export default new Popup();

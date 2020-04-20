@@ -7,29 +7,29 @@
 import * as Ult from '../common/Interfaces';
 
 export class StatusBar extends Ult.StatusBar {
-  isOverlay(): boolean {
-    return false;
-  }
+    isOverlay(): boolean {
+        return false;
+    }
 
-  setBarStyle(style: 'default' | 'light-content' | 'dark-content', animated: boolean): void {
-    // Nothing to do on Web
-  }
+    setBarStyle(style: 'default' | 'light-content' | 'dark-content', animated: boolean): void {
+        // Nothing to do on Web
+    }
 
-  setHidden(hidden: boolean, showHideTransition: 'fade' | 'slide'): void {
-    // Nothing to do on Web
-  }
+    setHidden(hidden: boolean, showHideTransition: 'fade' | 'slide'): void {
+        // Nothing to do on Web
+    }
 
-  setNetworkActivityIndicatorVisible(value: boolean): void {
-    // Nothing to do on the web
-  }
+    setNetworkActivityIndicatorVisible(value: boolean): void {
+        // Nothing to do on the web
+    }
 
-  setBackgroundColor(color: string, animated: boolean): void {
-    // Nothing to do on the web
-  }
+    setBackgroundColor(color: string, animated: boolean): void {
+        // Nothing to do on the web
+    }
 
-  setTranslucent(translucent: boolean): void {
-    // Nothing to do on the web
-  }
+    setTranslucent(translucent: boolean): void {
+        // Nothing to do on the web
+    }
 }
 
 export default new StatusBar();

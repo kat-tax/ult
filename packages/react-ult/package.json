@@ -1,6 +1,6 @@
 {
   "name": "react-ult",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "React compatibility layer that powers ULT",
   "keywords": [
     "cross-platform",

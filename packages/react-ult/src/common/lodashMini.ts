@@ -12,14 +12,14 @@ import pull = require('lodash/pull');
 import sortBy = require('lodash/sortBy');
 
 export interface Dictionary<T> {
-  [index: string]: T;
+    [index: string]: T;
 }
 
 export {
-  clone,
-  compact,
-  filter,
-  isEqual,
-  pull,
-  sortBy
+    clone,
+    compact,
+    filter,
+    isEqual,
+    pull,
+    sortBy,
 };

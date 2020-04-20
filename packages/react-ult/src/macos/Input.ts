@@ -7,9 +7,9 @@
 import * as Ult from '../common/Interfaces';
 
 export class Input extends Ult.Input {
-  constructor() {
-    super();
-  }
+    constructor() {
+        super();
+    }
 }
 
 export default new Input();

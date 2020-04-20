@@ -1,3 +1,4 @@
+
 /**
  * PromiseDefer.ts
  *
@@ -7,39 +8,39 @@
 import Timers from './Timers';
 
 export class Defer<T> {
-  private _promise: Promise<T>;
-  private _resolver: ((value: T) => void) | undefined;
-  private _rejector: ((value: any) => void) | undefined;
-  constructor() {
-    this._promise = new Promise<T>((res, rej) => {
-      this._resolver = res;
-      this._rejector = rej;
-    });
-  }
-
-  resolve(value: T) {
-    // Resolver shouldn't be undefined, but it's technically possible
-    if (!this._resolver) {
-      Timers.setTimeout(() => {
-        this.resolve(value);
-      }, 10);
-      return;
+    private _promise: Promise<T>;
+    private _resolver: ((value: T) => void) | undefined;
+    private _rejector: ((value: any) => void) | undefined;
+    constructor() {
+        this._promise = new Promise<T>((res, rej) => {
+            this._resolver = res;
+            this._rejector = rej;
+        });
     }
-    this._resolver(value);
-  }
 
-  reject(value: any) {
-    // Rejector shouldn't be undefined, but it's technically possible
-    if (!this._rejector) {
-      Timers.setTimeout(() => {
-        this.reject(value);
-      }, 10);
-      return;
+    resolve(value: T): void {
+        // Resolver shouldn't be undefined, but it's technically possible
+        if (!this._resolver) {
+            Timers.setTimeout(() => {
+                this.resolve(value);
+            }, 10);
+            return;
+        }
+        this._resolver(value);
     }
-    this._rejector(value);
-  }
 
-  promise(): Promise<T> {
-    return this._promise;
-  }
+    reject(value: any): void {
+        // Rejector shouldn't be undefined, but it's technically possible
+        if (!this._rejector) {
+            Timers.setTimeout(() => {
+                this.reject(value);
+            }, 10);
+            return;
+        }
+        this._rejector(value);
+    }
+
+    promise(): Promise<T> {
+        return this._promise;
+    }
 }

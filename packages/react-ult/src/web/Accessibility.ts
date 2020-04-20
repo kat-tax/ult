@@ -5,13 +5,13 @@
  * screen reader.
  */
 
-import {Accessibility as CommonAccessibility} from '../common/Accessibility';
+import { Accessibility as CommonAccessibility } from '../common/Accessibility';
 
 export class Accessibility extends CommonAccessibility {
-  // Calling this API on web has no effect.
-  isScreenReaderEnabled(): boolean {
-    return false;
-  }
+    // Calling this API on web has no effect.
+    isScreenReaderEnabled(): boolean {
+        return false;
+    }
 }
 
 export default new Accessibility();

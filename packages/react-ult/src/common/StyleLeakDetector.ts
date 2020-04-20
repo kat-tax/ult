@@ -2,16 +2,13 @@
  * StyleLeakDetector.ts
  *
  * Detects style memory-leaks in react-native.
- * To fix warning you could:
- *  - use not cached styles by providing cacheStyle == false to Style.create... method
- *  - for colors you could use StylesRegestry component
- *  - for ult component you could temporary disable validation by calling pause method and restore by calling resume,
- *    but please make sure that it doesn't leaks first please
+ * To fix warning use not cached styles by providing:
+ * cacheStyle == false to Style.create... method
  */
 
 import AppConfig from './AppConfig';
-import {Types} from './Interfaces';
-import {Dictionary, sortBy} from './lodashMini';
+import { Types } from './Interfaces';
+import { Dictionary, sortBy } from './lodashMini';
 
 export class StyleLeakDetector {
     private _fingerprintRegistry: {[key: string]: string} = {};
@@ -34,7 +31,7 @@ export class StyleLeakDetector {
         }
     }
 
-    private _sortObject(object: Dictionary<any>) {
+    private _sortObject(object: Dictionary<any>): Dictionary<any> {
         const result: Dictionary<any> = {};
         let keys: string [] = [];
         for (const key in object) {

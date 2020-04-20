@@ -5,21 +5,21 @@
  */
 
 export class AppConfig {
-  private _isDebug = false;
-  private _isDevelopment = false;
+    private _isDebug = false;
+    private _isDevelopment = false;
 
-  setAppConfig(isDebug: boolean, isDevelopment: boolean) {
-    this._isDebug = isDebug;
-    this._isDevelopment = isDevelopment;
-  }
+    setAppConfig(isDebug: boolean, isDevelopment: boolean): void {
+        this._isDebug = isDebug;
+        this._isDevelopment = isDevelopment;
+    }
 
-  isDebugMode(): boolean {
-    return this._isDebug;
-  }
+    isDebugMode(): boolean {
+        return this._isDebug;
+    }
 
-  isDevelopmentMode(): boolean {
-    return this._isDevelopment;
-  }
+    isDevelopmentMode(): boolean {
+        return this._isDevelopment;
+    }
 }
 
 export default new AppConfig();

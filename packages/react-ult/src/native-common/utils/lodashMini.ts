@@ -19,17 +19,17 @@ import omit = require('lodash/omit');
 import union = require('lodash/union');
 
 export {
-  clone,
-  compact,
-  extend,
-  filter,
-  findIndex,
-  findLast,
-  isEqual,
-  isUndefined,
-  last,
-  map,
-  max,
-  omit,
-  union
+    clone,
+    compact,
+    extend,
+    filter,
+    findIndex,
+    findLast,
+    isEqual,
+    isUndefined,
+    last,
+    map,
+    max,
+    omit,
+    union,
 };

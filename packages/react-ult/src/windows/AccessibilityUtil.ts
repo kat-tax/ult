@@ -5,12 +5,13 @@
  */
 
 import * as React from 'react';
-import {AccessibilityPlatformUtil} from '../common/AccessibilityUtil';
+
+import { AccessibilityPlatformUtil } from '../common/AccessibilityUtil';
 
 export class AccessibilityUtil extends AccessibilityPlatformUtil {
-  setAccessibilityFocus(component: React.Component<any, any>) {
-    // No-Op
-  }
+    setAccessibilityFocus(component: React.Component<any, any>): void {
+        // No-Op
+    }
 }
 
 export default new AccessibilityUtil();

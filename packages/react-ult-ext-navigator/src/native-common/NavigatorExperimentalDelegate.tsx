@@ -204,7 +204,6 @@ export class NavigatorExperimentalDelegate extends NavigatorDelegate {
     }
   }
 
-  // Callback from Navigator.js to RX.Navigator
   private _renderScene = (props: NavigationSceneRendererProps): JSX.Element => {
     let parentState: NavigationState = props.navigationState;
     let sceneState: NavigationRouteState = parentState.routes[props.scene.index] as NavigationRouteState;
