@@ -8,7 +8,7 @@ import * as React from 'react';
 import * as RN from 'react-native';
 
 import Easing from '../common/Easing';
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
 import RXImage from './Image';
 import RXText from './Text';
@@ -31,7 +31,7 @@ export const CommonAnimatedClasses: AnimatedClasses = {
 
 let animatedClasses: AnimatedClasses = CommonAnimatedClasses;
 
-class AnimatedWrapper<P, T, C> extends RX.AnimatedComponent<P, T, C> {
+class AnimatedWrapper<P, T, C> extends Ult.AnimatedComponent<P, T, C> {
     protected _mountedComponent: RN.ReactNativeBaseComponent<any, any> | undefined;
 
     setNativeProps(props: P) {
@@ -66,7 +66,7 @@ class AnimatedWrapper<P, T, C> extends RX.AnimatedComponent<P, T, C> {
     };
 }
 
-class AnimatedImage extends AnimatedWrapper<RX.Types.AnimatedImageProps, RX.Types.Stateless, RX.AnimatedImage> {
+class AnimatedImage extends AnimatedWrapper<Ult.Types.AnimatedImageProps, Ult.Types.Stateless, Ult.AnimatedImage> {
     render() {
         const additionalProps = { ref: this._onMount, style: this.props.style };
         return (
@@ -80,7 +80,7 @@ class AnimatedImage extends AnimatedWrapper<RX.Types.AnimatedImageProps, RX.Type
     }
 }
 
-class AnimatedText extends AnimatedWrapper<RX.Types.AnimatedTextProps, RX.Types.Stateless, RX.AnimatedText>  {
+class AnimatedText extends AnimatedWrapper<Ult.Types.AnimatedTextProps, Ult.Types.Stateless, Ult.AnimatedText>  {
     render() {
         const additionalProps = { ref: this._onMount, style: this.props.style };
         return (
@@ -94,7 +94,7 @@ class AnimatedText extends AnimatedWrapper<RX.Types.AnimatedTextProps, RX.Types.
     }
 }
 
-class AnimatedTextInput extends AnimatedWrapper<RX.Types.AnimatedTextInputProps, RX.Types.Stateless, RX.AnimatedTextInput>   {
+class AnimatedTextInput extends AnimatedWrapper<Ult.Types.AnimatedTextInputProps, Ult.Types.Stateless, Ult.AnimatedTextInput>   {
     render() {
         const additionalProps = {ref: this._onMount, style: this.props.style };
         return (
@@ -108,7 +108,7 @@ class AnimatedTextInput extends AnimatedWrapper<RX.Types.AnimatedTextInputProps,
     }
 }
 
-class AnimatedView extends AnimatedWrapper<RX.Types.AnimatedViewProps, RX.Types.Stateless, RX.AnimatedView> {
+class AnimatedView extends AnimatedWrapper<Ult.Types.AnimatedViewProps, Ult.Types.Stateless, Ult.AnimatedView> {
     setFocusRestricted(restricted: boolean) {
         // Nothing to do.
     }
@@ -147,12 +147,12 @@ class FocusRestrictedAnimatedView extends AnimatedView {
 }
 
 const timing = function(
-        value: RX.Types.AnimatedValue,
-        config: RX.Types.Animated.TimingAnimationConfig): RX.Types.Animated.CompositeAnimation {
+        value: Ult.Types.AnimatedValue,
+        config: Ult.Types.Animated.TimingAnimationConfig): Ult.Types.Animated.CompositeAnimation {
 
     let isLooping = config.loop !== undefined && config.loop !== null;
     return {
-        start: function(onEnd?: RX.Types.Animated.EndCallback): void {
+        start: function(onEnd?: Ult.Types.Animated.EndCallback): void {
             function animate(): void {
                 const timingConfig: RN.Animated.TimingAnimationConfig = {
                     toValue: config.toValue,
@@ -188,7 +188,7 @@ const timing = function(
 };
 
 export const AnimatedCommon = {
-    Easing: Easing as RX.Types.Animated.Easing,
+    Easing: Easing as Ult.Types.Animated.Easing,
 
     timing: timing,
     parallel: RN.Animated.parallel,
@@ -196,18 +196,18 @@ export const AnimatedCommon = {
 
     Value: RN.Animated.Value,
     createValue: (initialValue: number) => new RN.Animated.Value(initialValue),
-    interpolate: (animatedValue: RX.Types.AnimatedValue, inputRange: number[], outputRange: string[]) => animatedValue.interpolate({
+    interpolate: (animatedValue: Ult.Types.AnimatedValue, inputRange: number[], outputRange: string[]) => animatedValue.interpolate({
         inputRange: inputRange,
         outputRange: outputRange,
     }),
 };
 
-export function makeAnimated(nativeAnimatedClasses: AnimatedClasses, useFocusRestrictedView?: boolean): RX.Animated {
+export function makeAnimated(nativeAnimatedClasses: AnimatedClasses, useFocusRestrictedView?: boolean): Ult.Animated {
     if (nativeAnimatedClasses) {
         animatedClasses = nativeAnimatedClasses;
     }
 
-    const animated: RX.Animated = {
+    const animated: Ult.Animated = {
         // platform specific animated components
         Image: AnimatedImage,
         Text: AnimatedText,

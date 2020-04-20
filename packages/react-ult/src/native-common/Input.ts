@@ -6,9 +6,9 @@
 
 import * as RN from 'react-native';
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
-export class Input extends RX.Input {
+export class Input extends Ult.Input {
     constructor() {
         super();
 

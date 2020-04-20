@@ -5,7 +5,7 @@
  */
 
 import AppConfig from '../common/AppConfig';
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 import StyleLeakDetector from '../common/StyleLeakDetector';
 
 import * as _ from './utils/lodashMini';
@@ -14,9 +14,9 @@ interface CssAliasMap {
     [prop: string]: string;
 }
 
-export class Styles extends RX.Styles {
+export class Styles extends Ult.Styles {
     // Combines a set of styles - for web we need to flatten to a single object
-    combine<S>(ruleSet1: RX.Types.StyleRuleSetRecursive<S> | undefined, ruleSet2?: RX.Types.StyleRuleSetRecursive<S>): S | undefined {
+    combine<S>(ruleSet1: Ult.Types.StyleRuleSetRecursive<S> | undefined, ruleSet2?: Ult.Types.StyleRuleSetRecursive<S>): S | undefined {
         if (!ruleSet1 && !ruleSet2) {
             return undefined;
         }
@@ -91,62 +91,62 @@ export class Styles extends RX.Styles {
     }
 
     // Creates opaque styles that can be used for View
-    View(ruleSet: RX.Types.ViewStyle, cacheStyle = true): RX.Types.ViewStyleRuleSet {
+    View(ruleSet: Ult.Types.ViewStyle, cacheStyle = true): Ult.Types.ViewStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle);
     }
 
     // Creates opaque styles that can be used for View
-    AnimatedView(ruleSet: RX.Types.AnimatedViewStyle): RX.Types.AnimatedViewStyleRuleSet {
+    AnimatedView(ruleSet: Ult.Types.AnimatedViewStyle): Ult.Types.AnimatedViewStyleRuleSet {
         return this._adaptStyles(ruleSet, false);
     }
 
     // Creates opaque styles that can be used for ScrollView
-    ScrollView(ruleSet: RX.Types.ScrollViewStyle, cacheStyle = true): RX.Types.ScrollViewStyleRuleSet {
+    ScrollView(ruleSet: Ult.Types.ScrollViewStyle, cacheStyle = true): Ult.Types.ScrollViewStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle);
     }
 
     // Creates opaque styles that can be used for Button
-    Button(ruleSet: RX.Types.ButtonStyle, cacheStyle = true): RX.Types.ButtonStyleRuleSet {
+    Button(ruleSet: Ult.Types.ButtonStyle, cacheStyle = true): Ult.Types.ButtonStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle);
     }
 
     // Creates opaque styles that can be used for Text
-    Text(ruleSet: RX.Types.TextStyle, cacheStyle = true): RX.Types.TextStyleRuleSet {
+    Text(ruleSet: Ult.Types.TextStyle, cacheStyle = true): Ult.Types.TextStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle, true);
     }
 
     // Creates opaque styles that can be used for Text
-    AnimatedText(ruleSet: RX.Types.AnimatedTextStyle): RX.Types.AnimatedTextStyleRuleSet {
+    AnimatedText(ruleSet: Ult.Types.AnimatedTextStyle): Ult.Types.AnimatedTextStyleRuleSet {
         return this._adaptStyles(ruleSet, false);
     }
 
     // Creates opaque styles that can be used for TextInput
-    TextInput(ruleSet: RX.Types.TextInputStyle, cacheStyle = true): RX.Types.TextInputStyleRuleSet {
+    TextInput(ruleSet: Ult.Types.TextInputStyle, cacheStyle = true): Ult.Types.TextInputStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle, true);
     }
 
     // Creates opaque styles that can be used for TextInput
-    AnimatedTextInput(ruleSet: RX.Types.AnimatedTextInputStyle): RX.Types.AnimatedTextInputStyleRuleSet {
+    AnimatedTextInput(ruleSet: Ult.Types.AnimatedTextInputStyle): Ult.Types.AnimatedTextInputStyleRuleSet {
         return this._adaptStyles(ruleSet, false);
     }
 
     // Creates opaque styles that can be used for Link
-    Link(ruleSet: RX.Types.LinkStyle, cacheStyle = true): RX.Types.LinkStyleRuleSet {
+    Link(ruleSet: Ult.Types.LinkStyle, cacheStyle = true): Ult.Types.LinkStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle);
     }
 
     // Creates opaque styles that can be used for Image
-    Image(ruleSet: RX.Types.ImageStyle, cacheStyle = true): RX.Types.ImageStyleRuleSet {
+    Image(ruleSet: Ult.Types.ImageStyle, cacheStyle = true): Ult.Types.ImageStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle);
     }
 
     // Creates opaque styles that can be used for Image
-    AnimatedImage(ruleSet: RX.Types.AnimatedImageStyle): RX.Types.AnimatedImageStyleRuleSet {
+    AnimatedImage(ruleSet: Ult.Types.AnimatedImageStyle): Ult.Types.AnimatedImageStyleRuleSet {
         return this._adaptStyles(ruleSet, false);
     }
 
     // Creates opaque styles that can be used for Picker
-    Picker(ruleSet: RX.Types.PickerStyle, cacheStyle = true): RX.Types.PickerStyleRuleSet {
+    Picker(ruleSet: Ult.Types.PickerStyle, cacheStyle = true): Ult.Types.PickerStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle);
     }
 

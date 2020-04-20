@@ -6,9 +6,9 @@
 
 import * as RN from 'react-native';
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
-export class International implements RX.International {
+export class International implements Ult.International {
     private _isRTL: boolean;
 
     constructor() {

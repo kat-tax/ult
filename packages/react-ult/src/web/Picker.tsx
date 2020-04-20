@@ -6,12 +6,12 @@
 
 import * as React from 'react';
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
 import * as _ from './utils/lodashMini';
 import Styles from './Styles';
 
-export class Picker extends RX.Picker {
+export class Picker extends Ult.Picker {
     render() {
         return (
             <select
@@ -25,7 +25,7 @@ export class Picker extends RX.Picker {
         );
     }
 
-    private _getStyles(): RX.Types.PickerStyleRuleSet {
+    private _getStyles(): Ult.Types.PickerStyleRuleSet {
         return Styles.combine(this.props.style) as any;
     }
 

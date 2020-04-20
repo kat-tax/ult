@@ -7,7 +7,7 @@
 import * as RN from 'react-native';
 
 import AppConfig from '../common/AppConfig';
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
 import { omit } from './utils/lodashMini';
 import Platform from './Platform';
@@ -29,18 +29,18 @@ if (Platform.getType() !== 'windows') {
 }
 
 // React Native styles that ULT doesn't expose.
-type ReactNativeViewAndImageCommonStyle<Style extends RX.Types.ViewAndImageCommonStyle> = Style & {
+type ReactNativeViewAndImageCommonStyle<Style extends Ult.Types.ViewAndImageCommonStyle> = Style & {
     flexGrow?: number;
     flexShrink?: number;
     flexBasis?: number;
     textShadowColor?: string;
-    textShadowOffset?: RX.Types.ShadowOffset;
+    textShadowOffset?: Ult.Types.ShadowOffset;
     textShadowRadius?: number;
 };
 
-export class Styles extends RX.Styles {
-    combine<S>(ruleSet1: RX.Types.StyleRuleSetRecursive<S> | undefined,
-            ruleSet2?: RX.Types.StyleRuleSetRecursive<S>): RX.Types.StyleRuleSetOrArray<S> | undefined {
+export class Styles extends Ult.Styles {
+    combine<S>(ruleSet1: Ult.Types.StyleRuleSetRecursive<S> | undefined,
+            ruleSet2?: Ult.Types.StyleRuleSetRecursive<S>): Ult.Types.StyleRuleSetOrArray<S> | undefined {
         if (!ruleSet1 && !ruleSet2) {
             return undefined;
         }
@@ -48,7 +48,7 @@ export class Styles extends RX.Styles {
         const ruleSet = ruleSet1 ? (ruleSet2 ? [ruleSet1, ruleSet2] : ruleSet1) : ruleSet2;
 
         if (ruleSet instanceof Array) {
-            let resultArray: RX.Types.StyleRuleSet<S>[] = [];
+            let resultArray: Ult.Types.StyleRuleSet<S>[] = [];
             for (let i = 0; i < ruleSet.length; i++) {
                 const subRuleSet = this.combine(ruleSet[i]);
 
@@ -79,62 +79,62 @@ export class Styles extends RX.Styles {
     }
 
     // Creates opaque styles that can be used for View
-    View(ruleSet: RX.Types.ViewStyle, cacheStyle = true): RX.Types.ViewStyleRuleSet {
+    View(ruleSet: Ult.Types.ViewStyle, cacheStyle = true): Ult.Types.ViewStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle);
     }
 
     // Creates animated styles that can be used for View
-    AnimatedView(ruleSet: RX.Types.AnimatedViewStyle): RX.Types.AnimatedViewStyleRuleSet {
+    AnimatedView(ruleSet: Ult.Types.AnimatedViewStyle): Ult.Types.AnimatedViewStyleRuleSet {
         return this._adaptAnimatedStyles(ruleSet);
     }
 
     // Creates opaque styles that can be used for ScrollView
-    ScrollView(ruleSet: RX.Types.ScrollViewStyle, cacheStyle = true): RX.Types.ScrollViewStyleRuleSet {
+    ScrollView(ruleSet: Ult.Types.ScrollViewStyle, cacheStyle = true): Ult.Types.ScrollViewStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle);
     }
 
     // Creates opaque styles that can be used for Button
-    Button(ruleSet: RX.Types.ButtonStyle, cacheStyle = true): RX.Types.ButtonStyleRuleSet {
+    Button(ruleSet: Ult.Types.ButtonStyle, cacheStyle = true): Ult.Types.ButtonStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle);
     }
 
     // Creates opaque styles that can be used for Text
-    Text(ruleSet: RX.Types.TextStyle, cacheStyle = true): RX.Types.TextStyleRuleSet {
+    Text(ruleSet: Ult.Types.TextStyle, cacheStyle = true): Ult.Types.TextStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle, true);
     }
 
     // Creates opaque styles that can be used for Text
-    AnimatedText(ruleSet: RX.Types.AnimatedTextStyle): RX.Types.AnimatedTextStyleRuleSet {
+    AnimatedText(ruleSet: Ult.Types.AnimatedTextStyle): Ult.Types.AnimatedTextStyleRuleSet {
         return this._adaptAnimatedStyles(ruleSet);
     }
 
     // Creates opaque styles that can be used for TextInput
-    TextInput(ruleSet: RX.Types.TextInputStyle, cacheStyle = true): RX.Types.TextInputStyleRuleSet {
+    TextInput(ruleSet: Ult.Types.TextInputStyle, cacheStyle = true): Ult.Types.TextInputStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle, true);
     }
 
     // Creates opaque styles that can be used for TextInput
-    AnimatedTextInput(ruleSet: RX.Types.AnimatedTextInputStyle): RX.Types.AnimatedTextInputStyleRuleSet {
+    AnimatedTextInput(ruleSet: Ult.Types.AnimatedTextInputStyle): Ult.Types.AnimatedTextInputStyleRuleSet {
         return this._adaptAnimatedStyles(ruleSet);
     }
 
     // Creates opaque styles that can be used for Image
-    Image(ruleSet: RX.Types.ImageStyle, cacheStyle = true): RX.Types.ImageStyleRuleSet {
+    Image(ruleSet: Ult.Types.ImageStyle, cacheStyle = true): Ult.Types.ImageStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle);
     }
 
     // Creates animated opaque styles that can be used for Image
-    AnimatedImage(ruleSet: RX.Types.AnimatedImageStyle): RX.Types.AnimatedImageStyleRuleSet {
+    AnimatedImage(ruleSet: Ult.Types.AnimatedImageStyle): Ult.Types.AnimatedImageStyleRuleSet {
         return this._adaptAnimatedStyles(ruleSet);
     }
 
     // Creates opaque styles that can be used for Link
-    Link(ruleSet: RX.Types.LinkStyle, cacheStyle = true): RX.Types.LinkStyleRuleSet {
+    Link(ruleSet: Ult.Types.LinkStyle, cacheStyle = true): Ult.Types.LinkStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle);
     }
 
     // Creates opaque styles that can be used for Picker
-    Picker(ruleSet: RX.Types.PickerStyle, cacheStyle = true): RX.Types.PickerStyleRuleSet {
+    Picker(ruleSet: Ult.Types.PickerStyle, cacheStyle = true): Ult.Types.PickerStyleRuleSet {
         return this._adaptStyles(ruleSet, cacheStyle);
     }
 
@@ -143,8 +143,8 @@ export class Styles extends RX.Styles {
         return {};
     }
 
-    private _adaptStyles<S extends RX.Types.ViewAndImageCommonStyle>(def: S,
-            cacheStyle: boolean, isTextStyle = false): Readonly<RX.Types.StyleRuleSet<S>> {
+    private _adaptStyles<S extends Ult.Types.ViewAndImageCommonStyle>(def: S,
+            cacheStyle: boolean, isTextStyle = false): Readonly<Ult.Types.StyleRuleSet<S>> {
         let adaptedRuleSet = def as ReactNativeViewAndImageCommonStyle<S>;
         if (cacheStyle) {
             StyleLeakDetector.detectLeaks(def);
@@ -155,7 +155,7 @@ export class Styles extends RX.Styles {
         }
 
         // Convert text styling
-        const textStyle = adaptedRuleSet as RX.Types.TextStyle;
+        const textStyle = adaptedRuleSet as Ult.Types.TextStyle;
         if (textStyle.font) {
             if (textStyle.font.fontFamily !== undefined) {
                 textStyle.fontFamily = textStyle.font.fontFamily;
@@ -218,7 +218,7 @@ export class Styles extends RX.Styles {
         return AppConfig.isDevelopmentMode() ? Object.freeze(adaptedRuleSet) : adaptedRuleSet;
     }
 
-    private _adaptAnimatedStyles<T extends RX.Types.AnimatedViewAndImageCommonStyle>(def: T): Readonly<T> {
+    private _adaptAnimatedStyles<T extends Ult.Types.AnimatedViewAndImageCommonStyle>(def: T): Readonly<T> {
         const adaptedRuleSet = omit<T>(def, forbiddenProps) as T;
         return AppConfig.isDevelopmentMode() ? Object.freeze(adaptedRuleSet) : adaptedRuleSet;
     }

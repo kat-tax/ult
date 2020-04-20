@@ -4,7 +4,7 @@
  * Common implementation for deep linking.
  */
 
-import * as RX from './Interfaces';
+import * as Ult from './Interfaces';
 import { filter } from './lodashMini';
 
 // Collection of Regex that help validate an email.
@@ -17,11 +17,11 @@ const emailHostRegex = /^[a-z0-9.-]+$/i;
 // However, the host cannot contain '..', start/end with '.', or have any (sub)domain start/end with '-'.
 const emailHostConstraintViolationRegex = /\.\.|^[.-]|[.-]$|\.-|-\./i;
 
-export abstract class Linking extends RX.Linking {
+export abstract class Linking extends Ult.Linking {
     protected abstract _openUrl(url: string): Promise<void>;
 
     // Launches SMS app
-    launchSms(phoneInfo: RX.Types.SmsInfo): Promise<void> {
+    launchSms(phoneInfo: Ult.Types.SmsInfo): Promise<void> {
         // Format phone info
         const phoneUrl = this._createSmsUrl(phoneInfo);
         return this._openUrl(phoneUrl);
@@ -33,7 +33,7 @@ export abstract class Linking extends RX.Linking {
     }
 
     // Escaped Email uri - mailto:[emailAddress]?subject=<emailSubject>&body=<emailBody>
-    protected _createEmailUrl(emailInfo: RX.Types.EmailInfo): string {
+    protected _createEmailUrl(emailInfo: Ult.Types.EmailInfo): string {
         let emailUrl = 'mailto:';
         let validEmails: string[];
 
@@ -65,7 +65,7 @@ export abstract class Linking extends RX.Linking {
     }
 
     // Escaped SMS uri - sms:<phoneNumber>?body=<messageString>
-    protected _createSmsUrl(smsInfo: RX.Types.SmsInfo): string {
+    protected _createSmsUrl(smsInfo: Ult.Types.SmsInfo): string {
         let smsUrl = 'sms:';
         if (smsInfo.phoneNumber) {
             smsUrl += encodeURI(smsInfo.phoneNumber);

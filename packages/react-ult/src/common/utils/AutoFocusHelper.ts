@@ -7,7 +7,7 @@
 
 import * as React from 'react';
 
-import * as RX from '../Interfaces';
+import * as Ult from '../Interfaces';
 
 import Timers from './Timers';
 
@@ -39,11 +39,11 @@ export class FocusArbitratorProvider {
     private _id: number;
     private _parentArbitratorProvider: FocusArbitratorProvider | undefined;
 
-    private _arbitratorCallback: RX.Types.FocusArbitrator | undefined;
+    private _arbitratorCallback: Ult.Types.FocusArbitrator | undefined;
     private _candidates: FocusCandidateInternal[] = [];
     private _pendingChildren: { [key: string]: FocusArbitratorProvider } = {};
 
-    constructor(view?: RX.View, arbitrator?: RX.Types.FocusArbitrator) {
+    constructor(view?: Ult.View, arbitrator?: Ult.Types.FocusArbitrator) {
         this._id = ++_lastFocusArbitratorProviderId;
         this._parentArbitratorProvider = view
             ? ((view.context && view.context.focusArbitrator) || rootFocusArbitratorProvider)
@@ -91,7 +91,7 @@ export class FocusArbitratorProvider {
     }
 
     private static _arbitrate(candidates: FocusCandidateInternal[],
-            arbitrator?: RX.Types.FocusArbitrator): FocusCandidateInternal | undefined {
+            arbitrator?: Ult.Types.FocusArbitrator): FocusCandidateInternal | undefined {
         // Filtering out everything which is already unmounted.
         candidates = candidates.filter(item => item.isAvailable());
 
@@ -107,7 +107,7 @@ export class FocusArbitratorProvider {
 
         if (arbitrator) {
             // There is an application specified focus arbitrator.
-            const toArbitrate: RX.Types.FocusCandidate[] = [];
+            const toArbitrate: Ult.Types.FocusCandidate[] = [];
 
             candidates.forEach(candidate => {
                 const component = candidate.component as any;
@@ -142,7 +142,7 @@ export class FocusArbitratorProvider {
         return candidates[candidates.length - 1];
     }
 
-    setCallback(arbitrator?: RX.Types.FocusArbitrator): void {
+    setCallback(arbitrator?: Ult.Types.FocusArbitrator): void {
         this._arbitratorCallback = arbitrator;
     }
 

@@ -5,9 +5,9 @@
  * user presence.
  */
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
-export class UserPresence extends RX.UserPresence {
+export class UserPresence extends Ult.UserPresence {
     // On native platforms, assume that the user is present
     // whenever the app is running.
     isUserPresent(): boolean {

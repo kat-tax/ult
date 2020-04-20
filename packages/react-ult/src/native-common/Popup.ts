@@ -5,13 +5,13 @@
  */
 
 import assert from '../common/assert';
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 import Timers from '../common/utils/Timers';
 
 import FrontLayerViewManager from './FrontLayerViewManager';
 
-export class Popup extends RX.Popup {
-    show(options: RX.Types.PopupOptions, popupId: string, delay?: number): boolean {
+export class Popup extends Ult.Popup {
+    show(options: Ult.Types.PopupOptions, popupId: string, delay?: number): boolean {
         assert(popupId, `popupId must be a non-empty string. Actual: ${ popupId }`);
         assert(this._isValidAnchor(options), `options must have a valid 'getAnchor()'`);
 
@@ -38,7 +38,7 @@ export class Popup extends RX.Popup {
         return FrontLayerViewManager.isPopupDisplayed(popupId);
     }
 
-    private _isValidAnchor(options: RX.Types.PopupOptions): boolean {
+    private _isValidAnchor(options: Ult.Types.PopupOptions): boolean {
         return options && typeof options.getAnchor === 'function' && !!options.getAnchor();
     }
 }

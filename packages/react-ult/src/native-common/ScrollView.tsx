@@ -7,7 +7,7 @@
 import * as React from 'react';
 import * as RN from 'react-native';
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 import { ScrollViewProps } from '../common/Types';
 
 import ViewBase from './ViewBase';
@@ -16,8 +16,8 @@ import ViewBase from './ViewBase';
 //   causes you to have to click twice instead of once on some pieces of UI in
 //   order for the UI to acknowledge your interaction.
 const overrideKeyboardShouldPersistTaps = RN.Platform.OS === 'macos' || RN.Platform.OS === 'windows';
-export class ScrollView extends ViewBase<RX.Types.ScrollViewProps, RX.Types.Stateless, RN.ScrollView, RX.ScrollView>
-    implements RX.ScrollView {
+export class ScrollView extends ViewBase<Ult.Types.ScrollViewProps, Ult.Types.Stateless, RN.ScrollView, Ult.ScrollView>
+    implements Ult.ScrollView {
 
     private _scrollTop = 0;
     private _scrollLeft = 0;

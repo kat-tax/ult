@@ -9,11 +9,11 @@
  * but the user has not intereacted with the app in the last 60 seconds
  */
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
 import AppVisibilityUtils from './utils/AppVisibilityUtils';
 
-export class UserPresence extends RX.UserPresence {
+export class UserPresence extends Ult.UserPresence {
     private _isPresent: boolean;
 
     constructor() {

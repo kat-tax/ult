@@ -4,9 +4,9 @@
  * Web-specific implementation of the cross-platform status bar.
  */
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
-export class StatusBar extends RX.StatusBar {
+export class StatusBar extends Ult.StatusBar {
     isOverlay(): boolean {
         return false;
     }

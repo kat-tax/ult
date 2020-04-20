@@ -5,7 +5,7 @@
  */
 
 import AppConfig from '../common/AppConfig';
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 import { Defer } from '../common/utils/PromiseDefer';
 import Timers from '../common/utils/Timers';
 
@@ -18,11 +18,11 @@ import * as _ from './utils/lodashMini';
 const _layoutTimerActiveDuration = 1000;
 const _layoutTimerInactiveDuration = 10000;
 
-export abstract class ViewBase<P extends RX.Types.ViewPropsShared<C>, S, C extends RX.View | RX.ScrollView> extends RX.ViewBase<P, S> {
+export abstract class ViewBase<P extends Ult.Types.ViewPropsShared<C>, S, C extends Ult.View | Ult.ScrollView> extends Ult.ViewBase<P, S> {
     private static _viewCheckingTimer: number | undefined;
     private static _isResizeHandlerInstalled = false;
-    private static _viewCheckingList: ViewBase<RX.Types.ViewPropsShared<RX.View | RX.ScrollView>, any, RX.View | RX.ScrollView>[] = [];
-    private static _appActivationState = RX.Types.AppActivationState.Active;
+    private static _viewCheckingList: ViewBase<Ult.Types.ViewPropsShared<Ult.View | Ult.ScrollView>, any, Ult.View | Ult.ScrollView>[] = [];
+    private static _appActivationState = Ult.Types.AppActivationState.Active;
 
     abstract render(): JSX.Element;
     protected abstract _getContainer(): HTMLElement | null;
@@ -31,7 +31,7 @@ export abstract class ViewBase<P extends RX.Types.ViewPropsShared<C>, S, C exten
 
     // Sets the activation state so we can stop our periodic timer
     // when the app is in the background.
-    static setActivationState(newState: RX.Types.AppActivationState) {
+    static setActivationState(newState: Ult.Types.AppActivationState) {
         if (ViewBase._appActivationState !== newState) {
             ViewBase._appActivationState = newState;
 
@@ -43,18 +43,18 @@ export abstract class ViewBase<P extends RX.Types.ViewPropsShared<C>, S, C exten
 
             if (ViewBase._viewCheckingList.length > 0) {
                 // If we're becoming active, check and report layout changes immediately.
-                if (newState === RX.Types.AppActivationState.Active) {
+                if (newState === Ult.Types.AppActivationState.Active) {
                     ViewBase._checkViews();
                 }
 
                 ViewBase._viewCheckingTimer = Timers.setInterval(ViewBase._checkViews,
-                    newState === RX.Types.AppActivationState.Active ?
+                    newState === Ult.Types.AppActivationState.Active ?
                         _layoutTimerActiveDuration : _layoutTimerInactiveDuration);
             }
         }
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps: RX.Types.ViewPropsShared<C>) {
+    UNSAFE_componentWillReceiveProps(nextProps: Ult.Types.ViewPropsShared<C>) {
         if (!!this.props.onLayout !== !!nextProps.onLayout) {
             if (this.props.onLayout) {
                 this._checkViewCheckerUnbuild();
@@ -159,7 +159,7 @@ export abstract class ViewBase<P extends RX.Types.ViewPropsShared<C>, S, C exten
         // when the app is active versus inactive.
         if (!ViewBase._viewCheckingTimer) {
             ViewBase._viewCheckingTimer = Timers.setInterval(ViewBase._checkViews,
-                ViewBase._appActivationState === RX.Types.AppActivationState.Active ?
+                ViewBase._appActivationState === Ult.Types.AppActivationState.Active ?
                     _layoutTimerActiveDuration : _layoutTimerInactiveDuration);
         }
 

@@ -6,7 +6,7 @@
 
 import * as React from 'react';
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
 import Button from './Button';
 import Modal from './Modal';
@@ -14,12 +14,12 @@ import Styles from './Styles';
 import Text from './Text';
 import View from './View';
 
-export interface AppModalContentProps extends RX.Types.ViewProps {
-    buttons?: RX.Types.AlertButtonSpec[];
+export interface AppModalContentProps extends Ult.Types.ViewProps {
+    buttons?: Ult.Types.AlertButtonSpec[];
     title: string;
     message?: string;
     modalId: string;
-    theme?: RX.Types.AlertModalTheme;
+    theme?: Ult.Types.AlertModalTheme;
     preventDismissOnPress?: boolean;
 }
 
@@ -88,7 +88,7 @@ const _styles = {
     }),
 };
 
-export class AlertModalContent extends RX.Component<AppModalContentProps, AppModalContentState> {
+export class AlertModalContent extends Ult.Component<AppModalContentProps, AppModalContentState> {
     constructor(props: AppModalContentProps) {
         super(props);
         this.state = {
@@ -162,7 +162,7 @@ export class AlertModalContent extends RX.Component<AppModalContentProps, AppMod
         );
     }
 
-    private _onPressButton(btnSpec: RX.Types.AlertButtonSpec) {
+    private _onPressButton(btnSpec: Ult.Types.AlertButtonSpec) {
         Modal.dismiss(this.props.modalId);
 
         if (btnSpec.onPress) {
@@ -170,11 +170,11 @@ export class AlertModalContent extends RX.Component<AppModalContentProps, AppMod
         }
     }
 
-    private _onPressBody = (e: RX.Types.SyntheticEvent) => {
+    private _onPressBody = (e: Ult.Types.SyntheticEvent) => {
         e.stopPropagation();
     };
 
-    private _onPressBackground = (e: RX.Types.SyntheticEvent) => {
+    private _onPressBackground = (e: Ult.Types.SyntheticEvent) => {
         if (!this.props.preventDismissOnPress) {
             Modal.dismiss(this.props.modalId);
         }

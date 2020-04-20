@@ -8,13 +8,13 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 import { Defer } from '../common/utils/PromiseDefer';
 
 import FrontLayerViewManager from './FrontLayerViewManager';
 import ScrollViewConfig from './ScrollViewConfig';
 
-export class UserInterface extends RX.UserInterface {
+export class UserInterface extends Ult.UserInterface {
     private _isNavigatingWithKeyboard = false;
 
     constructor() {
@@ -22,8 +22,8 @@ export class UserInterface extends RX.UserInterface {
         this.keyboardNavigationEvent.subscribe(this._keyboardNavigationStateChanged);
     }
 
-    measureLayoutRelativeToWindow(component: React.Component<any, any>): Promise<RX.Types.LayoutInfo> {
-        const deferred = new Defer<RX.Types.LayoutInfo>();
+    measureLayoutRelativeToWindow(component: React.Component<any, any>): Promise<Ult.Types.LayoutInfo> {
+        const deferred = new Defer<Ult.Types.LayoutInfo>();
         let componentDomNode: HTMLElement | null = null;
 
         try {
@@ -49,8 +49,8 @@ export class UserInterface extends RX.UserInterface {
     }
 
     measureLayoutRelativeToAncestor(component: React.Component<any, any>,
-            ancestor: React.Component<any, any>): Promise<RX.Types.LayoutInfo> {
-        const deferred = new Defer<RX.Types.LayoutInfo>();
+            ancestor: React.Component<any, any>): Promise<Ult.Types.LayoutInfo> {
+        const deferred = new Defer<Ult.Types.LayoutInfo>();
         let componentDomNode: HTMLElement | null = null;
         let ancestorDomNode: HTMLElement | null = null;
 
@@ -78,7 +78,7 @@ export class UserInterface extends RX.UserInterface {
         return deferred.promise();
     }
 
-    measureWindow(rootViewId?: string): RX.Types.LayoutInfo {
+    measureWindow(rootViewId?: string): Ult.Types.LayoutInfo {
         // Mo multi window support, default to main window
         return {
             x: 0,
@@ -127,7 +127,7 @@ export class UserInterface extends RX.UserInterface {
         // Nothing to do
     }
 
-    evaluateTouchLatency(e: RX.Types.MouseEvent): void {
+    evaluateTouchLatency(e: Ult.Types.MouseEvent): void {
         // Nothing to do
     }
 

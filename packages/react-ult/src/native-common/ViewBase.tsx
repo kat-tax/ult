@@ -6,25 +6,25 @@
 
 import * as RN from 'react-native';
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
 import { isEqual } from './utils/lodashMini';
 
 export abstract class ViewBase<
-    P extends RX.Types.ViewPropsShared<C>,
+    P extends Ult.Types.ViewPropsShared<C>,
     S,
     T extends RN.View | RN.ScrollView,
-    C extends RX.View | RX.ScrollView
-> extends RX.ViewBase<P, S> {
+    C extends Ult.View | Ult.ScrollView
+> extends Ult.ViewBase<P, S> {
 
     protected static readonly _supportsNativeFocusBlur = RN.Platform.OS !== 'android';
-    private static _defaultViewStyle: RX.Types.ViewStyleRuleSet | undefined;
-    private _layoutEventValues: RX.Types.ViewOnLayoutEvent | undefined;
+    private static _defaultViewStyle: Ult.Types.ViewStyleRuleSet | undefined;
+    private _layoutEventValues: Ult.Types.ViewOnLayoutEvent | undefined;
 
     abstract render(): JSX.Element;
     protected _nativeComponent: T | undefined;
 
-    static setDefaultViewStyle(defaultViewStyle: RX.Types.ViewStyleRuleSet) {
+    static setDefaultViewStyle(defaultViewStyle: Ult.Types.ViewStyleRuleSet) {
         ViewBase._defaultViewStyle = defaultViewStyle;
     }
 
@@ -45,7 +45,7 @@ export abstract class ViewBase<
         this._nativeComponent = view || undefined;
     };
 
-    protected _getStyles(props: RX.Types.ViewProps) {
+    protected _getStyles(props: Ult.Types.ViewProps) {
         // If this platform uses an explicit default view style, push it on to
         // the front of the list of provided styles.
         if (ViewBase._defaultViewStyle) {

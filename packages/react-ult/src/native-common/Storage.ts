@@ -6,10 +6,10 @@
 
 import * as RN from 'react-native';
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 import { Defer } from '../common/utils/PromiseDefer';
 
-export class Storage extends RX.Storage {
+export class Storage extends Ult.Storage {
     getItem(key: string): Promise<string | undefined> {
         const deferred = new Defer<string | undefined>();
 

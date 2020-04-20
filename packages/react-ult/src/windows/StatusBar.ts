@@ -4,9 +4,9 @@
  * Windows-specific implementation of StatusBar APIs.
  */
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
-export class StatusBar extends RX.StatusBar {
+export class StatusBar extends Ult.StatusBar {
     isOverlay(): boolean {
         // We currently only care about Windows desktop which doesn't have a
         // status bar.

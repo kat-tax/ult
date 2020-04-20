@@ -7,16 +7,16 @@
 import * as React from 'react';
 
 import assert from '../common/assert';
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
 import FrontLayerViewManager from './FrontLayerViewManager';
 
-export class Modal extends RX.Modal {
+export class Modal extends Ult.Modal {
     isDisplayed(modalId?: string): boolean {
         return FrontLayerViewManager.isModalDisplayed(modalId);
     }
 
-    show(modal: React.ReactElement<RX.Types.ViewProps>, modalId: string, options?: RX.Types.ModalOptions): void {
+    show(modal: React.ReactElement<Ult.Types.ViewProps>, modalId: string, options?: Ult.Types.ModalOptions): void {
         assert(modal, `modal must be valid. Actual ${ modal }`);
         assert(modalId, `modalId must be a non-empty string. Actual: ${ modalId }`);
 

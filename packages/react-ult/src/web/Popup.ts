@@ -5,12 +5,12 @@
  */
 
 import assert from '../common/assert';
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
 import FrontLayerViewManager from './FrontLayerViewManager';
 
-export class Popup extends RX.Popup {
-    show(options: RX.Types.PopupOptions, popupId: string, delay?: number): boolean {
+export class Popup extends Ult.Popup {
+    show(options: Ult.Types.PopupOptions, popupId: string, delay?: number): boolean {
         assert(popupId, `popupId must be a non-empty string. Actual: ${ popupId }`);
 
         return FrontLayerViewManager.showPopup(options, popupId, delay);

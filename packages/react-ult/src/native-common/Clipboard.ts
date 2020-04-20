@@ -6,9 +6,9 @@
 
 import * as RN from 'react-native';
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
-export class Clipboard extends RX.Clipboard  {
+export class Clipboard extends Ult.Clipboard  {
     setText(text: string): void {
         RN.Clipboard.setString(text);
     }

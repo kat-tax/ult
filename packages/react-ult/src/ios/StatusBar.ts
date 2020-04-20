@@ -6,9 +6,9 @@
 
 import * as RN from 'react-native';
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
-export class StatusBar extends RX.StatusBar {
+export class StatusBar extends Ult.StatusBar {
     isOverlay(): boolean {
         // iOS always draws the status bar as an overlay, as opposed
         // to a view that takes up space of its own.

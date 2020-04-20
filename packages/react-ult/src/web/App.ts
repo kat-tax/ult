@@ -4,12 +4,12 @@
  * Implements App interface for ULT.
  */
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
 import AppVisibilityUtils from './utils/AppVisibilityUtils';
 
-export class App extends RX.App {
-    private _activationState: RX.Types.AppActivationState;
+export class App extends Ult.App {
+    private _activationState: Ult.Types.AppActivationState;
 
     constructor() {
         super();
@@ -17,17 +17,17 @@ export class App extends RX.App {
         // Handle test environment where document is not defined.
         if (typeof(document) !== 'undefined') {
             this._activationState = AppVisibilityUtils.isAppInForeground() ?
-                RX.Types.AppActivationState.Active : RX.Types.AppActivationState.Background;
+                Ult.Types.AppActivationState.Active : Ult.Types.AppActivationState.Background;
 
             AppVisibilityUtils.onAppForegroundedEvent.subscribe(() => {
-                this._setActivationState(RX.Types.AppActivationState.Active);
+                this._setActivationState(Ult.Types.AppActivationState.Active);
             });
 
             AppVisibilityUtils.onAppBackgroundedEvent.subscribe(() => {
-                this._setActivationState(RX.Types.AppActivationState.Background);
+                this._setActivationState(Ult.Types.AppActivationState.Background);
             });
         } else {
-            this._activationState = RX.Types.AppActivationState.Active;
+            this._activationState = Ult.Types.AppActivationState.Active;
         }
     }
 
@@ -35,11 +35,11 @@ export class App extends RX.App {
         super.initialize(debug, development);
     }
 
-    getActivationState(): RX.Types.AppActivationState {
+    getActivationState(): Ult.Types.AppActivationState {
         return this._activationState;
     }
 
-    private _setActivationState = (currentState: RX.Types.AppActivationState): void => {
+    private _setActivationState = (currentState: Ult.Types.AppActivationState): void => {
         if (this._activationState !== currentState) {
             this._activationState = currentState;
             this.activationStateChangedEvent.fire(this._activationState);

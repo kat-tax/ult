@@ -6,17 +6,17 @@
 
 import * as React from 'react';
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
 import { AlertModalContent } from './AlertModalContent';
 import Modal from './Modal';
 
 // Web/HTML implementation for alert dialog boxes
-export class Alert extends RX.Alert {
+export class Alert extends Ult.Alert {
     private _modalId = 'RX.Alert_WebModal';
 
-    show(title: string, message?: string, buttons?: RX.Types.AlertButtonSpec[],
-            options?: RX.Types.AlertOptions): void {
+    show(title: string, message?: string, buttons?: Ult.Types.AlertButtonSpec[],
+            options?: Ult.Types.AlertOptions): void {
         Modal.show(
             (
                 <AlertModalContent

@@ -9,7 +9,7 @@ import * as React from 'react';
 import * as RN from 'react-native';
 
 import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 import Linking from '../native-common/Linking';
 
 import AccessibilityUtil from './AccessibilityUtil';
@@ -20,7 +20,7 @@ export interface LinkContext {
     isRxParentAText?: boolean;
 }
 
-export class LinkBase<S> extends React.Component<RX.Types.LinkProps, S> {
+export class LinkBase<S> extends React.Component<Ult.Types.LinkProps, S> {
     static contextTypes = {
         focusArbitrator: PropTypes.object,
         isRxParentAText: PropTypes.bool,
@@ -75,7 +75,7 @@ export class LinkBase<S> extends React.Component<RX.Types.LinkProps, S> {
         this._mountedComponent = component || undefined;
     };
 
-    protected _onPress = (e: RX.Types.SyntheticEvent) => {
+    protected _onPress = (e: Ult.Types.SyntheticEvent) => {
         if (EventHelpers.isRightMouseButton(e)) {
             if (this.props.onContextMenu) {
                 this.props.onContextMenu(EventHelpers.toMouseEvent(e));
@@ -96,7 +96,7 @@ export class LinkBase<S> extends React.Component<RX.Types.LinkProps, S> {
         }
     };
 
-    protected _onLongPress = (e: RX.Types.SyntheticEvent) => {
+    protected _onLongPress = (e: Ult.Types.SyntheticEvent) => {
         // Right mouse button doesn't change behavior based on press length.
         if (EventHelpers.isRightMouseButton(e)) {
             if (this.props.onContextMenu) {

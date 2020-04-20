@@ -9,7 +9,7 @@ import * as ReactDOM from 'react-dom';
 
 import AppConfig from '../common/AppConfig';
 import Easing from '../common/Easing';
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
 import { executeTransition, TransitionSpec } from './animated/executeTransition';
 import RXImage from './Image';
@@ -60,7 +60,7 @@ export abstract class Animation {
     _id: number | undefined;
 
     // Starts the animation
-    abstract start(onEnd?: RX.Types.Animated.EndCallback): void;
+    abstract start(onEnd?: Ult.Types.Animated.EndCallback): void;
 
     // Stops the animation
     abstract stop(): void;
@@ -71,12 +71,12 @@ export abstract class Animation {
 interface ValueListener {
     setValue(valueObject: Value, newValue: number | string): void;
     startTransition(valueObject: Value, from: number | string, toValue: number | string, duration: number,
-        easing: string, delay: number, onEnd: RX.Types.Animated.EndCallback): void;
+        easing: string, delay: number, onEnd: Ult.Types.Animated.EndCallback): void;
     stopTransition(valueObject: Value): number | string | undefined;
 }
 
 // The animated value object
-export class Value extends RX.Types.AnimatedValue {
+export class Value extends Ult.Types.AnimatedValue {
     protected _value: number | string;
     private _listeners: ValueListener[];
 
@@ -104,7 +104,7 @@ export class Value extends RX.Types.AnimatedValue {
         return false;
     }
 
-    interpolate(config: RX.Types.Animated.InterpolationConfigType) {
+    interpolate(config: Ult.Types.Animated.InterpolationConfigType) {
         return new InterpolatedValue(config, this);
     }
 
@@ -143,7 +143,7 @@ export class Value extends RX.Types.AnimatedValue {
 
     // Start a specific animation.
     _startTransition(toValue: number | string, duration: number, easing: string, delay: number,
-            onEnd: RX.Types.Animated.EndCallback): void {
+            onEnd: Ult.Types.Animated.EndCallback): void {
 
         // If there are no listeners, the app probably has a bug where it's
         // starting an animation before the associated element is mounted.
@@ -160,7 +160,7 @@ export class Value extends RX.Types.AnimatedValue {
 
         // Only call onEnd once for a series of listeners.
         let onEndCalled = false;
-        const onEndWrapper = (result: RX.Types.Animated.EndResult) => {
+        const onEndWrapper = (result: Ult.Types.Animated.EndResult) => {
             if (onEndCalled) {
                 return;
             }
@@ -194,7 +194,7 @@ export class Value extends RX.Types.AnimatedValue {
 
 export class InterpolatedValue extends Value {
     private _interpolationConfig: { [key: number]: string | number } | undefined;
-    constructor(private _config: RX.Types.Animated.InterpolationConfigType, rootValue: Value) {
+    constructor(private _config: Ult.Types.Animated.InterpolationConfigType, rootValue: Value) {
         super(rootValue._getOutputValue() as number);
 
         if (!this._config || !this._config.inputRange || !this._config.outputRange ||
@@ -214,7 +214,7 @@ export class InterpolatedValue extends Value {
                 this.setValue(valueObject._getOutputValue());
             },
             startTransition: (valueObject: Value, from: number | string, toValue: number | string, duration: number,
-                    easing: string, delay: number, onEnd: RX.Types.Animated.EndCallback) => {
+                    easing: string, delay: number, onEnd: Ult.Types.Animated.EndCallback) => {
                 this._startTransition(toValue, duration, easing, delay, onEnd);
             },
             stopTransition: (valueObject: Value) => {
@@ -225,7 +225,7 @@ export class InterpolatedValue extends Value {
     }
 
     _startTransition(toValue: number | string, duration: number, easing: string, delay: number,
-            onEnd: RX.Types.Animated.EndCallback): void {
+            onEnd: Ult.Types.Animated.EndCallback): void {
         // This API doesn't currently support more than two elements in the
         // interpolation array. Supporting this in the web would require the
         // use of JS-driven animations or keyframes, both of which are prohibitively
@@ -300,8 +300,8 @@ export class InterpolatedValue extends Value {
     }
 }
 
-export const timing: RX.Types.Animated.TimingFunction = function(value: Value,
-        config: RX.Types.Animated.TimingAnimationConfig): RX.Types.Animated.CompositeAnimation {
+export const timing: Ult.Types.Animated.TimingFunction = function(value: Value,
+        config: Ult.Types.Animated.TimingAnimationConfig): Ult.Types.Animated.CompositeAnimation {
 
     if (!value  || !config) {
         throw new Error('Timing animation requires value and config');
@@ -309,13 +309,13 @@ export const timing: RX.Types.Animated.TimingFunction = function(value: Value,
 
     let stopLooping = false;
     return {
-        start: function(onEnd?: RX.Types.Animated.EndCallback): void {
+        start: function(onEnd?: Ult.Types.Animated.EndCallback): void {
             const animate = () => {
                 if (config.loop) {
                     value.setValue(config.loop.restartFrom);
                 }
 
-                const easing: RX.Types.Animated.EasingFunction = config.easing || Easing.Default();
+                const easing: Ult.Types.Animated.EasingFunction = config.easing || Easing.Default();
                 const duration = config.duration !== undefined ? config.duration : 500;
                 const delay = config.delay || 0;
                 value._startTransition(config.toValue, duration, easing.cssName, delay, result => {
@@ -343,8 +343,8 @@ export const timing: RX.Types.Animated.TimingFunction = function(value: Value,
     };
 };
 
-export const sequence: RX.Types.Animated.SequenceFunction = function(
-        animations: RX.Types.Animated.CompositeAnimation[]): RX.Types.Animated.CompositeAnimation {
+export const sequence: Ult.Types.Animated.SequenceFunction = function(
+        animations: Ult.Types.Animated.CompositeAnimation[]): Ult.Types.Animated.CompositeAnimation {
 
     if (!animations) {
         throw new Error('Sequence animation requires a list of animations');
@@ -353,7 +353,7 @@ export const sequence: RX.Types.Animated.SequenceFunction = function(
     let hasBeenStopped = false;
     let doneCount = 0;
     const result = {
-        start: function(onEnd?: RX.Types.Animated.EndCallback) {
+        start: function(onEnd?: Ult.Types.Animated.EndCallback) {
             if (!animations || animations.length === 0) {
                 throw new Error('No animations were passed to the animated sequence API');
             }
@@ -390,8 +390,8 @@ export const sequence: RX.Types.Animated.SequenceFunction = function(
     return result;
 };
 
-export const parallel: RX.Types.Animated.ParallelFunction = function(
-        animations: RX.Types.Animated.CompositeAnimation[]): RX.Types.Animated.CompositeAnimation {
+export const parallel: Ult.Types.Animated.ParallelFunction = function(
+        animations: Ult.Types.Animated.CompositeAnimation[]): Ult.Types.Animated.CompositeAnimation {
 
     if (!animations) {
         throw new Error('Parallel animation requires a list of animations');
@@ -402,7 +402,7 @@ export const parallel: RX.Types.Animated.ParallelFunction = function(
     let doneCount = 0;
 
     const result = {
-        start: function(onEnd?: RX.Types.Animated.EndCallback) {
+        start: function(onEnd?: Ult.Types.Animated.EndCallback) {
             if (!animations || animations.length === 0) {
                 throw new Error('No animations were passed to the animated parallel API');
             }
@@ -438,7 +438,7 @@ export const parallel: RX.Types.Animated.ParallelFunction = function(
 };
 
 interface ExtendedTransition extends TransitionSpec {
-    onEnd?: RX.Types.Animated.EndCallback;
+    onEnd?: Ult.Types.Animated.EndCallback;
     toValue?: number | string;
 }
 
@@ -452,9 +452,9 @@ interface AnimatedValueMap {
 }
 
 // Function for creating wrapper AnimatedComponent around passed in component
-function createAnimatedComponent<PropsType extends RX.Types.CommonProps<C>, C>(Component: any): any {
+function createAnimatedComponent<PropsType extends Ult.Types.CommonProps<C>, C>(Component: any): any {
     class AnimatedComponentGenerated extends React.Component<PropsType, void>
-        implements RX.AnimatedComponent<PropsType, void, C>, ValueListener {
+        implements Ult.AnimatedComponent<PropsType, void, C>, ValueListener {
 
         private _mountedComponent: any = null;
         private _propsWithoutStyle: any;
@@ -480,7 +480,7 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps<C>, C>(C
             }
         }
 
-        UNSAFE_componentWillReceiveProps(props: RX.Types.CommonStyledProps<RX.Types.StyleRuleSet<object>, C>) {
+        UNSAFE_componentWillReceiveProps(props: Ult.Types.CommonStyledProps<Ult.Types.StyleRuleSet<object>, C>) {
             this._updateStyles(props);
         }
 
@@ -511,7 +511,7 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps<C>, C>(C
         }
 
         startTransition(valueObject: Value, fromValue: number | string, toValue: number | string, duration: number,
-                easing: string, delay: number, onEnd: RX.Types.Animated.EndCallback): void {
+                easing: string, delay: number, onEnd: Ult.Types.Animated.EndCallback): void {
 
             // We should never get here if the component isn't mounted,
             // but we'll add this additional protection.
@@ -744,7 +744,7 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps<C>, C>(C
 
         // Typing of `any` on StyleRuleSet isn't desirable, but there's not accurate typings that can be used to represent
         // our merging of web/RX styles here here
-        private _updateStyles(props: RX.Types.CommonStyledProps<RX.Types.StyleRuleSet<any>, C>) {
+        private _updateStyles(props: Ult.Types.CommonStyledProps<Ult.Types.StyleRuleSet<any>, C>) {
             this._propsWithoutStyle = _.omit(props, 'style');
 
             const rawStyles = Styles.combine(props.style || {});
@@ -907,15 +907,15 @@ function createAnimatedComponent<PropsType extends RX.Types.CommonProps<C>, C>(C
     return AnimatedComponentGenerated;
 }
 
-export const Image = createAnimatedComponent(RXImage) as typeof RX.AnimatedImage;
-export const Text = createAnimatedComponent(RXText) as typeof RX.AnimatedText;
-export const TextInput = createAnimatedComponent(RXTextInput) as typeof RX.AnimatedTextInput;
-export const View = createAnimatedComponent(RXView) as typeof RX.AnimatedView;
+export const Image = createAnimatedComponent(RXImage) as typeof Ult.AnimatedImage;
+export const Text = createAnimatedComponent(RXText) as typeof Ult.AnimatedText;
+export const TextInput = createAnimatedComponent(RXTextInput) as typeof Ult.AnimatedTextInput;
+export const View = createAnimatedComponent(RXView) as typeof Ult.AnimatedView;
 
-export type Image = RX.AnimatedImage;
-export type Text = RX.AnimatedText;
-export type TextInput = RX.AnimatedTextInput;
-export type View = RX.AnimatedView;
+export type Image = Ult.AnimatedImage;
+export type Text = Ult.AnimatedText;
+export type TextInput = Ult.AnimatedTextInput;
+export type View = Ult.AnimatedView;
 
 export const createValue: (initialValue: number) => Value = function(initialValue: number) {
     return new Value(initialValue);

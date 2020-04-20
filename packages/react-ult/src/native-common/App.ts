@@ -6,28 +6,28 @@
 
 import * as RN from 'react-native';
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
 import { RootView, RootViewUsingProps } from './RootView';
 import UserInterface from './UserInterface';
 
-const _rnStateToRxState: {[key: string]: RX.Types.AppActivationState} = {
-    'unknown': RX.Types.AppActivationState.Active,
-    'active': RX.Types.AppActivationState.Active,
-    'background': RX.Types.AppActivationState.Background,
-    'inactive': RX.Types.AppActivationState.Inactive,
-    'extension': RX.Types.AppActivationState.Extension,
+const _rnStateToRxState: {[key: string]: Ult.Types.AppActivationState} = {
+    'unknown': Ult.Types.AppActivationState.Active,
+    'active': Ult.Types.AppActivationState.Active,
+    'background': Ult.Types.AppActivationState.Background,
+    'inactive': Ult.Types.AppActivationState.Inactive,
+    'extension': Ult.Types.AppActivationState.Extension,
     // uninitialized means in Background on android since last change I did
-    'uninitialized': RX.Types.AppActivationState.Background,
+    'uninitialized': Ult.Types.AppActivationState.Background,
 };
 
-export class App extends RX.App {
+export class App extends Ult.App {
     constructor() {
         super();
 
         RN.AppState.addEventListener('change', (newState: string) => {
             // Fall back to active if a new state spits out that we don't know about
-            this.activationStateChangedEvent.fire(_rnStateToRxState[newState] || RX.Types.AppActivationState.Active);
+            this.activationStateChangedEvent.fire(_rnStateToRxState[newState] || Ult.Types.AppActivationState.Active);
         });
 
         RN.AppState.addEventListener('memoryWarning', () => {
@@ -42,8 +42,8 @@ export class App extends RX.App {
         UserInterface.registerRootViewUsingPropsFactory(this.getRootViewUsingPropsFactory());
     }
 
-    getActivationState(): RX.Types.AppActivationState {
-        return _rnStateToRxState[RN.AppState.currentState] || RX.Types.AppActivationState.Active;
+    getActivationState(): Ult.Types.AppActivationState {
+        return _rnStateToRxState[RN.AppState.currentState] || Ult.Types.AppActivationState.Active;
     }
 
     protected getRootViewFactory(): RN.ComponentProvider {

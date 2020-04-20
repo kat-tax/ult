@@ -4,9 +4,9 @@
  * Web-specific implementation of the cross-platform Clipboard abstraction.
  */
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
-export class Clipboard extends RX.Clipboard {
+export class Clipboard extends Ult.Clipboard {
     setText(text: string): void {
         const node = Clipboard._createInvisibleNode();
         node.value = text;

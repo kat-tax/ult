@@ -6,9 +6,9 @@
 
 import SubscribableEvent from 'subscribableevent';
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
-export abstract class Accessibility extends RX.Accessibility {
+export abstract class Accessibility extends Ult.Accessibility {
     abstract isScreenReaderEnabled(): boolean;
 
     screenReaderChangedEvent = new SubscribableEvent<(isEnabled: boolean) => void>();

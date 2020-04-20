@@ -10,12 +10,12 @@ import * as RN from 'react-native';
 
 import AppConfig from '../common/AppConfig';
 import assert from '../common/assert';
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 import { Defer } from '../common/utils/PromiseDefer';
 
 import MainViewStore from './MainViewStore';
 
-export class UserInterface extends RX.UserInterface {
+export class UserInterface extends Ult.UserInterface {
     private _touchLatencyThresholhdMs: number | undefined;
     private _isNavigatingWithKeyboard = false;
     private _rootViewUsingPropsFactory: RN.ComponentProvider | undefined;
@@ -30,8 +30,8 @@ export class UserInterface extends RX.UserInterface {
         this._rootViewRegistry = {};
     }
 
-    measureLayoutRelativeToWindow(component: React.Component<any, any>): Promise<RX.Types.LayoutInfo> {
-        const deferred = new Defer<RX.Types.LayoutInfo>();
+    measureLayoutRelativeToWindow(component: React.Component<any, any>): Promise<Ult.Types.LayoutInfo> {
+        const deferred = new Defer<Ult.Types.LayoutInfo>();
         const nodeHandle = RN.findNodeHandle(component);
 
         assert(!!nodeHandle);
@@ -51,9 +51,9 @@ export class UserInterface extends RX.UserInterface {
     }
 
     measureLayoutRelativeToAncestor(component: React.Component<any, any>,
-            ancestor: React.Component<any, any>): Promise<RX.Types.LayoutInfo> {
+            ancestor: React.Component<any, any>): Promise<Ult.Types.LayoutInfo> {
 
-        const deferred = new Defer<RX.Types.LayoutInfo>();
+        const deferred = new Defer<Ult.Types.LayoutInfo>();
         const nodeHandle = RN.findNodeHandle(component);
         const ancestorNodeHander = RN.findNodeHandle(ancestor);
 
@@ -74,7 +74,7 @@ export class UserInterface extends RX.UserInterface {
         return deferred.promise();
     }
 
-    measureWindow(rootViewId?: string): RX.Types.LayoutInfo {
+    measureWindow(rootViewId?: string): Ult.Types.LayoutInfo {
         let dimensions = RN.Dimensions.get('window');
 
         if (rootViewId && RN.Platform.OS === 'windows') {
@@ -166,7 +166,7 @@ export class UserInterface extends RX.UserInterface {
         this._touchLatencyThresholhdMs = latencyThresholdMs;
     }
 
-    evaluateTouchLatency(e: RX.Types.SyntheticEvent) {
+    evaluateTouchLatency(e: Ult.Types.SyntheticEvent) {
         if (this._touchLatencyThresholhdMs) {
             const latency = Date.now() - e.timeStamp.valueOf();
             if (latency > this._touchLatencyThresholhdMs) {

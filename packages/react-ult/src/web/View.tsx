@@ -11,7 +11,7 @@ import * as ReactDOM from 'react-dom';
 import AppConfig from '../common/AppConfig';
 import { FocusArbitratorProvider } from '../common/utils/AutoFocusHelper';
 import { RestrictFocusType } from '../common/utils/FocusManager';
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 import { PopupComponent } from '../common/PopupContainerViewBase';
 
 import AccessibilityUtil from './AccessibilityUtil';
@@ -79,7 +79,7 @@ export interface ViewContext {
     focusArbitrator?: FocusArbitratorProvider;
 }
 
-export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RX.View> {
+export class View extends ViewBase<Ult.Types.ViewProps, Ult.Types.Stateless, Ult.View> {
     static contextTypes: React.ValidationMap<any> = {
         isRxParentAText: PropTypes.bool,
         focusManager: PropTypes.object,
@@ -109,12 +109,12 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RX.Vi
     private _popupContainer: PopupContainerView | undefined;
     private _popupToken: PopupComponent | undefined;
 
-    constructor(props: RX.Types.ViewProps, context?: ViewContext) {
+    constructor(props: Ult.Types.ViewProps, context?: ViewContext) {
         super(props, context);
 
         this._limitFocusWithin =
-            (props.limitFocusWithin === RX.Types.LimitFocusType.Limited) ||
-            (props.limitFocusWithin === RX.Types.LimitFocusType.Accessible);
+            (props.limitFocusWithin === Ult.Types.LimitFocusType.Limited) ||
+            (props.limitFocusWithin === Ult.Types.LimitFocusType.Accessible);
 
         if (this.props.restrictFocusWithin || this._limitFocusWithin) {
             this._focusManager = new FocusManager(context && context.focusManager);
@@ -266,7 +266,7 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RX.Vi
         return !!this._popupContainer && this._popupContainer.isHidden();
     }
 
-    private _updateFocusArbitratorProvider(props: RX.Types.ViewProps) {
+    private _updateFocusArbitratorProvider(props: Ult.Types.ViewProps) {
         if (props.arbitrateFocus) {
             if (this._focusArbitratorProvider) {
                 this._focusArbitratorProvider.setCallback(props.arbitrateFocus);
@@ -416,7 +416,7 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RX.Vi
             reactElement;
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps: RX.Types.ViewProps) {
+    UNSAFE_componentWillReceiveProps(nextProps: Ult.Types.ViewProps) {
         super.UNSAFE_componentWillReceiveProps(nextProps);
 
         if (AppConfig.isDevelopmentMode()) {
@@ -502,7 +502,7 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RX.Vi
     }
 }
 
-applyFocusableComponentMixin(View, function(this: View, nextProps?: RX.Types.ViewProps) {
+applyFocusableComponentMixin(View, function(this: View, nextProps?: Ult.Types.ViewProps) {
     // VoiceOver with the VoiceOver key combinations (Ctrl+Option+Left/Right) focuses
     // <div>s when whatever tabIndex is set (even if tabIndex=-1). So, View is focusable
     // when tabIndex is not undefined.

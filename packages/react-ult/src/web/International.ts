@@ -4,11 +4,11 @@
  * Web-specific implementation for i18n.
  */
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
 import FrontLayerViewManager from './FrontLayerViewManager';
 
-export class International implements RX.International {
+export class International implements Ult.International {
     allowRTL(allow: boolean): void {
         FrontLayerViewManager.allowRTL(allow);
     }

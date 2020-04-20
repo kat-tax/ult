@@ -7,13 +7,13 @@
 import * as RN from 'react-native';
 
 import AppConfig from '../common/AppConfig';
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 import UserInterface from '../native-common/UserInterface';
 
 // Native implementation for alert dialog boxes
-export class Alert implements RX.Alert {
-    show(title: string, message?: string, buttons?: RX.Types.AlertButtonSpec[],
-            options?: RX.Types.AlertOptions): void {
+export class Alert implements Ult.Alert {
+    show(title: string, message?: string, buttons?: Ult.Types.AlertButtonSpec[],
+            options?: Ult.Types.AlertOptions): void {
 
         const alertOptions: RN.ExtendedAlertOptions = {};
 

@@ -7,7 +7,7 @@
 import * as React from 'react';
 
 // Use only for type data
-import * as RX from './Interfaces';
+import * as Ult from './Interfaces';
 
 export { default as SubscribableEvent, SubscriptionToken } from 'subscribableevent';
 
@@ -461,7 +461,7 @@ export type FocusArbitrator = (candidates: FocusCandidate[]) => FocusCandidate |
 // See View's arbitrateFocus property.
 export interface FocusCandidate {
     // An instance of the component which wants to be focused.
-    component: RX.FocusableComponent;
+    component: Ult.FocusableComponent;
 
     // Value of component.props.accessibilityId (if specified).
     accessibilityId?: string;
@@ -472,7 +472,7 @@ export interface CommonStyledProps<T, C = React.Component> extends CommonProps<C
 }
 
 // Button
-export interface ButtonProps extends CommonStyledProps<ButtonStyleRuleSet, RX.Button>, CommonAccessibilityProps {
+export interface ButtonProps extends CommonStyledProps<ButtonStyleRuleSet, Ult.Button>, CommonAccessibilityProps {
     title?: string;
     disabled?: boolean;
     disabledOpacity?: number;
@@ -508,7 +508,7 @@ export interface PickerPropsItem {
     label: string;
     value: string;
 }
-export interface PickerProps extends CommonProps<RX.Picker> {
+export interface PickerProps extends CommonProps<Ult.Picker> {
     items: PickerPropsItem[];
     selectedValue: string;
     onValueChange: (itemValue: string, itemPosition: number) => void;
@@ -539,7 +539,7 @@ export interface ImagePropsShared<C = React.Component> extends CommonProps<C> {
     onError?: (err?: Error) => void;
 }
 
-export interface ImageProps extends ImagePropsShared<RX.Image> {
+export interface ImageProps extends ImagePropsShared<Ult.Image> {
     style?: StyleRuleSetRecursive<ImageStyleRuleSet>;
 }
 
@@ -548,7 +548,7 @@ export interface ImageMetadata {
     height: number;
 }
 
-export interface AnimatedImageProps extends ImagePropsShared<RX.AnimatedImage> {
+export interface AnimatedImageProps extends ImagePropsShared<Ult.AnimatedImage> {
     style?: StyleRuleSetRecursive<AnimatedImageStyleRuleSet | ImageStyleRuleSet>;
 }
 
@@ -588,11 +588,11 @@ export interface TextPropsShared<C = React.Component> extends CommonProps<C> {
     onContextMenu?: (e: MouseEvent) => void;
 }
 
-export interface TextProps extends TextPropsShared<RX.Text> {
+export interface TextProps extends TextPropsShared<Ult.Text> {
     style?: StyleRuleSetRecursive<TextStyleRuleSet>;
 }
 
-export interface AnimatedTextProps extends TextPropsShared<RX.AnimatedText> {
+export interface AnimatedTextProps extends TextPropsShared<Ult.AnimatedText> {
     style?: StyleRuleSetRecursive<AnimatedTextStyleRuleSet | TextStyleRuleSet>;
 }
 
@@ -682,12 +682,12 @@ export interface ViewPropsShared<C = React.Component> extends CommonProps<C>, Co
     onResponderTerminationRequest?: (e: SyntheticEvent) => boolean;
 }
 
-export interface ViewProps extends ViewPropsShared<RX.View> {
+export interface ViewProps extends ViewPropsShared<Ult.View> {
     style?: StyleRuleSetRecursive<ViewStyleRuleSet>;
     useSafeInsets?: boolean;
 }
 
-export interface AnimatedViewProps extends ViewPropsShared<RX.AnimatedView> {
+export interface AnimatedViewProps extends ViewPropsShared<Ult.AnimatedView> {
     style?: StyleRuleSetRecursive<AnimatedViewStyleRuleSet | ViewStyleRuleSet>;
 }
 
@@ -762,7 +762,7 @@ export enum PreferredPanGesture {
     Vertical
 }
 
-export interface GestureViewProps extends CommonStyledProps<ViewStyleRuleSet, RX.GestureView>, CommonAccessibilityProps {
+export interface GestureViewProps extends CommonStyledProps<ViewStyleRuleSet, Ult.GestureView>, CommonAccessibilityProps {
     // Gestures and attributes that apply only to touch inputs
     onPinchZoom?: (gestureState: MultiTouchGestureState) => void;
     onRotate?: (gestureState: MultiTouchGestureState) => void;
@@ -804,7 +804,7 @@ export interface ScrollIndicatorInsets {
 }
 
 // ScrollView
-export interface ScrollViewProps extends CommonStyledProps<ScrollViewStyleRuleSet, RX.ScrollView>, CommonAccessibilityProps {
+export interface ScrollViewProps extends CommonStyledProps<ScrollViewStyleRuleSet, Ult.ScrollView>, CommonAccessibilityProps {
     children?: ReactNode;
 
     horizontal?: boolean; // By default false
@@ -867,12 +867,12 @@ export interface ScrollViewProps extends CommonStyledProps<ScrollViewStyleRuleSe
     // hooked into the onScroll handler of the scrollview and .setValue() will be called on them
     // with the updated values.  On supported platforms, it will use RN.Animated.event() to do
     // a native-side/-backed coupled animation.
-    scrollXAnimatedValue?: RX.Types.AnimatedValue;
-    scrollYAnimatedValue?: RX.Types.AnimatedValue;
+    scrollXAnimatedValue?: Ult.Types.AnimatedValue;
+    scrollYAnimatedValue?: Ult.Types.AnimatedValue;
 }
 
 // Link
-export interface LinkProps extends CommonStyledProps<LinkStyleRuleSet, RX.Link> {
+export interface LinkProps extends CommonStyledProps<LinkStyleRuleSet, Ult.Link> {
     title?: string;
     url: string;
     children?: ReactNode;
@@ -883,8 +883,8 @@ export interface LinkProps extends CommonStyledProps<LinkStyleRuleSet, RX.Link> 
     accessibilityId?: string;
     autoFocus?: boolean; // The component is a candidate for being autofocused.
 
-    onPress?: (e: RX.Types.SyntheticEvent, url: string) => void;
-    onLongPress?: (e: RX.Types.SyntheticEvent, url: string) => void;
+    onPress?: (e: Ult.Types.SyntheticEvent, url: string) => void;
+    onLongPress?: (e: Ult.Types.SyntheticEvent, url: string) => void;
     onHoverStart?: (e: SyntheticEvent) => void;
     onHoverEnd?: (e: SyntheticEvent) => void;
     onContextMenu?: (e: MouseEvent) => void;
@@ -939,16 +939,16 @@ export interface TextInputPropsShared<C = React.Component> extends CommonProps<C
     onScroll?: (newScrollLeft: number, newScrollTop: number) => void;
 }
 
-export interface TextInputProps extends TextInputPropsShared<RX.TextInput> {
+export interface TextInputProps extends TextInputPropsShared<Ult.TextInput> {
     style?: StyleRuleSetRecursive<TextInputStyleRuleSet>;
 }
 
-export interface AnimatedTextInputProps extends TextInputPropsShared<RX.AnimatedTextInput> {
+export interface AnimatedTextInputProps extends TextInputPropsShared<Ult.AnimatedTextInput> {
     style?: StyleRuleSetRecursive<AnimatedTextInputStyleRuleSet | TextInputStyleRuleSet>;
 }
 
 // ActivityIndicator
-export interface ActivityIndicatorProps extends CommonStyledProps<ActivityIndicatorStyleRuleSet, RX.ActivityIndicator> {
+export interface ActivityIndicatorProps extends CommonStyledProps<ActivityIndicatorStyleRuleSet, Ult.ActivityIndicator> {
     color: string;
     size?: 'large' | 'medium' | 'small' | 'tiny';
     deferTime?: number; // Number of ms to wait before displaying
@@ -992,7 +992,7 @@ export interface PopupOptions {
     // anchor has been pressed.
     // IMPORTANT NOTE: This handler may be called when the component is
     // already unmounted as it uses a time delay to accommodate a fade-out animation.
-    onAnchorPressed?: (e?: RX.Types.SyntheticEvent) => void;
+    onAnchorPressed?: (e?: Ult.Types.SyntheticEvent) => void;
 
     // Determines if the anchor invoking the popup should behave like a toggle.
     // Value = true  => Calling Popup.show will show the popup. A subsequent call, will hide the popup, and so on.
@@ -1105,7 +1105,7 @@ export namespace Animated {
         outputRange: (number | string)[];
     }
 
-    export type TimingFunction = (value: RX.Types.AnimatedValue | RX.Types.InterpolatedValue,
+    export type TimingFunction = (value: Ult.Types.AnimatedValue | Ult.Types.InterpolatedValue,
         config: TimingAnimationConfig) => CompositeAnimation;
     export let timing: TimingFunction;
 

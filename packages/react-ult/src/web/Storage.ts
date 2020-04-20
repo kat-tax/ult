@@ -4,9 +4,9 @@
  * Web-specific implementation of the cross-platform database storage abstraction.
  */
 
-import * as RX from '../common/Interfaces';
+import * as Ult from '../common/Interfaces';
 
-export class Storage extends RX.Storage {
+export class Storage extends Ult.Storage {
     getItem(key: string): Promise<string | undefined> {
         const value = window.localStorage.getItem(key);
         return Promise.resolve<string | undefined>(value === null ? undefined : value);
