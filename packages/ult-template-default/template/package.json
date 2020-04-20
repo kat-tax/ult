@@ -23,7 +23,7 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-native": "^0.61.5",
-    "react-ult": "^0.1.7"
+    "reactxp": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

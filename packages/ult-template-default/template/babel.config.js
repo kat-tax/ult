@@ -9,12 +9,5 @@ module.exports = function(api) {
     ['@babel/proposal-decorators', {legacy: true}],
   ];
 
-  if (process.env.platform === 'web') {
-    return {
-      presets: ['@babel/env', ...presets],
-      plugins,
-    }
-  }
-
   return {presets, plugins};
 };

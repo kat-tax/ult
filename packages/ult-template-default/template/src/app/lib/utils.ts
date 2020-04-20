@@ -1,4 +1,4 @@
-import {Platform} from 'react-ult';
+import {Platform} from 'reactxp';
 
 const _platform = Platform.getType();
 
