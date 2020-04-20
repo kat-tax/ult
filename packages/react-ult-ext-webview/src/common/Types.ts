@@ -5,7 +5,7 @@
  */
 
 import {Component as ReactComponent} from 'react';
-import {Types as RXTypes} from 'react-ult';
+import {Types as UltTypes} from 'react-ult';
 
 export interface WebViewNavigationState {
   canGoBack: boolean;
@@ -53,24 +53,24 @@ export interface WebViewShouldStartLoadEvent {
   url: string;
 }
 
-export interface WebViewNavigationEvent extends RXTypes.SyntheticEvent {
+export interface WebViewNavigationEvent extends UltTypes.SyntheticEvent {
   nativeEvent: WebViewNavigationState;
 }
 
-export interface WebViewErrorEvent extends RXTypes.SyntheticEvent {
+export interface WebViewErrorEvent extends UltTypes.SyntheticEvent {
   nativeEvent: WebViewErrorState;
 }
 
-export interface WebViewMessageEvent extends RXTypes.SyntheticEvent {
+export interface WebViewMessageEvent extends UltTypes.SyntheticEvent {
   data: string;
   origin: string;
 }
 
-export interface WebViewProps extends RXTypes.CommonStyledProps<RXTypes.ViewStyleRuleSet, WebView> {
+export interface WebViewProps extends UltTypes.CommonStyledProps<UltTypes.ViewStyleRuleSet, WebView> {
   url?: string;
   source?: WebViewSource;
   headers?: Headers;
-  onLoad?: (e: RXTypes.SyntheticEvent) => void;
+  onLoad?: (e: UltTypes.SyntheticEvent) => void;
   onNavigationStateChange?: (navigationState: WebViewNavigationState) => void;
   scalesPageToFit?: boolean;
   injectedJavaScript?: string;
@@ -82,15 +82,15 @@ export interface WebViewProps extends RXTypes.CommonStyledProps<RXTypes.ViewStyl
   startInLoadingState?: boolean;
   domStorageEnabled?: boolean;
   onShouldStartLoadWithRequest?: (shouldStartLoadEvent: WebViewShouldStartLoadEvent) => boolean;
-  onLoadStart?: (e: RXTypes.SyntheticEvent) => void;
-  onError?: (e: RXTypes.SyntheticEvent) => void;
+  onLoadStart?: (e: UltTypes.SyntheticEvent) => void;
+  onError?: (e: UltTypes.SyntheticEvent) => void;
   onMessage?: (e: WebViewMessageEvent) => void;
 
   // Web only; overrides javaScriptEnabled if used
   sandbox?: WebViewSandboxMode;
 }
 
-export abstract class WebView extends ReactComponent<WebViewProps, RXTypes.Stateless> {
+export abstract class WebView extends ReactComponent<WebViewProps, UltTypes.Stateless> {
   abstract postMessage(message: string, targetOrigin?: string): void;
   abstract reload(): void;
   abstract goBack(): void;

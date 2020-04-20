@@ -62,20 +62,20 @@ function applyMixin(thisObj: any, mixin: {[propertyName: string]: any}, properti
 }
 
 export interface ButtonContext {
-    hasRxButtonAscendant?: boolean;
+    hasUltButtonAscendant?: boolean;
     focusArbitrator?: FocusArbitratorProvider;
 }
 
 export class Button extends ButtonBase {
     static contextTypes = {
-        hasRxButtonAscendant: PropTypes.bool,
+        hasUltButtonAscendant: PropTypes.bool,
         focusArbitrator: PropTypes.object,
     };
 
     context!: ButtonContext;
 
     static childContextTypes: React.ValidationMap<any> = {
-        hasRxButtonAscendant: PropTypes.bool,
+        hasUltButtonAscendant: PropTypes.bool,
     };
 
     private _mixin_componentDidMount = RN.Touchable.Mixin.componentDidMount || noop;
@@ -111,7 +111,7 @@ export class Button extends ButtonBase {
         this.state = this.touchableGetInitialState();
         this._setOpacityStyles(props);
 
-        if (context && context.hasRxButtonAscendant) {
+        if (context && context.hasUltButtonAscendant) {
             if (AppConfig.isDevelopmentMode()) {
                 console.warn('Button components should not be embedded. Some APIs, e.g. Accessibility, will not work.');
             }
@@ -200,7 +200,7 @@ export class Button extends ButtonBase {
     }
 
     getChildContext(): ButtonContext {
-        return { hasRxButtonAscendant: true };
+        return { hasUltButtonAscendant: true };
     }
 
     setNativeProps(nativeProps: RN.ViewProps) {

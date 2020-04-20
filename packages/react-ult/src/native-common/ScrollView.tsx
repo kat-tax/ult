@@ -100,7 +100,7 @@ export class ScrollView extends ViewBase<Ult.Types.ScrollViewProps, Ult.Types.St
         // navigation and tab bars in iOS.
         // (navigationBarHidden={true}). We believe that React Native may not be calculating the content insets for the
         // ScrollView correctly in this situation. Disabling this calculation seems to fix the ScrollView inset issues.
-        // Currently RX does not expose any components that would require `automaticallyAdjustContentInsets` to be
+        // Currently ULT does not expose any components that would require `automaticallyAdjustContentInsets` to be
         // set to true.
         // We also set removeClippedSubviews to false, overriding the default value. Most of the scroll views
         // we use are virtualized anyway.

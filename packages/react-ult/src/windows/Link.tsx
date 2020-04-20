@@ -71,7 +71,7 @@ export class Link extends LinkBase<LinkState> implements FocusManagerFocusableCo
     };
 
     protected _render(internalProps: RN.TextProps, onMount: (text: any) => void) {
-        if (this.context && !this.context.isRxParentAText) {
+        if (this.context && !this.context.isUltParentAText) {
             // Standalone link. We use a keyboard focusable RN.Text
             return this._renderLinkAsFocusableText(internalProps, onMount);
         } else if (RNW.HyperlinkWindows && !this.state.isRestrictedOrLimited) {

@@ -67,22 +67,22 @@ if (typeof document !== 'undefined') {
 }
 
 export interface MainViewContext {
-    isInRxMainView?: boolean;
+    isInUltMainView?: boolean;
 }
 
 // This helper class wraps the main view and passes a boolean value
-// "isInRxMainView" to all children found within it. This is used to
+// "isInUltMainView" to all children found within it. This is used to
 // prevent gesture handling within the main view when a modal is displayed.
 export class MainViewContainer extends React.Component<Types.CommonProps<MainViewContainer>, Types.Stateless>
     implements React.ChildContextProvider<MainViewContext> {
 
     static childContextTypes: React.ValidationMap<any> = {
-        isInRxMainView: PropTypes.bool,
+        isInUltMainView: PropTypes.bool,
     };
 
     getChildContext(): MainViewContext {
         return {
-            isInRxMainView: true,
+            isInUltMainView: true,
         };
     }
 

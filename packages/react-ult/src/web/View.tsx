@@ -22,7 +22,7 @@ import restyleForInlineText from './utils/restyleForInlineText';
 import Styles from './Styles';
 import ViewBase from './ViewBase';
 
-// Cast to any to allow merging of web and RX styles
+// Cast to any to allow merging of web and ULT styles
 const _styles = {
     defaultStyle: {
         position: 'relative',
@@ -73,7 +73,7 @@ if (typeof document !== 'undefined') {
 }
 
 export interface ViewContext {
-    isRxParentAText?: boolean;
+    isUltParentAText?: boolean;
     focusManager?: FocusManager;
     popupContainer?: PopupContainerView;
     focusArbitrator?: FocusArbitratorProvider;
@@ -81,7 +81,7 @@ export interface ViewContext {
 
 export class View extends ViewBase<Ult.Types.ViewProps, Ult.Types.Stateless, Ult.View> {
     static contextTypes: React.ValidationMap<any> = {
-        isRxParentAText: PropTypes.bool,
+        isUltParentAText: PropTypes.bool,
         focusManager: PropTypes.object,
         popupContainer: PropTypes.object,
         focusArbitrator: PropTypes.object,
@@ -90,7 +90,7 @@ export class View extends ViewBase<Ult.Types.ViewProps, Ult.Types.Stateless, Ult
     context!: ViewContext;
 
     static childContextTypes: React.ValidationMap<any> = {
-        isRxParentAText: PropTypes.bool.isRequired,
+        isUltParentAText: PropTypes.bool.isRequired,
         focusManager: PropTypes.object,
         popupContainer: PropTypes.object,
         focusArbitrator: PropTypes.object,
@@ -231,7 +231,7 @@ export class View extends ViewBase<Ult.Types.ViewProps, Ult.Types.Stateless, Ult
         // Because they're in an Types.View, they should use their normal styling rather than their
         // special styling for appearing inline with text.
         const childContext: ViewContext = {
-            isRxParentAText: false,
+            isUltParentAText: false,
         };
 
         // Provide the descendants with the focus manager and popup container (if any).
@@ -411,7 +411,7 @@ export class View extends ViewBase<Ult.Types.ViewProps, Ult.Types.Stateless, Ult
             );
         }
 
-        return this.context.isRxParentAText ?
+        return this.context.isUltParentAText ?
             restyleForInlineText(reactElement) :
             reactElement;
     }

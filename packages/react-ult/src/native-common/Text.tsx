@@ -23,21 +23,21 @@ const _styles = {
 };
 
 export interface TextContext {
-    isRxParentAText: boolean;
+    isUltParentAText: boolean;
     focusArbitrator?: FocusArbitratorProvider;
-    isRxParentAContextMenuResponder?: boolean;
+    isUltParentAContextMenuResponder?: boolean;
 }
 
 export class Text extends React.Component<Types.TextProps, Types.Stateless> implements React.ChildContextProvider<TextContext> {
     static contextTypes: React.ValidationMap<any> = {
         focusArbitrator: PropTypes.object,
-        isRxParentAContextMenuResponder: PropTypes.bool,
+        isUltParentAContextMenuResponder: PropTypes.bool,
     };
 
     context!: TextContext;
 
     static childContextTypes: React.ValidationMap<any> = {
-        isRxParentAText: PropTypes.bool.isRequired,
+        isUltParentAText: PropTypes.bool.isRequired,
     };
 
     protected _mountedComponent: RN.Text | undefined;
@@ -89,7 +89,7 @@ export class Text extends React.Component<Types.TextProps, Types.Stateless> impl
 
         // The presence of an onContextMenu on this instance or on the first responder parent up the tree
         // should disable any system provided context menu
-        const disableContextMenu = !!onContextMenu || !!this.context.isRxParentAContextMenuResponder;
+        const disableContextMenu = !!onContextMenu || !!this.context.isUltParentAContextMenuResponder;
 
         return { disableContextMenu };
     }
@@ -107,10 +107,10 @@ export class Text extends React.Component<Types.TextProps, Types.Stateless> impl
     };
 
     getChildContext() {
-        // Let descendant RX components know that their nearest RX ancestor is an RX.Text.
-        // Because they're in an RX.Text, they should style themselves specially for appearing
+        // Let descendant ULT components know that their nearest ULT ancestor is an ULT.Text.
+        // Because they're in an ULT.Text, they should style themselves specially for appearing
         // inline with text.
-        return { isRxParentAText: true };
+        return { isUltParentAText: true };
     }
 
     protected _getStyles(): Types.StyleRuleSetRecursiveArray<Types.TextStyleRuleSet> {

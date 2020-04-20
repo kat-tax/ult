@@ -40,7 +40,7 @@ export interface ImageState {
 }
 
 export interface ImageContext {
-    isRxParentAText?: boolean;
+    isUltParentAText?: boolean;
 }
 
 interface XhrBlobUrlCacheEntry {
@@ -114,23 +114,23 @@ class XhrBlobUrlCache {
 
 export class Image extends React.Component<Types.ImageProps, ImageState> {
     static contextTypes: React.ValidationMap<any> = {
-        isRxParentAText: PropTypes.bool,
+        isUltParentAText: PropTypes.bool,
     };
 
     // Provided by super, just re-typing here
     context!: ImageContext;
 
     static childContextTypes: React.ValidationMap<any> = {
-        isRxParentAText: PropTypes.bool.isRequired,
+        isUltParentAText: PropTypes.bool.isRequired,
     };
 
     private _mountedComponent: HTMLImageElement | null = null;
 
     getChildContext() {
-        // Let descendant RX components know that their nearest RX ancestor is not an RX.Text.
-        // Because they're in an RX.Image, they should use their normal styling rather than their
+        // Let descendant ULT components know that their nearest ULT ancestor is not an ULT.Text.
+        // Because they're in an ULT.Image, they should use their normal styling rather than their
         // special styling for appearing inline with text.
-        return { isRxParentAText: false };
+        return { isUltParentAText: false };
     }
 
     static prefetch(url: string): Promise<boolean> {
@@ -367,7 +367,7 @@ export class Image extends React.Component<Types.ImageProps, ImageState> {
             </div>
         );
 
-        return this.context.isRxParentAText ?
+        return this.context.isUltParentAText ?
             restyleForInlineText(reactElement) :
             reactElement;
     }

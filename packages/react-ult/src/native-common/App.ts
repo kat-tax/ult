@@ -11,7 +11,7 @@ import * as Ult from '../common/Interfaces';
 import { RootView, RootViewUsingProps } from './RootView';
 import UserInterface from './UserInterface';
 
-const _rnStateToRxState: {[key: string]: Ult.Types.AppActivationState} = {
+const _rnStateToUltState: {[key: string]: Ult.Types.AppActivationState} = {
     'unknown': Ult.Types.AppActivationState.Active,
     'active': Ult.Types.AppActivationState.Active,
     'background': Ult.Types.AppActivationState.Background,
@@ -27,7 +27,7 @@ export class App extends Ult.App {
 
         RN.AppState.addEventListener('change', (newState: string) => {
             // Fall back to active if a new state spits out that we don't know about
-            this.activationStateChangedEvent.fire(_rnStateToRxState[newState] || Ult.Types.AppActivationState.Active);
+            this.activationStateChangedEvent.fire(_rnStateToUltState[newState] || Ult.Types.AppActivationState.Active);
         });
 
         RN.AppState.addEventListener('memoryWarning', () => {
@@ -37,13 +37,13 @@ export class App extends Ult.App {
 
     initialize(debug: boolean, development: boolean): void {
         super.initialize(debug, development);
-        window.rxdebug = debug;
+        window.ultdebug = debug;
         RN.AppRegistry.registerComponent('UltApp', this.getRootViewFactory());
         UserInterface.registerRootViewUsingPropsFactory(this.getRootViewUsingPropsFactory());
     }
 
     getActivationState(): Ult.Types.AppActivationState {
-        return _rnStateToRxState[RN.AppState.currentState] || Ult.Types.AppActivationState.Active;
+        return _rnStateToUltState[RN.AppState.currentState] || Ult.Types.AppActivationState.Active;
     }
 
     protected getRootViewFactory(): RN.ComponentProvider {

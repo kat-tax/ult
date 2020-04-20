@@ -18,7 +18,7 @@ import { clone } from './utils/lodashMini';
 import MouseResponder, { MouseResponderSubscription } from './utils/MouseResponder';
 import Styles from './Styles';
 
-// Cast to any to allow merging of web and RX styles
+// Cast to any to allow merging of web and ULT styles
 const _styles = {
     defaultView: {
         position: 'relative',
@@ -36,7 +36,7 @@ const _styles = {
 const _preferredPanRatio = 3;
 
 export interface GestureViewContext {
-    isInRxMainView?: boolean;
+    isInUltMainView?: boolean;
 }
 
 let _idCounter = 1;
@@ -61,7 +61,7 @@ export abstract class GestureView extends GestureViewCommon {
     private _gestureTypeLocked = false;
 
     static contextTypes: React.ValidationMap<any> = {
-        isInRxMainView: PropTypes.bool,
+        isInUltMainView: PropTypes.bool,
     };
 
     // Get preferred pan ratio for platform.
@@ -145,7 +145,7 @@ export abstract class GestureView extends GestureViewCommon {
         this._responder = MouseResponder.create({
             id: this._id,
             target: container,
-            disableWhenModal: !!this.context.isInRxMainView,
+            disableWhenModal: !!this.context.isInUltMainView,
             shouldBecomeFirstResponder: (event: MouseEvent) => {
                 if (!this.props.onPan && !this.props.onPanHorizontal && !this.props.onPanVertical) {
                     return false;
@@ -321,12 +321,12 @@ export abstract class GestureView extends GestureViewCommon {
     private static _mapReactTouchListToBasic(l: React.TouchList): TouchListBasic {
         const nl: Types.Touch[] = new Array(l.length);
         for (let i = 0; i < l.length; i++) {
-            nl[i] = this._mapReactTouchToRx(l[i]);
+            nl[i] = this._mapReactTouchToUlt(l[i]);
         }
         return nl;
     }
 
-    private static _mapReactTouchToRx(l: React.Touch): Types.Touch {
+    private static _mapReactTouchToUlt(l: React.Touch): Types.Touch {
         return {
             identifier: l.identifier,
             locationX: l.clientX,

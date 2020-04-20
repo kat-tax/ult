@@ -1,7 +1,7 @@
 ﻿/**
  * UserPresence.ts
  *
- * Native implementation of the RX interfaces related to
+ * Native implementation of the ULT interfaces related to
  * user presence.
  */
 

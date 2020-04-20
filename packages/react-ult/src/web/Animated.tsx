@@ -12,12 +12,12 @@ import Easing from '../common/Easing';
 import * as Ult from '../common/Interfaces';
 
 import { executeTransition, TransitionSpec } from './animated/executeTransition';
-import RXImage from './Image';
+import UltImage from './Image';
 import * as _ from './utils/lodashMini';
 import Styles from './Styles';
-import RXText from './Text';
-import RXTextInput from './TextInput';
-import RXView from './View';
+import UltText from './Text';
+import UltTextInput from './TextInput';
+import UltView from './View';
 
 // Animated Css Property Units - check /common/Types for the list of available
 // css animated properties
@@ -743,7 +743,7 @@ function createAnimatedComponent<PropsType extends Ult.Types.CommonProps<C>, C>(
         }
 
         // Typing of `any` on StyleRuleSet isn't desirable, but there's not accurate typings that can be used to represent
-        // our merging of web/RX styles here here
+        // our merging of web/ULT styles here here
         private _updateStyles(props: Ult.Types.CommonStyledProps<Ult.Types.StyleRuleSet<any>, C>) {
             this._propsWithoutStyle = _.omit(props, 'style');
 
@@ -907,10 +907,10 @@ function createAnimatedComponent<PropsType extends Ult.Types.CommonProps<C>, C>(
     return AnimatedComponentGenerated;
 }
 
-export const Image = createAnimatedComponent(RXImage) as typeof Ult.AnimatedImage;
-export const Text = createAnimatedComponent(RXText) as typeof Ult.AnimatedText;
-export const TextInput = createAnimatedComponent(RXTextInput) as typeof Ult.AnimatedTextInput;
-export const View = createAnimatedComponent(RXView) as typeof Ult.AnimatedView;
+export const Image = createAnimatedComponent(UltImage) as typeof Ult.AnimatedImage;
+export const Text = createAnimatedComponent(UltText) as typeof Ult.AnimatedText;
+export const TextInput = createAnimatedComponent(UltTextInput) as typeof Ult.AnimatedTextInput;
+export const View = createAnimatedComponent(UltView) as typeof Ult.AnimatedView;
 
 export type Image = Ult.AnimatedImage;
 export type Text = Ult.AnimatedText;

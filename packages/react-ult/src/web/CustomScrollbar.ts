@@ -34,11 +34,11 @@ export interface ScrollbarOptions {
 let _nativeSrollBarWidth = -1;
 let _isStyleSheetInstalled = false;
 const _customScrollbarCss = `
-    .rxCustomScroll .scrollViewport > * {
+    .ultCustomScroll .scrollViewport > * {
         box-sizing: border-box;
         display: block;
     }
-    .rxCustomScroll .rail {
+    .ultCustomScroll .rail {
         position: absolute;
         border-radius: 4px;
         opacity: 0;
@@ -50,106 +50,106 @@ const _customScrollbarCss = `
         display: none;
         box-sizing: border-box;
     }
-    .rxCustomScroll .rail:hover {
+    .ultCustomScroll .rail:hover {
         background-color: #EEE;
         border-color: #EEE;
         opacity: .9;
         border-radius: 6px;
     }
-    .rxCustomScroll .rail:hover .slider {
+    .ultCustomScroll .rail:hover .slider {
         border-radius: 6px;
     }
-    .rxCustomScroll .rail .slider {
+    .ultCustomScroll .rail .slider {
         position: absolute;
         border-radius: 4px;
         background: #555;
         box-sizing: border-box;
         border: 1px solid #555;
     }
-    .rxCustomScroll:not(.neutraloverride) > .scrollViewportV > * {
+    .ultCustomScroll:not(.neutraloverride) > .scrollViewportV > * {
         margin-right: em(-17px) !important;
     }
-    .rxCustomScroll .railV {
+    .ultCustomScroll .railV {
         top: 0;
         bottom: 0;
         right: 3px;
         width: 8px;
     }
-    .rxCustomScroll .railV .slider {
+    .ultCustomScroll .railV .slider {
         top: 10px;
         width: 8px;
         min-height: 15px;
     }
-    .rxCustomScroll .railV.railBoth {
+    .ultCustomScroll .railV.railBoth {
         bottom: 15px;
     }
-    .rxCustomScroll .railH {
+    .ultCustomScroll .railH {
         left: 0;
         right: 0;
         bottom: 3px;
         height: 8px;
     }
-    .rxCustomScroll .railH .slider {
+    .ultCustomScroll .railH .slider {
         left: 10px;
         top: -1px;
         height: 8px;
         min-width: 15px;
     }
-    .rxCustomScroll .railH.railBoth {
+    .ultCustomScroll .railH.railBoth {
         right: 15px;
     }
-    .rxCustomScroll.active .rail {
+    .ultCustomScroll.active .rail {
         display: block;
     }
-    .rxCustomScroll:hover .rail {
+    .ultCustomScroll:hover .rail {
         opacity: .6;
     }
-    .rxCustomScroll:hover .rail .slider {
+    .ultCustomScroll:hover .rail .slider {
         background: #AAA;
         border-color: #AAA;
     }
-    .rxCustomScroll.rxCustomScrollH {
+    .ultCustomScroll.ultCustomScrollH {
         width: auto;
     }
-    .rxCustomScroll.rxCustomScrollV {
+    .ultCustomScroll.ultCustomScrollV {
         width: 100%;
     }
-    .rxCustomScroll.scrolling .rail {
+    .ultCustomScroll.scrolling .rail {
         background-color: #EEE;
         border-color: #EEE;
         opacity: .9;
         border-radius: 6px;
     }
-    .rxCustomScroll.scrolling .rail .slider {
+    .ultCustomScroll.scrolling .rail .slider {
         border-radius: 6px;
         background: #AAA;
         border-color: #AAA;
     }
-    .rxCustomScroll.scrolling .scrollViewport > * {
+    .ultCustomScroll.scrolling .scrollViewport > * {
         pointer-events: none !important;
     }
-    .rxCustomScroll.scrolling .railV {
+    .ultCustomScroll.scrolling .railV {
         width: 12px;
     }
-    .rxCustomScroll.scrolling .railV .slider {
+    .ultCustomScroll.scrolling .railV .slider {
         width: 12px;
     }
-    .rxCustomScroll.scrolling .railH {
+    .ultCustomScroll.scrolling .railH {
         height: 12px;
     }
-    .rxCustomScroll.scrolling .railH .slider {
+    .ultCustomScroll.scrolling .railH .slider {
         height: 12px;
     }
-    .rxCustomScroll .railV:hover {
+    .ultCustomScroll .railV:hover {
         width: 12px;
     }
-    .rxCustomScroll .railV:hover .slider {
+    .ultCustomScroll .railV:hover .slider {
         width: 12px;
     }
-    .rxCustomScroll .railH:hover {
+    .ultCustomScroll .railH:hover {
         height: 12px;
     }
-    .rxCustomScroll .railH:hover .slider {
+    .ultCustomScroll .railH:hover .slider {
         height: 12px;
     }
 `;
@@ -404,7 +404,7 @@ export class Scrollbar {
     }
 
     private _addScrollbars(): void {
-        const containerClass = this._hasVertical ? 'rxCustomScrollV' : 'rxCustomScrollH';
+        const containerClass = this._hasVertical ? 'ultCustomScrollV' : 'ultCustomScrollH';
 
         if (this._hasVertical) {
             this._addScrollBar(this._verticalBar, 'railV', this._hasHorizontal);
@@ -415,7 +415,7 @@ export class Scrollbar {
         }
 
         this._container.classList.add(containerClass);
-        this._container.classList.add('rxCustomScroll');
+        this._container.classList.add('ultCustomScroll');
         this._viewport = this._container.querySelector('.scrollViewport') as HTMLElement;
     }
 

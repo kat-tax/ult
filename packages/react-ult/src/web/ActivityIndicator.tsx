@@ -10,36 +10,36 @@ import { Types } from '../common/Interfaces';
 import Timers from '../common/utils/Timers';
 
 const _activityIndicatorCss = `
-.rx-activity {
+.ult-activity {
   position: relative;
   width: 100px;
   height: 100px;
 }
-.rx-activity .layer-1-translate,
-.rx-activity .layer-3-translate,
-.rx-activity .layer-5-translate,
-.rx-activity .layer-7-translate {
+.ult-activity .layer-1-translate,
+.ult-activity .layer-3-translate,
+.ult-activity .layer-5-translate,
+.ult-activity .layer-7-translate {
   -webkit-transform: translate(50px, 50px);
           transform: translate(50px, 50px);
 }
-.rx-activity .layer-2-translate,
-.rx-activity .layer-4-translate,
-.rx-activity .layer-6-translate,
-.rx-activity .layer-8-translate {
+.ult-activity .layer-2-translate,
+.ult-activity .layer-4-translate,
+.ult-activity .layer-6-translate,
+.ult-activity .layer-8-translate {
   -webkit-transform: translate(0px, -40px);
           transform: translate(0px, -40px);
 }
-.rx-activity .layer-2-content,
-.rx-activity .layer-4-content,
-.rx-activity .layer-6-content,
-.rx-activity .layer-8-content {
+.ult-activity .layer-2-content,
+.ult-activity .layer-4-content,
+.ult-activity .layer-6-content,
+.ult-activity .layer-8-content {
   width: 100px;
   height: 100px;
 }
-.rx-activity .layer-2-content .shape-0,
-.rx-activity .layer-4-content .shape-0,
-.rx-activity .layer-6-content .shape-0,
-.rx-activity .layer-8-content .shape-0 {
+.ult-activity .layer-2-content .shape-0,
+.ult-activity .layer-4-content .shape-0,
+.ult-activity .layer-6-content .shape-0,
+.ult-activity .layer-8-content .shape-0 {
   position: absolute;
   left: -7.5px;
   top: -7.5px;
@@ -47,12 +47,12 @@ const _activityIndicatorCss = `
   height: 15px;
   border-radius: 50%;
 }
-.rx-activity div {
+.ult-activity div {
   position: absolute;
   width: 0;
   height: 0;
 }
-.rx-activity .animation {
+.ult-activity .animation {
   -webkit-animation-duration: 1.4s;
           animation-duration: 1.4s;
   -webkit-animation-timing-function: linear;
@@ -64,73 +64,73 @@ const _activityIndicatorCss = `
   -webkit-animation-delay: 0s;
           animation-delay: 0s;
 }
-.rx-activity .layer-1-rotate {
-  -webkit-animation-name: rx-activity-layer-1-rotate;
-          animation-name: rx-activity-layer-1-rotate;
+.ult-activity .layer-1-rotate {
+  -webkit-animation-name: ult-activity-layer-1-rotate;
+          animation-name: ult-activity-layer-1-rotate;
 }
-.rx-activity .layer-2-scale {
-  -webkit-animation-name: rx-activity-layer-2-scale;
-          animation-name: rx-activity-layer-2-scale;
+.ult-activity .layer-2-scale {
+  -webkit-animation-name: ult-activity-layer-2-scale;
+          animation-name: ult-activity-layer-2-scale;
 }
-.rx-activity .layer-3-rotate {
-  -webkit-animation-name: rx-activity-layer-3-rotate;
-          animation-name: rx-activity-layer-3-rotate;
+.ult-activity .layer-3-rotate {
+  -webkit-animation-name: ult-activity-layer-3-rotate;
+          animation-name: ult-activity-layer-3-rotate;
 }
-.rx-activity .layer-4-scale {
-  -webkit-animation-name: rx-activity-layer-4-scale;
-          animation-name: rx-activity-layer-4-scale;
+.ult-activity .layer-4-scale {
+  -webkit-animation-name: ult-activity-layer-4-scale;
+          animation-name: ult-activity-layer-4-scale;
 }
-.rx-activity .layer-5-rotate {
-  -webkit-animation-name: rx-activity-layer-5-rotate;
-          animation-name: rx-activity-layer-5-rotate;
+.ult-activity .layer-5-rotate {
+  -webkit-animation-name: ult-activity-layer-5-rotate;
+          animation-name: ult-activity-layer-5-rotate;
 }
-.rx-activity .layer-6-scale {
-  -webkit-animation-name: rx-activity-layer-6-scale;
-          animation-name: rx-activity-layer-6-scale;
+.ult-activity .layer-6-scale {
+  -webkit-animation-name: ult-activity-layer-6-scale;
+          animation-name: ult-activity-layer-6-scale;
 }
-.rx-activity .layer-7-rotate {
-  -webkit-animation-name: rx-activity-layer-7-rotate;
-          animation-name: rx-activity-layer-7-rotate;
+.ult-activity .layer-7-rotate {
+  -webkit-animation-name: ult-activity-layer-7-rotate;
+          animation-name: ult-activity-layer-7-rotate;
 }
-.rx-activity .layer-8-scale {
-  -webkit-animation-name: rx-activity-layer-8-scale;
-          animation-name: rx-activity-layer-8-scale;
+.ult-activity .layer-8-scale {
+  -webkit-animation-name: ult-activity-layer-8-scale;
+          animation-name: ult-activity-layer-8-scale;
 }
-.rx-activity .shape-0 {
+.ult-activity .shape-0 {
   background-color: white;
 }
-.rx-activity.hidden {
+.ult-activity.hidden {
   visibility: hidden;
 }
-.rx-activity-extra-small {
+.ult-activity-extra-small {
   width: 16px;
   height: 16px;
 }
-.rx-activity-extra-small .layer-1-translate,
-.rx-activity-extra-small .layer-3-translate,
-.rx-activity-extra-small .layer-5-translate,
-.rx-activity-extra-small .layer-7-translate {
+.ult-activity-extra-small .layer-1-translate,
+.ult-activity-extra-small .layer-3-translate,
+.ult-activity-extra-small .layer-5-translate,
+.ult-activity-extra-small .layer-7-translate {
   -webkit-transform: translate(8px, 8px);
           transform: translate(8px, 8px);
 }
-.rx-activity-extra-small .layer-2-translate,
-.rx-activity-extra-small .layer-4-translate,
-.rx-activity-extra-small .layer-6-translate,
-.rx-activity-extra-small .layer-8-translate {
+.ult-activity-extra-small .layer-2-translate,
+.ult-activity-extra-small .layer-4-translate,
+.ult-activity-extra-small .layer-6-translate,
+.ult-activity-extra-small .layer-8-translate {
   -webkit-transform: translate(0px, -6.4px);
           transform: translate(0px, -6.4px);
 }
-.rx-activity-extra-small .layer-2-content,
-.rx-activity-extra-small .layer-4-content,
-.rx-activity-extra-small .layer-6-content,
-.rx-activity-extra-small .layer-8-content {
+.ult-activity-extra-small .layer-2-content,
+.ult-activity-extra-small .layer-4-content,
+.ult-activity-extra-small .layer-6-content,
+.ult-activity-extra-small .layer-8-content {
   width: 16px;
   height: 16px;
 }
-.rx-activity-extra-small .layer-2-content .shape-0,
-.rx-activity-extra-small .layer-4-content .shape-0,
-.rx-activity-extra-small .layer-6-content .shape-0,
-.rx-activity-extra-small .layer-8-content .shape-0 {
+.ult-activity-extra-small .layer-2-content .shape-0,
+.ult-activity-extra-small .layer-4-content .shape-0,
+.ult-activity-extra-small .layer-6-content .shape-0,
+.ult-activity-extra-small .layer-8-content .shape-0 {
   position: absolute;
   left: -2px;
   top: -2px;
@@ -138,35 +138,35 @@ const _activityIndicatorCss = `
   height: 4px;
   border-radius: 50%;
 }
-.rx-activity-small {
+.ult-activity-small {
   width: 20px;
   height: 20px;
 }
-.rx-activity-small .layer-1-translate,
-.rx-activity-small .layer-3-translate,
-.rx-activity-small .layer-5-translate,
-.rx-activity-small .layer-7-translate {
+.ult-activity-small .layer-1-translate,
+.ult-activity-small .layer-3-translate,
+.ult-activity-small .layer-5-translate,
+.ult-activity-small .layer-7-translate {
   -webkit-transform: translate(10px, 10px);
           transform: translate(10px, 10px);
 }
-.rx-activity-small .layer-2-translate,
-.rx-activity-small .layer-4-translate,
-.rx-activity-small .layer-6-translate,
-.rx-activity-small .layer-8-translate {
+.ult-activity-small .layer-2-translate,
+.ult-activity-small .layer-4-translate,
+.ult-activity-small .layer-6-translate,
+.ult-activity-small .layer-8-translate {
   -webkit-transform: translate(0px, -8px);
           transform: translate(0px, -8px);
 }
-.rx-activity-small .layer-2-content,
-.rx-activity-small .layer-4-content,
-.rx-activity-small .layer-6-content,
-.rx-activity-small .layer-8-content {
+.ult-activity-small .layer-2-content,
+.ult-activity-small .layer-4-content,
+.ult-activity-small .layer-6-content,
+.ult-activity-small .layer-8-content {
   width: 20px;
   height: 20px;
 }
-.rx-activity-small .layer-2-content .shape-0,
-.rx-activity-small .layer-4-content .shape-0,
-.rx-activity-small .layer-6-content .shape-0,
-.rx-activity-small .layer-8-content .shape-0 {
+.ult-activity-small .layer-2-content .shape-0,
+.ult-activity-small .layer-4-content .shape-0,
+.ult-activity-small .layer-6-content .shape-0,
+.ult-activity-small .layer-8-content .shape-0 {
   position: absolute;
   left: -3px;
   top: -3px;
@@ -174,35 +174,35 @@ const _activityIndicatorCss = `
   height: 6px;
   border-radius: 50%;
 }
-.rx-activity-medium {
+.ult-activity-medium {
   width: 36px;
   height: 36px;
 }
-.rx-activity-medium .layer-1-translate,
-.rx-activity-medium .layer-3-translate,
-.rx-activity-medium .layer-5-translate,
-.rx-activity-medium .layer-7-translate {
+.ult-activity-medium .layer-1-translate,
+.ult-activity-medium .layer-3-translate,
+.ult-activity-medium .layer-5-translate,
+.ult-activity-medium .layer-7-translate {
   -webkit-transform: translate(18px, 18px);
           transform: translate(18px, 18px);
 }
-.rx-activity-medium .layer-2-translate,
-.rx-activity-medium .layer-4-translate,
-.rx-activity-medium .layer-6-translate,
-.rx-activity-medium .layer-8-translate {
+.ult-activity-medium .layer-2-translate,
+.ult-activity-medium .layer-4-translate,
+.ult-activity-medium .layer-6-translate,
+.ult-activity-medium .layer-8-translate {
   -webkit-transform: translate(0px, -14.4px);
           transform: translate(0px, -14.4px);
 }
-.rx-activity-medium .layer-2-content,
-.rx-activity-medium .layer-4-content,
-.rx-activity-medium .layer-6-content,
-.rx-activity-medium .layer-8-content {
+.ult-activity-medium .layer-2-content,
+.ult-activity-medium .layer-4-content,
+.ult-activity-medium .layer-6-content,
+.ult-activity-medium .layer-8-content {
   width: 36px;
   height: 36px;
 }
-.rx-activity-medium .layer-2-content .shape-0,
-.rx-activity-medium .layer-4-content .shape-0,
-.rx-activity-medium .layer-6-content .shape-0,
-.rx-activity-medium .layer-8-content .shape-0 {
+.ult-activity-medium .layer-2-content .shape-0,
+.ult-activity-medium .layer-4-content .shape-0,
+.ult-activity-medium .layer-6-content .shape-0,
+.ult-activity-medium .layer-8-content .shape-0 {
   position: absolute;
   left: -4.5px;
   top: -4.5px;
@@ -210,7 +210,7 @@ const _activityIndicatorCss = `
   height: 9px;
   border-radius: 50%;
 }
-@-webkit-keyframes rx-activity-layer-1-rotate {
+@-webkit-keyframes ult-activity-layer-1-rotate {
   0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -224,7 +224,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@keyframes rx-activity-layer-1-rotate {
+@keyframes ult-activity-layer-1-rotate {
   0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -238,7 +238,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@-webkit-keyframes rx-activity-layer-2-scale {
+@-webkit-keyframes ult-activity-layer-2-scale {
   0% {
     -webkit-transform: scale(0.96);
             transform: scale(0.96);
@@ -276,7 +276,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@keyframes rx-activity-layer-2-scale {
+@keyframes ult-activity-layer-2-scale {
   0% {
     -webkit-transform: scale(0.96);
             transform: scale(0.96);
@@ -314,7 +314,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@-webkit-keyframes rx-activity-layer-3-rotate {
+@-webkit-keyframes ult-activity-layer-3-rotate {
   0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -328,7 +328,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@keyframes rx-activity-layer-3-rotate {
+@keyframes ult-activity-layer-3-rotate {
   0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -342,7 +342,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@-webkit-keyframes rx-activity-layer-4-scale {
+@-webkit-keyframes ult-activity-layer-4-scale {
   0% {
     -webkit-transform: scale(0.96);
             transform: scale(0.96);
@@ -380,7 +380,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@keyframes rx-activity-layer-4-scale {
+@keyframes ult-activity-layer-4-scale {
   0% {
     -webkit-transform: scale(0.96);
             transform: scale(0.96);
@@ -418,7 +418,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@-webkit-keyframes rx-activity-layer-5-rotate {
+@-webkit-keyframes ult-activity-layer-5-rotate {
   0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -432,7 +432,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@keyframes rx-activity-layer-5-rotate {
+@keyframes ult-activity-layer-5-rotate {
   0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -446,7 +446,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@-webkit-keyframes rx-activity-layer-6-scale {
+@-webkit-keyframes ult-activity-layer-6-scale {
   0% {
     -webkit-transform: scale(0.96);
             transform: scale(0.96);
@@ -484,7 +484,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@keyframes rx-activity-layer-6-scale {
+@keyframes ult-activity-layer-6-scale {
   0% {
     -webkit-transform: scale(0.96);
             transform: scale(0.96);
@@ -522,7 +522,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@-webkit-keyframes rx-activity-layer-7-rotate {
+@-webkit-keyframes ult-activity-layer-7-rotate {
   0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -536,7 +536,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@keyframes rx-activity-layer-7-rotate {
+@keyframes ult-activity-layer-7-rotate {
   0% {
     -webkit-transform: rotate(0deg);
             transform: rotate(0deg);
@@ -550,7 +550,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@-webkit-keyframes rx-activity-layer-8-scale {
+@-webkit-keyframes ult-activity-layer-8-scale {
   0% {
     -webkit-transform: scale(1);
             transform: scale(1);
@@ -582,7 +582,7 @@ const _activityIndicatorCss = `
             animation-timing-function: linear;
   }
 }
-@keyframes rx-activity-layer-8-scale {
+@keyframes ult-activity-layer-8-scale {
   0% {
     -webkit-transform: scale(1);
             transform: scale(1);
@@ -678,13 +678,13 @@ export class ActivityIndicator extends React.Component<Types.ActivityIndicatorPr
             backgroundColor: this.props.color,
         };
 
-        const spinnerClasses = ['rx-activity'];
+        const spinnerClasses = ['ult-activity'];
         if (this.props.size === 'tiny') {
-            spinnerClasses.push('rx-activity-extra-small');
+            spinnerClasses.push('ult-activity-extra-small');
         } else if (this.props.size === 'small') {
-            spinnerClasses.push('rx-activity-small');
+            spinnerClasses.push('ult-activity-small');
         } else if (this.props.size === 'medium') {
-            spinnerClasses.push('rx-activity-medium');
+            spinnerClasses.push('ult-activity-medium');
         }
 
         if (!this.state.isVisible) {

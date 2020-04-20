@@ -34,11 +34,11 @@ const DOWN_KEYCODES = [KEY_CODE_SPACE, KEY_CODE_ENTER, KEY_CODE_F10, KEY_CODE_AP
 const UP_KEYCODES = [KEY_CODE_SPACE];
 
 export interface ViewContext extends ViewContextCommon {
-    isRxParentAText?: boolean;
+    isUltParentAText?: boolean;
     focusManager?: FocusManager;
     popupContainer?: PopupContainerView;
-    isRxParentAContextMenuResponder?: boolean;
-    isRxParentAFocusableInSameFocusManager?: boolean;
+    isUltParentAContextMenuResponder?: boolean;
+    isUltParentAFocusableInSameFocusManager?: boolean;
 }
 
 const FocusableView = RNW.createFocusableComponent(RN.View);
@@ -46,7 +46,7 @@ const FocusableAnimatedView = RNW.createFocusableComponent(RN.Animated.View);
 
 export class View extends ViewCommon implements React.ChildContextProvider<ViewContext>, FocusManagerFocusableComponent {
     static contextTypes: React.ValidationMap<any> = {
-        isRxParentAText: PropTypes.bool,
+        isUltParentAText: PropTypes.bool,
         focusManager: PropTypes.object,
         popupContainer: PropTypes.object,
         ...ViewCommon.contextTypes,
@@ -55,11 +55,11 @@ export class View extends ViewCommon implements React.ChildContextProvider<ViewC
     context!: ViewContext;
 
     static childContextTypes: React.ValidationMap<any> = {
-        isRxParentAText: PropTypes.bool.isRequired,
+        isUltParentAText: PropTypes.bool.isRequired,
         focusManager: PropTypes.object,
         popupContainer: PropTypes.object,
-        isRxParentAContextMenuResponder: PropTypes.bool,
-        isRxParentAFocusableInSameFocusManager: PropTypes.bool,
+        isUltParentAContextMenuResponder: PropTypes.bool,
+        isUltParentAFocusableInSameFocusManager: PropTypes.bool,
         ...ViewCommon.childContextTypes,
     };
 
@@ -412,12 +412,12 @@ export class View extends ViewCommon implements React.ChildContextProvider<ViewC
     }
 
     getChildContext() {
-        // Let descendant RX components know that their nearest RX ancestor is not an RX.Text.
-        // Because they're in an RX.View, they should use their normal styling rather than their
+        // Let descendant ULT components know that their nearest ULT ancestor is not an ULT.Text.
+        // Because they're in an ULT.View, they should use their normal styling rather than their
         // special styling for appearing inline with text.
         const childContext: ViewContext = super.getChildContext();
 
-        childContext.isRxParentAText = false;
+        childContext.isUltParentAText = false;
 
         // Provide the descendants with the focus manager (if any).
         if (this._focusManager) {
@@ -428,7 +428,7 @@ export class View extends ViewCommon implements React.ChildContextProvider<ViewC
             // trigger performance issues.
             // One way to narrow down to a manageable set is to ignore "accessible focusable" controls that are children of
             // focusable controls, as long as they are tracked by same FocusManager .
-            childContext.isRxParentAFocusableInSameFocusManager = false;
+            childContext.isUltParentAFocusableInSameFocusManager = false;
         }
         if (this._popupContainer) {
             childContext.popupContainer = this._popupContainer;
@@ -441,12 +441,12 @@ export class View extends ViewCommon implements React.ChildContextProvider<ViewC
         if (this._isButton(this.props)) {
             // This instance can be a responder. It may or may not have to invoke an onContextMenu handler, but
             // it will consume all corresponding touch events, so overwriting any parent-set value is the correct thing to do.
-            childContext.isRxParentAContextMenuResponder = !!this.props.onContextMenu;
+            childContext.isUltParentAContextMenuResponder = !!this.props.onContextMenu;
         }
 
         if (this.props.tabIndex !== undefined) {
             // This button will hide other "accessible focusable" controls as part of being restricted/limited by a focus manager
-            childContext.isRxParentAFocusableInSameFocusManager = true;
+            childContext.isUltParentAFocusableInSameFocusManager = true;
         }
 
         return childContext;

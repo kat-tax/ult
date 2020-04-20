@@ -13,7 +13,7 @@ import Modal from './Modal';
 
 // Web/HTML implementation for alert dialog boxes
 export class Alert extends Ult.Alert {
-    private _modalId = 'RX.Alert_WebModal';
+    private _modalId = 'ULT.Alert_WebModal';
 
     show(title: string, message?: string, buttons?: Ult.Types.AlertButtonSpec[],
             options?: Ult.Types.AlertOptions): void {

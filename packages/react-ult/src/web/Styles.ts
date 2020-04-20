@@ -374,7 +374,7 @@ export class Styles extends Ult.Styles {
         }
 
         // CSS (and React JS) support lineHeight defined as either a multiple of the font
-        // size or a pixel count. The RX.Types interface always uses a pixel count. We need to
+        // size or a pixel count. The ULT.Types interface always uses a pixel count. We need to
         // convert to the string notation to make CSS happy.
         if (def.lineHeight !== undefined) {
             def.lineHeight = def.lineHeight + 'px';

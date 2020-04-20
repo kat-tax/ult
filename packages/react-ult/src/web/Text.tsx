@@ -25,7 +25,7 @@ if (typeof document !== 'undefined') {
     document.head.appendChild(style);
 }
 
-// Cast to any to allow merging of web and RX styles
+// Cast to any to allow merging of web and ULT styles
 const _styles = {
     defaultStyle: {
         position: 'relative',
@@ -48,7 +48,7 @@ const _styles = {
 };
 
 export interface TextContext {
-    isRxParentAText: boolean;
+    isUltParentAText: boolean;
     focusArbitrator?: FocusArbitratorProvider;
 }
 
@@ -60,7 +60,7 @@ export class Text extends TextBase {
     context!: TextContext;
 
     static childContextTypes: React.ValidationMap<any> = {
-        isRxParentAText: PropTypes.bool.isRequired,
+        isUltParentAText: PropTypes.bool.isRequired,
     };
 
     private _mountedText: HTMLDivElement | null = null;
@@ -69,7 +69,7 @@ export class Text extends TextBase {
         // Let descendant Types components know that their nearest Types ancestor is an Types.Text.
         // Because they're in an Types.Text, they should style themselves specially for appearing
         // inline with text.
-        return { isRxParentAText: true };
+        return { isUltParentAText: true };
     }
 
     render() {

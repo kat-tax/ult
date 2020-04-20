@@ -13,7 +13,7 @@ export { default as SubscribableEvent, SubscriptionToken } from 'subscribableeve
 
 export type ReactNode = React.ReactNode;
 
-// Some RX components contain render logic in the abstract classes located in rx/common. That render logic
+// Some ULT components contain render logic in the abstract classes located in ult/common. That render logic
 // depends on using a platform specific React library (web vs native). Thus, we need an interface to abstract
 // this detail away from the components' common implementation.
 export interface ReactInterface {

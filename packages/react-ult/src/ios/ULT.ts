@@ -21,7 +21,7 @@ import InternationalImpl from '../native-common/International';
 import LinkImpl from '../native-common/Link';
 import LocationImpl from '../common/Location';
 import ModalImpl from '../native-common/Modal';
-import RXModuleInterface = require('../common/ModuleInterface');
+import UltModuleInterface = require('../common/ModuleInterface');
 import PickerImpl from '../native-common/Picker';
 import PlatformImpl from '../native-common/Platform';
 import PopupImpl from '../native-common/Popup';
@@ -30,7 +30,7 @@ import StorageImpl from '../native-common/Storage';
 import StylesImpl from '../native-common/Styles';
 import TextImpl from '../native-common/Text';
 import TextInputImpl from '../native-common/TextInput';
-import RXTypes = require('../common/Types');
+import UltTypes = require('../common/Types');
 import UserInterfaceImpl from '../native-common/UserInterface';
 import UserPresenceImpl from '../native-common/UserPresence';
 import ViewImpl from '../native-common/View';
@@ -100,13 +100,13 @@ module ULT {
     export type View = UltInterfaces.View;
     export let View: typeof UltInterfaces.View = ViewImpl;
     export const Animated = AnimatedImpl.makeAnimated(AnimatedImpl.CommonAnimatedClasses);
-    export import CommonProps = RXTypes.CommonProps;
-    export import CommonStyledProps = RXTypes.CommonStyledProps;
-    export import Stateless = RXTypes.Stateless;
-    export import Types = RXTypes;
+    export import CommonProps = UltTypes.CommonProps;
+    export import CommonStyledProps = UltTypes.CommonStyledProps;
+    export import Stateless = UltTypes.Stateless;
+    export import Types = UltTypes;
 
     export import Component = React.Component;
-    export import ComponentBase = RXTypes.ComponentBase;
+    export import ComponentBase = UltTypes.ComponentBase;
     export import createElement = React.createElement;
     export import Children = React.Children;
     export let __spread = (React as any).__spread;
@@ -116,8 +116,8 @@ module ULT {
 // -- STRANGE THINGS GOING ON HERE --
 // See web/ULT.tsx for more details.
 
-let _rxImplementsRxInterface: typeof RXModuleInterface.ULT = ULT;
-_rxImplementsRxInterface = _rxImplementsRxInterface;
+let _ultImplementsUltInterface: typeof UltModuleInterface.ULT = ULT;
+_ultImplementsUltInterface = _ultImplementsUltInterface;
 
 export = ULT;
 

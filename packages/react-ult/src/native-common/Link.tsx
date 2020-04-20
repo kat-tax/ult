@@ -17,13 +17,13 @@ import EventHelpers from './utils/EventHelpers';
 
 export interface LinkContext {
     focusArbitrator?: FocusArbitratorProvider;
-    isRxParentAText?: boolean;
+    isUltParentAText?: boolean;
 }
 
 export class LinkBase<S> extends React.Component<Ult.Types.LinkProps, S> {
     static contextTypes = {
         focusArbitrator: PropTypes.object,
-        isRxParentAText: PropTypes.bool,
+        isUltParentAText: PropTypes.bool,
     };
 
     context!: LinkContext;

@@ -120,7 +120,6 @@ export class NavigatorImpl extends NavigatorBase<NavigatorState> {
   private _sceneRefs: {[sceneIndex: string]: ULT.View} = {};
   // Save a public reference to the parent navigator if one was given in props.
   navigatorReference: Navigator;
-  // [Bug:506870] Move web navigator to RX animated API
   // Spring system and spring used for transitions.
   springSystem: SpringSystem;
   spring: Spring;

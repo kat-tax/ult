@@ -26,7 +26,7 @@ const _styles = {
 };
 
 export interface ImageContext {
-    isRxParentAText?: boolean;
+    isUltParentAText?: boolean;
 }
 
 export interface ImageState {
@@ -37,7 +37,7 @@ export interface ImageState {
 
 export class Image extends React.Component<Types.ImageProps, ImageState> implements React.ChildContextProvider<ImageContext> {
     static childContextTypes: React.ValidationMap<any> = {
-        isRxParentAText: PropTypes.bool.isRequired,
+        isUltParentAText: PropTypes.bool.isRequired,
     };
 
     static prefetch(url: string): Promise<boolean> {
@@ -135,10 +135,10 @@ export class Image extends React.Component<Types.ImageProps, ImageState> impleme
     }
 
     getChildContext() {
-        // Let descendant RX components know that their nearest RX ancestor is not an RX.Text.
-        // Because they're in an RX.View/etc, they should use their normal styling rather than their
+        // Let descendant ULT components know that their nearest ULT ancestor is not an ULT.Text.
+        // Because they're in an ULT.View/etc, they should use their normal styling rather than their
         // special styling for appearing inline with text.
-        return { isRxParentAText: false };
+        return { isUltParentAText: false };
     }
 
     protected getStyles() {

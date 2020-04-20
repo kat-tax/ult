@@ -54,7 +54,7 @@ export interface GestureStatePointVelocity extends GestureStatePoint {
 }
 
 // We need a method-less really-basic touch event basic type for allowing cross-platform adapting of
-// web(React)-based touch events into RX touch events, since they're based on the RN type to allow
+// web(React)-based touch events into ULT touch events, since they're based on the RN type to allow
 // for zero-work casting and manipulating.
 export interface TouchListBasic {
     [index: number]: Types.Touch;

@@ -289,7 +289,7 @@ export class ScrollView extends ViewBase<Ult.Types.ScrollViewProps, Ult.Types.St
         return (
             <div
                 role={ 'none' }
-                className='rxCustomScroll'
+                className='ultCustomScroll'
                 style={ containerStyles }
                 data-test-id={ this.props.testId }
             >

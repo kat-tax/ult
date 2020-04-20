@@ -331,8 +331,8 @@ export class View extends ViewBase<Ult.Types.ViewProps, Ult.Types.Stateless, RN.
             delete this._internalProps.testId;
         }
 
-        // Translate accessibilityProps from RX to RN, there are type diferrences for example:
-        // accessibilityLiveRegion prop is number (RX.Types.AccessibilityLiveRegion) in RX, but
+        // Translate accessibilityProps from ULT to RN, there are type diferrences for example:
+        // accessibilityLiveRegion prop is number (ULT.Types.AccessibilityLiveRegion) in ULT, but
         // string is expected by RN.View
         const accessibilityProps = {
             importantForAccessibility: AccessibilityUtil.importantForAccessibilityToString(props.importantForAccessibility),

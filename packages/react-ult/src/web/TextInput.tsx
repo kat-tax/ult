@@ -21,7 +21,7 @@ export interface TextInputState {
 
 const _isMac = (typeof navigator !== 'undefined') && (typeof navigator.platform === 'string') && (navigator.platform.indexOf('Mac') >= 0);
 
-// Cast to any to allow merging of web and RX styles
+// Cast to any to allow merging of web and ULT styles
 const _styles = {
     defaultStyle: {
         position: 'relative',

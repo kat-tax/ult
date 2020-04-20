@@ -15,12 +15,12 @@ import { Types } from '../common/Interfaces';
 import { Text as TextBase, TextContext as TextContextBase } from '../native-common/Text';
 
 export interface TextContext extends TextContextBase {
-    isRxParentAFocusableInSameFocusManager?: boolean;
+    isUltParentAFocusableInSameFocusManager?: boolean;
 }
 
 export class Text extends TextBase implements React.ChildContextProvider<TextContext>, FocusManagerFocusableComponent {
     static contextTypes: React.ValidationMap<any> = {
-        isRxParentAFocusableInSameFocusManager: PropTypes.bool,
+        isUltParentAFocusableInSameFocusManager: PropTypes.bool,
         ...TextBase.contextTypes,
     };
 
@@ -30,7 +30,7 @@ export class Text extends TextBase implements React.ChildContextProvider<TextCon
     context!: TextContext;
 
     static childContextTypes: React.ValidationMap<any> = {
-        isRxParentAFocusableInSameFocusManager: PropTypes.bool,
+        isUltParentAFocusableInSameFocusManager: PropTypes.bool,
         ...TextBase.childContextTypes,
     };
 
@@ -55,7 +55,7 @@ export class Text extends TextBase implements React.ChildContextProvider<TextCon
 
         // This control will hide other "accessible focusable" controls as part of being restricted/limited by a focus manager
         // (more detailed description is in windows/View.tsx)
-        childContext.isRxParentAFocusableInSameFocusManager = true;
+        childContext.isUltParentAFocusableInSameFocusManager = true;
 
         return childContext;
     }
@@ -98,8 +98,8 @@ export class Text extends TextBase implements React.ChildContextProvider<TextCon
 applyFocusableComponentMixin(Text, function(this: Text, nextProps?: Types.TextProps, nextState?: any, nextCtx?: TextContext) {
     // This control should be tracked by a FocusManager if there's no other control tracked by the same FocusManager in
     // the parent path
-    return nextCtx && ('isRxParentAFocusableInSameFocusManager' in nextCtx)
-        ? !nextCtx.isRxParentAFocusableInSameFocusManager : !this.context.isRxParentAFocusableInSameFocusManager;
+    return nextCtx && ('isUltParentAFocusableInSameFocusManager' in nextCtx)
+        ? !nextCtx.isUltParentAFocusableInSameFocusManager : !this.context.isUltParentAFocusableInSameFocusManager;
 }, true);
 
 export default Text;

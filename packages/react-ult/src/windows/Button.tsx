@@ -28,8 +28,8 @@ const UP_KEYCODES = [KEY_CODE_SPACE];
 const FocusableAnimatedView = RNW.createFocusableComponent(RN.Animated.View);
 
 export interface ButtonContext extends ButtonContextBase {
-    isRxParentAContextMenuResponder?: boolean;
-    isRxParentAFocusableInSameFocusManager?: boolean;
+    isUltParentAContextMenuResponder?: boolean;
+    isUltParentAFocusableInSameFocusManager?: boolean;
 }
 
 export class Button extends ButtonBase implements React.ChildContextProvider<ButtonContext>, FocusManagerFocusableComponent {
@@ -38,8 +38,8 @@ export class Button extends ButtonBase implements React.ChildContextProvider<But
     context!: ButtonContext;
 
     static childContextTypes: React.ValidationMap<any> = {
-        isRxParentAContextMenuResponder: PropTypes.bool,
-        isRxParentAFocusableInSameFocusManager: PropTypes.bool,
+        isUltParentAContextMenuResponder: PropTypes.bool,
+        isUltParentAFocusableInSameFocusManager: PropTypes.bool,
         ...ButtonBase.childContextTypes,
     };
 
@@ -125,11 +125,11 @@ export class Button extends ButtonBase implements React.ChildContextProvider<But
 
         // This instance can be a responder (even when button is disabled). It may or may not have to invoke an onContextMenu handler, but
         // it will consume all corresponding touch events, so overwriting any parent-set value is the correct thing to do.
-        childContext.isRxParentAContextMenuResponder = !!this.props.onContextMenu;
+        childContext.isUltParentAContextMenuResponder = !!this.props.onContextMenu;
 
         // This button will hide other "accessible focusable" controls as part of being restricted/limited by a focus manager
         // (more detailed description is in windows/View.tsx)
-        childContext.isRxParentAFocusableInSameFocusManager = true;
+        childContext.isUltParentAFocusableInSameFocusManager = true;
 
         return childContext;
     }

@@ -10,9 +10,9 @@ import React = require('react');
 import { setSortAndFilterFunc } from '../common/utils/AutoFocusHelper';
 import UltInterfaces = require('../common/Interfaces');
 import LocationImpl from '../common/Location';
-import RXModuleInterface = require('../common/ModuleInterface');
+import UltModuleInterface = require('../common/ModuleInterface');
 import PopupImpl from '../web/Popup';
-import RXTypes = require('../common/Types');
+import UltTypes = require('../common/Types');
 
 import AccessibilityImpl from './Accessibility';
 import { ActivityIndicator as ActivityIndicatorImpl } from './ActivityIndicator';
@@ -104,13 +104,13 @@ module ULT {
     export let View: typeof UltInterfaces.View = ViewImpl;
 
     export import Animated = AnimatedImpl;
-    export import CommonProps = RXTypes.CommonProps;
-    export import CommonStyledProps = RXTypes.CommonStyledProps;
-    export import Stateless = RXTypes.Stateless;
-    export import Types = RXTypes;
+    export import CommonProps = UltTypes.CommonProps;
+    export import CommonStyledProps = UltTypes.CommonStyledProps;
+    export import Stateless = UltTypes.Stateless;
+    export import Types = UltTypes;
 
     export import Component = React.Component;
-    export import ComponentBase = RXTypes.ComponentBase;
+    export import ComponentBase = UltTypes.ComponentBase;
     export import createElement = React.createElement;
     export import Children = React.Children;
     export let __spread = (React as any).__spread;
@@ -129,8 +129,8 @@ AppImpl.activationStateChangedEvent.subscribe(newState => {
 //    Note: RX must be a module so 'RX.Foo' can be a valid value ('new RX.Foo') and valid type ('var k: RX.Foo'), but modules cannot
 //    implement an interface. If RX was a class or variable then it could directly check this, but then 'RX.Foo' would not be a valid type.
 
-let _rxImplementsRxInterface: typeof RXModuleInterface.ULT = ULT;
-_rxImplementsRxInterface = _rxImplementsRxInterface;
+let _ultImplementsUltInterface: typeof UltModuleInterface.ULT = ULT;
+_ultImplementsUltInterface = _ultImplementsUltInterface;
 export = ULT;
 
 /*

@@ -1,7 +1,7 @@
 /**
  * ViewBase.tsx
  *
- * Base class that is used for several RX views.
+ * Base class that is used for several ULT views.
  */
 
 import * as RN from 'react-native';

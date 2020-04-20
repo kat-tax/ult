@@ -1,13 +1,13 @@
 /**
  * restyleForInlineText.tsx
  *
- * When a ULT component appears as a child of an RX.Text, it needs to be styled
+ * When a ULT component appears as a child of an ULT.Text, it needs to be styled
  * specially so that it appears inline with the text rather than introducing line
  * breaks.
  *
  * This utility restyles the component that is passed to it as inline so it flows
  * with the text. When a ULT component is a child of a text, pass the return value
- * of its render method to this utility. See RX.View for an example.
+ * of its render method to this utility. See ULT.View for an example.
  */
 
 import * as React from 'react';
@@ -22,7 +22,7 @@ function restyleForInlineText(reactElement: React.ReactElement<any>) {
         style &&
         style.width !== undefined &&
         style.height !== undefined,
-        'Children of an <RX.Text> must have a defined height and width',
+        'Children of an <ULT.Text> must have a defined height and width',
     );
 
     /*

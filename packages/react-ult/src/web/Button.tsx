@@ -39,20 +39,20 @@ const _longPressTime = 1000;
 const _defaultAccessibilityTrait = Types.AccessibilityTrait.Button;
 
 export interface ButtonContext {
-    hasRxButtonAscendant?: boolean;
+    hasUltButtonAscendant?: boolean;
     focusArbitrator?: FocusArbitratorProvider;
 }
 
 export class Button extends ButtonBase {
     static contextTypes = {
-        hasRxButtonAscendant: PropTypes.bool,
+        hasUltButtonAscendant: PropTypes.bool,
         focusArbitrator: PropTypes.object,
     };
 
     context!: ButtonContext;
 
     static childContextTypes = {
-        hasRxButtonAscendant: PropTypes.bool,
+        hasUltButtonAscendant: PropTypes.bool,
     };
 
     private _mountedButton: HTMLButtonElement | null = null;
@@ -67,7 +67,7 @@ export class Button extends ButtonBase {
     constructor(props: Types.ButtonProps, context?: ButtonContext) {
         super(props, context);
 
-        if (context && context.hasRxButtonAscendant) {
+        if (context && context.hasUltButtonAscendant) {
             if (AppConfig.isDevelopmentMode()) {
                 console.warn('Button components should not be embedded. Some APIs, e.g. Accessibility, will not work.');
             }
@@ -75,7 +75,7 @@ export class Button extends ButtonBase {
     }
 
     getChildContext(): ButtonContext {
-        return { hasRxButtonAscendant: true };
+        return { hasUltButtonAscendant: true };
     }
 
     render() {
