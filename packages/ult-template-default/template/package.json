@@ -28,14 +28,14 @@
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/runtime": "^7.9.2",
-    "@babel/plugin-proposal-decorators": "^7.7.4",
+    "@babel/plugin-proposal-decorators": "^7.8.3",
     "@babel/preset-env": "^7.7.4",
     "@react-native-community/cli": "^3.2.1",
-    "@types/node": "^13.9.2",
-    "@types/react": "^16.9.26",
-    "cross-env": "^6.0.3",
+    "@types/node": "^13.13.2",
+    "@types/react": "^16.9.34",
+    "cross-env": "^7.0.2",
     "metro-react-native-babel-preset": "^0.59.0",
     "typescript": "^3.8.3",
-    "ult-scripts": "0.2.1"
+    "ult-scripts": "^0.2.1"
   }
 }
