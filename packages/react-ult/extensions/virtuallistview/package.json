@@ -1,6 +1,6 @@
 {
   "name": "react-ult-ext-virtuallistview",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Plugin for ULT that provides performant scrolling in a virtualized list view",
   "types": "dist/VirtualListView.d.ts",
   "license": "MIT",
@@ -17,16 +17,18 @@
     "react-dom": "^16.9.0",
     "react-native": "^0.61.5",
     "react-native-windows": "^0.61.5",
-    "react-ult": "^2.1.0"
+    "react-ult": "^2.1.1"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.149",
-    "@types/react-dom": "^16.9.4",
-    "@typescript-eslint/eslint-plugin": "2.15.0",
+    "@types/lodash": "^4.14.150",
+    "@types/react-dom": "^16.9.6",
+    "@typescript-eslint/eslint-plugin": "2.29.0",
     "eslint": "6.8.0",
-    "eslint-config-skype": "1.5.0",
-    "eslint-plugin-import": "2.19.1",
-    "eslint-plugin-react": "7.17.0",
+    "eslint-config-skype": "1.6.0",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-react": "7.19.0",
+    "react": "^16.9.0",
+    "react-ult": "^2.1.1",
     "typescript": "3.8.3"
   }
 }

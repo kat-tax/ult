@@ -1,6 +1,6 @@
 {
   "name": "react-ult-ext-netinfo",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Plugin for ULT that provides information about network connectivity",
   "types": "dist/web/PluginBase.d.ts",
   "license": "MIT",
@@ -17,13 +17,15 @@
     "react-dom": "^16.9.0",
     "react-native": "^0.61.5",
     "react-native-windows": "^0.61.5",
-    "react-ult": "^2.1.0"
+    "react-ult": "^2.1.1"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "2.29.0",
     "eslint": "6.8.0",
     "eslint-config-skype": "1.6.0",
     "eslint-plugin-import": "2.20.2",
+    "react": "^16.9.0",
+    "react-ult": "^2.1.1",
     "typescript": "3.8.3"
   }
 }
