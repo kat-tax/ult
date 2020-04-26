@@ -14,7 +14,7 @@
 
 import * as React from 'react';
 import * as RN from 'react-native';
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 import * as Navigation from 'reactxp-experimental-navigation';
 
 import assert from '../common/assert';

@@ -8,7 +8,7 @@
  */
 
 import * as React from 'react';
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 
 import * as Types from '../common/Types';
 

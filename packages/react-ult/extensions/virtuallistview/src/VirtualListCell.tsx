@@ -8,7 +8,7 @@
  */
 
 import { createRef } from 'react';
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 
 import assert from './assert';
 

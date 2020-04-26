@@ -23,7 +23,7 @@ import { isEqual } from './utils/lodashMini';
 import MainViewStore from './MainViewStore';
 import Styles from './Styles';
 
-// Fields should be prefixed with 'reactxp' to help avoid naming collisions.
+// Fields should be prefixed with "reactxp" to help avoid naming collisions.
 // All fields should be removed from this.props before passing downwards.
 interface BaseRootViewProps {
     reactxp_rootViewId?: string;

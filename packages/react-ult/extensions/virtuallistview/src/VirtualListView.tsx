@@ -37,7 +37,7 @@
 
 import * as _ from 'lodash';
 import { createRef, RefObject } from 'react';
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 
 import assert from './assert';
 import { VirtualListCell, VirtualListCellInfo, VirtualListCellRenderDetails } from './VirtualListCell';

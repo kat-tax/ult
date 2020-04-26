@@ -8,7 +8,7 @@
  */
 
 import * as React from 'react';
-import { Styles as RXStyles } from 'reactxp';
+import { Styles as RXStyles } from 'react-ult';
 
 import assert from '../common/assert';
 import { ImageSvgProps } from '../common/Types';

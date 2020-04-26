@@ -10,7 +10,7 @@
  * NavigatorSceneConfig are both exported.
  */
 
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 
 import * as _ from '../common/lodashMini';
 import * as Types from '../common/Types';

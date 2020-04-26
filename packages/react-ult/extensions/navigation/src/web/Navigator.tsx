@@ -12,9 +12,9 @@
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 import * as rebound from 'rebound';
-import { Styles, View } from 'reactxp';
+import { Styles, View } from 'react-ult';
 
 import * as _ from '../common/lodashMini';
 import * as Types from '../common/Types';

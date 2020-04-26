@@ -16,7 +16,7 @@ import {
     WebViewSourceUri as RNWebViewSourceUri,
 } from 'react-native-webview/lib/WebViewTypes';
 
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 
 import * as Types from '../common/Types';
 
