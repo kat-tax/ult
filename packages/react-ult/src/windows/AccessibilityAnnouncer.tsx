@@ -19,7 +19,7 @@ import Timers from '../common/utils/Timers';
 import Accessibility from './Accessibility';
 
 const _styles = {
-    liveRegionContainer: Styles.createViewStyle({
+    liveRegionContainer: Styles.View({
         position: 'absolute',
         opacity: 0,
         top: -30,

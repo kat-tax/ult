@@ -63,13 +63,13 @@ interface StaticRendererProps<ItemInfo extends VirtualListCellInfo> extends RX.C
 }
 
 const _styles = {
-    cellView: RX.Styles.createViewStyle({
+    cellView: RX.Styles.View({
         position: 'absolute',
     }),
-    overflowVisible: RX.Styles.createViewStyle({
+    overflowVisible: RX.Styles.View({
         overflow: 'visible',
     }),
-    overflowHidden: RX.Styles.createViewStyle({
+    overflowHidden: RX.Styles.View({
         overflow: 'hidden',
     }),
 };
@@ -150,7 +150,7 @@ export class VirtualListCell<ItemInfo extends VirtualListCellInfo> extends RX.Co
 
         if (!props.isScreenReaderModeEnabled && !_isNativeMacOS) {
             // On native platforms, we'll stick with translate[X|Y] because it has a performance advantage.
-            this._animatedStylePosition = RX.Styles.createAnimatedViewStyle({
+            this._animatedStylePosition = RX.Styles.AnimatedView({
                 transform: [{
                     translateY: this._topValue,
                 }],
@@ -160,7 +160,7 @@ export class VirtualListCell<ItemInfo extends VirtualListCellInfo> extends RX.Co
             // We need to work around an IE-specific bug. It doesn't properly handle
             // translateY in this case. In particular, if separate translations are used
             // within the item itself, it doesn't handle that combination.
-            this._animatedStylePosition = RX.Styles.createAnimatedViewStyle({
+            this._animatedStylePosition = RX.Styles.AnimatedView({
                 top: this._topValue,
                 left: this._leftValue,
             });
@@ -168,7 +168,7 @@ export class VirtualListCell<ItemInfo extends VirtualListCellInfo> extends RX.Co
 
         this._widthValue = RX.Animated.createValue(props.width || 0);
 
-        this._animatedStyleWidth = RX.Styles.createAnimatedViewStyle({
+        this._animatedStyleWidth = RX.Styles.AnimatedView({
             width: this._widthValue,
         });
     }
