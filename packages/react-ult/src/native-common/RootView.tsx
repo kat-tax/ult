@@ -39,12 +39,12 @@ interface RootViewState {
 }
 
 const _styles = {
-    rootViewStyle: Styles.View ({
+    rootViewStyle: Styles.createViewStyle({
         flex: 1,
         alignItems: 'stretch',
         overflow: 'visible',
     }),
-    liveRegionContainer: Styles.View({
+    liveRegionContainer: Styles.createViewStyle({
         position: 'absolute',
         opacity: 0,
         top: -30,

@@ -45,20 +45,20 @@ export interface Spring {
 
 // Default styles
 const _styles = {
-    container: Styles.View({
+    container: Styles.createViewStyle({
         flex: 1,
         flexDirection: 'column',
         alignSelf: 'stretch',
         overflow: 'hidden',
     }),
-    defaultSceneStyle: Styles.View({
+    defaultSceneStyle: Styles.createViewStyle({
         position: 'absolute',
         left: 0,
         right: 0,
         bottom: 0,
         top: 0,
     }),
-    baseScene: Styles.View({
+    baseScene: Styles.createViewStyle({
         position: 'absolute',
         overflow: 'hidden',
         left: 0,
@@ -66,19 +66,19 @@ const _styles = {
         bottom: 0,
         top: 0,
     }),
-    disabledScene: Styles.View({
+    disabledScene: Styles.createViewStyle({
         top: 0,
         bottom: 0,
         flex: 1,
     }),
-    transitioner: Styles.View( {
+    transitioner: Styles.createViewStyle( {
         flex: 1,
         flexDirection: 'column',
         backgroundColor: 'transparent',
         overflow: 'hidden',
         alignItems: 'stretch',
     }),
-    sceneStyle: Styles.View({
+    sceneStyle: Styles.createViewStyle({
         flex: 1,
         shadowOffset: { height: 0, width: 0 },
         shadowRadius: 40,

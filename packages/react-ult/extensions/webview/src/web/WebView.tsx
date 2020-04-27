@@ -13,12 +13,12 @@ import * as RX from 'react-ult';
 import * as Types from '../common/Types';
 
 const _styles = {
-    webViewDefault: RX.Styles.View({
+    webViewDefault: RX.Styles.createViewStyle({
         flex: 1,
         alignSelf: 'stretch',
         borderStyle: 'none',
     }),
-    webViewContainer: RX.Styles.View({
+    webViewContainer: RX.Styles.createViewStyle({
         flexDirection: 'column',
         flex: 1,
         alignSelf: 'stretch',

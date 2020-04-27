@@ -20,7 +20,7 @@ import Platform from './Platform';
 import Styles from './Styles';
 
 const _styles = {
-    defaultImage: Styles.Image({
+    defaultImage: Styles.createImageStyle({
         flex: 0,
         overflow: 'hidden',
         width: undefined,

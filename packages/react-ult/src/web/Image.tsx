@@ -28,7 +28,7 @@ const _styles = {
         maxWidth: '100%',
         maxHeight: '100%',
     },
-    defaultContainer: Styles.Image({
+    defaultContainer: Styles.createImageStyle({
         position: 'relative',
         flex: 0,
         overflow: 'visible',

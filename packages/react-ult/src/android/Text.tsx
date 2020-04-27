@@ -16,7 +16,7 @@ import Styles from '../native-common/Styles';
 import { Text as CommonText } from '../native-common/Text';
 
 const _styles = {
-    defaultText: Styles.Text({
+    defaultText: Styles.createTextStyle({
         includeFontPadding: false,
         textAlignVertical: 'center',
     }),

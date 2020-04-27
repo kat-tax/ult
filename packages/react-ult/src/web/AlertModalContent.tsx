@@ -31,18 +31,18 @@ export interface AppModalContentState {
 }
 
 const _styles = {
-    background: Styles.View({
+    background: Styles.createViewStyle({
         flex: 1,
         backgroundColor: 'rgba(0, 0, 0, 0.1)',
         alignItems: 'center',
         alignSelf: 'stretch',
     }),
-    verticalRoot: Styles.View({
+    verticalRoot: Styles.createViewStyle({
         flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
     }),
-    defaultBody: Styles.View({
+    defaultBody: Styles.createViewStyle({
         width: 300,
         backgroundColor: '#fff',
         borderColor: '#bbb',
@@ -51,42 +51,42 @@ const _styles = {
         paddingHorizontal: 8,
         paddingVertical: 4,
     }),
-    defaultTitleText: Styles.Text({
+    defaultTitleText: Styles.createTextStyle({
         fontSize: 20,
         fontWeight: 'bold',
         alignSelf: 'center',
         padding: 12,
         flex: 1,
     }),
-    defaultMessageText: Styles.Text({
+    defaultMessageText: Styles.createTextStyle({
         fontSize: 16,
         alignSelf: 'center',
         padding: 12,
         flex: 1,
     }),
-    defaultButtonContainer: Styles.Button({
+    defaultButtonContainer: Styles.createButtonStyle({
         padding: 8,
         flex: 1,
     }),
-    defaultButton: Styles.Button({
+    defaultButton: Styles.createButtonStyle({
         alignItems: 'center',
         flex: 1,
         borderWidth: 1,
         borderRadius: 8,
         borderColor: '#bbb',
     }),
-    defaultButtonHover: Styles.Button({
+    defaultButtonHover: Styles.createButtonStyle({
         backgroundColor: '#eee',
     }),
-    defaultCancelButton: Styles.Button({
+    defaultCancelButton: Styles.createButtonStyle({
         borderColor: 'red',
     }),
-    defaultBtnText: Styles.Text({
+    defaultBtnText: Styles.createTextStyle({
         fontSize: 14,
         padding: 8,
         color: '#333',
     }),
-    defaultCancelBtnText: Styles.Text({
+    defaultCancelBtnText: Styles.createTextStyle({
         color: 'red',
     }),
 };

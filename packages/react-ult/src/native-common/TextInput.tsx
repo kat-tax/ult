@@ -18,7 +18,7 @@ import EventHelpers from './utils/EventHelpers';
 import Styles from './Styles';
 
 const _styles = {
-    defaultTextInput: Styles.TextInput({
+    defaultTextInput: Styles.createTextInputStyle({
         borderWidth: 0, // Needed for Windows UWP
         padding: 0,
     }),

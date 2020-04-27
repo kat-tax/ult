@@ -12,12 +12,12 @@ export function AppFrame() {
 }
 
 export const styles = {
-  root: Styles.View({
+  root: Styles.createViewStyle({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   }),
-  welcome: Styles.Text({
+  welcome: Styles.createTextStyle({
     textAlign: 'center',
   }),
 };

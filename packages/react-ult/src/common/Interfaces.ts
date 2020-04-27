@@ -222,18 +222,18 @@ export abstract class StatusBar {
 export abstract class Styles {
     abstract combine<T>(ruleSet1: Types.StyleRuleSetRecursive<T> | undefined,
         ruleSet2?: Types.StyleRuleSetRecursive<T>): Types.StyleRuleSetOrArray<T> | undefined;
-    abstract View(ruleSet: Types.ViewStyle, cacheStyle?: boolean): Types.ViewStyleRuleSet;
-    abstract AnimatedView(ruleSet: Types.AnimatedViewStyle): Types.AnimatedViewStyleRuleSet;
-    abstract ScrollView(ruleSet: Types.ScrollViewStyle, cacheStyle?: boolean): Types.ScrollViewStyleRuleSet;
-    abstract Button(ruleSet: Types.ButtonStyle, cacheStyle?: boolean): Types.ButtonStyleRuleSet;
-    abstract Text(ruleSet: Types.TextStyle, cacheStyle?: boolean): Types.TextStyleRuleSet;
-    abstract AnimatedText(ruleSet: Types.AnimatedTextStyle): Types.AnimatedTextStyleRuleSet;
-    abstract TextInput(ruleSet: Types.TextInputStyle, cacheStyle?: boolean): Types.TextInputStyleRuleSet;
-    abstract AnimatedTextInput(ruleSet: Types.AnimatedTextInputStyle): Types.AnimatedTextInputStyleRuleSet;
-    abstract Image(ruleSet: Types.ImageStyle, cacheStyle?: boolean): Types.ImageStyleRuleSet;
-    abstract AnimatedImage(ruleSet: Types.AnimatedImageStyle): Types.AnimatedImageStyleRuleSet;
-    abstract Link(ruleSet: Types.LinkStyleRuleSet, cacheStyle?: boolean): Types.LinkStyleRuleSet;
-    abstract Picker(ruleSet: Types.PickerStyle, cacheStyle?: boolean): Types.PickerStyleRuleSet;
+    abstract createViewStyle(ruleSet: Types.ViewStyle, cacheStyle?: boolean): Types.ViewStyleRuleSet;
+    abstract createAnimatedViewStyle(ruleSet: Types.AnimatedViewStyle): Types.AnimatedViewStyleRuleSet;
+    abstract createScrollViewStyle(ruleSet: Types.ScrollViewStyle, cacheStyle?: boolean): Types.ScrollViewStyleRuleSet;
+    abstract createButtonStyle(ruleSet: Types.ButtonStyle, cacheStyle?: boolean): Types.ButtonStyleRuleSet;
+    abstract createTextStyle(ruleSet: Types.TextStyle, cacheStyle?: boolean): Types.TextStyleRuleSet;
+    abstract createAnimatedTextStyle(ruleSet: Types.AnimatedTextStyle): Types.AnimatedTextStyleRuleSet;
+    abstract createTextInputStyle(ruleSet: Types.TextInputStyle, cacheStyle?: boolean): Types.TextInputStyleRuleSet;
+    abstract createAnimatedTextInputStyle(ruleSet: Types.AnimatedTextInputStyle): Types.AnimatedTextInputStyleRuleSet;
+    abstract createImageStyle(ruleSet: Types.ImageStyle, cacheStyle?: boolean): Types.ImageStyleRuleSet;
+    abstract createAnimatedImageStyle(ruleSet: Types.AnimatedImageStyle): Types.AnimatedImageStyleRuleSet;
+    abstract createLinkStyle(ruleSet: Types.LinkStyleRuleSet, cacheStyle?: boolean): Types.LinkStyleRuleSet;
+    abstract createPickerStyle(ruleSet: Types.PickerStyle, cacheStyle?: boolean): Types.PickerStyleRuleSet;
 
     // This method isn't part of the documented ReactXP interface and shouldn't be used by
     // app-level code, but it is needed for some ReactXP extensions (e.g. reactxp-imagesvg),

@@ -51,7 +51,7 @@ export function getCode(component) {
       .keys(root.style)
       .filter(c => root.style[c] !== undefined);
     if (properties.length > 0) {
-      writer.write(`${root.slug}: Styles.${root.tag}({`).indent(() => {
+      writer.write(`${root.slug}: Styles.create${root.tag}Style({`).indent(() => {
         properties.forEach(property => {
           const value = root.style[property];
           writer.write(`${property}: `);
@@ -73,7 +73,7 @@ export function getCode(component) {
           .keys(child.style)
           .filter(c => child.style[c] !== undefined);
         if (properties.length > 0) {
-          writer.write(`${slug}: Styles.${child.tag}({`).indent(() => {
+          writer.write(`${slug}: Styles.create${child.tag}Style({`).indent(() => {
             properties.forEach(property => {
               const value = child.style[property];
               writer.write(`${property}: `);

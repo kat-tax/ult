@@ -10,8 +10,7 @@
         "*.tsx"
       ],
       "rules": {
-        "@typescript-eslint/explicit-function-return-type": "off",
-        "@typescript-eslint/member-naming": "off"
+        "@typescript-eslint/explicit-function-return-type": "off"
       }
     }
   ]

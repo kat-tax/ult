@@ -19,12 +19,12 @@ export class StyleLeakDetector extends CommonStyleLeakDetector {
         // example, suppose we have this code:
         //
         //   1:  const _styles = {
-        //   2:      fillScreen: RX.Styles.View({
+        //   2:      fillScreen: RX.Styles.createViewStyle({
         //   3:          flex: 1,
         //   4:          flexDirection: 'column',
         //   5:          alignSelf: 'stretch'
         //   6:      }),
-        //   7:      content: RX.Styles.View({
+        //   7:      content: RX.Styles.createViewStyle({
         //   8:          flex: 1,
         //   9:          flexDirection: 'column',
         //   10:         alignSelf: 'stretch'

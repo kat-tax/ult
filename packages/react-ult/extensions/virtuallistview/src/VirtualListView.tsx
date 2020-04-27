@@ -149,12 +149,12 @@ enum FocusDirection {
 }
 
 const _styles = {
-    scrollContainer: RX.Styles.ScrollView({
+    scrollContainer: RX.Styles.createScrollViewStyle({
         flex: 1,
         position: 'relative',
         flexDirection: 'column',
     }),
-    staticContainer: RX.Styles.View({
+    staticContainer: RX.Styles.createViewStyle({
         flex: 1,
         flexDirection: 'column',
     }),
@@ -198,7 +198,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
     // Controls the full height of the scrolling view, independent of the view port height
     private _containerHeight = 0;
     private _containerHeightValue = RX.Animated.createValue(this._containerHeight);
-    private _containerAnimatedStyle = RX.Styles.AnimatedView({
+    private _containerAnimatedStyle = RX.Styles.createAnimatedViewStyle({
         height: this._containerHeightValue,
     });
 

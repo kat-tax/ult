@@ -46,7 +46,7 @@ interface PluginAPI {
   createBooleanOperation(): BooleanOperationNode
 
   createPaintStyle(): PaintStyle
-  Text(): TextStyle
+  createTextStyle(): TextStyle
   createEffectStyle(): EffectStyle
   createGridStyle(): GridStyle
 
