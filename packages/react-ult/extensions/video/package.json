@@ -1,6 +1,6 @@
 {
   "name": "react-ult-ext-video",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Plugin for ULT that provides a video player component for all platforms",
   "types": "dist/web/PluginBase.d.ts",
   "license": "MIT",
@@ -18,7 +18,7 @@
     "react-dom": "^16.9.0",
     "react-native": "^0.61.5",
     "react-native-windows": "^0.61.5",
-    "react-ult": "^2.1.1"
+    "react-ult": "^2.1.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.150",
@@ -30,7 +30,7 @@
     "eslint-plugin-import": "2.20.2",
     "eslint-plugin-react": "7.19.0",
     "react": "^16.9.0",
-    "react-ult": "^2.1.1",
+    "react-ult": "^2.1.2",
     "typescript": "3.8.3"
   }
 }
