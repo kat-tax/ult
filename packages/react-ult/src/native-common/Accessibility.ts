@@ -47,7 +47,9 @@ export class Accessibility extends CommonAccessibility {
                     }
                 });
             }
-        } catch(e) {}
+        } catch (e) {
+            // ...
+        }
     }
 
     protected _updateScreenReaderStatus(isEnabled: boolean): void {

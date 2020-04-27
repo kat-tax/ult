@@ -1,8 +1,8 @@
 {
-  "name": "react-ult-imagesvg",
-  "version": "2.0.0",
-  "description": "Plugin for ReactXP that provides support for SVG (scalable vector graphics) for all platforms",
-  "author": "ReactXP Team <reactxp@microsoft.com>",
+  "name": "react-ult-ext-imagesvg",
+  "version": "2.1.2",
+  "description": "Plugin for ULT that provides support for SVG (scalable vector graphics) for all platforms",
+  "types": "dist/web/PluginBase.d.ts",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
@@ -13,21 +13,21 @@
     "react-native-svg": "^9.13.3"
   },
   "peerDependencies": {
-    "react": "^16.3",
-    "reactxp": "^2.0.0",
-    "react-dom": "^16.3",
-    "react-native": ">=0.57",
-    "react-native-windows": "^0.57.1"
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-native": "^0.61.5",
+    "react-native-windows": "^0.61.5",
+    "react-ult": "^2.1.2"
   },
   "devDependencies": {
-    "@types/react-native": "^0.60.23",
-    "@typescript-eslint/eslint-plugin": "2.15.0",
+    "@types/react-native": "^0.62.4",
+    "@typescript-eslint/eslint-plugin": "2.29.0",
     "eslint": "6.8.0",
-    "eslint-config-skype": "1.5.0",
-    "eslint-plugin-import": "2.19.1",
-    "eslint-plugin-react": "7.17.0",
-    "reactxp": "^2.0.0",
-    "typescript": "3.7.4"
-  },
-  "types": "dist/web/PluginBase.d.ts"
+    "eslint-config-skype": "1.6.0",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-react": "7.19.0",
+    "react": "^16.9.0",
+    "react-ult": "^2.1.2",
+    "typescript": "3.8.3"
+  }
 }

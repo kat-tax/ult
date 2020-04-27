@@ -8,7 +8,7 @@
  * display videos and controlling video playback.
  */
 
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 
 import * as Types from './Types';
 

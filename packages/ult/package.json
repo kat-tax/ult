@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "chalk": "^4.0.0",
-    "replace-in-file": "^5.0.2"
+    "replace-in-file": "^6.0.0"
   },
   "repository": {
     "url": "https://github.com/kat-tax/ult.git"

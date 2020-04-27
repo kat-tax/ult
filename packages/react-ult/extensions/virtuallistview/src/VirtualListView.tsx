@@ -37,7 +37,7 @@
 
 import * as _ from 'lodash';
 import { createRef, RefObject } from 'react';
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 
 import assert from './assert';
 import { VirtualListCell, VirtualListCellInfo, VirtualListCellRenderDetails } from './VirtualListCell';
@@ -149,12 +149,12 @@ enum FocusDirection {
 }
 
 const _styles = {
-    scrollContainer: RX.Styles.createScrollViewStyle({
+    scrollContainer: RX.Styles.ScrollView({
         flex: 1,
         position: 'relative',
         flexDirection: 'column',
     }),
-    staticContainer: RX.Styles.createViewStyle({
+    staticContainer: RX.Styles.View({
         flex: 1,
         flexDirection: 'column',
     }),
@@ -198,7 +198,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
     // Controls the full height of the scrolling view, independent of the view port height
     private _containerHeight = 0;
     private _containerHeightValue = RX.Animated.createValue(this._containerHeight);
-    private _containerAnimatedStyle = RX.Styles.createAnimatedViewStyle({
+    private _containerAnimatedStyle = RX.Styles.AnimatedView({
         height: this._containerHeightValue,
     });
 
@@ -1135,6 +1135,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
             });
 
             if (item.isNavigable) {
+                // eslint-disable-next-line @typescript-eslint/camelcase
                 this._navigatableItemsRendered.push({ key: item.key, vc_key: virtualCellInfo.virtualKey });
             }
         }
@@ -1239,7 +1240,7 @@ export class VirtualListView<ItemInfo extends VirtualListViewItemInfo>
             if (Array.isArray(this.props.style)) {
                 staticContainerStyle = staticContainerStyle.concat(this.props.style as RX.Types.ViewStyleRuleSet[]);
             } else {
-                staticContainerStyle.push(this.props.style as RX.Types.ViewStyleRuleSet);
+                staticContainerStyle.push(this.props.style);
             }
         }
 

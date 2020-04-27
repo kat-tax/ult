@@ -8,17 +8,17 @@
  */
 
 import * as React from 'react';
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 
 import * as Types from '../common/Types';
 
 const _styles = {
-    webViewDefault: RX.Styles.createViewStyle({
+    webViewDefault: RX.Styles.View({
         flex: 1,
         alignSelf: 'stretch',
         borderStyle: 'none',
     }),
-    webViewContainer: RX.Styles.createViewStyle({
+    webViewContainer: RX.Styles.View({
         flexDirection: 'column',
         flex: 1,
         alignSelf: 'stretch',

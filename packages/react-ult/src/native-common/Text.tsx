@@ -20,7 +20,7 @@ import { compact } from './utils/lodashMini';
 import Styles from './Styles';
 
 const _styles = {
-    defaultText: Styles.createTextStyle({
+    defaultText: Styles.Text({
         overflow: 'hidden',
     }),
 };

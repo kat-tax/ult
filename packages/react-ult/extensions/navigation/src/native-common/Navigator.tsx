@@ -6,7 +6,7 @@
  *
  * Common native implementation for Navigator on mobile.
  */
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 
 import * as Types from '../common/Types';
 import {

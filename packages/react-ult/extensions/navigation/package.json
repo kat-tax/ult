@@ -1,48 +1,37 @@
 {
-  "name": "react-ult-navigation",
-  "version": "2.0.0",
-  "description": "Plugin for ReactXP that provides a navigation framework",
+  "name": "react-ult-ext-navigation",
+  "version": "2.1.2",
+  "description": "Plugin for ULT that provides a navigation framework",
+  "types": "dist/web/Navigator.d.ts",
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "lint": "eslint --ext .ts,.tsx src",
     "lint:fix": "npm run lint -- --fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Microsoft/reactxp/tree/master/extensions/navigation"
-  },
-  "keywords": [
-    "react-native",
-    "reactxp",
-    "react"
-  ],
   "dependencies": {
     "lodash": "^4.17.15",
     "rebound": "^0.1.0",
     "reactxp-experimental-navigation": "1.0.14"
   },
   "peerDependencies": {
-    "react": "^16.3.0",
-    "reactxp": "^2.0.0",
-    "react-dom": "^16.3.0",
-    "react-native": ">=0.57",
-    "react-native-windows": "^0.57.1"
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-native": "^0.61.5",
+    "react-native-windows": "^0.61.5",
+    "react-ult": "^2.1.2"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.149",
-    "@types/react-dom": "^16.9.4",
-    "@types/react-native": "^0.60.23",
-    "@typescript-eslint/eslint-plugin": "2.15.0",
+    "@types/lodash": "^4.14.150",
+    "@types/react-dom": "^16.9.6",
+    "@types/react-native": "^0.62.4",
+    "@typescript-eslint/eslint-plugin": "2.29.0",
     "eslint": "6.8.0",
-    "eslint-config-skype": "1.5.0",
-    "eslint-plugin-import": "2.20.0",
-    "eslint-plugin-react": "7.17.0",
-    "react": "^16.3.0",
-    "react-dom": "^16.3.0",
-    "reactxp": "^2.0.0",
-    "typescript": "3.7.4"
-  },
-  "author": "ReactXP Team <reactxp@microsoft.com>",
-  "license": "MIT",
-  "types": "dist/web/Navigator.d.ts"
+    "eslint-config-skype": "1.6.0",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-react": "7.19.0",
+    "react": "^16.9.0",
+    "react-ult": "^2.1.2",
+    "typescript": "3.8.3"
+  }
 }

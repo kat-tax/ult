@@ -23,15 +23,15 @@
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-native": "^0.61.5",
-    "react-ult": "^2.0.3"
+    "react-ult": "^2.1.2"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",
     "@babel/runtime": "^7.9.2",
     "@babel/plugin-proposal-decorators": "^7.8.3",
     "@babel/preset-env": "^7.7.4",
-    "@react-native-community/cli": "^3.2.1",
-    "@types/node": "^13.13.2",
+    "@react-native-community/cli": "3.2.1",
+    "@types/node": "^13.13.4",
     "@types/react": "^16.9.34",
     "cross-env": "^7.0.2",
     "metro-react-native-babel-preset": "^0.59.0",

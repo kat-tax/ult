@@ -27,7 +27,8 @@
         ]
       }
     ],
-    "@typescript-eslint/no-parameter-properties": "off"
+    "@typescript-eslint/no-parameter-properties": "off",
+    "@typescript-eslint/member-naming": "off"
   },
   "overrides": [
     {

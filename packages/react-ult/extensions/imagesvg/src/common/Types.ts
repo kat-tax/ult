@@ -6,7 +6,7 @@
  * Type definitions to support the plugin.
  */
 
-import { Types as RXTypes } from 'reactxp';
+import { Types as RXTypes } from 'react-ult';
 import * as React from 'react';
 
 export interface ImageSvgStyle extends RXTypes.ViewStyle {

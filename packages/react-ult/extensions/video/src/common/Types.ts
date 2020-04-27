@@ -8,7 +8,7 @@
  */
 
 import * as React from 'react';
-import { Types as RXTypes } from 'reactxp';
+import { Types as RXTypes } from 'react-ult';
 
 // Video interfaces from react-native-video
 export interface VideoProgress {

@@ -8,7 +8,7 @@
 
 // Use only for type data
 import * as React from 'react';
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 
 export type ReactNode = React.ReactNode;
 

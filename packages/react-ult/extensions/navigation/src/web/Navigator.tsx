@@ -12,9 +12,9 @@
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 import * as rebound from 'rebound';
-import { Styles, View } from 'reactxp';
+import { Styles, View } from 'react-ult';
 
 import * as _ from '../common/lodashMini';
 import * as Types from '../common/Types';
@@ -45,20 +45,20 @@ export interface Spring {
 
 // Default styles
 const _styles = {
-    container: Styles.createViewStyle({
+    container: Styles.View({
         flex: 1,
         flexDirection: 'column',
         alignSelf: 'stretch',
         overflow: 'hidden',
     }),
-    defaultSceneStyle: Styles.createViewStyle({
+    defaultSceneStyle: Styles.View({
         position: 'absolute',
         left: 0,
         right: 0,
         bottom: 0,
         top: 0,
     }),
-    baseScene: Styles.createViewStyle({
+    baseScene: Styles.View({
         position: 'absolute',
         overflow: 'hidden',
         left: 0,
@@ -66,19 +66,19 @@ const _styles = {
         bottom: 0,
         top: 0,
     }),
-    disabledScene: Styles.createViewStyle({
+    disabledScene: Styles.View({
         top: 0,
         bottom: 0,
         flex: 1,
     }),
-    transitioner: Styles.createViewStyle( {
+    transitioner: Styles.View( {
         flex: 1,
         flexDirection: 'column',
         backgroundColor: 'transparent',
         overflow: 'hidden',
         alignItems: 'stretch',
     }),
-    sceneStyle: Styles.createViewStyle({
+    sceneStyle: Styles.View({
         flex: 1,
         shadowOffset: { height: 0, width: 0 },
         shadowRadius: 40,

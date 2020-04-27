@@ -16,12 +16,12 @@ import {
     WebViewSourceUri as RNWebViewSourceUri,
 } from 'react-native-webview/lib/WebViewTypes';
 
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 
 import * as Types from '../common/Types';
 
 const _styles = {
-    webViewDefault: RX.Styles.createViewStyle({
+    webViewDefault: RX.Styles.View({
         flex: 1,
         alignSelf: 'stretch',
     }),

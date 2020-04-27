@@ -9,7 +9,7 @@
 
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import * as RX from 'reactxp';
+import * as RX from 'react-ult';
 
 import extend = require('lodash/extend');
 

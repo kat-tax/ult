@@ -28,13 +28,13 @@ import Styles from './Styles';
 import UserInterface from './UserInterface';
 
 const _styles = {
-    defaultButton: Styles.createButtonStyle({
+    defaultButton: Styles.Button({
         alignItems: 'stretch',
         justifyContent: 'center',
         overflow: 'hidden',
         backgroundColor: 'rgba(0, 0, 0, 0)',
     }),
-    disabled: Styles.createButtonStyle({
+    disabled: Styles.Button({
         opacity: 0.5,
     }),
 };
@@ -142,7 +142,7 @@ export class Button extends ButtonBase {
         let disabledStyle = this.props.disabled ? _styles.disabled : undefined;
 
         if (this.props.disabled && this.props.disabledOpacity !== undefined) {
-            disabledStyle = Styles.createButtonStyle({
+            disabledStyle = Styles.Button({
                 opacity: this.props.disabledOpacity,
             }, false);
         }
@@ -305,7 +305,7 @@ export class Button extends ButtonBase {
         if (this._defaultOpacityValue !== opacityValueFromProps || (prevProps && props.disabled !== prevProps.disabled)) {
             this._defaultOpacityValue = opacityValueFromProps;
             this._opacityAnimatedValue = new Animated.Value(this._defaultOpacityValue);
-            this._opacityAnimatedStyle = Styles.createAnimatedViewStyle({
+            this._opacityAnimatedStyle = Styles.AnimatedView({
                 opacity: this._opacityAnimatedValue,
             });
         }
