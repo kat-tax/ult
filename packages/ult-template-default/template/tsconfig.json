@@ -24,6 +24,6 @@
     "noImplicitAny": true,
     "skipLibCheck": true,
     "declaration": true,
-    "noResolve": false,
+    "noResolve": false
   }
 }
