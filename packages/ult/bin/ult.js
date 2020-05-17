@@ -22,26 +22,28 @@ async function main() {
   if (name.length > 100) 
     return console.log(chalk.red('Project name length cannot exceed 100 characters.'));
   try {
-    console.log('Creating new project, please wait...');
+    console.log('Creating project, please wait...');
     await native(name, template);
     console.log('Initializing Windows project...');
     await windows(name, template);
     console.log('Initializing MacOS project...');
     await macos(name, template);
-    console.log('Applying final patches...');
+    console.log('Patching native templates...');
     await patch(name, template);
-    console.log(chalk.green(`Successfully created ${name}!\n`));
+    // TODO: install pods if on macos
+    // console.log('Installing pods...');
+    console.log(`✔️ Successfully created ${name}!\n`);
     console.log(chalk.bold('1) Navigate to your project:'));
     console.log(`$ ${chalk.yellow(`cd ${name.toLowerCase()}`)}\n`);
     console.log(chalk.bold('2) Choose a command below:'));
-    console.log(`$ ${chalk.yellow('npm run web')}`);
-    console.log(`$ ${chalk.yellow('npm run android')}`);
-    console.log(`$ ${chalk.yellow('npm run ios')}`);
-    console.log(`$ ${chalk.yellow('npm run macos')}`);
-    console.log(`$ ${chalk.yellow('npm run windows')}`);
+    console.log(`$ ${chalk.yellow('npm run start:web')}`);
+    console.log(`$ ${chalk.yellow('npm run start:ios')}`);
+    console.log(`$ ${chalk.yellow('npm run start:macos')}`);
+    console.log(`$ ${chalk.yellow('npm run start:windows')}`);
+    console.log(`$ ${chalk.yellow('npm run start:android')}`);
     console.log(chalk.blue('\nFor more details, visit https://docs.ult.dev'));
   } catch (e) {
-    console.log(chalk.red(`Failed to create project. (code: ${e})>`));
+    console.log(`❌ Failed to create project. (${e})>`);
   }
 }
 

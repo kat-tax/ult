@@ -1,1 +1,2 @@
-export * as utils from 'app/lib/utils';
+import * as utils from 'app/lib/utils';
+export {utils};

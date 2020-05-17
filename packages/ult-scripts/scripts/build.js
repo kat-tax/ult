@@ -1,31 +1,44 @@
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
 process.on('unhandledRejection', err => {throw err});
-require('../config/env');
+require('../lib/env');
 
+// Imports
 const path = require('path');
-const chalk = require('react-dev-utils/chalk');
 const fs = require('fs-extra');
 const webpack = require('webpack');
-const configFactory = require('../config/webpack.config');
-const paths = require('../config/paths');
-const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
-const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
-const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
+const bfj = require('bfj');
+
+// React Dev Utils
+const chalk = require('react-dev-utils/chalk');
 const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
+const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
+const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild;
+const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
+const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
+const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const printBuildError = require('react-dev-utils/printBuildError');
+const {checkBrowsers} = require('react-dev-utils/browsersHelper');
+
+// Config
+const paths = require('../config/paths');
+const argv = process.argv.slice(2);
+const isInteractive = process.stdout.isTTY;
+const useYarn = fs.existsSync(paths.yarnLockFile);
+const writeStats = argv.indexOf('--stats') !== -1;
+const configFactory = require('../config/webpack.config');
+
+// Verification
+if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
+  process.exit(1);
+}
+
+// Setup
+const config = configFactory('production');
 const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024;
 const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
-const useYarn = fs.existsSync(paths.yarnLockFile);
-const isInteractive = process.stdout.isTTY;
-const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild;
-const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
 
-if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs]))
-  process.exit(1);
-
-const config = configFactory('production');
-const {checkBrowsers} = require('react-dev-utils/browsersHelper');
+// Run
 checkBrowsers(paths.appPath, isInteractive)
   .then(() => measureFileSizesBeforeBuild(paths.appBuild))
   .then(previousFileSizes => {
@@ -52,11 +65,7 @@ checkBrowsers(paths.appPath, isInteractive)
   err => {
     const tscCompileOnError = process.env.TSC_COMPILE_ON_ERROR === 'true';
     if (tscCompileOnError) {
-      console.log(
-        chalk.yellow(
-          'Compiled with the following type errors (you may want to check these before deploying your app):\n'
-        )
-      );
+      console.log(chalk.yellow('Compiled with the following type errors (check before deploying your app):\n'));
       printBuildError(err);
     } else {
       console.log(chalk.red('Failed to compile.\n'));
@@ -92,7 +101,13 @@ function build(previousFileSizes) {
         console.log(chalk.yellow('\nTreating warnings as errors because process.env.CI = true.\n'));
         return reject(new Error(messages.warnings.join('\n\n')));
       }
-      return resolve({stats, previousFileSizes, warnings: messages.warnings});
+      const resolveArgs = resolve({stats, previousFileSizes, warnings: messages.warnings});
+      if (writeStats) {
+        return bfj
+          .write(paths.appBuild + '/bundle-stats.json', stats.toJson())
+          .then(() => resolve(resolveArgs))
+          .catch(error => reject(new Error(error)));
+      }
     });
   });
 }
