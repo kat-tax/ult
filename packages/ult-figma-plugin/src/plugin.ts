@@ -1,4 +1,4 @@
-import {getCode, getTarget} from './figma';
+import {getCode} from './convert';
 
 figma.ui.on('message', onMessage);
 figma.on('selectionchange', onUpdate);
@@ -12,6 +12,16 @@ let EDITOR_VALUE = '';
 function onUpdate() {
   const {selection} = figma.currentPage;
   const hasSelection = selection.length > 0;
+  const getTarget = (selection: readonly SceneNode[]) => {
+    let root: SceneNode | DocumentNode & ChildrenMixin = selection[0];
+    if (root.type === 'COMPONENT') return selection[0] as ComponentNode;
+    while (root.parent && root.parent.type !== 'PAGE') {
+      root = root.parent;
+      if (root.type === 'COMPONENT') return root;
+    }
+    return null;
+  }
+  
   const target = hasSelection && getTarget(selection);
   const code = target && getCode(target);
   const payload = code ? code : '';

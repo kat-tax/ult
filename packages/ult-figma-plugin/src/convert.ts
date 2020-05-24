@@ -1,9 +1,17 @@
 import CodeBlockWriter from 'code-block-writer';
 
-export function getCode(component) {
+interface Component {
+  deps: {},
+  props: {},
+  setup: {},
+  render: {},
+  styles: {},
+}
+
+export function getCode(component: ComponentNode) {
   const {code, deps, styles} = getContent([...component.children]);
   const root = {tag: 'View', slug: 'root', style: getStyle(component)};
-  const name = getName(component.name);
+  const name = convertComponentName(component.name);
   const dependencies = ['Styles', 'View', ...deps].join(', ');
   const writer = new CodeBlockWriter({
     newLine: "\r\n",         // default: "\n"
@@ -95,14 +103,33 @@ export function getCode(component) {
   return writer.toString();
 }
 
-export function getTarget(selection: readonly SceneNode[]) {
-  let root: SceneNode | DocumentNode & ChildrenMixin = selection[0];
-  if (root.type === 'COMPONENT') return selection[0];
-  while (root.parent && root.parent.type !== 'PAGE') {
-    root = root.parent;
-    if (root.type === 'COMPONENT') return root;
-  }
-  return null;
+function getContent(children, depth = 0, deps = [], styles = {}) {
+  let code = [];
+
+  children.reverse().forEach(child => {
+    const isGroup = child.type === 'GROUP';
+    const isText = child.type === 'TEXT';
+    const tag = convertElementTag(child.type);
+    const slug = convertVariableName(child.name);
+
+    styles[slug] = {tag, style: getStyle(child)};
+  
+    if (isText && deps.indexOf('Text') === -1) {
+      deps.push('Text');
+    }
+
+    if (isText) {
+      code.push({slug, tag: 'Text', value: child.characters || ''});
+    }
+
+    if (isGroup) {
+      const content = getContent([...child.children], depth + 1, deps, styles);
+      styles = {...styles, ...content.styles};
+      code.push({slug, tag: 'View', children: content.code});
+    }
+  });
+
+  return {code, deps, styles};
 }
 
 function getStyle(component) {
@@ -177,13 +204,13 @@ function getStyle(component) {
       ...styles,
       color,
       fontSize,
-      // fontFamily,
+      fontFamily,
       letterSpacing: undefined, // TODO
       lineHeight: undefined, // TODO
       fontStyle: isItalic ? 'italic' : undefined,
       fontWeight: isBold ? '700' : isThin ? '300' : undefined,
       textAlign: isAlignLeft ? 'left' : isAlignRight ? 'right' : undefined,
-      // textAlignVertical: isAlignTop ? 'top' : isAlignBottom ? 'bottom' : undefined,
+      textAlignVertical: isAlignTop ? 'top' : isAlignBottom ? 'bottom' : undefined,
       textDecorationLine: isUnderline ? 'underline' : isCrossed ? 'line-through' : undefined,
     };
   }
@@ -191,56 +218,136 @@ function getStyle(component) {
   return styles;
 }
 
-function getContent(children, depth = 0, deps = [], styles = {}) {
-  let code = [];
-
-  children.reverse().forEach(child => {
-    const isText = child.type === 'TEXT';
-    const isGroup = child.type === 'GROUP';
-    const slug = getSlug(child.name);
-    const tag = getTag(child.type);
-
-    styles[slug] = {tag, style: getStyle(child)};
-  
-    if (isText && deps.indexOf('Text') === -1) {
-      deps.push('Text');
-    }
-
-    if (isText) {
-      code.push({slug, tag: 'Text', value: child.characters || ''});
-    }
-
-    if (isGroup) {
-      const content = getContent([...child.children], depth + 1, deps, styles);
-      styles = {...styles, ...content.styles};
-      code.push({slug, tag: 'View', children: content.code});
-    }
-  });
-
-  return {code, deps, styles};
+// Conversions
+function convertComponent() {
+  // Turn a component and it's children into code
 }
 
-function getTag(type: string) {
+function convertLayout() {
+  // Convert figma auto layout to flexbox
+}
+
+function convertFrame() {
+  // Convert frames and groups to Views
+}
+
+function convertText() {
+  // Convert text properties
+}
+
+function convertShape() {
+  // Convert shapes & images to ULT components
+}
+
+function convertVector() {
+  // Convert SVGs to ULT components
+}
+
+function convertRectangle() {
+  // Convert rectangle shapes to Views w/ backgrounds
+}
+
+function convertColor() {
+  // Convert colors from paint fill
+}
+
+function convertEvents() {
+  // Convert event handlers
+}
+
+function convertElementTag(type: string) {
   switch (type) {
     case 'COMPONENT':
+    case 'INSTANCE':
+    case 'RECTANGLE':
     case 'GROUP':
       return 'View';
     case 'TEXT':
       return 'Text';
     case 'IMAGE':
       return 'Image';
+    case 'BOOLEAN_OPERATION':
+    case 'VECTOR':
+    case 'STAR':
+    case 'LINE':
+    case 'ELLIPSE':
+    case 'POLYGON':
+      return 'Svg';
     default:
       return 'Unknown';
   }
 }
 
-function getName(value: string) {
+function convertComponentName(value: string) {
   return value.replace(/\s/g, '');
 }
 
-function getSlug(value: string) {
+function convertVariableName(value: string) {
   return value.split(' ').map((word, index) => {
     if (index == 0) return word.toLowerCase();
     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
   }).join('');
+}
+
+// Helpers
+
+function getColor(rgb: RGB, opacity: number) {
+  const {r,g,b} = rgb;
+  return `rgba(${255.0 * r}, ${255.0 * g}, ${255.0 * b}, ${opacity})`;
+}
+
+function getColorFromPaint(fills: ReadonlyArray<Paint>): string | null {
+  const paint = fills.find(f => f.type === 'SOLID' && f.visible) as SolidPaint;
+  if (paint == null) return null;
+  return getColor(paint.color, paint.opacity || 1.0);
+}
+
+function getOpacity(node: BlendMixin) {
+  if (node.opacity === 1) return {};
+  return node.opacity;
+}
+
+function getEffects(node: BaseNode & BlendMixin) {
+  const style = {}
+  for (const effect of node.effects) {
+    if (!effect.visible) continue;
+    if (effect.type === 'DROP_SHADOW' || effect.type === 'INNER_SHADOW') {
+      const prop = `${node.type === 'TEXT' ? 'text' : 'box'}-shadow`;
+      style[prop] = `${effect.type === "INNER_SHADOW" ? 'inset ' : ''}${effect.offset.x}px ${effect.offset.y}px ${effect.radius}px ${getColor(effect.color, effect.color.a)}`;
+    } else if (effect.type === "BACKGROUND_BLUR") {
+      style["backdrop-filter"] = `blur(${effect.radius}px)`;
+    }
+  }
+  return style;
+}
+
+function getCornerStyle(node: any/*RectangleCornerMixin*/) {
+  return {"border-radius": `${node.topLeftRadius}px ${node.topRightRadius}px ${node.bottomRightRadius}px ${node.bottomLeftRadius}px`};
+}
+
+function getTextWeight(style: string): number {
+  switch (style.replace(/\s*italic\s*/i, '')) {
+    case 'Thin':
+      return 100;
+    case 'Extra Light':
+    case 'Extra-light':
+      return 200;
+    case 'Light':
+      return 300;
+    case 'Regular':
+      return 400;
+    case 'Medium':
+      return 500;
+    case 'Semi Bold':
+    case 'Semi-bold':
+      return 600;
+    case 'Bold':
+      return 700;
+    case 'Extra Bold':
+    case 'Extra-bold':
+      return 800;
+    case 'Black':
+      return 900;
+  }
+  return 400;
 }
