@@ -18,18 +18,20 @@ After everything installs, use `npm run [task]`
 
 | Command               | Description                                         |
 | ----------------------| --------------------------------------------------- |
+| npm start             | Start the Metro native bundler                      |
 | npm run start:web     | Start the Web development server                    |
 | npm run start:ios     | Start the iOS development server                    |
 | npm run start:macos   | Start the MacOS development server                  |
 | npm run start:android | Start the Android development server                |
 | npm run start:windows | Start the Windows development server                |
-| npm run build:web     | Build a production Web bundle                       |
+| npm run build         | Build a production Web bundle                       |
 | npm run build:ios     | Build a production iOS app                          |
 | npm run build:macos   | Build a production MacOS app                        |
 | npm run build:android | Build a production Android app                      |
-| npm run build:windows | Build a production Windows executable               |
+| npm run build:windows | Build a production Windows app                      |
 
 ### Technologies
+
 - [TypeScript](https://www.typescriptlang.org/) *(language)*
 - [Metro](https://facebook.github.io/metro/) *(native bundler)*
 - [Webpack](https://webpack.js.org/) *(web bundler)*
@@ -38,19 +40,19 @@ After everything installs, use `npm run [task]`
 - [ReactNative](https://reactnative.dev/) & [RNW](https://microsoft.github.io/react-native-windows/) *(native bridge)*
 - **Bring your own state library!**
   - [Redux](https://redux.js.org/)
-  - [MobX](https://mobx.js.org/)
+  - [Recoil](https://recoiljs.org/)
+  - [MobX](https://mobx-react.js.org/)
   - [XState](https://xstate.js.org/)
-  - [Refract](https://refract.js.org/)
 
 ### Features
 
 - ⚛ Native cross-platform UI
 - ♾ Flexible architecture
+- 🧩 Platform extensions
 - ♿ Great accessibility
 - 📦 Small bundle size
 - ✨ Typed styles
 - 🎥 Animations
-- 🧩 Extensions
 
 ### Community
 
