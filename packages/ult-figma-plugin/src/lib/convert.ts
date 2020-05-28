@@ -1,6 +1,9 @@
+import {Style} from 'react-ult';
 import CodeBlockWriter from 'code-block-writer';
+import {formatTag, formatSlug} from './utils';
+import * as style from './style';
 
-interface Component {
+export interface Component {
   deps: {},
   props: {},
   setup: {},
@@ -9,10 +12,10 @@ interface Component {
 }
 
 export function getCode(component: ComponentNode) {
-  const {code, deps, styles} = getContent([...component.children]);
+  const {code, dependencies, styles} = getContent([...component.children]);
   const root = {tag: 'View', slug: 'root', style: getStyle(component)};
-  const name = convertComponentName(component.name);
-  const dependencies = ['Styles', 'View', ...deps].join(', ');
+  const deps = ['Styles', 'View', ...dependencies].join(', ');
+  const name = formatTag(component.name);
   const writer = new CodeBlockWriter({
     newLine: "\r\n",         // default: "\n"
     useTabs: false,          // default: false
@@ -39,7 +42,7 @@ export function getCode(component: ComponentNode) {
   writer.quote('react');
   writer.write(';');
   writer.newLine();
-  writer.write(`import {${dependencies}} from `);
+  writer.write(`import {${deps}} from `);
   writer.quote('react-ult');
   writer.write(';');
   writer.newLine();
@@ -103,33 +106,25 @@ export function getCode(component: ComponentNode) {
   return writer.toString();
 }
 
-function getContent(children, depth = 0, deps = [], styles = {}) {
+function getContent(children, depth = 0, dependencies = [], styles = {}) {
   let code = [];
-
   children.reverse().forEach(child => {
     const isGroup = child.type === 'GROUP';
     const isText = child.type === 'TEXT';
-    const tag = convertElementTag(child.type);
-    const slug = convertVariableName(child.name);
-
+    const slug = formatSlug(child.name);
+    const tag = formatTag(child.type);
     styles[slug] = {tag, style: getStyle(child)};
-  
-    if (isText && deps.indexOf('Text') === -1) {
-      deps.push('Text');
-    }
-
-    if (isText) {
+    if (isText && dependencies.indexOf('Text') === -1)
+      dependencies.push('Text');
+    if (isText)
       code.push({slug, tag: 'Text', value: child.characters || ''});
-    }
-
     if (isGroup) {
-      const content = getContent([...child.children], depth + 1, deps, styles);
+      const content = getContent([...child.children], depth + 1, dependencies, styles);
       styles = {...styles, ...content.styles};
       code.push({slug, tag: 'View', children: content.code});
     }
   });
-
-  return {code, deps, styles};
+  return {code, dependencies, styles};
 }
 
 function getStyle(component) {
@@ -154,19 +149,6 @@ function getStyle(component) {
         backgroundColor: color = undefined; // Value is animatable
         opacity: number = 1.0; // Value is animatable
         overflow: 'hidden' | 'visible';
-
-        borderWidth: number;
-        borderTopWidth: number;
-        borderRightWidth: number;
-        borderBottomWidth: number;
-        borderLeftWidth: number;
-        borderColor: color;
-        borderStyle: 'solid' | 'dotted' | 'dashed' | 'none';
-        borderRadius: number;  // Sets all four border radius attributes; value is animatable
-        borderTopRightRadius: number = 0;
-        borderBottomRightRadius: number = 0;
-        borderBottomLeftRadius: number = 0;
-        borderTopLeftRadius: number = 0;
 
         // NOTE: If applied to a Text element, these properties translate to text shadows,
         // not a box shadow.
@@ -218,9 +200,55 @@ function getStyle(component) {
   return styles;
 }
 
-// Conversions
-function convertComponent() {
-  // Turn a component and it's children into code
+function convertNode(node: BaseNode) {
+  if ('visible' in node && !node.visible)
+    return '';
+  switch (node.type) {
+    case 'FRAME':
+    case 'INSTANCE':
+    case 'COMPONENT':
+      return convertFrame(node);
+    case 'GROUP':
+      return convertGroup(node);
+    case 'BOOLEAN_OPERATION':
+    case 'VECTOR':
+    case 'STAR':
+    case 'LINE':
+    case 'ELLIPSE':
+    case 'POLYGON':
+      return convertShape(node);
+    case 'RECTANGLE':
+      return convertRectangle(node);
+    case 'TEXT':
+      return convertText(node);
+    case 'PAGE':
+    case 'SLICE':
+    case 'DOCUMENT':
+    default:
+      return '';
+  }
+}
+
+function convertChildren(children: ReadonlyArray<BaseNode>) {
+  const nodes: BaseNode[] = []
+  const walk = (children: ReadonlyArray<BaseNode>) => {
+    for (const child of children) {
+      if (child.type !== "GROUP") {
+        nodes.push(child);
+      } else if (child.visible) {
+        if (child.parent
+          && 'layoutMode' in child.parent
+          && child.parent.layoutMode !== "NONE") {
+          nodes.push(child);
+        } else {
+          walk(child.children);
+        }
+      }
+    }
+  };
+
+  walk(children);
+  return nodes.map(convertNode).join('\n');
 }
 
 function convertLayout() {
@@ -253,101 +281,4 @@ function convertColor() {
 
 function convertEvents() {
   // Convert event handlers
-}
-
-function convertElementTag(type: string) {
-  switch (type) {
-    case 'COMPONENT':
-    case 'INSTANCE':
-    case 'RECTANGLE':
-    case 'GROUP':
-      return 'View';
-    case 'TEXT':
-      return 'Text';
-    case 'IMAGE':
-      return 'Image';
-    case 'BOOLEAN_OPERATION':
-    case 'VECTOR':
-    case 'STAR':
-    case 'LINE':
-    case 'ELLIPSE':
-    case 'POLYGON':
-      return 'Svg';
-    default:
-      return 'Unknown';
-  }
-}
-
-function convertComponentName(value: string) {
-  return value.replace(/\s/g, '');
-}
-
-function convertVariableName(value: string) {
-  return value.split(' ').map((word, index) => {
-    if (index == 0) return word.toLowerCase();
-    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-  }).join('');
-}
-
-// Helpers
-
-function getColor(rgb: RGB, opacity: number) {
-  const {r,g,b} = rgb;
-  return `rgba(${255.0 * r}, ${255.0 * g}, ${255.0 * b}, ${opacity})`;
-}
-
-function getColorFromPaint(fills: ReadonlyArray<Paint>): string | null {
-  const paint = fills.find(f => f.type === 'SOLID' && f.visible) as SolidPaint;
-  if (paint == null) return null;
-  return getColor(paint.color, paint.opacity || 1.0);
-}
-
-function getOpacity(node: BlendMixin) {
-  if (node.opacity === 1) return {};
-  return node.opacity;
-}
-
-function getEffects(node: BaseNode & BlendMixin) {
-  const style = {}
-  for (const effect of node.effects) {
-    if (!effect.visible) continue;
-    if (effect.type === 'DROP_SHADOW' || effect.type === 'INNER_SHADOW') {
-      const prop = `${node.type === 'TEXT' ? 'text' : 'box'}-shadow`;
-      style[prop] = `${effect.type === "INNER_SHADOW" ? 'inset ' : ''}${effect.offset.x}px ${effect.offset.y}px ${effect.radius}px ${getColor(effect.color, effect.color.a)}`;
-    } else if (effect.type === "BACKGROUND_BLUR") {
-      style["backdrop-filter"] = `blur(${effect.radius}px)`;
-    }
-  }
-  return style;
-}
-
-function getCornerStyle(node: any/*RectangleCornerMixin*/) {
-  return {"border-radius": `${node.topLeftRadius}px ${node.topRightRadius}px ${node.bottomRightRadius}px ${node.bottomLeftRadius}px`};
-}
-
-function getTextWeight(style: string): number {
-  switch (style.replace(/\s*italic\s*/i, '')) {
-    case 'Thin':
-      return 100;
-    case 'Extra Light':
-    case 'Extra-light':
-      return 200;
-    case 'Light':
-      return 300;
-    case 'Regular':
-      return 400;
-    case 'Medium':
-      return 500;
-    case 'Semi Bold':
-    case 'Semi-bold':
-      return 600;
-    case 'Bold':
-      return 700;
-    case 'Extra Bold':
-    case 'Extra-bold':
-      return 800;
-    case 'Black':
-      return 900;
-  }
-  return 400;
 }

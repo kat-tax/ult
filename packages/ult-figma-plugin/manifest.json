@@ -1,7 +1,7 @@
 {
   "name": "ULT · React Component Designer",
   "id": "821138713091291738",
-  "main": "dist/plugin.js",
+  "main": "dist/main.js",
   "ui": "dist/ui.html",
   "api": "1.0.0"
 }
