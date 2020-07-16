@@ -1,4 +1,4 @@
-package com.helloworld;
+package com.apptemplate;
 
 import com.facebook.react.ReactActivity;
 
