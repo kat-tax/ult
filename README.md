@@ -1,7 +1,7 @@
 # ULT · The Ultimate Dev Stack
 
 <a alt="ULT Website" href="https://ult.dev">
-  <img width="480" src="https://raw.githubusercontent.com/kat-tax/ult/master/_layouts/banner.png">
+  <img align="right" width="360" src="https://raw.githubusercontent.com/kat-tax/ult/master/_layouts/banner.png">
 </a>
 
 #### Cross-platform development with a single code base!
@@ -13,8 +13,6 @@ After everything installs, use `npm run [task]`
 *For more details, visit the [documentation](https://docs.ult.dev)*
 
 *If you have questions, [create an issue](https://github.com/kat-tax/ult/issues/new/choose)*
-
--------------------------------------------------------------------------------
 
 ### Tasks
 
