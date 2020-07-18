@@ -11,7 +11,7 @@ const name = opts ? opts.trim() : '';
 const cwd = path.resolve(process.cwd(), name.toLowerCase());
 const tpl = `ult-template-${flag ? flag.substr(2) : 'default'}`;
 
-async function main() {
+async function init() {
   if (!name)
     return console.log(chalk.red('Project name is missing. (e.g. npx ult Demo)'));
   if (name.match(/^[_\.]/))
@@ -45,4 +45,4 @@ async function main() {
   }
 }
 
-main();
+init();
