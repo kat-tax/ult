@@ -3,18 +3,23 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "react-native start",
-    "start:web": "ult-scripts start",
-    "start:ios": "react-native run-ios",
-    "start:macos": "node node_modules/react-native-macos/local-cli/cli.js start --use-react-native-macos",
-    "start:android": "react-native run-android",
-    "start:windows": "react-native run-windows",
+    "web": "ult-scripts start",
+    "ios": "react-native run-ios",
+    "macos": "node node_modules/react-native-macos/local-cli/cli.js start --use-react-native-macos",
+    "windows": "react-native run-windows",
+    "android": "react-native run-android",
     "build": "ult-scripts build",
     "build:web": "ult-scripts build",
     "build:ios": "react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ios/app/src/main/assets/index.ios.bundle --assets-dest ios/app/src/main/res",
     "build:macos": "react-native bundle --platform macos --dev false --entry-file index.js --bundle-output macos/app/src/main/assets/index.macos.bundle --assets-dest macos/app/src/main/res",
+    "build:windows": "react-native bundle --platform windows --dev false --entry-file index.js --bundle-output windows/app/src/main/assets/index.windows.bundle --assets-dest windows/app/src/main/res",
     "build:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
-    "build:windows": "react-native bundle --platform windows --dev false --entry-file index.js --bundle-output windows/app/src/main/assets/index.windows.bundle --assets-dest windows/app/src/main/res"
+    "start": "react-native start",
+    "start:web": "ult-scripts start",
+    "start:ios": "react-native run-ios",
+    "start:macos": "node node_modules/react-native-macos/local-cli/cli.js start --use-react-native-macos",
+    "start:windows": "react-native run-windows",
+    "start:android": "react-native run-android"
   },
   "browserslist": {
     "production": ">0.2%, not dead, not op_mini all",
@@ -29,14 +34,13 @@
   "devDependencies": {
     "@babel/core": "^7.10.5",
     "@babel/runtime": "^7.10.5",
-    "@babel/plugin-proposal-decorators": "^7.10.5",
     "@babel/preset-env": "^7.10.4",
     "@react-native-community/cli": "^4.10.1",
     "@types/node": "^14.0.23",
     "@types/react": "^16.9.43",
     "cross-env": "^7.0.2",
     "metro-react-native-babel-preset": "^0.60.0",
-    "typescript": "^3.9.6",
+    "typescript": "^3.9.7",
     "ult-scripts": "^0.3.15"
   }
 }

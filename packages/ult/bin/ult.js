@@ -23,23 +23,23 @@ async function init() {
   try {
     console.log('Creating project, please wait...');
     await utils.npx(['--ignore-existing', 'react-native', 'init', name, '--template', tpl]);
-    console.log('Initializing Windows...');
+    console.log('Initializing Windows project...');
     await utils.npx(['react-native-windows-init', '--overwrite'], cwd);
-    console.log('Initializing MacOS...');
+    console.log('Initializing MacOS project...');
     await utils.npx(['react-native-macos-init'], cwd);
-    console.log('Patching files...');
+    console.log('Patching project files...\n');
     await utils.patch(name);
     // TODO: install pods if on macos
     console.log(chalk.green(`Successfully created ${name}!\n`));
     console.log(chalk.bold('1) Navigate to your project:'));
     console.log(`$ ${chalk.yellow(`cd ${name.toLowerCase()}`)}\n`);
     console.log(chalk.bold('2) Choose a command below:'));
-    console.log(`$ ${chalk.yellow('npm run start:web')}`);
-    console.log(`$ ${chalk.yellow('npm run start:ios')}`);
-    console.log(`$ ${chalk.yellow('npm run start:macos')}`);
-    console.log(`$ ${chalk.yellow('npm run start:windows')}`);
-    console.log(`$ ${chalk.yellow('npm run start:android')}`);
-    console.log(chalk.blue('\nFor more details, visit https://docs.ult.dev'));
+    console.log(`$ ${chalk.yellow('npm run web')}`);
+    console.log(`$ ${chalk.yellow('npm run ios')}`);
+    console.log(`$ ${chalk.yellow('npm run macos')}`);
+    console.log(`$ ${chalk.yellow('npm run windows')}`);
+    console.log(`$ ${chalk.yellow('npm run android')}`);
+    console.log(chalk.blue('\nFor more details, visit https://docs.ult.dev\n'));
   } catch (e) {
     console.log(chalk.red(`Failed to create project. (${e})`));
   }
