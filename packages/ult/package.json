@@ -1,6 +1,6 @@
 {
   "name": "ult",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "The Ultimate Dev Stack",
   "homepage": "https://ult.dev",
   "license": "MIT",
@@ -18,8 +18,8 @@
     "default": "node ./bin/ult.js"
   },
   "dependencies": {
-    "chalk": "^4.0.0",
-    "replace-in-file": "^6.0.0"
+    "chalk": "^4.1.0",
+    "replace-in-file": "^6.1.0"
   },
   "repository": {
     "url": "https://github.com/kat-tax/ult.git"

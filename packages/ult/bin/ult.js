@@ -1,18 +1,17 @@
 #!/usr/bin/env node
 
+const path = require('path');
 const chalk = require('chalk');
-const patch = require('../lib/patch');
-const native = require('../lib/native');
-const windows = require('../lib/windows');
-const macos = require('../lib/macos');
+const utils = require('../lib/utils');
 
 const args = process.argv.slice(2);
 const opts = args.find(e => e.slice(0,2) !== '--');
 const flag = args.find(e => e.slice(0,2) === '--');
-const template = flag ? flag.substr(2) : 'default';
 const name = opts ? opts.trim() : '';
+const cwd = path.resolve(process.cwd(), name.toLowerCase());
+const tpl = `ult-template-${flag ? flag.substr(2) : 'default'}`;
 
-async function main() {
+async function init() {
   if (!name)
     return console.log(chalk.red('Project name is missing. (e.g. npx ult Demo)'));
   if (name.match(/^[_\.]/))
@@ -23,28 +22,27 @@ async function main() {
     return console.log(chalk.red('Project name length cannot exceed 100 characters.'));
   try {
     console.log('Creating project, please wait...');
-    await native(name, template);
+    await utils.npx(['--ignore-existing', 'react-native', 'init', name, '--template', tpl]);
     console.log('Initializing Windows project...');
-    await windows(name, template);
+    await utils.npx(['react-native-windows-init', '--overwrite'], cwd);
     console.log('Initializing MacOS project...');
-    await macos(name, template);
-    console.log('Patching native templates...');
-    await patch(name, template);
+    await utils.npx(['react-native-macos-init'], cwd);
+    console.log('Patching project files...\n');
+    await utils.patch(name);
     // TODO: install pods if on macos
-    // console.log('Installing pods...');
-    console.log(`✔️ Successfully created ${name}!\n`);
+    console.log(chalk.green(`Successfully created ${name}!\n`));
     console.log(chalk.bold('1) Navigate to your project:'));
     console.log(`$ ${chalk.yellow(`cd ${name.toLowerCase()}`)}\n`);
     console.log(chalk.bold('2) Choose a command below:'));
-    console.log(`$ ${chalk.yellow('npm run start:web')}`);
-    console.log(`$ ${chalk.yellow('npm run start:ios')}`);
-    console.log(`$ ${chalk.yellow('npm run start:macos')}`);
-    console.log(`$ ${chalk.yellow('npm run start:windows')}`);
-    console.log(`$ ${chalk.yellow('npm run start:android')}`);
-    console.log(chalk.blue('\nFor more details, visit https://docs.ult.dev'));
+    console.log(`$ ${chalk.yellow('npm run web')}`);
+    console.log(`$ ${chalk.yellow('npm run ios')}`);
+    console.log(`$ ${chalk.yellow('npm run macos')}`);
+    console.log(`$ ${chalk.yellow('npm run windows')}`);
+    console.log(`$ ${chalk.yellow('npm run android')}`);
+    console.log(chalk.blue('\nFor more details, visit https://docs.ult.dev\n'));
   } catch (e) {
-    console.log(`❌ Failed to create project. (${e})>`);
+    console.log(chalk.red(`Failed to create project. (${e})`));
   }
 }
 
-main();
+init();
