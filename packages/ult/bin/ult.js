@@ -2,7 +2,7 @@
 
 const path = require('path');
 const chalk = require('chalk');
-const utils = require('../lib/utils');
+const utils = require('./utils');
 
 const args = process.argv.slice(2);
 const opts = args.find(e => e.slice(0,2) !== '--');
@@ -29,14 +29,14 @@ async function init() {
     await utils.npx(['react-native-windows-init', '--overwrite'], cwd);
     console.log('Initializing MacOS project...');
     await utils.npx(['react-native-macos-init'], cwd);
-    console.log('Patching project files...\n');
+    console.log('Patching project files...');
     await utils.patch(name);
     if (process.platform === 'darwin') {
-      console.log('Installing pods...\n');
+      console.log('Installing pods...');
       await utils.pod(name);
     }
     // Information
-    console.log(chalk.green(`Successfully created ${name}!\n`));
+    console.log(chalk.green(`\nSuccessfully created ${name}!\n`));
     console.log(chalk.bold('1) Navigate to your project:'));
     console.log(`$ ${chalk.yellow(`cd ${name.toLowerCase()}`)}\n`);
     console.log(chalk.bold('2) Choose a command below:'));
