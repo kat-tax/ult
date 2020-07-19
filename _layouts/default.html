@@ -504,6 +504,16 @@
           text-decoration: underline
       }
 
+      h3 {
+        font-size: 1rem;
+        margin-bottom: 1rem;
+        margin-top: 3rem;
+      }
+
+      h4 {
+        font-weight: 600;
+      }
+
       .btn {
           display: inline-block;
           margin-bottom: 1rem;
@@ -520,6 +530,7 @@
       @media screen and (max-width: 540px) {
           .btn {
               width: 100%;
+              margin-left: 0;
           }
       }
 
@@ -558,7 +569,7 @@
           display: flex;
           flex-direction: column;
           align-items: center;
-          word-wrap: break-word;
+          margin-bottom: 46px;
       }
 
       .main-content :first-child {
@@ -566,18 +577,19 @@
       }
 
       .main-content img {
-          max-width: 100%
+          margin-top: 46px !important;
       }
 
       .main-content h1,.main-content h2,.main-content h3,.main-content h4,.main-content h5,.main-content h6 {
           margin-top: 2rem;
-          margin-bottom: 1rem;
+          margin-bottom: 0;
           font-weight: normal;
           color: #159957
       }
 
       .main-content p {
-          margin-bottom: 1em
+          margin-top: 0;
+          margin-bottom: 0;
       }
 
       .main-content code {
