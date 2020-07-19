@@ -505,13 +505,14 @@
       }
 
       h3 {
-        font-size: 1rem;
-        margin-bottom: 1rem;
-        margin-top: 3rem;
+        font-size: 1rem !important;
+        margin-bottom: 1rem !important;
+        margin-top: 3rem !important;
+        font-weight: 600 !important;
       }
 
       h4 {
-        font-weight: 600;
+        font-weight: 600 !important;
       }
 
       .btn {
@@ -592,6 +593,13 @@
           margin-bottom: 0;
       }
 
+      .main-content p:nth-child(2),
+      .main-content p:nth-child(3),
+      .main-content p:nth-child(4),
+      .main-content p:nth-child(5) {
+        margin-top: 0.5rem !important;
+      }
+
       .main-content code {
           padding: 2px 4px;
           font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
@@ -659,7 +667,10 @@
       }
 
       .main-content ul,.main-content ol {
-          margin-top: 0
+        margin-top: 0;
+        padding-left: 0;
+        list-style: none;
+        text-align: center;
       }
 
       .main-content blockquote {
