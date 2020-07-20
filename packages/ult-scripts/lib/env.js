@@ -10,8 +10,8 @@ if (!NODE_ENV) {
 
 const dotenvFiles = [
   `${paths.dotenv}.${NODE_ENV}.local`,
-  `${paths.dotenv}.${NODE_ENV}`,
   NODE_ENV !== 'test' && `${paths.dotenv}.local`,
+  `${paths.dotenv}.${NODE_ENV}`,
   paths.dotenv,
 ].filter(Boolean);
 

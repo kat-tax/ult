@@ -19,13 +19,15 @@ function getModules() {
 
 // Helpers
 function getAdditionalModulePaths(options = {}) {
-  const baseUrl = options.baseUrl;
-  const baseUrlResolved = path.resolve(paths.appPath, baseUrl);
-  if (path.relative(paths.appNodeModules, baseUrlResolved) === '')
+  const path = options.baseUrl;
+  if (!path)
+    return '';
+  const pathResolved = path.resolve(paths.appPath, path);
+  if (path.relative(paths.appNodeModules, pathResolved) === '')
     return null;
-  if (path.relative(paths.appSrc, baseUrlResolved) === '')
+  if (path.relative(paths.appSrc, pathResolved) === '')
     return [paths.appSrc];
-  if (path.relative(paths.appPath, baseUrlResolved) === '')
+  if (path.relative(paths.appPath, pathResolved) === '')
     return null;
   throw new Error(chalk.red.bold("Your project's `baseUrl` can only be set to `src` or `node_modules`."));
 }
