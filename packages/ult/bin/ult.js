@@ -14,19 +14,17 @@ const tpl = `ult-template-${flag ? flag.substr(2) : 'default'}`;
 async function init() {
   // Validation
   if (!name)
-    return console.log(chalk.red('Project name is missing. (e.g. npx ult Demo)'));
-  if (name.match(/^[_\.]/))
-    return console.log(chalk.red('Project name should not start with . or _'));
-  if (name.match(/[~'!()*]/))
-    return console.log(chalk.red('Project name should not contain: ~ ( ) \' ! *'));
+    return console.log(chalk.red('Project name is missing (e.g. npx ult Demo)'));
   if (name.length > 100) 
-    return console.log(chalk.red('Project name length cannot exceed 100 characters.'));
+    return console.log(chalk.red('Project name cannot exceed 100 characters'));
+  if (!name.match(/^[a-zA-Z0-9]+$/))
+    return console.log(chalk.red('Project name should be alphanumeric'));
   // Installation
   try {
-    console.log('Creating project, please wait...');
-    await utils.npx(['--ignore-existing', 'react-native', 'init', name, '--template', tpl]);
+    console.log('Creating project, please wait...\n');
+    await utils.npx(['react-native', 'init', name, '--template', tpl]);
     console.log('Initializing Windows project...');
-    await utils.npx(['react-native-windows-init', '--overwrite'], cwd);
+    await utils.npx(['react-native-windows-init', '--overwrite', '--version', '0.62.2'], cwd);
     console.log('Initializing MacOS project...');
     await utils.npx(['react-native-macos-init'], cwd);
     console.log('Patching project files...');
@@ -48,7 +46,7 @@ async function init() {
     console.log(chalk.blue('\nFor more details, visit https://docs.ult.dev\n'));
   // Exception
   } catch (e) {
-    console.log(chalk.red(`Failed to create project. (${e})`));
+    console.log(chalk.red(`Failed to create project (${e})`));
   }
 }
 
