@@ -348,6 +348,7 @@ export class Image extends React.Component<Types.ImageProps, ImageState> {
         if (this.state.showImgTag) {
             optionalImg = (
                 <img
+                    loading="lazy"
                     style={ _styles.image as any }
                     src={ this.state.displayUrl }
                     alt={ this.props.accessibilityLabel }
