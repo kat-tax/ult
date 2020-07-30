@@ -41,6 +41,6 @@
     "cross-env": "^7.0.2",
     "metro-react-native-babel-preset": "^0.60.0",
     "typescript": "^3.9.7",
-    "ult-scripts": "^0.3.15"
+    "ult-scripts": "^0.3.17"
   }
 }
