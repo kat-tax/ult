@@ -22,7 +22,7 @@ async function init() {
   // Installation
   try {
     console.log('Creating project, please wait...\n');
-    await utils.npx(['react-native', 'init', name, '--template', tpl]);
+    await utils.npx(['react-native', 'init', name, '--template', tpl], undefined, true);
     console.log('Initializing Windows project...');
     await utils.npx(['react-native-windows-init', '--overwrite', '--version', '0.62.2'], cwd);
     console.log('Initializing MacOS project...');

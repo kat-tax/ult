@@ -1,16 +1,14 @@
 const path = require('path');
 const replace = require('replace-in-file');
 const spawn = require('child_process').spawn;
-const exit = (command, resolve, reject) => e => e === 0
-  ? resolve()
-  : reject(`${command}: code ${e}`);
+const exit = (cmd, res, rej) => e => e === 0 ? res() : rej(`${cmd}: code ${e}`);
 
 // Helper to run the "npx" cli tool
-function npx(args, cwd) {
+function npx(args, cwd, inherit) {
+  const cmd = process.platform === 'win32' ? 'npx.cmd' : 'npx';
   return new Promise((res, rej) => {
-    const child = spawn(process.platform === 'win32' ? 'npx.cmd' : 'npx', args, {cwd})
-    child.stdout.on('data', (data) => (console.log(data.toString())));
-    child.once('exit', exit(`npx ${args[0]}`, res, rej));
+    spawn(cmd, args, {cwd, stdio: inherit ? 'inherit' : undefined})
+      .once('exit', exit(`npx ${args[0]}`, res, rej));
   });
 };
 
@@ -18,7 +16,8 @@ function npx(args, cwd) {
 function pod(name) {
   const cwd = path.resolve(process.cwd(), name.toLowerCase(), 'ios');
   return new Promise((res, rej) => {
-    spawn('pod', ['install'], {cwd}).once('exit', exit('pod install', res, rej));
+    spawn('pod', ['install'], {cwd, stdio: 'inherit'})
+      .once('exit', exit('pod install', res, rej));
   });
 };
 
