@@ -35,7 +35,7 @@ module.exports = function(webpackEnv) {
   const clientEnv = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
   const hasSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
   const hasBugSnag = !!process.env.BUGSNAG_API_KEY;
-  const hasRefresh = clientEnv.raw.FAST_REFRESH;
+  const hasRefresh = false; // TOFIX: clientEnv.raw.FAST_REFRESH;
   const cacheIdentifier = getCacheIdentifier(
     isProd ? 'production' : isDev && 'development', [
       'babel-plugin-named-asset-import',

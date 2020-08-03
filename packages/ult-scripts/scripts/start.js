@@ -22,7 +22,6 @@ const paths = require('../config/paths');
 const isInteractive = process.stdout.isTTY;
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const react = require(require.resolve('react', {paths: [paths.appPath]}));
-const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 const createDevServerConfig = require('../config/server.config');
 const configFactory = require('../config/webpack.config');
 const getClientEnvironment = require('../lib/env');
@@ -67,10 +66,11 @@ checkBrowsers(paths.appPath, isInteractive)
     });
 
     const devServer = new WebpackDevServer(compiler, serverConfig);
+    const clientEnv = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
     devServer.listen(port, HOST, err => {
       if (err) return console.log(err);
       if (isInteractive) clearConsole();
-      if (env.raw.FAST_REFRESH && semver.lt(react.version, '16.10.0'))
+      if (clientEnv.raw.FAST_REFRESH && semver.lt(react.version, '16.10.0'))
         console.log(chalk.yellow(`Fast Refresh requires React 16.10 or higher. You are using React ${react.version}.`));
       console.log(chalk.cyan('Starting the development server...\n'));
       openBrowser(urls.localUrlForBrowser);
