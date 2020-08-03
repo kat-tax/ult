@@ -43,7 +43,7 @@ async function init() {
     console.log(`$ ${chalk.yellow('npm run macos')}`);
     console.log(`$ ${chalk.yellow('npm run windows')}`);
     console.log(`$ ${chalk.yellow('npm run android')}`);
-    console.log(chalk.blue('\nFor more details, visit https://docs.ult.dev\n'));
+    console.log(chalk.cyan('\nFor more details, visit https://docs.ult.dev\n'));
   // Exception
   } catch (e) {
     console.log(chalk.red(`Failed to create project (${e})`));
