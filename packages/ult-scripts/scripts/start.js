@@ -5,6 +5,7 @@ require('../lib/env');
 
 // Imports
 const fs = require('fs-extra');
+const semver = require('semver');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 
@@ -20,8 +21,11 @@ const openBrowser = require('react-dev-utils/openBrowser');
 const paths = require('../config/paths');
 const isInteractive = process.stdout.isTTY;
 const useYarn = fs.existsSync(paths.yarnLockFile);
-const configFactory = require('../config/webpack.config');
+const react = require(require.resolve('react', {paths: [paths.appPath]}));
+const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 const createDevServerConfig = require('../config/server.config');
+const configFactory = require('../config/webpack.config');
+const getClientEnvironment = require('../lib/env');
 
 // Verification
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
@@ -44,22 +48,30 @@ checkBrowsers(paths.appPath, isInteractive)
     const appName = require(paths.appPackageJson).name;
     const config = configFactory('development');
     const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
-    const tscCompileOnError = process.env.TSC_COMPILE_ON_ERROR === 'true';
     const urls = prepareUrls(protocol, HOST, port, paths.publicUrlOrPath.slice(0, -1));
-    const devSocket = {
-      warnings: warnings => devServer.sockWrite(devServer.sockets, 'warnings', warnings),
-      errors: errors => devServer.sockWrite(devServer.sockets, 'errors', errors),
-    };
-
-    const opts = {urls, config, appName, webpack, useYarn, devSocket, tscCompileOnError, useTypeScript: true};
-    const compiler = createCompiler(opts);
     const proxySetting = require(paths.appPackageJson).proxy;
     const proxyConfig = prepareProxy(proxySetting, paths.appPublic, paths.publicUrlOrPath);
     const serverConfig = createDevServerConfig(proxyConfig, urls.lanUrlForConfig);
+    const compiler = createCompiler({
+      urls,
+      config,
+      appName,
+      webpack,
+      useYarn,
+      useTypeScript: true,
+      tscCompileOnError: process.env.TSC_COMPILE_ON_ERROR === 'true',
+      devSocket: {
+        warnings: warnings => devServer.sockWrite(devServer.sockets, 'warnings', warnings),
+        errors: errors => devServer.sockWrite(devServer.sockets, 'errors', errors),
+      },
+    });
+
     const devServer = new WebpackDevServer(compiler, serverConfig);
     devServer.listen(port, HOST, err => {
       if (err) return console.log(err);
       if (isInteractive) clearConsole();
+      if (env.raw.FAST_REFRESH && semver.lt(react.version, '16.10.0'))
+        console.log(chalk.yellow(`Fast Refresh requires React 16.10 or higher. You are using React ${react.version}.`));
       console.log(chalk.cyan('Starting the development server...\n'));
       openBrowser(urls.localUrlForBrowser);
     });

@@ -188,6 +188,8 @@ module.exports = function(webpackEnv) {
       isDev && hasRefresh && new ReactRefreshWebpackPlugin({
         overlay: {
           entry: webpackDevClient,
+          module: require.resolve('react-dev-utils/refreshOverlayInterop'),
+          sockIntegration: false,
         },
       }),
       // https://github.com/danethurber/webpack-manifest-plugin#api
@@ -205,15 +207,10 @@ module.exports = function(webpackEnv) {
         },
       }),
       // https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin.GenerateSW#GenerateSW
-      isProd && new WorkboxWebpackPlugin.GenerateSW({
-        clientsClaim: true,
-        importWorkboxFrom: 'cdn',
-        exclude: [/\.map$/, /asset-manifest\.json$/],
-        navigateFallback: paths.publicUrlOrPath + 'index.html',
-        navigateFallbackBlacklist: [
-          new RegExp('^/_'),
-          new RegExp('/[^/?]+\\.[^/]+$'),
-        ],
+      isProd && fs.existsSync(paths.swSrc) && new WorkboxWebpackPlugin.InjectManifest({
+        swSrc: paths.swSrc,
+        dontCacheBustURLsMatching: /\.[0-9a-f]{8}\./,
+        exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE/],
       }),
       // https://docs.bugsnag.com/build-integrations/webpack/#build-reporter
       isProd && hasBugSnag && new BugsnagBuildReporterPlugin({

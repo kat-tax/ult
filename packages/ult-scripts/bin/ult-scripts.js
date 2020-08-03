@@ -8,7 +8,7 @@ const script = index === -1 ? args[0] : args[index];
 process.on('unhandledRejection', err => {throw err});
 
 if (['build', 'start'].includes(script)) {
-  const result = spawn.sync('node', index > 0 ? args.slice(0, index) : []
+  const result = spawn.sync(process.execPath, index > 0 ? args.slice(0, index) : []
     .concat(require.resolve('../scripts/' + script))
     .concat(args.slice(index + 1)), {stdio: 'inherit'});
   if (result.signal) {
