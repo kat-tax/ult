@@ -1,38 +1,31 @@
 {
   "name": "react-ult",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "Cross-platform abstraction layer for ULT based on ReactXP",
   "types": "dist/ReactXP.d.ts",
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "watch": "tsc --watch",
-    "lint": "eslint --ext .ts,.tsx src",
-    "lint:fix": "npm run lint -- --fix"
+    "watch": "tsc --watch"
   },
   "dependencies": {
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "prop-types": "^15.7.2",
     "rebound": "^0.1.0",
     "subscribableevent": "^1.0.1"
   },
   "peerDependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-native": "^0.61.5",
-    "react-native-windows": "^0.61.5"
+    "react": "16.9 - 16.13",
+    "react-dom": "16.9 - 16.13",
+    "react-native": "0.59 - 0.63",
+    "react-native-windows": "0.59 - 0.63"
   },
   "devDependencies": {
     "@types/lodash": "4.14.159",
     "@types/react": "16.9.45",
     "@types/react-dom": "16.9.8",
     "@types/react-native": "0.62.4",
-    "@typescript-eslint/eslint-plugin": "2.29.0",
-    "eslint": "6.8.0",
-    "eslint-config-skype": "1.6.0",
-    "eslint-plugin-import": "2.20.2",
-    "eslint-plugin-react": "7.19.0",
     "react": "^16.9.0",
-    "typescript": "3.8.3"
+    "typescript": "3.9.7"
   }
 }
