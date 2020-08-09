@@ -98,6 +98,7 @@ export abstract class GestureView extends GestureViewCommon {
                 ref={ this._setContainerRef }
                 onMouseDown={ this._onMouseDown }
                 onClick={ this._onClick }
+                onDoubleClick={ this._onDoubleClick }
                 onWheel={ this._onWheel }
                 onTouchStart={ this._onTouchStart }
                 onTouchMove={ this._onTouchMove }
@@ -289,6 +290,16 @@ export abstract class GestureView extends GestureViewCommon {
             // timer so we can determine whether the current tap is a single or double.
             this._reportDelayedTap();
             this._startDoubleTapTimer(gsState);
+        }
+    };
+
+    private _onDoubleClick = (e: React.MouseEvent<any>) => {
+        if (this.props.onDoubleClick) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const tapEvent = this._mouseEventToTapGestureState(e);
+            this.props.onDoubleClick(tapEvent);
         }
     };
 

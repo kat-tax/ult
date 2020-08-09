@@ -780,6 +780,7 @@ export interface GestureViewProps extends CommonStyledProps<ViewStyleRuleSet, RX
     onPanHorizontal?: (gestureState: PanGestureState) => void;
     onTap?: (gestureState: TapGestureState) => void;
     onDoubleTap?: (gestureState: TapGestureState) => void;
+    onDoubleClick?: (gestureState: TapGestureState) => void;
     onLongPress?: (gestureState: TapGestureState) => void;
     onContextMenu?: (gestureState: TapGestureState) => void;
 
