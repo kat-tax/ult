@@ -1,6 +1,6 @@
 {
   "name": "ult",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "The Ultimate Dev Stack",
   "homepage": "https://ult.dev",
   "license": "MIT",
@@ -15,7 +15,7 @@
     "ult": "./bin/ult.js"
   },
   "engines": {
-    "node": "^10.12.0 || >=12.0.0"
+    "node": ">=12.0.0"
   },
   "scripts": {
     "default": "node ./bin/ult.js"
