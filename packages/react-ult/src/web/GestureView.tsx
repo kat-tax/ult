@@ -98,7 +98,6 @@ export abstract class GestureView extends GestureViewCommon {
                 ref={ this._setContainerRef }
                 onMouseDown={ this._onMouseDown }
                 onClick={ this._onClick }
-                onDoubleClick={ this._onDoubleClick }
                 onWheel={ this._onWheel }
                 onTouchStart={ this._onTouchStart }
                 onTouchMove={ this._onTouchMove }
@@ -109,6 +108,7 @@ export abstract class GestureView extends GestureViewCommon {
                 role={ ariaRole }
                 aria-label={ this.props.accessibilityLabel }
                 aria-hidden={ isAriaHidden }
+                onDoubleClick={ this.props.onDoubleClick ? this._sendDoubleClickEvent : undefined }
                 onContextMenu={ this.props.onContextMenu ? this._sendContextMenuEvent : undefined }
                 data-test-id={ this.props.testId }
             >
@@ -293,7 +293,7 @@ export abstract class GestureView extends GestureViewCommon {
         }
     };
 
-    private _onDoubleClick = (e: React.MouseEvent<any>) => {
+    private _sendDoubleClickEvent = (e: React.MouseEvent<any>) => {
         if (this.props.onDoubleClick) {
             e.preventDefault();
             e.stopPropagation();
