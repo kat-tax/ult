@@ -280,7 +280,7 @@ export class Image extends React.Component<Types.ImageProps, ImageState> {
         const withCredentials = props.headers
             && Object.keys(props.headers).some(header => header.toLowerCase() === 'origin');
 
-        if (window.fetch) {
+        if (window.fetch as any) {
             const headers = new Headers();
 
             if (props.headers) {

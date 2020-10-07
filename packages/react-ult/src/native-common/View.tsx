@@ -298,13 +298,6 @@ export class View extends ViewBase<RX.Types.ViewProps, RX.Types.Stateless, RN.Vi
             delete this._mixin_componentDidMount;
             delete this._mixin_componentWillUnmount;
 
-            delete this.touchableHandlePress;
-            delete this.touchableHandleLongPress;
-            delete this.touchableGetPressRectOffset;
-            delete this.touchableHandleActivePressIn;
-            delete this.touchableHandleActivePressOut;
-            delete this.touchableGetHighlightDelayMS;
-
             this._mixinIsApplied = false;
         }
     }

@@ -215,7 +215,7 @@ export class Styles extends RX.Styles {
         }
 
         if (cacheStyle) {
-            return RN.StyleSheet.create({ _style: adaptedRuleSet })._style;
+            return RN.StyleSheet.create({ _style: adaptedRuleSet as any })._style as any;
         }
 
         return AppConfig.isDevelopmentMode() ? Object.freeze(adaptedRuleSet) : adaptedRuleSet;
