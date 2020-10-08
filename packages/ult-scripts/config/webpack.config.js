@@ -1,6 +1,7 @@
 // Imports
 const path = require('path');
 const fs = require('fs-extra');
+const semver = require('semver');
 const webpack = require('webpack');
 const resolve = require('resolve');
 
@@ -28,6 +29,7 @@ const getClientEnvironment = require('../lib/env');
 const modules = require('../lib/modules');
 const paths = require('./paths');
 const app = require(paths.appPackageJson);
+const react = require(require.resolve('react', {paths: [paths.appPath]}));
 
 // Config
 module.exports = function(webpackEnv) {
@@ -126,7 +128,16 @@ module.exports = function(webpackEnv) {
                 cacheDirectory: true,
                 cacheCompression: false,
                 customize: require.resolve('babel-preset-react-app/webpack-overrides'),
-                presets: [require.resolve('babel-preset-react-app')],
+                presets: [
+                  [
+                    require.resolve('babel-preset-react-app'),
+                    {
+                      runtime: semver.gte(react.version, '17.0.0-alpha.0')
+                        ? 'automatic'
+                        : 'classic',
+                    },
+                  ],
+                ],
                 plugins: [
                   [
                     require.resolve('babel-plugin-named-asset-import'),
