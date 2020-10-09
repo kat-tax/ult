@@ -3,7 +3,6 @@
 const path = require('path');
 const chalk = require('chalk');
 const utils = require('./utils');
-
 const args = process.argv.slice(2);
 const opts = args.find(e => e.slice(0,2) !== '--');
 const flag = args.find(e => e.slice(0,2) === '--');
@@ -24,9 +23,9 @@ async function init() {
     console.log('Creating project, please wait...\n');
     await utils.npx(['react-native', 'init', name, '--template', tpl], undefined, true);
     console.log('Initializing Windows project...');
-    await utils.npx(['react-native-windows-init', '--overwrite', '--version', '0.62.2'], cwd);
+    await utils.npx(['react-native-windows-init', '--overwrite'], cwd);
     console.log('Initializing MacOS project...');
-    await utils.npx(['react-native-macos-init', '--overwrite', '--prerelease'], cwd);
+    await utils.npx(['react-native-macos-init', '--overwrite'], cwd);
     console.log('Patching project files...');
     await utils.patch(name);
     if (process.platform === 'darwin') {
