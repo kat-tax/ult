@@ -76,6 +76,8 @@ export interface WebViewProps extends RXTypes.CommonStyledProps<RXTypes.ViewStyl
     allowsInlineMediaPlayback?: boolean;
 
     // Native only
+    cacheEnabled?: boolean;
+    sharedCookiesEnabled?: boolean;
     startInLoadingState?: boolean;
     domStorageEnabled?: boolean;
     onShouldStartLoadWithRequest?: (shouldStartLoadEvent: WebViewShouldStartLoadEvent) => boolean;

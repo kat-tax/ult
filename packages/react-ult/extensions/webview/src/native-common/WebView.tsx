@@ -42,6 +42,8 @@ export class WebView extends React.Component<Types.WebViewProps, RX.Types.Statel
                 ref={ this._onMount }
                 style={ styles }
                 source={ source }
+                cacheEnabled={ this.props.cacheEnabled }
+                sharedCookiesEnabled={ this.props.sharedCookiesEnabled }
                 startInLoadingState={ this.props.startInLoadingState }
                 javaScriptEnabled={ this.props.javaScriptEnabled }
                 allowsInlineMediaPlayback={ this.props.allowsInlineMediaPlayback }
