@@ -2,7 +2,17 @@ const fs = require('fs');
 const path = require('path');
 
 const appDirectory = fs.realpathSync(process.cwd());
-const moduleFileExtensions = ['ts', 'tsx', 'js', 'jsx', 'json'];
+const moduleFileExtensions = [
+  'js',
+  'web.js',
+  'jsx',
+  'web.jsx',
+  'ts',
+  'web.ts',
+  'tsx',
+  'web.tsx',
+  'json',
+];
 
 const getPublicUrlOrPath = require('react-dev-utils/getPublicUrlOrPath');
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);

@@ -1,7 +1,6 @@
 // Imports
 const path = require('path');
 const fs = require('fs-extra');
-const semver = require('semver');
 const webpack = require('webpack');
 const resolve = require('resolve');
 
@@ -13,7 +12,8 @@ const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpack
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const webpackDevClient = require.resolve('react-dev-utils/webpackHotDevClient');
+const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
+const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
 
 // Plugins
 const TerserPlugin = require('terser-webpack-plugin');
@@ -29,7 +29,16 @@ const getClientEnvironment = require('../lib/env');
 const modules = require('../lib/modules');
 const paths = require('./paths');
 const app = require(paths.appPackageJson);
-const react = require(require.resolve('react', {paths: [paths.appPath]}));
+const hasJsxRuntime = (() => {
+  if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true')
+    return false;
+  try {
+    require.resolve('react/jsx-runtime');
+    return true;
+  } catch (e) {
+    return false;
+  }
+})();
 
 // Config
 module.exports = function(webpackEnv) {
@@ -52,7 +61,7 @@ module.exports = function(webpackEnv) {
   return {
     // https://webpack.js.org/configuration/#options
     mode: isProd ? 'production' : isDev && 'development',
-    entry: isDev && !hasRefresh ? [webpackDevClient, paths.appIndexJs] : paths.appIndexJs,
+    entry: isDev && !hasRefresh ? [webpackDevClientEntry, paths.appIndexJs] : paths.appIndexJs,
     devtool: isProd ? hasSourceMap ? 'source-map' : false : isDev && 'cheap-module-source-map',
     performance: false,
     bail: isProd,
@@ -97,12 +106,21 @@ module.exports = function(webpackEnv) {
       modules: ['node_modules', paths.appNodeModules].concat(modules.additionalModulePaths || []),
       extensions: paths.moduleFileExtensions.map(ext => `.${ext}`),
       alias: {
-        ...(isProdProfile && {'react-dom$': 'react-dom/profiling', 'scheduler/tracing': 'scheduler/tracing-profiling'}),
+        // React Native Web support
+        'react-native': 'react-native-web',
+        // ReactDevTools profiling
+        ...(isProdProfile && {
+          'react-dom$': 'react-dom/profiling',
+          'scheduler/tracing': 'scheduler/tracing-profiling',
+        }),
         ...(modules.webpackAliases || {}),
       },
       plugins: [
         PnpWebpackPlugin,
-        new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson]),
+        new ModuleScopePlugin(paths.appSrc, [
+          paths.appPackageJson,
+          reactRefreshOverlayEntry,
+        ]),
       ],
     },
     resolveLoader: {
@@ -130,11 +148,8 @@ module.exports = function(webpackEnv) {
                 customize: require.resolve('babel-preset-react-app/webpack-overrides'),
                 presets: [
                   [
-                    require.resolve('babel-preset-react-app'),
-                    {
-                      runtime: semver.gte(react.version, '17.0.0-alpha.0')
-                        ? 'automatic'
-                        : 'classic',
+                    require.resolve('babel-preset-react-app'), {
+                      runtime: hasJsxRuntime ? 'automatic' : 'classic',
                     },
                   ],
                 ],
@@ -200,8 +215,8 @@ module.exports = function(webpackEnv) {
       // https://github.com/pmmmwh/react-refresh-webpack-plugin#options
       isDev && hasRefresh && new ReactRefreshWebpackPlugin({
         overlay: {
-          entry: webpackDevClient,
-          module: require.resolve('react-dev-utils/refreshOverlayInterop'),
+          entry: webpackDevClientEntry,
+          module: reactRefreshOverlayEntry,
           sockIntegration: false,
         },
       }),
