@@ -42,7 +42,7 @@ After everything installs, use `npm run [task]`
  - [TypeScript](https://www.typescriptlang.org/) (language)
  - [React](https://reactjs.org/) (view abstraction)
  - [Metro](https://facebook.github.io/metro/) & [Webpack](https://webpack.js.org/) (bundlers)
- - [RN](https://reactnative.dev/) + [Web](https://necolas.github.io/react-native-web) & [Windows](https://microsoft.github.io/react-native-windows/) (bridges)
+ - [RN](https://reactnative.dev/) + [Windows](https://microsoft.github.io/react-native-windows/) & [Web](https://necolas.github.io/react-native-web) (bridges)
 
 ### Bring your own state!
   - [Redux](https://redux.js.org/)
