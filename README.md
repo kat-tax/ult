@@ -53,7 +53,7 @@ After everything installs, use `npm run [task]`
 
 ### Maybe you want a database?
   - [WatermelonDB](https://watermelondb.now.sh/)
-  - [CouchDB](https://couchdb.apache.org/)
+  - [PouchDB](https://pouchdb.com/)
   - [RxDB](https://rxdb.info/)
   - [GUN](https://gun.eco/)
   - [OrbitDB](https://orbitdb.org/)
