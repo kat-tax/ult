@@ -52,7 +52,7 @@ After everything installs, use `npm run [task]`
   - [MobX](https://mobx.js.org/)
 
 ### Maybe you want a database?
-  - [WatermelonDB](https://watermelondb.now.sh/)
+  - [WatermelonDB](https://nozbe.github.io/WatermelonDB/)
   - [PouchDB](https://pouchdb.com/)
   - [RxDB](https://rxdb.info/)
   - [GUN](https://gun.eco/)
