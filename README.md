@@ -29,22 +29,7 @@ After everything installs, use `npm run [task]`
 | npm run build:windows | Build a production Windows app                      |
 | npm run build:android | Build a production Android app                      |
 
-### Technologies
-
-- [TypeScript](https://www.typescriptlang.org/) *(language)*
-- [Metro](https://facebook.github.io/metro/) *(native bundler)*
-- [Webpack](https://webpack.js.org/) *(web bundler)*
-- [React](https://reactjs.org/) *(view abstraction)*
-- [ReactXP](https://microsoft.github.io/reactxp/) *(compatibility layer)*
-- [ReactNative](https://reactnative.dev/) & [RNW](https://microsoft.github.io/react-native-windows/) *(native bridge)*
-- **Bring your own state library!**
-  - [Redux](https://redux.js.org/)
-  - [MobX](https://mobx.js.org/)
-  - [XState](https://xstate.js.org/)
-  - [Refract](https://refract.js.org/)
-
 ### Features
-
 - ⚛ Native cross-platform UI
 - ♾ Flexible architecture
 - ♿ Great accessibility
@@ -52,6 +37,26 @@ After everything installs, use `npm run [task]`
 - ✨ Typed styles
 - 🎥 Animations
 - 🧩 Extensions
+
+### Technologies
+ - [TypeScript](https://www.typescriptlang.org/) (language)
+ - [React](https://reactjs.org/) (view abstraction)
+ - [Metro](https://facebook.github.io/metro/) & [Webpack](https://webpack.js.org/) (bundlers)
+ - [RN](https://reactnative.dev/) + [Web](https://necolas.github.io/react-native-web) & [Windows](https://microsoft.github.io/react-native-windows/) (bridges)
+
+### Bring your own state!
+  - [Redux](https://redux.js.org/)
+  - [Recoil](https://recoiljs.org/)
+  - [Refract](https://refract.js.org/)
+  - [XState](https://xstate.js.org/)
+  - [MobX](https://mobx.js.org/)
+
+### Maybe you want a database?
+  - [WatermelonDB](https://watermelondb.now.sh/)
+  - [CouchDB](https://couchdb.apache.org/)
+  - [RxDB](https://rxdb.info/)
+  - [GUN](https://gun.eco/)
+  - [OrbitDB](https://orbitdb.org/)
 
 ### Community
 
