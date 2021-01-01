@@ -18,11 +18,10 @@ const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlay
 // Plugins
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
-const {BugsnagBuildReporterPlugin, BugsnagSourceMapUploaderPlugin} = require('webpack-bugsnag-plugins');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
-const PnpWebpackPlugin = require('pnp-webpack-plugin');
+const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const {BugsnagBuildReporterPlugin, BugsnagSourceMapUploaderPlugin} = require('webpack-bugsnag-plugins');
 
 // Helpers
 const getClientEnvironment = require('../lib/env');
@@ -61,19 +60,24 @@ module.exports = function(webpackEnv) {
   return {
     // https://webpack.js.org/configuration/#options
     mode: isProd ? 'production' : isDev && 'development',
-    entry: isDev && !hasRefresh ? [webpackDevClientEntry, paths.appIndexJs] : paths.appIndexJs,
-    devtool: isProd ? hasSourceMap ? 'source-map' : false : isDev && 'cheap-module-source-map',
+    entry: isDev && !hasRefresh
+      ? [webpackDevClientEntry, paths.appIndexJs]
+      : paths.appIndexJs,
+    devtool: isProd
+      ? hasSourceMap
+        ? 'source-map'
+        : false
+      : isDev && 'cheap-module-source-map',
     performance: false,
     bail: isProd,
     output: {
       globalObject: 'this',
-      futureEmitAssets: true,
-      jsonpFunction: `webpackJsonp${app.name}`,
+      chunkLoadingGlobal: `webpackJsonp${app.name}`,
       publicPath: paths.publicUrlOrPath,
       pathinfo: isDev,
       path: isProd
         ? paths.appBuild
-        : undefined,
+        : '/',
       filename: isProd
         ? 'static/js/[name].[contenthash:8].js'
         : isDev && 'static/js/bundle.js',
@@ -90,7 +94,6 @@ module.exports = function(webpackEnv) {
       minimize: isProd,
       minimizer: [
         new TerserPlugin({
-          sourceMap: hasSourceMap,
           terserOptions: {
             parse: {ecma: 8},
             mangle: {safari10: true},
@@ -116,16 +119,10 @@ module.exports = function(webpackEnv) {
         ...(modules.webpackAliases || {}),
       },
       plugins: [
-        PnpWebpackPlugin,
         new ModuleScopePlugin(paths.appSrc, [
           paths.appPackageJson,
           reactRefreshOverlayEntry,
         ]),
-      ],
-    },
-    resolveLoader: {
-      plugins: [
-        PnpWebpackPlugin.moduleLoader(module),
       ],
     },
     module: {
@@ -221,7 +218,7 @@ module.exports = function(webpackEnv) {
         },
       }),
       // https://github.com/danethurber/webpack-manifest-plugin#api
-      new ManifestPlugin({
+      new WebpackManifestPlugin({
         fileName: 'asset-manifest.json',
         publicPath: paths.publicUrlOrPath,
         generate: (seed, files, entrypoints) => {
@@ -239,6 +236,7 @@ module.exports = function(webpackEnv) {
         swSrc: paths.swSrc,
         dontCacheBustURLsMatching: /\.[0-9a-f]{8}\./,
         exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE/],
+        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
       }),
       // https://docs.bugsnag.com/build-integrations/webpack/#build-reporter
       isProd && hasBugSnag && new BugsnagBuildReporterPlugin({
@@ -273,15 +271,15 @@ module.exports = function(webpackEnv) {
         ],
       }),
     ].filter(Boolean),
-    node: {
-      module: 'empty',
-      dgram: 'empty',
-      dns: 'mock',
-      fs: 'empty',
-      http2: 'empty',
-      net: 'empty',
-      tls: 'empty',
-      child_process: 'empty',
-    },
+    // node: {
+    //   module: 'empty',
+    //   dgram: 'empty',
+    //   dns: 'mock',
+    //   fs: 'empty',
+    //   http2: 'empty',
+    //   net: 'empty',
+    //   tls: 'empty',
+    //   child_process: 'empty',
+    // },
   };
 };

@@ -1,7 +1,7 @@
 {
   "name": "ult-scripts",
   "description": "Configuration and scripts for ULT",
-  "version": "1.0.8",
+  "version": "1.0.16",
   "license": "MIT",
   "types": "./lib/ult.d.ts",
   "bin": {
@@ -28,18 +28,17 @@
     "dotenv-expand": "5.1.0",
     "file-loader": "6.2.0",
     "fs-extra": "^9.0.1",
-    "html-webpack-plugin": "4.5.0",
-    "pnp-webpack-plugin": "1.6.4",
+    "html-webpack-plugin": "5.0.0-alpha.17",
     "react-dev-utils": "^11.0.1",
     "react-refresh": "^0.9.0",
     "resolve": "1.19.0",
-    "terser-webpack-plugin": "4.2.3",
+    "terser-webpack-plugin": "5.0.3",
     "ts-pnp": "1.2.0",
-    "webpack": "4.44.2",
+    "webpack": "5.11.1",
     "webpack-bugsnag-plugins": "^1.6.0",
     "webpack-dev-server": "3.11.1",
-    "webpack-manifest-plugin": "2.2.0",
-    "workbox-webpack-plugin": "5.1.4"
+    "webpack-manifest-plugin": "3.0.0",
+    "workbox-webpack-plugin": "6.0.2"
   },
   "devDependencies": {
     "react": "17.0.1",
