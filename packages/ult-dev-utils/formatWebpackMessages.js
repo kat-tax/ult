@@ -14,23 +14,8 @@ function isLikelyASyntaxError(message) {
 }
 
 // Cleans up webpack error messages.
-function formatMessage(messageOrMessageMetadata) {
-  let moduleName;
-  let message;
-  if (typeof messageOrMessageMetadata === 'string') {
-    message = messageOrMessageMetadata;
-  } else {
-    if (messageOrMessageMetadata.moduleName) {
-      // Clean up file name
-      moduleName = chalk.inverse(
-        messageOrMessageMetadata.moduleName.replace(/^(.*) \d+:\d+-\d+$/, '$1')
-      );
-    }
-
-    message = messageOrMessageMetadata.message;
-  }
-
-  let lines = [moduleName, ...message.split('\n')].filter(Boolean);
+function formatMessage(message) {
+  let lines = message.split('\n');
 
   // Strip webpack-added headers off errors/warnings
   // https://github.com/webpack/webpack/blob/master/lib/ModuleError.js
@@ -76,6 +61,8 @@ function formatMessage(messageOrMessageMetadata) {
   if (lines.length > 2 && lines[1].trim() === '') {
     lines.splice(1, 1);
   }
+  // Clean up file name
+  lines[0] = lines[0].replace(/^(.*) \d+:\d+-\d+$/, '$1');
 
   // TODO: Fix ModuleNotFoundPlugin so its errors get formatted correctly.
   // TODO: Fix ModuleScopePlugin so its errors get formatted correctly.
@@ -108,13 +95,6 @@ function formatMessage(messageOrMessageMetadata) {
   ); // at ... ...:x:y
   message = message.replace(/^\s*at\s<anonymous>(\n|$)/gm, ''); // at <anonymous>
   lines = message.split('\n');
-
-  // Remove the require stack of a loader.
-  if (lines.find(line => line.indexOf('Require stack:') !== -1)) {
-    lines = lines.filter(
-      line => line !== 'Require stack:' && /- [.\w/-]+/.test(line) === false
-    );
-  }
 
   // Remove duplicated newlines
   lines = lines.filter(

@@ -102,10 +102,8 @@ class ModuleNotFoundPlugin {
       register(tap) {
         if (
           !(
-            tap.name === 'MultiEntryPlugin' ||
-            tap.name === 'SingleEntryPlugin' ||
-            tap.name === 'EntryPlugin'
-          )
+            tap.name === 'MultiEntryPlugin'
+            || tap.name === 'SingleEntryPlugin')
         ) {
           return tap;
         }
