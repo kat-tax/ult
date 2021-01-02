@@ -35,7 +35,6 @@ function formatMessage(message) {
   });
 
   message = lines.join('\n');
-
   // Smoosh syntax errors (commonly found in CSS)
   message = message.replace(
     /SyntaxError\s+\((\d+):(\d+)\)\s*(.+?)\n/g,
@@ -54,7 +53,6 @@ function formatMessage(message) {
     /^.*export '(.+?)' \(imported as '(.+?)'\) was not found in '(.+?)'.*$/gm,
     `Attempted import error: '$1' is not exported from '$3' (imported as '$2').`
   );
-
   lines = message.split('\n');
 
   // Remove leading newline
@@ -63,9 +61,6 @@ function formatMessage(message) {
   }
   // Clean up file name
   lines[0] = lines[0].replace(/^(.*) \d+:\d+-\d+$/, '$1');
-
-  // TODO: Fix ModuleNotFoundPlugin so its errors get formatted correctly.
-  // TODO: Fix ModuleScopePlugin so its errors get formatted correctly.
 
   // Cleans up verbose "module not found" messages for files and packages.
   if (lines[1] && lines[1].indexOf('Module not found: ') === 0) {

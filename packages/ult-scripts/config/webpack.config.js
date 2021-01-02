@@ -18,10 +18,11 @@ const reactRefreshOverlayEntry = require.resolve('ult-dev-utils/refreshOverlayIn
 // Plugins
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const {BugsnagBuildReporterPlugin, BugsnagSourceMapUploaderPlugin} = require('webpack-bugsnag-plugins');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 // Helpers
 const getClientEnvironment = require('../lib/env');
@@ -60,7 +61,6 @@ module.exports = function(webpackEnv) {
   return {
     // https://webpack.js.org/configuration/#options
     mode: isProd ? 'production' : isDev && 'development',
-    chunkLoadingGlobal: `webpackChunk${app.name}`,
     entry: isDev && !hasRefresh
       ? [
         webpackDevClientEntry,
@@ -76,7 +76,9 @@ module.exports = function(webpackEnv) {
     bail: isProd,
     output: {
       globalObject: 'this',
-      path: paths.appBuild,
+      futureEmitAssets: true,
+      jsonpFunction: `webpackJsonp${app.name}`,
+      path: isProd ? paths.appBuild : undefined,
       publicPath: paths.publicUrlOrPath,
       pathinfo: isDev,
       filename: isProd
@@ -96,6 +98,7 @@ module.exports = function(webpackEnv) {
       minimizer: [
         new TerserPlugin({
           terserOptions: {
+            sourceMap: hasSourceMap,
             parse: {ecma: 8},
             mangle: {safari10: true},
             output: {ecma: 5, comments: false, ascii_only: true},
@@ -112,48 +115,6 @@ module.exports = function(webpackEnv) {
       alias: {
         // React Native Web support
         'react-native': 'react-native-web',
-        // Polyfill Node bindings
-        // See https://github.com/webpack/webpack/pull/8460
-        // See https://github.com/webpack/node-libs-browser/blob/master/index.js
-        assert: 'assert',
-        buffer: 'buffer',
-        child_process: path.resolve(path.join(__dirname, 'mocks/empty')),
-        cluster: path.resolve(path.join(__dirname, 'mocks/empty')),
-        console: 'console-browserify',
-        constants: 'constants-browserify',
-        crypto: 'crypto-browserify',
-        dgram: path.resolve(path.join(__dirname, 'mocks/empty')),
-        dns: path.resolve(path.join(__dirname, 'mocks/dns')),
-        domain: 'domain-browser',
-        events: 'events',
-        fs: path.resolve(path.join(__dirname, 'mocks/empty')),
-        http: 'stream-http',
-        http2: path.resolve(path.join(__dirname, 'mocks/empty')),
-        https: 'https-browserify',
-        module: path.resolve(path.join(__dirname, 'mocks/empty')),
-        net: path.resolve(path.join(__dirname, 'mocks/empty')),
-        os: 'os-browserify/browser.js',
-        path: 'path-browserify',
-        punycode: 'punycode',
-        process: 'process/browser.js',
-        querystring: 'querystring-es3',
-        readline: path.resolve(path.join(__dirname, 'mocks/empty')),
-        repl: path.resolve(path.join(__dirname, 'mocks/empty')),
-        stream: 'stream-browserify',
-        _stream_duplex: 'readable-stream/duplex.js',
-        _stream_passthrough: 'readable-stream/passthrough.js',
-        _stream_readable: 'readable-stream/readable.js',
-        _stream_transform: 'readable-stream/transform.js',
-        _stream_writable: 'readable-stream/writable.js',
-        string_decoder: 'string_decoder',
-        sys: 'util/util.js',
-        timers: 'timers-browserify',
-        tls: path.resolve(path.join(__dirname, 'mocks/empty')),
-        tty: 'tty-browserify',
-        url: 'url',
-        util: 'util/util.js',
-        vm: 'vm-browserify',
-        zlib: 'browserify-zlib',
         // ReactDevTools profiling
         ...(isProdProfile && {
           'react-dom$': 'react-dom/profiling',
@@ -162,16 +123,22 @@ module.exports = function(webpackEnv) {
         ...(modules.webpackAliases || {}),
       },
       plugins: [
+        PnpWebpackPlugin,
         new ModuleScopePlugin(paths.appSrc, [
           paths.appPackageJson,
-          // reactRefreshOverlayEntry,
+          reactRefreshOverlayEntry,
         ]),
+      ],
+    },
+    resolveLoader: {
+      plugins: [
+        PnpWebpackPlugin.moduleLoader(module),
       ],
     },
     module: {
       strictExportPresence: true,
       rules: [
-        {type: 'javascript/auto', parser: {requireEnsure: false}},
+        { parser: { requireEnsure: false } },
         {
           oneOf: [
             {
@@ -225,7 +192,6 @@ module.exports = function(webpackEnv) {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
             },
-            {test: /\.json$/, loader: require.resolve('json-loader')},
             // ** STOP ** Are you adding a new loader?
             // Make sure to add the new loader(s) before the "file" loader.
           ],
@@ -233,7 +199,6 @@ module.exports = function(webpackEnv) {
       ],
     },
     plugins: [
-      new webpack.ProvidePlugin({process: 'process/browser.js', Buffer: ['buffer', 'Buffer']}),
       // https://github.com/jantimon/html-webpack-plugin#options
       new HtmlWebpackPlugin(Object.assign({}, {inject: true, template: paths.appHtml}, isProd ? {
         minify: {
@@ -316,5 +281,15 @@ module.exports = function(webpackEnv) {
         ],
       }),
     ].filter(Boolean),
+    node: {
+      module: 'empty',
+      dgram: 'empty',
+      dns: 'mock',
+      fs: 'empty',
+      http2: 'empty',
+      net: 'empty',
+      tls: 'empty',
+      child_process: 'empty',
+    },
   };
 };

@@ -11,7 +11,7 @@
 const {
   dismissRuntimeErrors,
   reportRuntimeError,
-} = require('ult-error-overlay');
+} = require('react-error-overlay');
 
 module.exports = {
   clearRuntimeErrors: dismissRuntimeErrors,

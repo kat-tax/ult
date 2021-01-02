@@ -1,6 +1,6 @@
 {
   "name": "ult-dev-utils",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": "MIT",
   "description": "Webpack utilities used by ULT",
   "repository": {
@@ -69,10 +69,10 @@
     "open": "^7.3.0",
     "pkg-up": "3.1.0",
     "prompts": "2.4.0",
+    "react-error-overlay": "^6.0.8",
     "recursive-readdir": "2.2.2",
     "shell-quote": "1.7.2",
     "strip-ansi": "6.0.0",
-    "text-table": "0.2.0",
-    "ult-error-overlay": "^1.0.0"
+    "text-table": "0.2.0"
   }
 }
