@@ -10,15 +10,15 @@ const webpack = require('webpack');
 const bfj = require('bfj');
 
 // React Dev Utils
-const chalk = require('react-dev-utils/chalk');
-const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
+const chalk = require('ult-dev-utils/chalk');
+const FileSizeReporter = require('ult-dev-utils/FileSizeReporter');
 const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
 const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild;
-const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
-const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
-const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
-const printBuildError = require('react-dev-utils/printBuildError');
-const {checkBrowsers} = require('react-dev-utils/browsersHelper');
+const printHostingInstructions = require('ult-dev-utils/printHostingInstructions');
+const formatWebpackMessages = require('ult-dev-utils/formatWebpackMessages');
+const checkRequiredFiles = require('ult-dev-utils/checkRequiredFiles');
+const printBuildError = require('ult-dev-utils/printBuildError');
+const {checkBrowsers} = require('ult-dev-utils/browsersHelper');
 
 // Config
 const paths = require('../config/paths');

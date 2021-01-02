@@ -14,7 +14,7 @@ const moduleFileExtensions = [
   'json',
 ];
 
-const getPublicUrlOrPath = require('react-dev-utils/getPublicUrlOrPath');
+const getPublicUrlOrPath = require('ult-dev-utils/getPublicUrlOrPath');
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
 const resolveModule = (resolve, path) => {
