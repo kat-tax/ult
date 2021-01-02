@@ -12,8 +12,8 @@ const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpack
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
-const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
-const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
+// TODO: const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
+// TODO: const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
 
 // Plugins
 const TerserPlugin = require('terser-webpack-plugin');
@@ -61,7 +61,12 @@ module.exports = function(webpackEnv) {
     // https://webpack.js.org/configuration/#options
     mode: isProd ? 'production' : isDev && 'development',
     entry: isDev && !hasRefresh
-      ? [webpackDevClientEntry, paths.appIndexJs]
+      ? [
+        require.resolve('webpack-dev-server/client') + '?/',
+        require.resolve('webpack/hot/dev-server'),
+        // TODO: webpackDevClientEntry,
+        paths.appIndexJs,
+      ]
       : paths.appIndexJs,
     devtool: isProd
       ? hasSourceMap
@@ -121,7 +126,7 @@ module.exports = function(webpackEnv) {
       plugins: [
         new ModuleScopePlugin(paths.appSrc, [
           paths.appPackageJson,
-          reactRefreshOverlayEntry,
+          // reactRefreshOverlayEntry,
         ]),
       ],
     },
@@ -211,11 +216,11 @@ module.exports = function(webpackEnv) {
       isDev && new webpack.HotModuleReplacementPlugin(),
       // https://github.com/pmmmwh/react-refresh-webpack-plugin#options
       isDev && hasRefresh && new ReactRefreshWebpackPlugin({
-        overlay: {
-          entry: webpackDevClientEntry,
-          module: reactRefreshOverlayEntry,
-          sockIntegration: false,
-        },
+        // overlay: {
+        //   entry: webpackDevClientEntry,
+        //   module: reactRefreshOverlayEntry,
+        //   sockIntegration: false,
+        // },
       }),
       // https://github.com/danethurber/webpack-manifest-plugin#api
       new WebpackManifestPlugin({
