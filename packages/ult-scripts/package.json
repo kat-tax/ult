@@ -1,7 +1,7 @@
 {
   "name": "ult-scripts",
   "description": "Configuration and scripts for ULT",
-  "version": "1.0.28",
+  "version": "1.0.30",
   "license": "MIT",
   "types": "./lib/ult.d.ts",
   "bin": {
@@ -29,10 +29,10 @@
     "file-loader": "6.2.0",
     "fs-extra": "^9.0.1",
     "html-webpack-plugin": "4.5.0",
+    "pnp-webpack-plugin": "1.6.4",
     "react-refresh": "^0.9.0",
     "resolve": "1.19.0",
     "terser-webpack-plugin": "4.2.3",
-    "pnp-webpack-plugin": "1.6.4",
     "ts-pnp": "1.2.0",
     "ult-dev-utils": "^1.0.3",
     "webpack": "4.44.2",
