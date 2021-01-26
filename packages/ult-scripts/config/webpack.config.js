@@ -115,6 +115,12 @@ module.exports = function(webpackEnv) {
       alias: {
         // React Native Web support
         'react-native': 'react-native-web',
+        // React Native SVG support for web
+        'react-native-svg': 'react-native-svg-web',
+        // React Recycler List View
+        'recyclerlistview': 'recyclerlistview/web',
+        // Temp Gesture View Web Fix
+        'react-native-gesture-handler': 'react-native-gesture-handler-compiled',
         // ReactDevTools profiling
         ...(isProdProfile && {
           'react-dom$': 'react-dom/profiling',
@@ -191,6 +197,12 @@ module.exports = function(webpackEnv) {
               options: {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
+            },
+            // https://github.com/oblador/react-native-vector-icons#web-with-webpack
+            {
+              test: /\.ttf$/,
+              loader: require.resolve('file-loader'),
+              include: path.resolve(__dirname, 'node_modules/react-native-vector-icons'),
             },
             // ** STOP ** Are you adding a new loader?
             // Make sure to add the new loader(s) before the "file" loader.
