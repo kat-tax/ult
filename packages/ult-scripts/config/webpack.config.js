@@ -119,8 +119,6 @@ module.exports = function(webpackEnv) {
         'react-native-svg': 'react-native-svg-web',
         // React Recycler List View
         'recyclerlistview': 'recyclerlistview/web',
-        // Temp Gesture View Web Fix
-        'react-native-gesture-handler': 'react-native-gesture-handler-compiled',
         // ReactDevTools profiling
         ...(isProdProfile && {
           'react-dom$': 'react-dom/profiling',
@@ -149,7 +147,12 @@ module.exports = function(webpackEnv) {
           oneOf: [
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
-              include: paths.appSrc,
+              include: [
+                paths.appSrc,
+                paths.appPkgVectorIcons,
+                paths.appPkgGestureHandler,
+                paths.appPkgReanimated,
+              ],
               loader: require.resolve('babel-loader'),
               options: {
                 cacheIdentifier,
