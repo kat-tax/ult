@@ -51,7 +51,6 @@ module.exports = function(webpackEnv) {
   const hasRefresh = clientEnv.raw.FAST_REFRESH;
   const cacheIdentifier = getCacheIdentifier(
     isProd ? 'production' : isDev && 'development', [
-      'babel-plugin-named-asset-import',
       'babel-preset-react-app',
       'ult-dev-utils',
       'ult-scripts',
@@ -170,10 +169,6 @@ module.exports = function(webpackEnv) {
                   ],
                 ],
                 plugins: [
-                  [
-                    require.resolve('babel-plugin-named-asset-import'),
-                    {loaderMap: {svg: {ReactComponent: '@svgr/webpack?-svgo,+titleProp,+ref![path]'}}},
-                  ],
                   isDev && hasRefresh && require.resolve('react-refresh/babel'),
                 ].filter(Boolean),
               },
