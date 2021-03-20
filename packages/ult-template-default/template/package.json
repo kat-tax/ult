@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "web": "ult-scripts start",
+    "web": "ult-scripts run-web",
     "ios": "react-native run-ios",
     "macos": "node node_modules/react-native-macos/local-cli/cli.js start --use-react-native-macos",
     "windows": "react-native run-windows",
     "android": "react-native run-android",
-    "build:web": "ult-scripts build",
+    "build:web": "ult-scripts build-web",
     "build:ios": "react-native bundle --platform ios --dev false --entry-file index.js --bundle-output ios/app/src/main/assets/index.ios.bundle --assets-dest ios/app/src/main/res",
     "build:macos": "react-native bundle --platform macos --dev false --entry-file index.js --bundle-output macos/app/src/main/assets/index.macos.bundle --assets-dest macos/app/src/main/res",
     "build:windows": "react-native bundle --platform windows --dev false --entry-file index.js --bundle-output windows/app/src/main/assets/index.windows.bundle --assets-dest windows/app/src/main/res",
@@ -19,21 +19,21 @@
     "development": "last 2 versions"
   },
   "dependencies": {
-    "react": "16.11.0",
-    "react-dom": "16.11.0",
-    "react-native": "0.62.2",
-    "react-native-macos": "0.62.16",
-    "react-native-windows": "0.62.12",
-    "react-ult": "^2.2.0"
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
+    "react-native": "0.63.4",
+    "react-native-macos": "0.63.23",
+    "react-native-windows": "0.63.24",
+    "react-ult": "^2.2.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/runtime": "^7.11.2",
-    "@babel/preset-env": "^7.11.5",
-    "@types/node": "^14.11.7",
-    "@types/react": "^16.9.51",
-    "metro-react-native-babel-preset": "^0.63.0",
-    "typescript": "^4.0.3",
-    "ult-scripts": "^1.0.6"
+    "@babel/core": "^7.13.10",
+    "@babel/runtime": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "@types/node": "^14.14.35",
+    "@types/react": "^17.0.3",
+    "metro-react-native-babel-preset": "^0.65.2",
+    "typescript": "^4.2.3",
+    "ult-scripts": "^1.0.39"
   }
 }
