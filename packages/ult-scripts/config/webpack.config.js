@@ -5,24 +5,25 @@ const webpack = require('webpack');
 const resolve = require('resolve');
 
 // React Dev Utils
-const getCacheIdentifier = require('ult-dev-utils/getCacheIdentifier');
 const typescriptFormatter = require('ult-dev-utils/typescriptFormatter');
 const InterpolateHtmlPlugin = require('ult-dev-utils/InterpolateHtmlPlugin');
 const ForkTsCheckerWebpackPlugin = require('ult-dev-utils/ForkTsCheckerWebpackPlugin');
 const WatchMissingNodeModulesPlugin = require('ult-dev-utils/WatchMissingNodeModulesPlugin');
 const ModuleNotFoundPlugin = require('ult-dev-utils/ModuleNotFoundPlugin');
 const ModuleScopePlugin = require('ult-dev-utils/ModuleScopePlugin');
+const getCacheIdentifier = require('ult-dev-utils/getCacheIdentifier');
 const webpackDevClientEntry = require.resolve('ult-dev-utils/webpackHotDevClient');
 const reactRefreshOverlayEntry = require.resolve('ult-dev-utils/refreshOverlayInterop');
 
 // Plugins
-const TerserPlugin = require('terser-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
 const {BugsnagBuildReporterPlugin, BugsnagSourceMapUploaderPlugin} = require('webpack-bugsnag-plugins');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
 // Helpers
 const getClientEnvironment = require('../lib/env');
@@ -112,11 +113,13 @@ module.exports = function(webpackEnv) {
       modules: ['node_modules', paths.appNodeModules].concat(modules.additionalModulePaths || []),
       extensions: paths.moduleFileExtensions.map(ext => `.${ext}`),
       alias: {
-        // React Native Web support
+        // Alias React Native Web
         'react-native': 'react-native-web',
-        // React Native SVG support for web
+        // Alias popular libraries
         'react-native-svg': 'react-native-svg-web',
-        // React Recycler List View
+        'react-native-maps': 'react-native-web-maps',
+        'react-native-webview': 'react-native-web-webview',
+        'lottie-react-native': 'react-native-web-lottie',
         'recyclerlistview': 'recyclerlistview/web',
         // ReactDevTools profiling
         ...(isProdProfile && {
@@ -189,18 +192,18 @@ module.exports = function(webpackEnv) {
                 presets: [[require.resolve('babel-preset-react-app/dependencies'), {helpers: true}]],
               },
             },
+            // https://github.com/oblador/react-native-vector-icons#web-with-webpack
+            {
+              test: /\.ttf$/,
+              loader: require.resolve('file-loader'),
+              include: path.resolve(__dirname, 'node_modules/react-native-vector-icons'),
+            },
             {
               loader: require.resolve('file-loader'),
               exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
               options: {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
-            },
-            // https://github.com/oblador/react-native-vector-icons#web-with-webpack
-            {
-              test: /\.ttf$/,
-              loader: require.resolve('file-loader'),
-              include: path.resolve(__dirname, 'node_modules/react-native-vector-icons'),
             },
             // ** STOP ** Are you adding a new loader?
             // Make sure to add the new loader(s) before the "file" loader.
@@ -290,6 +293,29 @@ module.exports = function(webpackEnv) {
           '!**/src/setupProxy.*',
           '!**/src/setupTests.*',
         ],
+      }),
+      // https://webpack.js.org/plugins/eslint-webpack-plugin/#options
+      new ESLintPlugin({
+        extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
+        formatter: require.resolve('react-dev-utils/eslintFormatter'),
+        eslintPath: require.resolve('eslint'),
+        failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
+        context: paths.appSrc,
+        cache: true,
+        cacheLocation: path.resolve(
+          paths.appNodeModules,
+          '.cache/.eslintcache'
+        ),
+        cwd: paths.appPath,
+        resolvePluginsRelativeTo: __dirname,
+        baseConfig: {
+          extends: [require.resolve('eslint-config-react-app/base')],
+          rules: {
+            ...(!hasJsxRuntime && {
+              'react/react-in-jsx-scope': 'error',
+            }),
+          },
+        },
       }),
     ].filter(Boolean),
     node: {
