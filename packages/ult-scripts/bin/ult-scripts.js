@@ -1,18 +1,21 @@
 #!/usr/bin/env node
 
-const spawn = require('ult-dev-utils/crossSpawn');
-const scripts = [
+process.on('unhandledRejection', error => {
+  throw error;
+});
+
+const SCRIPTS = [
   'run-web',
   'build-web',
+  'test-web',
 ];
 
+const spawn = require('ult-dev-utils/crossSpawn');
 const args = process.argv.slice(2);
-const index = args.findIndex(x => x === scripts[1] || x === scripts[0]);
+const index = args.findIndex(x => x === SCRIPTS[1] || x === SCRIPTS[0]);
 const script = index === -1 ? args[0] : args[index];
 
-process.on('unhandledRejection', err => {throw err});
-
-if (scripts.includes(script)) {
+if (SCRIPTS.includes(script)) {
   const result = spawn.sync(process.execPath, index > 0 ? args.slice(0, index) : []
     .concat(require.resolve('../scripts/' + script))
     .concat(args.slice(index + 1)), {stdio: 'inherit'});

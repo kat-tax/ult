@@ -43,6 +43,7 @@ module.exports = {
   appTypeDeclarations: resolveApp('src/ult-app-env.d.ts'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
   swSrc: resolveModule(resolveApp, 'src/service-worker'),
+  testsSetup: resolveModule(resolveApp, 'src/setupTests'),
   proxySetup: resolveApp('src/setupProxy.js'),
   moduleFileExtensions: moduleFileExtensions,
   publicUrlOrPath: getPublicUrlOrPath(

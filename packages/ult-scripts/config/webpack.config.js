@@ -288,6 +288,7 @@ module.exports = function(webpackEnv) {
           '!**/src/**/__tests__/**',
           '!**/src/**/?(*.)(spec|test).*',
           '!**/src/setupProxy.*',
+          '!**/src/setupTests.*',
         ],
       }),
     ].filter(Boolean),
