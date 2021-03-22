@@ -1,5 +1,4 @@
 const path = require('path');
-const replace = require('replace-in-file');
 const spawn = require('child_process').spawn;
 const exit = (cmd, res, rej) => e => e === 0 ? res() : rej(`${cmd}: code ${e}`);
 
@@ -18,26 +17,6 @@ function pod(name) {
   return new Promise((res, rej) => {
     spawn('pod', ['install'], {cwd, stdio: 'inherit'})
       .once('exit', exit('pod install', res, rej));
-  });
-};
-
-// Patches Windows & MacOS main component names
-async function patch(name) {
-  const cwd = path.resolve(process.cwd(), name.toLowerCase());
-  await replace({
-    from: `MainComponentName(L"${name}");`,
-    to: 'MainComponentName(L"RXApp");',
-    files: [
-      `${cwd}/windows/${name}/App.cpp`,
-    ],
-  });
-  await replace({
-    from: `moduleName:@"${name}"`,
-    to: 'moduleName:@"RXApp"',
-    files: [
-      `${cwd}/macos/${name}-iOS/AppDelegate.m`,
-      `${cwd}/macos/${name}-macOS/ViewController.m`,
-    ],
   });
 };
 

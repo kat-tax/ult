@@ -26,8 +26,6 @@ async function init() {
     await utils.npx(['react-native-windows-init', '--overwrite'], cwd);
     console.log('Initializing MacOS project...');
     await utils.npx(['react-native-macos-init', '--overwrite'], cwd);
-    console.log('Patching project files...');
-    await utils.patch(name);
     if (process.platform === 'darwin') {
       console.log('Installing pods...');
       await utils.pod(name);
