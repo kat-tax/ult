@@ -1,12 +1,3 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-'use strict';
-
 // This alternative WebpackDevServer combines the functionality of:
 // https://github.com/webpack/webpack-dev-server/blob/webpack-1/client/index.js
 // https://github.com/webpack/webpack/blob/webpack-1/hot/dev-server.js
@@ -16,10 +7,10 @@
 // that looks similar to our console output. The error overlay is inspired by:
 // https://github.com/glenjamin/webpack-hot-middleware
 
-var stripAnsi = require('strip-ansi');
 var url = require('url');
-var launchEditorEndpoint = require('./launchEditorEndpoint');
+var stripAnsi = require('strip-ansi');
 var formatWebpackMessages = require('./formatWebpackMessages');
+var launchEditorEndpoint = require('./launchEditorEndpoint');
 var ErrorOverlay = require('react-error-overlay');
 
 ErrorOverlay.setEditorHandler(function editorHandler(errorLocation) {

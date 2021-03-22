@@ -1,23 +1,13 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-'use strict';
-
 const path = require('path');
 const chalk = require('chalk');
-const stripAnsi = require('strip-ansi');
 const table = require('text-table');
+const stripAnsi = require('strip-ansi');
 
 const cwd = process.cwd();
 
 function isError(message) {
-  if (message.fatal || message.severity === 2) {
+  if (message.fatal || message.severity === 2)
     return true;
-  }
   return false;
 }
 
@@ -32,26 +22,21 @@ function formatter(results) {
 
   results.forEach(result => {
     let messages = result.messages;
-    if (messages.length === 0) {
+    if (messages.length === 0)
       return;
-    }
-
     messages = messages.map(message => {
       let messageType;
       if (isError(message)) {
         messageType = 'error';
         hasErrors = true;
-        if (message.ruleId) {
+        if (message.ruleId)
           reportContainsErrorRuleIDs = true;
-        }
       } else {
         messageType = 'warn';
       }
-
       let line = message.line || 0;
-      if (message.column) {
+      if (message.column)
         line += ':' + message.column;
-      }
       let position = chalk.bold('Line ' + line + ':');
       return [
         '',
@@ -63,9 +48,8 @@ function formatter(results) {
     });
 
     // if there are error messages, we want to show only errors
-    if (hasErrors) {
+    if (hasErrors)
       messages = messages.filter(m => m[2] === 'error');
-    }
 
     // add color to rule keywords
     messages.forEach(m => {
@@ -82,7 +66,6 @@ function formatter(results) {
 
     // print the filename and relative path
     output += `${getRelativePath(result.filePath)}\n`;
-
     // print the errors
     output += `${outputTable}\n\n`;
   });

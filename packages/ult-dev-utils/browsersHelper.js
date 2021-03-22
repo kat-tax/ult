@@ -1,17 +1,9 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-'use strict';
-
-const browserslist = require('browserslist');
-const chalk = require('chalk');
 const os = require('os');
-const prompts = require('prompts');
-const pkgUp = require('pkg-up');
 const fs = require('fs');
+const chalk = require('chalk');
+const pkgUp = require('pkg-up');
+const prompts = require('prompts');
+const browserslist = require('browserslist');
 
 const defaultBrowsers = {
   production: ['>0.2%', 'not dead', 'not op_mini all'],
@@ -23,10 +15,8 @@ const defaultBrowsers = {
 };
 
 function shouldSetBrowsers(isInteractive) {
-  if (!isInteractive) {
+  if (!isInteractive)
     return Promise.resolve(true);
-  }
-
   const question = {
     type: 'confirm',
     name: 'shouldSetBrowsers',
@@ -37,16 +27,13 @@ function shouldSetBrowsers(isInteractive) {
       )}?`,
     initial: true,
   };
-
   return prompts(question).then(answer => answer.shouldSetBrowsers);
 }
 
 function checkBrowsers(dir, isInteractive, retry = true) {
   const current = browserslist.loadConfig({ path: dir });
-  if (current != null) {
+  if (current != null)
     return Promise.resolve(current);
-  }
-
   if (!retry) {
     return Promise.reject(
       new Error(
@@ -56,22 +43,17 @@ function checkBrowsers(dir, isInteractive, retry = true) {
       )
     );
   }
-
   return shouldSetBrowsers(isInteractive).then(shouldSetBrowsers => {
-    if (!shouldSetBrowsers) {
+    if (!shouldSetBrowsers)
       return checkBrowsers(dir, isInteractive, false);
-    }
-
     return (
       pkgUp({ cwd: dir })
         .then(filePath => {
-          if (filePath == null) {
+          if (filePath == null)
             return Promise.reject();
-          }
           const pkg = JSON.parse(fs.readFileSync(filePath));
           pkg['browserslist'] = defaultBrowsers;
           fs.writeFileSync(filePath, JSON.stringify(pkg, null, 2) + os.EOL);
-
           browserslist.clearCaches();
           console.log();
           console.log(
@@ -88,4 +70,4 @@ function checkBrowsers(dir, isInteractive, retry = true) {
   });
 }
 
-module.exports = { defaultBrowsers, checkBrowsers };
+module.exports = {defaultBrowsers, checkBrowsers};

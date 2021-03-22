@@ -1,13 +1,4 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-'use strict';
-
-const { URL } = require('url');
+const {URL} = require('url');
 
 module.exports = getPublicUrlOrPath;
 
@@ -24,17 +15,14 @@ module.exports = getPublicUrlOrPath;
  */
 function getPublicUrlOrPath(isEnvDevelopment, homepage, envPublicUrl) {
   const stubDomain = 'https://create-react-app.dev';
-
   if (envPublicUrl) {
     // ensure last slash exists
     envPublicUrl = envPublicUrl.endsWith('/')
       ? envPublicUrl
       : envPublicUrl + '/';
-
     // validate if `envPublicUrl` is a URL or path like
     // `stubDomain` is ignored if `envPublicUrl` contains a domain
     const validPublicUrl = new URL(envPublicUrl, stubDomain);
-
     return isEnvDevelopment
       ? envPublicUrl.startsWith('.')
         ? '/'
@@ -47,7 +35,6 @@ function getPublicUrlOrPath(isEnvDevelopment, homepage, envPublicUrl) {
   if (homepage) {
     // strip last slash if exists
     homepage = homepage.endsWith('/') ? homepage : homepage + '/';
-
     // validate if `homepage` is a URL or path like and use just pathname
     const validHomepagePathname = new URL(homepage, stubDomain).pathname;
     return isEnvDevelopment

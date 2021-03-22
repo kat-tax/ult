@@ -1,5 +1,3 @@
-'use strict';
-
 const path = require('path');
 const escape = require('escape-string-regexp');
 

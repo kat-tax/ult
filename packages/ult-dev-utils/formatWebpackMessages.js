@@ -1,12 +1,3 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-'use strict';
-
 const friendlySyntaxErrorLabel = 'Syntax error:';
 
 function isLikelyASyntaxError(message) {
@@ -24,12 +15,8 @@ function formatMessage(message) {
   // Transform parsing error into syntax error
   // TODO: move this to our ESLint formatter?
   lines = lines.map(line => {
-    const parsingError = /Line (\d+):(?:(\d+):)?\s*Parsing error: (.+)$/.exec(
-      line
-    );
-    if (!parsingError) {
-      return line;
-    }
+    const parsingError = /Line (\d+):(?:(\d+):)?\s*Parsing error: (.+)$/.exec(line);
+    if (!parsingError) return line;
     const [, errorLine, errorColumn, errorMessage] = parsingError;
     return `${friendlySyntaxErrorLabel} ${errorMessage} (${errorLine}:${errorColumn})`;
   });
@@ -59,6 +46,7 @@ function formatMessage(message) {
   if (lines.length > 2 && lines[1].trim() === '') {
     lines.splice(1, 1);
   }
+
   // Clean up file name
   lines[0] = lines[0].replace(/^(.*) \d+:\d+-\d+$/, '$1');
 
@@ -106,10 +94,9 @@ function formatWebpackMessages(json) {
   const formattedErrors = json.errors.map(formatMessage);
   const formattedWarnings = json.warnings.map(formatMessage);
   const result = {errors: formattedErrors, warnings: formattedWarnings};
-  if (result.errors.some(isLikelyASyntaxError)) {
-    // If there are any syntax errors, show just them.
+  // If there are any syntax errors, show just them.
+  if (result.errors.some(isLikelyASyntaxError))
     result.errors = result.errors.filter(isLikelyASyntaxError);
-  }
   return result;
 }
 

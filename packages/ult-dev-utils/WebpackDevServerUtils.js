@@ -1,19 +1,11 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-'use strict';
-
-const address = require('address');
 const fs = require('fs');
-const path = require('path');
 const url = require('url');
+const path = require('path');
 const chalk = require('chalk');
 const detect = require('detect-port-alt');
 const isRoot = require('is-root');
 const prompts = require('prompts');
+const address = require('address');
 const clearConsole = require('./clearConsole');
 const formatWebpackMessages = require('./formatWebpackMessages');
 const getProcessForPort = require('./getProcessForPort');
@@ -27,19 +19,20 @@ function prepareUrls(protocol, host, port, pathname = '/') {
     url.format({
       protocol,
       hostname,
-      port,
       pathname,
+      port,
     });
   const prettyPrintUrl = hostname =>
     url.format({
       protocol,
       hostname,
-      port: chalk.bold(port),
       pathname,
+      port: chalk.bold(port),
     });
 
-  const isUnspecifiedHost = host === '0.0.0.0' || host === '::';
   let prettyHost, lanUrlForConfig, lanUrlForTerminal;
+  const isUnspecifiedHost = host === '0.0.0.0' || host === '::';
+
   if (isUnspecifiedHost) {
     prettyHost = 'localhost';
     try {
@@ -60,9 +53,7 @@ function prepareUrls(protocol, host, port, pathname = '/') {
           lanUrlForConfig = undefined;
         }
       }
-    } catch (_e) {
-      // ignored
-    }
+    } catch (_) {}
   } else {
     prettyHost = host;
   }
@@ -129,9 +120,8 @@ function createCompiler({
   // bundle, so if you refresh, it'll wait instead of serving the old one.
   // "invalid" is short for "bundle invalidated", it doesn't imply any errors.
   compiler.hooks.invalid.tap('invalid', () => {
-    if (isInteractive) {
+    if (isInteractive)
       clearConsole();
-    }
     console.log('Compiling...');
   });
 
@@ -152,7 +142,6 @@ function createCompiler({
         const allMsgs = [...diagnostics, ...lints];
         const format = message =>
           `${message.file}\n${typescriptFormatter(message, true)}`;
-
         tsMessagesResolver({
           errors: allMsgs.filter(msg => msg.severity === 'error').map(format),
           warnings: allMsgs
@@ -182,13 +171,8 @@ function createCompiler({
 
     if (useTypeScript && statsData.errors.length === 0) {
       const delayedMsg = setTimeout(() => {
-        console.log(
-          chalk.yellow(
-            'Files successfully emitted, waiting for typecheck results...'
-          )
-        );
+        console.log(chalk.yellow('Files successfully emitted, waiting for typecheck results...'));
       }, 100);
-
       const messages = await tsMessagesPromise;
       clearTimeout(delayedMsg);
       if (tscCompileOnError) {
@@ -224,21 +208,19 @@ function createCompiler({
 
     const messages = formatWebpackMessages(statsData);
     const isSuccessful = !messages.errors.length && !messages.warnings.length;
-    if (isSuccessful) {
+    if (isSuccessful)
       console.log(chalk.green('Compiled successfully!'));
-    }
-    if (isSuccessful && (isInteractive || isFirstCompile)) {
+    if (isSuccessful && (isInteractive || isFirstCompile))
       printInstructions(appName, urls, useYarn);
-    }
+
     isFirstCompile = false;
 
     // If errors exist, only show errors.
     if (messages.errors.length) {
       // Only keep the first error. Others are often indicative
       // of the same problem, but confuse the reader with noise.
-      if (messages.errors.length > 1) {
+      if (messages.errors.length > 1)
         messages.errors.length = 1;
-      }
       console.log(chalk.red('Failed to compile.\n'));
       console.log(messages.errors.join('\n\n'));
       return;
@@ -282,16 +264,14 @@ function createCompiler({
       }
     });
   }
-
   return compiler;
 }
 
 function resolveLoopback(proxy) {
   const o = url.parse(proxy);
   o.host = undefined;
-  if (o.hostname !== 'localhost') {
+  if (o.hostname !== 'localhost')
     return proxy;
-  }
   // Unfortunately, many languages (unlike node) do not yet support IPv6.
   // This means even though localhost resolves to ::1, the application
   // must fall back to IPv4 (on 127.0.0.1).
@@ -301,7 +281,6 @@ function resolveLoopback(proxy) {
   } catch (_ignored) {
     o.hostname = '127.0.0.1';
   }*/
-
   try {
     // Check if we're on a network; if we are, chances are we can resolve
     // localhost. Otherwise, we can just be safe and assume localhost is
@@ -342,6 +321,7 @@ function onProxyError(proxy) {
     if (res.writeHead && !res.headersSent) {
       res.writeHead(500);
     }
+
     res.end(
       'Proxy error: Could not proxy request ' +
         req.url +
@@ -362,15 +342,9 @@ function prepareProxy(proxy, appPublicFolder, servedPathname) {
     return undefined;
   }
   if (typeof proxy !== 'string') {
-    console.log(
-      chalk.red('When specified, "proxy" in package.json must be a string.')
-    );
-    console.log(
-      chalk.red('Instead, the type of "proxy" was "' + typeof proxy + '".')
-    );
-    console.log(
-      chalk.red('Either remove "proxy" from package.json, or make it a string.')
-    );
+    console.log(chalk.red('When specified, "proxy" in package.json must be a string.'));
+    console.log(chalk.red('Instead, the type of "proxy" was "' + typeof proxy + '".'));
+    console.log(chalk.red('Either remove "proxy" from package.json, or make it a string.'));
     process.exit(1);
   }
 
@@ -392,11 +366,7 @@ function prepareProxy(proxy, appPublicFolder, servedPathname) {
   }
 
   if (!/^http(s)?:\/\//.test(proxy)) {
-    console.log(
-      chalk.red(
-        'When "proxy" is specified in package.json it must start with either http:// or https://'
-      )
-    );
+    console.log(chalk.red('When "proxy" is specified in package.json it must start with either http:// or https://'));
     process.exit(1);
   }
 

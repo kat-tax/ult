@@ -1,21 +1,11 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-'use strict';
-
+const path = require('path');
 const chalk = require('chalk');
 const findUp = require('find-up');
-const path = require('path');
 
 class ModuleNotFoundPlugin {
   constructor(appPath, yarnLockFile) {
     this.appPath = appPath;
     this.yarnLockFile = yarnLockFile;
-
     this.useYarnCommand = this.useYarnCommand.bind(this);
     this.getRelativePath = this.getRelativePath.bind(this);
     this.prettierError = this.prettierError.bind(this);
@@ -40,8 +30,7 @@ class ModuleNotFoundPlugin {
   }
 
   prettierError(err) {
-    let { details: _details = '', origin } = err;
-
+    let {details: _details = '', origin} = err;
     if (origin == null) {
       const caseSensitivity =
         err.message &&
@@ -57,14 +46,13 @@ class ModuleNotFoundPlugin {
       return err;
     }
 
-    const file = this.getRelativePath(origin.resource);
     let details = _details.split('\n');
-
     const request = /resolve '(.*?)' in '(.*?)'/.exec(details);
+    const file = this.getRelativePath(origin.resource);
+
     if (request) {
       const isModule = details[1] && details[1].includes('module');
       const isFile = details[1] && details[1].includes('file');
-
       let [, target, context] = request;
       context = this.getRelativePath(context);
       if (isModule) {
@@ -86,18 +74,17 @@ class ModuleNotFoundPlugin {
     } else {
       details = [err.message];
     }
-    err.message = [file, ...details].join('\n').replace('Error: ', '');
 
+    err.message = [file, ...details].join('\n').replace('Error: ', '');
     const isModuleScopePluginError =
       err.error && err.error.__module_scope_plugin;
-    if (isModuleScopePluginError) {
+    if (isModuleScopePluginError)
       err.message = err.message.replace('Module not found: ', '');
-    }
     return err;
   }
 
   apply(compiler) {
-    const { prettierError } = this;
+    const {prettierError} = this;
     compiler.hooks.make.intercept({
       register(tap) {
         if (
@@ -110,9 +97,8 @@ class ModuleNotFoundPlugin {
         return Object.assign({}, tap, {
           fn: (compilation, callback) => {
             tap.fn(compilation, (err, ...args) => {
-              if (err && err.name === 'ModuleNotFoundError') {
+              if (err && err.name === 'ModuleNotFoundError')
                 err = prettierError(err);
-              }
               callback(err, ...args);
             });
           },

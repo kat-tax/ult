@@ -1,12 +1,3 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-'use strict';
-
 const chalk = require('chalk');
 const path = require('path');
 const os = require('os');
@@ -23,9 +14,8 @@ class ModuleScopePlugin {
       'ModuleScopePlugin',
       (request, contextResolver, callback) => {
         // Unknown issuer, probably webpack internals
-        if (!request.context.issuer) {
+        if (!request.context.issuer)
           return callback();
-        }
         if (
           // If this resolves to a node_module, we don't care what happens next
           request.descriptionFileRoot.indexOf('/node_modules/') !== -1 ||

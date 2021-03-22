@@ -1,12 +1,3 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-'use strict';
-
 var chalk = require('chalk');
 var execSync = require('child_process').execSync;
 var spawn = require('cross-spawn');
@@ -40,22 +31,19 @@ function getBrowserEnv() {
   } else {
     action = Actions.BROWSER;
   }
-  return { action, value, args };
+  return {action, value, args};
 }
 
 function executeNodeScript(scriptPath, url) {
-  const extraArgs = process.argv.slice(2);
-  const child = spawn(process.execPath, [scriptPath, ...extraArgs, url], {
-    stdio: 'inherit',
-  });
+  const child = spawn(
+    process.execPath,
+    [scriptPath, ...process.argv.slice(2), url],
+    {stdio: 'inherit'},
+  );
   child.on('close', code => {
     if (code !== 0) {
       console.log();
-      console.log(
-        chalk.red(
-          'The script specified as BROWSER environment variable failed.'
-        )
-      );
+      console.log(chalk.red('The script specified as BROWSER environment variable failed.'));
       console.log(chalk.cyan(scriptPath) + ' exited with code ' + code + '.');
       console.log();
       return;

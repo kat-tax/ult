@@ -1,12 +1,3 @@
-/**
- * Copyright (c) 2015-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-'use strict';
-
 var fs = require('fs');
 var path = require('path');
 var chalk = require('chalk');
@@ -74,32 +65,21 @@ function printFileSizesAfterBuild(
       ? maxBundleGzipSize
       : maxChunkGzipSize;
     var isLarge = maxRecommendedSize && asset.size > maxRecommendedSize;
-    if (isLarge && path.extname(asset.name) === '.js') {
+    if (isLarge && path.extname(asset.name) === '.js')
       suggestBundleSplitting = true;
-    }
     console.log(
       '  ' +
-        (isLarge ? chalk.yellow(sizeLabel) : sizeLabel) +
-        '  ' +
-        chalk.dim(asset.folder + path.sep) +
-        chalk.cyan(asset.name)
+      (isLarge ? chalk.yellow(sizeLabel) : sizeLabel) +
+      '  ' +
+      chalk.dim(asset.folder + path.sep) +
+      chalk.cyan(asset.name)
     );
   });
   if (suggestBundleSplitting) {
     console.log();
-    console.log(
-      chalk.yellow('The bundle size is significantly larger than recommended.')
-    );
-    console.log(
-      chalk.yellow(
-        'Consider reducing it with code splitting: https://goo.gl/9VhYWB'
-      )
-    );
-    console.log(
-      chalk.yellow(
-        'You can also analyze the project dependencies: https://goo.gl/LeUzfb'
-      )
-    );
+    console.log(chalk.yellow('The bundle size is significantly larger than recommended.'));
+    console.log(chalk.yellow('Consider reducing it with code splitting: https://goo.gl/9VhYWB'));
+    console.log(chalk.yellow('You can also analyze the project dependencies: https://goo.gl/LeUzfb'));
   }
 }
 
