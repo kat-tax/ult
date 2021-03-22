@@ -16,7 +16,6 @@ const moduleFileExtensions = [
 
 const getPublicUrlOrPath = require('ult-dev-utils/getPublicUrlOrPath');
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
-const resolveOwn = relativePath => path.resolve(__dirname, '..', relativePath);
 const resolveModule = (resolve, path) => {
   const extension = moduleFileExtensions.find(ext => fs.existsSync(resolve(`${path}.${ext}`)));
   if (extension) return resolve(`${path}.${extension}`);
@@ -24,27 +23,23 @@ const resolveModule = (resolve, path) => {
 };
 
 module.exports = {
-  ownPath: resolveOwn('.'),
   appPath: resolveApp('.'),
   appSrc: resolveApp('src'),
-  dotenv: resolveApp('.env'),
   appBuild: resolveApp('build'),
   appPublic: resolveApp('web'),
   appHtml: resolveApp('web/index.html'),
-  yarnLockFile: resolveApp('yarn.lock'),
   appTsConfig: resolveApp('tsconfig.json'),
   appPackageJson: resolveApp('package.json'),
   appNodeModules: resolveApp('node_modules'),
-  ownNodeModules: resolveOwn('node_modules'),
   appPkgVectorIcons: resolveApp('node_modules/react-native-vector-icons'),
   appPkgGestureHandler: resolveApp('node_modules/react-native-gesture-handler'),
   appPkgReanimated: resolveApp('node_modules/react-native-reanimated'),
-  ownTypeDeclarations: resolveOwn('lib/ult-app.d.ts'),
-  appTypeDeclarations: resolveApp('src/ult-app-env.d.ts'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
-  swSrc: resolveModule(resolveApp, 'src/service-worker'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
+  swSrc: resolveModule(resolveApp, 'src/service-worker'),
   proxySetup: resolveApp('src/setupProxy.js'),
+  yarnLockFile: resolveApp('yarn.lock'),
+  dotenv: resolveApp('.env'),
   moduleFileExtensions: moduleFileExtensions,
   publicUrlOrPath: getPublicUrlOrPath(
     process.env.NODE_ENV === 'development',

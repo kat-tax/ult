@@ -1,11 +1,11 @@
 const fs = require('fs');
 
-// React Dev Utils
+// Dev Utils
 const ignoredFiles = require('ult-dev-utils/ignoredFiles');
-const redirectServedPath = require('ult-dev-utils/redirectServedPathMiddleware');
-const noopServiceWorkerMiddleware = require('ult-dev-utils/noopServiceWorkerMiddleware');
-const evalSourceMapMiddleware = require('ult-dev-utils/evalSourceMapMiddleware');
-const errorOverlayMiddleware = require('ult-dev-utils/errorOverlayMiddleware');
+const redirectServedPath = require('ult-dev-utils/middleware/RedirectServedPath');
+const noopServiceWorker = require('ult-dev-utils/middleware/NoopServiceWorker');
+const evalSourceMap = require('ult-dev-utils/middleware/EvalSourceMap');
+const errorOverlay = require('ult-dev-utils/middleware/ErrorOverlay');
 
 // Helpers
 const getHttpsConfig = require('../lib/https');
@@ -47,15 +47,15 @@ module.exports = function(proxy, allowedHost) {
       ignored: ignoredFiles(paths.appSrc),
     },
     before(app, server) {
-      app.use(evalSourceMapMiddleware(server));
-      app.use(errorOverlayMiddleware());
+      app.use(evalSourceMap(server));
+      app.use(errorOverlay());
       if (fs.existsSync(paths.proxySetup)) {
         require(paths.proxySetup)(app);
       }
     },
     after(app) {
       app.use(redirectServedPath(paths.publicUrlOrPath));
-      app.use(noopServiceWorkerMiddleware(paths.publicUrlOrPath));
+      app.use(noopServiceWorker(paths.publicUrlOrPath));
     },
   };
 };

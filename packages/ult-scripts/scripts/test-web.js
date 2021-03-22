@@ -9,21 +9,17 @@ const jest = require('jest');
 const execSync = require('child_process').execSync;
 let argv = process.argv.slice(2);
 
-function isInGitRepository() {
+function isRepository() {
   try {
-    execSync('git rev-parse --is-inside-work-tree', { stdio: 'ignore' });
+    execSync('git rev-parse --is-inside-work-tree', {stdio: 'ignore'});
     return true;
   } catch (e) {
-    return false;
-  }
-}
-
-function isInMercurialRepository() {
-  try {
-    execSync('hg --cwd . root', { stdio: 'ignore' });
-    return true;
-  } catch (e) {
-    return false;
+    try {
+      execSync('hg --cwd . root', {stdio: 'ignore'});
+      return true;
+    } catch (e) {
+      return false;
+    }
   }
 }
 
@@ -34,11 +30,10 @@ if (
   argv.indexOf('--watchAll=false') === -1
 ) {
   // https://github.com/facebook/create-react-app/issues/5210
-  const hasSourceControl = isInGitRepository() || isInMercurialRepository();
-  argv.push(hasSourceControl ? '--watch' : '--watchAll');
+  argv.push(isRepository() ? '--watch' : '--watchAll');
 }
 
-const createJestConfig = require('./lib/jest');
+const createJestConfig = require('../lib/jest');
 const path = require('path');
 const paths = require('../config/paths');
 argv.push(

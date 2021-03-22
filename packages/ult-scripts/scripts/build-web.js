@@ -4,20 +4,20 @@ process.on('unhandledRejection', err => {throw err});
 require('../lib/env');
 
 // Imports
-const path = require('path');
 const fs = require('fs-extra');
-const webpack = require('webpack');
 const bfj = require('bfj');
+const path = require('path');
+const chalk = require('chalk');
+const webpack = require('webpack');
 
-// React Dev Utils
-const chalk = require('ult-dev-utils/chalk');
-const FileSizeReporter = require('ult-dev-utils/FileSizeReporter');
-const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
-const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild;
+// Dev Utils
+const printBuildError = require('ult-dev-utils/printBuildError');
+const fileSizeReporter = require('ult-dev-utils/fileSizeReporter');
+const printFileSizesAfterBuild = fileSizeReporter.printFileSizesAfterBuild;
+const measureFileSizesBeforeBuild = fileSizeReporter.measureFileSizesBeforeBuild;
 const printHostingInstructions = require('ult-dev-utils/printHostingInstructions');
 const formatWebpackMessages = require('ult-dev-utils/formatWebpackMessages');
 const checkRequiredFiles = require('ult-dev-utils/checkRequiredFiles');
-const printBuildError = require('ult-dev-utils/printBuildError');
 const {checkBrowsers} = require('ult-dev-utils/browsersHelper');
 
 // Config

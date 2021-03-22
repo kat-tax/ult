@@ -4,13 +4,13 @@ const fs = require('fs-extra');
 const webpack = require('webpack');
 const resolve = require('resolve');
 
-// React Dev Utils
+// Dev Utils
 const typescriptFormatter = require('ult-dev-utils/typescriptFormatter');
-const InterpolateHtmlPlugin = require('ult-dev-utils/InterpolateHtmlPlugin');
-const ForkTsCheckerWebpackPlugin = require('ult-dev-utils/ForkTsCheckerWebpackPlugin');
-const WatchMissingNodeModulesPlugin = require('ult-dev-utils/WatchMissingNodeModulesPlugin');
-const ModuleNotFoundPlugin = require('ult-dev-utils/ModuleNotFoundPlugin');
-const ModuleScopePlugin = require('ult-dev-utils/ModuleScopePlugin');
+const InterpolateHtmlPlugin = require('ult-dev-utils/plugins/InterpolateHtml');
+const ForkTsCheckerWebpackPlugin = require('ult-dev-utils/plugins/ForkTsCheckerWebpack');
+const WatchMissingNodeModulesPlugin = require('ult-dev-utils/plugins/WatchMissingNodeModules');
+const ModuleNotFoundPlugin = require('ult-dev-utils/plugins/ModuleNotFound');
+const ModuleScopePlugin = require('ult-dev-utils/plugins/ModuleScope');
 const getCacheIdentifier = require('ult-dev-utils/getCacheIdentifier');
 const webpackDevClientEntry = require.resolve('ult-dev-utils/webpackHotDevClient');
 const reactRefreshOverlayEntry = require.resolve('ult-dev-utils/refreshOverlayInterop');
@@ -151,6 +151,7 @@ module.exports = function(webpackEnv) {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: [
                 paths.appSrc,
+                // RN packages needed to be compiled
                 paths.appPkgVectorIcons,
                 paths.appPkgGestureHandler,
                 paths.appPkgReanimated,

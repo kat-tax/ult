@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
-const resolve = require('resolve');
-const chalk = require('ult-dev-utils/chalk');
+const chalk = require('chalk');
 const paths = require('../config/paths');
+const resolve = require('resolve');
 
 function getModules() {
   const hasTsConfig = fs.existsSync(paths.appTsConfig);

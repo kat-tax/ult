@@ -5,11 +5,11 @@ require('../lib/env');
 
 // Imports
 const fs = require('fs-extra');
+const chalk = require('chalk');
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 
-// React Dev Utils
-const chalk = require('ult-dev-utils/chalk');
+// Dev Utils
 const {checkBrowsers} = require('ult-dev-utils/browsersHelper');
 const {choosePort, createCompiler, prepareProxy, prepareUrls} = require('ult-dev-utils/WebpackDevServerUtils');
 const checkRequiredFiles = require('ult-dev-utils/checkRequiredFiles');
