@@ -8,32 +8,22 @@
   <title>AppTemplate</title>
   <style>
     html {
-      font-family: proxima-nova, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+      font-family: sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
       -webkit-tap-highlight-color: transparent;
       -webkit-font-smoothing: antialiased;
       -webkit-text-size-adjust: 100%;
           -ms-text-size-adjust: 100%;
     }
 
-    html, body, .app-container {
+    html, body, #main {
       height: 100%;
       width: 100%;
       margin: 0;
       overflow-y: hidden;
-      scrollbar-width: thin;
-      scrollbar-color: #555 #EEE;
       -webkit-user-select: none;
          -moz-user-select: none;
           -ms-user-select: none;
               user-select: none;
-    }
-
-    body::-webkit-scrollbar {width: 11px}
-    body::-webkit-scrollbar-track {background: #EEE}
-    body::-webkit-scrollbar-thumb {
-      background-color: #555;
-      border: 3px solid #EEE;
-      border-radius: 6px;
     }
 
     a {text-decoration: none}
@@ -42,6 +32,6 @@
   </style>
 </head>
 <body>
-  <div class="app-container"></div>
+  <div id="main"></div>
 </body>
 </html>

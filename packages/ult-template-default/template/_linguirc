@@ -1,0 +1,9 @@
+{
+  "format": "po",
+  "sourceLocale": "en",
+  "locales": ["en", "cs"],
+  "catalogs": [{
+    "path": "src/lib/locales/{locale}/messages",
+    "include": ["src"]
+  }]
+}

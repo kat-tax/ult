@@ -1,0 +1,1 @@
+/*eslint-disable*/module.exports={messages:{"App is activated!":"App is activated!","Click to activate...'":"Click to activate...'"}};
