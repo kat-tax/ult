@@ -20,4 +20,4 @@ function pod(name) {
   });
 };
 
-module.exports = {npx, pod, patch};
+module.exports = {npx, pod};

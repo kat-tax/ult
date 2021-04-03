@@ -34,6 +34,8 @@ module.exports = {
   appPkgVectorIcons: resolveApp('node_modules/react-native-vector-icons'),
   appPkgGestureHandler: resolveApp('node_modules/react-native-gesture-handler'),
   appPkgReanimated: resolveApp('node_modules/react-native-reanimated'),
+  appPkgReanimatedArc: resolveApp('node_modules/@callstack/reanimated-arc'),
+  appPkgCircularProgress: resolveApp('node_modules/react-native-circular-progress'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),
   swSrc: resolveModule(resolveApp, 'src/service-worker'),

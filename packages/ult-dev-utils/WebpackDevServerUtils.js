@@ -10,7 +10,7 @@ const clearConsole = require('./clearConsole');
 const formatWebpackMessages = require('./formatWebpackMessages');
 const getProcessForPort = require('./getProcessForPort');
 const typescriptFormatter = require('./typescriptFormatter');
-const forkTsCheckerWebpackPlugin = require('./ForkTsCheckerWebpackPlugin');
+const forkTsCheckerWebpackPlugin = require('./plugins/ForkTsCheckerWebpack');
 
 const isInteractive = process.stdout.isTTY;
 

@@ -48,8 +48,10 @@ module.exports = function(webpackEnv) {
   const isProdProfile = isProd && process.argv.includes('--profile');
   const clientEnv = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
   const hasSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
-  const hasBugSnag = !!process.env.BUGSNAG_API_KEY;
-  const hasRefresh = clientEnv.raw.FAST_REFRESH;
+  const hasFastRefresh = clientEnv.raw.FAST_REFRESH;
+  const hasBugsnagReporting = !!process.env.BUGSNAG_API_KEY;
+  const hasDisabledESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
+  const hasDisabledESLintWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
   const cacheIdentifier = getCacheIdentifier(
     isProd ? 'production' : isDev && 'development', [
       'babel-preset-react-app',
@@ -61,7 +63,7 @@ module.exports = function(webpackEnv) {
   return {
     // https://webpack.js.org/configuration/#options
     mode: isProd ? 'production' : isDev && 'development',
-    entry: isDev && !hasRefresh
+    entry: isDev && !hasFastRefresh
       ? [
         webpackDevClientEntry,
         paths.appIndexJs,
@@ -114,7 +116,7 @@ module.exports = function(webpackEnv) {
       extensions: paths.moduleFileExtensions.map(ext => `.${ext}`),
       alias: {
         // Alias React Native Web
-        'react-native': 'react-native-web',
+        'react-native$': 'react-native-web',
         // Alias popular libraries
         'react-native-svg': 'react-native-svg-web',
         'react-native-maps': 'react-native-web-maps',
@@ -151,10 +153,12 @@ module.exports = function(webpackEnv) {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: [
                 paths.appSrc,
-                // RN packages needed to be compiled
+                // Popular RN libs needed to be compiled
                 paths.appPkgVectorIcons,
                 paths.appPkgGestureHandler,
                 paths.appPkgReanimated,
+                paths.appPkgReanimatedArc,
+                paths.appPkgCircularProgress,
               ],
               loader: require.resolve('babel-loader'),
               options: {
@@ -173,7 +177,7 @@ module.exports = function(webpackEnv) {
                   ],
                 ],
                 plugins: [
-                  isDev && hasRefresh && require.resolve('react-refresh/babel'),
+                  isDev && hasFastRefresh && require.resolve('react-refresh/babel'),
                 ].filter(Boolean),
               },
             },
@@ -234,7 +238,7 @@ module.exports = function(webpackEnv) {
       isDev && new WatchMissingNodeModulesPlugin(paths.appNodeModules),
       isDev && new webpack.HotModuleReplacementPlugin(),
       // https://github.com/pmmmwh/react-refresh-webpack-plugin#options
-      isDev && hasRefresh && new ReactRefreshWebpackPlugin({
+      isDev && hasFastRefresh && new ReactRefreshWebpackPlugin({
         overlay: {
           entry: webpackDevClientEntry,
           module: reactRefreshOverlayEntry,
@@ -263,13 +267,13 @@ module.exports = function(webpackEnv) {
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
       }),
       // https://docs.bugsnag.com/build-integrations/webpack/#build-reporter
-      isProd && hasBugSnag && new BugsnagBuildReporterPlugin({
+      isProd && hasBugsnagReporting && new BugsnagBuildReporterPlugin({
         apiKey: process.env.BUGSNAG_API_KEY,
         appVersion: process.env.APP_VERSION,
         releaseStage: process.env.APP_STAGE,
       }),
       // https://docs.bugsnag.com/build-integrations/webpack/#source-map-uploader
-      isProd && hasBugSnag && hasSourceMap && new BugsnagSourceMapUploaderPlugin({
+      isProd && hasBugsnagReporting && hasSourceMap && new BugsnagSourceMapUploaderPlugin({
         apiKey: process.env.BUGSNAG_API_KEY,
         appVersion: process.env.APP_VERSION,
         publicPath: paths.publicUrlOrPath,
@@ -296,11 +300,11 @@ module.exports = function(webpackEnv) {
         ],
       }),
       // https://webpack.js.org/plugins/eslint-webpack-plugin/#options
-      new ESLintPlugin({
+      !hasDisabledESLintPlugin && new ESLintPlugin({
         extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
-        formatter: require.resolve('react-dev-utils/eslintFormatter'),
+        formatter: require.resolve('ult-dev-utils/eslintFormatter'),
         eslintPath: require.resolve('eslint'),
-        failOnError: !(isEnvDevelopment && emitErrorsAsWarnings),
+        failOnError: !(isDev && hasDisabledESLintWarnings),
         context: paths.appSrc,
         cache: true,
         cacheLocation: path.resolve(
