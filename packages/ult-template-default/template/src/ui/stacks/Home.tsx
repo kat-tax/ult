@@ -6,15 +6,15 @@ export function Home() {
   const scheme = useColorScheme();
   const isDark = scheme === 'dark';
   const classes = {
-    greeting: [
-      styles.greeting,
-      isDark && styles.greetingDark,
+    text: [
+      styles.text,
+      isDark && styles.textDark,
     ],
   };
 
   return (
     <SafeAreaView style={styles.root}>
-      <Text style={classes.greeting}>
+      <Text style={classes.text}>
         {t`Hello World`}
       </Text>
     </SafeAreaView>
@@ -25,11 +25,11 @@ const styles = StyleSheet.create({
   root: {
     margin: 16,
   },
-  greeting: {
+  text: {
     fontSize: 14,
     color: '#000',
   },
-  greetingDark: {
+  textDark: {
     color: '#fff',
   },
 });

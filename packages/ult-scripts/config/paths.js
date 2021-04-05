@@ -14,7 +14,7 @@ const moduleFileExtensions = [
   'json',
 ];
 
-const getPublicUrlOrPath = require('ult-dev-utils/getPublicUrlOrPath');
+const getPublicUrlOrPath = require('react-dev-utils/getPublicUrlOrPath');
 const resolveApp = relativePath => path.resolve(appDirectory, relativePath);
 const resolveModule = (resolve, path) => {
   const extension = moduleFileExtensions.find(ext => fs.existsSync(resolve(`${path}.${ext}`)));

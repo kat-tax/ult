@@ -1,11 +1,11 @@
 const fs = require('fs');
 
 // Dev Utils
-const ignoredFiles = require('ult-dev-utils/ignoredFiles');
-const redirectServedPath = require('ult-dev-utils/middleware/RedirectServedPath');
-const noopServiceWorker = require('ult-dev-utils/middleware/NoopServiceWorker');
-const evalSourceMap = require('ult-dev-utils/middleware/EvalSourceMap');
-const errorOverlay = require('ult-dev-utils/middleware/ErrorOverlay');
+const ignoredFiles = require('react-dev-utils/ignoredFiles');
+const redirectServedPath = require('react-dev-utils/redirectServedPathMiddleware');
+const noopServiceWorker = require('react-dev-utils/noopServiceWorkerMiddleware');
+const evalSourceMap = require('react-dev-utils/evalSourceMapMiddleware');
+const errorOverlay = require('react-dev-utils/errorOverlayMiddleware');
 
 // Helpers
 const getHttpsConfig = require('../lib/https');

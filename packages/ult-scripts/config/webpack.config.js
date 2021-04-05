@@ -5,15 +5,15 @@ const webpack = require('webpack');
 const resolve = require('resolve');
 
 // Dev Utils
-const typescriptFormatter = require('ult-dev-utils/typescriptFormatter');
-const InterpolateHtmlPlugin = require('ult-dev-utils/plugins/InterpolateHtml');
-const ForkTsCheckerWebpackPlugin = require('ult-dev-utils/plugins/ForkTsCheckerWebpack');
-const WatchMissingNodeModulesPlugin = require('ult-dev-utils/plugins/WatchMissingNodeModules');
-const ModuleNotFoundPlugin = require('ult-dev-utils/plugins/ModuleNotFound');
-const ModuleScopePlugin = require('ult-dev-utils/plugins/ModuleScope');
-const getCacheIdentifier = require('ult-dev-utils/getCacheIdentifier');
-const webpackDevClientEntry = require.resolve('ult-dev-utils/webpackHotDevClient');
-const reactRefreshOverlayEntry = require.resolve('ult-dev-utils/refreshOverlayInterop');
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
+const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
+const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin');
+const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
+const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+const webpackDevClientEntry = require.resolve('react-dev-utils/webpackHotDevClient');
+const reactRefreshOverlayEntry = require.resolve('react-dev-utils/refreshOverlayInterop');
 
 // Plugins
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
@@ -55,7 +55,7 @@ module.exports = function(webpackEnv) {
   const cacheIdentifier = getCacheIdentifier(
     isProd ? 'production' : isDev && 'development', [
       'babel-preset-react-app',
-      'ult-dev-utils',
+      'react-dev-utils',
       'ult-scripts',
     ]
   );
@@ -302,7 +302,7 @@ module.exports = function(webpackEnv) {
       // https://webpack.js.org/plugins/eslint-webpack-plugin/#options
       !hasDisabledESLintPlugin && new ESLintPlugin({
         extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
-        formatter: require.resolve('ult-dev-utils/eslintFormatter'),
+        formatter: require.resolve('react-dev-utils/eslintFormatter'),
         eslintPath: require.resolve('eslint'),
         failOnError: !(isDev && hasDisabledESLintWarnings),
         context: paths.appSrc,
