@@ -15,3 +15,12 @@ else style.appendChild(document.createTextNode(iconCSS));
 document.head.appendChild(style);
 
 import 'ui/Main';
+
+// Web metrics
+import('web-vitals').then(({getCLS, getFID, getFCP, getLCP, getTTFB}) => {
+  getCLS();
+  getFID();
+  getFCP();
+  getLCP();
+  getTTFB();
+});

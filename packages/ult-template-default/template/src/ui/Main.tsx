@@ -1,4 +1,5 @@
-import React, {useEffect} from 'react';
+import React from 'react';
+import {useEffect} from 'react';
 import {AppRegistry} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import {I18nProvider} from '@lingui/react';

@@ -1,6 +1,7 @@
-import React, {StyleSheet, Text, useColorScheme} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import React from 'react';
 import {t} from '@lingui/macro';
+import {StyleSheet, Text, useColorScheme} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 export function Home() {
   const scheme = useColorScheme();

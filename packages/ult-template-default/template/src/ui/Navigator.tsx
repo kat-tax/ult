@@ -1,22 +1,22 @@
-import React, {useRef} from 'react';
+import React from 'react';
+import {t} from '@lingui/macro';
+import {useRef} from 'react';
 import {useColorScheme} from 'react-native';
-import {NavigationContainer, NavigationContainerRef} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import {NavigationContainer, NavigationContainerRef} from '@react-navigation/native';
 import {useReduxDevToolsExtension} from '@react-navigation/devtools';
 import {Default, DefaultDark} from 'lib/themes';
 import {Home} from 'ui/stacks/Home';
-import {t} from '@lingui/macro';
 
 const Stack = createStackNavigator();
 
 export function Navigator() {
-  const ref = useRef<NavigationContainerRef>(null);
   const scheme = useColorScheme();
-  const isDark = scheme === 'dark';
-  const theme = isDark ? DefaultDark.nav : Default.nav;
-  useReduxDevToolsExtension(ref);
+  const navRef = useRef<NavigationContainerRef>(null);
+  const navTheme = scheme === 'dark' ? DefaultDark.nav : Default.nav;
+  useReduxDevToolsExtension(navRef);
   return (
-    <NavigationContainer ref={ref} theme={theme}>
+    <NavigationContainer ref={navRef} theme={navTheme}>
       <Stack.Navigator>
         <Stack.Screen name={t`Home`} component={Home}/>
       </Stack.Navigator>

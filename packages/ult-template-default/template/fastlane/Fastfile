@@ -18,14 +18,14 @@ platform :android do
   private_lane :upload do |options|
     release_notes = options[:notes]
     appcenter_upload(
-        api_token: ENV["APPCENTER_API_TOKEN"],
-        owner_name: ENV["APPCENTER_OWNER_NAME"],
-        app_name: ENV["APPCENTER_APP_NAME"],
-        apk: "./android/app/build/outputs/apk/release/app-release.apk",
-        notify_testers: ENV["NOTIFY_TESTERS"],
-        destinations: ENV["DESTINATIONS"],
-        release_notes: release_notes
-        )
+      api_token: ENV["APPCENTER_API_TOKEN"],
+      owner_name: ENV["APPCENTER_OWNER_NAME"],
+      app_name: ENV["APPCENTER_APP_NAME"],
+      apk: "./android/app/build/outputs/apk/release/app-release.apk",
+      notify_testers: ENV["NOTIFY_TESTERS"],
+      destinations: ENV["DESTINATIONS"],
+      release_notes: release_notes
+    )
   end
 
   desc 'Build, deploy staging Android.'
@@ -55,19 +55,16 @@ end
 
 # iOS Sign, Build & Deploy
 platform :ios do
-  # You need to configure singing for iOS
-  # https://github.com/osamaq/reactnative-fastlane-appcenter#signing
   desc 'Set up certs and profiles for iOS.'
   lane :certificates do
     register_devices(
-      devices: {
-        }
+      devices: {}
     )
     match(
       app_identifier: 'com.app.bundle',
       readonly: true, 
       force_for_new_devices: true, 
-      )
+    )
   end
 
   desc 'Build the staging release iOS application.'
@@ -95,14 +92,14 @@ platform :ios do
   private_lane :upload do |options|
     release_notes = options[:notes]
     appcenter_upload(
-        api_token: ENV["APPCENTER_API_TOKEN"],
-        owner_name: ENV["APPCENTER_OWNER_NAME"],
-        app_name: ENV["APPCENTER_APP_NAME"],
-        ipa: "./" + "Hello App Display Name" + ".ipa",
-        notify_testers: ENV["NOTIFY_TESTERS"],
-        destinations: ENV["DESTINATIONS"],
-        release_notes: release_notes
-        )
+      api_token: ENV["APPCENTER_API_TOKEN"],
+      owner_name: ENV["APPCENTER_OWNER_NAME"],
+      app_name: ENV["APPCENTER_APP_NAME"],
+      ipa: "./" + "Hello App Display Name" + ".ipa",
+      notify_testers: ENV["NOTIFY_TESTERS"],
+      destinations: ENV["DESTINATIONS"],
+      release_notes: release_notes
+    )
   end
 
   desc 'Sign, build, deploy staging iOS.'
