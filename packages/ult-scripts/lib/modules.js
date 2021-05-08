@@ -12,6 +12,7 @@ function getModules() {
   const additionalModulePaths = getAdditionalModulePaths(options);
   return {
     hasTsConfig,
+    jestAliases: getJestAliases(options),
     webpackAliases: getWebpackAliases(options),
     additionalModulePaths: additionalModulePaths,
   };
@@ -28,6 +29,14 @@ function getAdditionalModulePaths(options = {}) {
   if (path.relative(paths.appPath, baseUrlResolved) === '')
     return null;
   throw new Error(chalk.red.bold("Your project's `baseUrl` can only be set to `src` or `node_modules`."));
+}
+
+function getJestAliases(options = {}) {
+  const baseUrl = options.baseUrl;
+  if (!baseUrl) return {};
+  const baseUrlResolved = path.resolve(paths.appPath, baseUrl);
+  if (path.relative(paths.appPath, baseUrlResolved) === '')
+    return {'^src/(.*)$': '<rootDir>/src/$1'};
 }
 
 function getWebpackAliases(options = {}) {

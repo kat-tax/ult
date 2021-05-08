@@ -18,6 +18,8 @@ const reactRefreshOverlayEntry = require.resolve('ult-dev-utils/refreshOverlayIn
 // Plugins
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
@@ -46,9 +48,13 @@ module.exports = function(webpackEnv) {
   const isProd = webpackEnv === 'production';
   const isProdProfile = isProd && process.argv.includes('--profile');
   const clientEnv = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
+
   const hasSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
-  const hasBugSnag = !!process.env.BUGSNAG_API_KEY;
-  const hasRefresh = clientEnv.raw.FAST_REFRESH;
+  const hasBugsnagReporting = !!process.env.BUGSNAG_API_KEY;
+  const hasFastRefresh = clientEnv.raw.FAST_REFRESH;
+  const hasDisabledESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
+  const hasDisabledESLintWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
+
   const cacheIdentifier = getCacheIdentifier(
     isProd ? 'production' : isDev && 'development', [
       'babel-preset-react-app',
@@ -60,7 +66,7 @@ module.exports = function(webpackEnv) {
   return {
     // https://webpack.js.org/configuration/#options
     mode: isProd ? 'production' : isDev && 'development',
-    entry: isDev && !hasRefresh
+    entry: isDev && !hasFastRefresh
       ? [
         webpackDevClientEntry,
         paths.appIndexJs,
@@ -171,7 +177,7 @@ module.exports = function(webpackEnv) {
                   ],
                 ],
                 plugins: [
-                  isDev && hasRefresh && require.resolve('react-refresh/babel'),
+                  isDev && hasFastRefresh && require.resolve('react-refresh/babel'),
                 ].filter(Boolean),
               },
             },
@@ -232,7 +238,7 @@ module.exports = function(webpackEnv) {
       isDev && new WatchMissingNodeModulesPlugin(paths.appNodeModules),
       isDev && new webpack.HotModuleReplacementPlugin(),
       // https://github.com/pmmmwh/react-refresh-webpack-plugin#options
-      isDev && hasRefresh && new ReactRefreshWebpackPlugin({
+      isDev && hasFastRefresh && new ReactRefreshWebpackPlugin({
         overlay: {
           entry: webpackDevClientEntry,
           module: reactRefreshOverlayEntry,
@@ -261,13 +267,13 @@ module.exports = function(webpackEnv) {
         maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
       }),
       // https://docs.bugsnag.com/build-integrations/webpack/#build-reporter
-      isProd && hasBugSnag && new BugsnagBuildReporterPlugin({
+      isProd && hasBugsnagReporting && new BugsnagBuildReporterPlugin({
         apiKey: process.env.BUGSNAG_API_KEY,
         appVersion: process.env.APP_VERSION,
         releaseStage: process.env.APP_STAGE,
       }),
       // https://docs.bugsnag.com/build-integrations/webpack/#source-map-uploader
-      isProd && hasBugSnag && hasSourceMap && new BugsnagSourceMapUploaderPlugin({
+      isProd && hasBugsnagReporting && hasSourceMap && new BugsnagSourceMapUploaderPlugin({
         apiKey: process.env.BUGSNAG_API_KEY,
         appVersion: process.env.APP_VERSION,
         publicPath: paths.publicUrlOrPath,
@@ -290,7 +296,31 @@ module.exports = function(webpackEnv) {
           '!**/src/**/__tests__/**',
           '!**/src/**/?(*.)(spec|test).*',
           '!**/src/setupProxy.*',
+          '!**/src/setupTests.*',
         ],
+      }),
+      // https://webpack.js.org/plugins/eslint-webpack-plugin/#options
+      !hasDisabledESLintPlugin && new ESLintPlugin({
+        extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
+        formatter: require.resolve('ult-dev-utils/eslintFormatter'),
+        eslintPath: require.resolve('eslint'),
+        failOnError: !(isDev && hasDisabledESLintWarnings),
+        context: paths.appSrc,
+        cache: true,
+        cacheLocation: path.resolve(
+          paths.appNodeModules,
+          '.cache/.eslintcache'
+        ),
+        cwd: paths.appPath,
+        resolvePluginsRelativeTo: __dirname,
+        baseConfig: {
+          extends: [require.resolve('eslint-config-react-app/base')],
+          rules: {
+            ...(!hasJsxRuntime && {
+              'react/react-in-jsx-scope': 'error',
+            }),
+          },
+        },
       }),
     ].filter(Boolean),
     node: {

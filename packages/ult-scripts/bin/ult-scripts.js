@@ -4,8 +4,10 @@ const spawn = require('ult-dev-utils/crossSpawn');
 const scripts = [
   'run-web',
   'build-web',
+  'test-web',
 ];
 
+const spawn = require('cross-spawn');
 const args = process.argv.slice(2);
 const index = args.findIndex(x => x === scripts[1] || x === scripts[0]);
 const script = index === -1 ? args[0] : args[index];
