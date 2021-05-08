@@ -18,13 +18,12 @@ const reactRefreshOverlayEntry = require.resolve('ult-dev-utils/refreshOverlayIn
 // Plugins
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const ESLintPlugin = require('eslint-webpack-plugin');
-const PnpWebpackPlugin = require('pnp-webpack-plugin');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
 const {BugsnagBuildReporterPlugin, BugsnagSourceMapUploaderPlugin} = require('webpack-bugsnag-plugins');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+const PnpWebpackPlugin = require('pnp-webpack-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 // Helpers
 const getClientEnvironment = require('../lib/env');

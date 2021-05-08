@@ -9,4 +9,4 @@ const isDebug = process.env.ULT_APP_DEBUG == 'true';
 
 App.initialize(isDev, isDebug);
 UserInterface.setMainView(<AppFrame/>);
-isWeb && UserInterface.useCustomScrollbars(true);
+isWeb() && UserInterface.useCustomScrollbars(true);

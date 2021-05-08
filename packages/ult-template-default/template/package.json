@@ -34,6 +34,6 @@
     "@types/react": "^17.0.5",
     "metro-react-native-babel-preset": "^0.66.0",
     "typescript": "^4.2.4",
-    "ult-scripts": "^1.1.0"
+    "ult-scripts": "^1.1.1"
   }
 }
