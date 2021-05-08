@@ -23,9 +23,9 @@ async function init() {
     console.log('Creating project, please wait...\n');
     await utils.npx(['react-native', 'init', name, '--template', tpl], undefined, true);
     console.log('Initializing Windows project...');
-    await utils.npx(['react-native-windows-init', '--overwrite'], cwd);
+    await utils.npx(['react-native-windows-init', '--overwrite', '--version', '0.63.27', '--no-telemetry'], cwd);
     console.log('Initializing MacOS project...');
-    await utils.npx(['react-native-macos-init', '--overwrite'], cwd);
+    await utils.npx(['react-native-macos-init', '--overwrite', '--version', '0.63.28'], cwd);
     console.log('Patching project files...');
     await utils.patch(name);
     if (process.platform === 'darwin') {
