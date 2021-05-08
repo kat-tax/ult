@@ -4,10 +4,10 @@ process.on('unhandledRejection', err => {throw err});
 require('../lib/env');
 
 // Imports
+const bfj = require('bfj');
 const path = require('path');
 const fs = require('fs-extra');
 const webpack = require('webpack');
-const bfj = require('bfj');
 
 // React Dev Utils
 const chalk = require('ult-dev-utils/chalk');

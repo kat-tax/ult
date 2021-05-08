@@ -1,9 +1,11 @@
 #!/usr/bin/env node
 
 const spawn = require('ult-dev-utils/crossSpawn');
+
 const scripts = [
   'run-web',
   'build-web',
+  'test-web',
 ];
 
 const args = process.argv.slice(2);
