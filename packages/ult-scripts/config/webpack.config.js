@@ -113,10 +113,12 @@ module.exports = function(webpackEnv) {
       extensions: paths.moduleFileExtensions.map(ext => `.${ext}`),
       alias: {
         // React Native Web support
-        'react-native': 'react-native-web',
-        // React Native SVG support for web
+        'react-native$': 'react-native-web',
+        // Alias popular RNW packages
         'react-native-svg': 'react-native-svg-web',
-        // React Recycler List View
+        'react-native-maps': 'react-native-web-maps',
+        'react-native-webview': 'react-native-web-webview',
+        'lottie-react-native': 'react-native-web-lottie',
         'recyclerlistview': 'recyclerlistview/web',
         // ReactDevTools profiling
         ...(isProdProfile && {
@@ -189,18 +191,18 @@ module.exports = function(webpackEnv) {
                 presets: [[require.resolve('babel-preset-react-app/dependencies'), {helpers: true}]],
               },
             },
+            // https://github.com/oblador/react-native-vector-icons#web-with-webpack
+            {
+              test: /\.ttf$/,
+              loader: require.resolve('file-loader'),
+              include: path.resolve(__dirname, 'node_modules/react-native-vector-icons'),
+            },
             {
               loader: require.resolve('file-loader'),
               exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
               options: {
                 name: 'static/media/[name].[hash:8].[ext]',
               },
-            },
-            // https://github.com/oblador/react-native-vector-icons#web-with-webpack
-            {
-              test: /\.ttf$/,
-              loader: require.resolve('file-loader'),
-              include: path.resolve(__dirname, 'node_modules/react-native-vector-icons'),
             },
             // ** STOP ** Are you adding a new loader?
             // Make sure to add the new loader(s) before the "file" loader.
