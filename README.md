@@ -23,11 +23,11 @@ After everything installs, use `npm run [task]`
 | npm run macos         | Start development on MacOS                          |
 | npm run android       | Start development on Android                        |
 | npm run windows       | Start development on Windows                        |
-| npm run build:web     | Build a production Web bundle                       |
-| npm run build:ios     | Build a production iOS app                          |
-| npm run build:macos   | Build a production MacOS app                        |
-| npm run build:windows | Build a production Windows app                      |
-| npm run build:android | Build a production Android app                      |
+| npm run build-web     | Build a production Web bundle                       |
+| npm run build-ios     | Build a production iOS app                          |
+| npm run build-macos   | Build a production MacOS app                        |
+| npm run build-windows | Build a production Windows app                      |
+| npm run build-android | Build a production Android app                      |
 
 ### Features
 - ⚛ Native cross-platform UI
