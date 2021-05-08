@@ -44,20 +44,6 @@ After everything installs, use `npm run [task]`
  - [Metro](https://facebook.github.io/metro/) & [Webpack](https://webpack.js.org/) (bundlers)
  - [RN](https://reactnative.dev/) + [Windows](https://microsoft.github.io/react-native-windows/) & [Web](https://necolas.github.io/react-native-web) (bridges)
 
-### Bring your own state!
-  - [Redux](https://redux.js.org/)
-  - [Recoil](https://recoiljs.org/)
-  - [Refract](https://refract.js.org/)
-  - [XState](https://xstate.js.org/)
-  - [MobX](https://mobx.js.org/)
-
-### Maybe you want a database?
-  - [WatermelonDB](https://nozbe.github.io/WatermelonDB/)
-  - [PouchDB](https://pouchdb.com/)
-  - [RxDB](https://rxdb.info/)
-  - [GUN](https://gun.eco/)
-  - [OrbitDB](https://orbitdb.org/)
-
 ### Community
 
 Join the discussion in [Discord](https://discord.gg/TzhDRyj)!
