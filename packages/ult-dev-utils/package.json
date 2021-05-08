@@ -1,6 +1,6 @@
 {
   "name": "ult-dev-utils",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "license": "MIT",
   "description": "Webpack utilities used by ULT",
   "repository": {
