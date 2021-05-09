@@ -56,7 +56,7 @@ module.exports = function(webpackEnv) {
 
   const cacheIdentifier = getCacheIdentifier(
     isProd ? 'production' : isDev && 'development', [
-      'babel-preset-react-app',
+      'babel-preset-ult-app',
       'ult-dev-utils',
       'ult-scripts',
     ]
@@ -167,10 +167,10 @@ module.exports = function(webpackEnv) {
                 configFile: false,
                 cacheDirectory: true,
                 cacheCompression: false,
-                customize: require.resolve('babel-preset-react-app/webpack-overrides'),
+                customize: require.resolve('babel-preset-ult-app/webpack-overrides'),
                 presets: [
                   [
-                    require.resolve('babel-preset-react-app'), {
+                    require.resolve('babel-preset-ult-app'), {
                       runtime: hasJsxRuntime ? 'automatic' : 'classic',
                     },
                   ],
@@ -193,7 +193,7 @@ module.exports = function(webpackEnv) {
                 cacheCompression: false,
                 sourceMaps: hasSourceMap,
                 inputSourceMap: hasSourceMap,
-                presets: [[require.resolve('babel-preset-react-app/dependencies'), {helpers: true}]],
+                presets: [[require.resolve('babel-preset-ult-app/dependencies'), {helpers: true}]],
               },
             },
             // https://github.com/oblador/react-native-vector-icons#web-with-webpack
