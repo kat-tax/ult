@@ -25,10 +25,10 @@ function pod(name) {
 async function patch(name) {
   const cwd = path.resolve(process.cwd(), name.toLowerCase());
   await replace({
-    from: `MainComponentName(L"${name}");`,
-    to: 'MainComponentName(L"RXApp");',
+    from: `ComponentName="${name}"`,
+    to: 'ComponentName="RXApp"',
     files: [
-      `${cwd}/windows/${name}/App.cpp`,
+      `${cwd}/windows/${name}/MainPage.xaml`,
     ],
   });
   await replace({
