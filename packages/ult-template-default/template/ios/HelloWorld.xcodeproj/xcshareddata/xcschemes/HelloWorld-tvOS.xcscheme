@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "AppTemplate-tvOS.app"
-               BlueprintName = "AppTemplate-tvOS"
-               ReferencedContainer = "container:AppTemplate.xcodeproj">
+               BuildableName = "HelloWorld-tvOS.app"
+               BlueprintName = "HelloWorld-tvOS"
+               ReferencedContainer = "container:HelloWorld.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "AppTemplate-tvOSTests.xctest"
-               BlueprintName = "AppTemplate-tvOSTests"
-               ReferencedContainer = "container:AppTemplate.xcodeproj">
+               BuildableName = "HelloWorld-tvOSTests.xctest"
+               BlueprintName = "HelloWorld-tvOSTests"
+               ReferencedContainer = "container:HelloWorld.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "AppTemplate-tvOS.app"
-            BlueprintName = "AppTemplate-tvOS"
-            ReferencedContainer = "container:AppTemplate.xcodeproj">
+            BuildableName = "HelloWorld-tvOS.app"
+            BlueprintName = "HelloWorld-tvOS"
+            ReferencedContainer = "container:HelloWorld.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "AppTemplate-tvOS.app"
-            BlueprintName = "AppTemplate-tvOS"
-            ReferencedContainer = "container:AppTemplate.xcodeproj">
+            BuildableName = "HelloWorld-tvOS.app"
+            BlueprintName = "HelloWorld-tvOS"
+            ReferencedContainer = "container:HelloWorld.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
