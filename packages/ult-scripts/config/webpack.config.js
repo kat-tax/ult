@@ -5,7 +5,6 @@ const webpack = require('webpack');
 const resolve = require('resolve');
 
 // React Dev Utils
-const getCacheIdentifier = require('ult-dev-utils/getCacheIdentifier');
 const typescriptFormatter = require('ult-dev-utils/typescriptFormatter');
 const InterpolateHtmlPlugin = require('ult-dev-utils/InterpolateHtmlPlugin');
 const ForkTsCheckerWebpackPlugin = require('ult-dev-utils/ForkTsCheckerWebpackPlugin');
@@ -16,11 +15,11 @@ const webpackDevClientEntry = require.resolve('ult-dev-utils/webpackHotDevClient
 const reactRefreshOverlayEntry = require.resolve('ult-dev-utils/refreshOverlayInterop');
 
 // Plugins
-const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const {BugsnagBuildReporterPlugin, BugsnagSourceMapUploaderPlugin} = require('webpack-bugsnag-plugins');
+const {ESBuildPlugin, ESBuildMinifyPlugin} = require('esbuild-loader');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
@@ -30,16 +29,6 @@ const getClientEnvironment = require('../lib/env');
 const modules = require('../lib/modules');
 const paths = require('./paths');
 const app = require(paths.appPackageJson);
-const hasJsxRuntime = (() => {
-  if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true')
-    return false;
-  try {
-    require.resolve('react/jsx-runtime');
-    return true;
-  } catch (e) {
-    return false;
-  }
-})();
 
 // Config
 module.exports = function(webpackEnv) {
@@ -53,14 +42,6 @@ module.exports = function(webpackEnv) {
   const hasFastRefresh = clientEnv.raw.FAST_REFRESH;
   const hasDisabledESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
   const hasDisabledESLintWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
-
-  const cacheIdentifier = getCacheIdentifier(
-    isProd ? 'production' : isDev && 'development', [
-      'babel-preset-react-app',
-      'ult-dev-utils',
-      'ult-scripts',
-    ]
-  );
 
   return {
     // https://webpack.js.org/configuration/#options
@@ -100,16 +81,10 @@ module.exports = function(webpackEnv) {
       runtimeChunk: {name: entrypoint => `runtime-${entrypoint.name}`},
       minimize: isProd,
       minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            sourceMap: hasSourceMap,
-            parse: {ecma: 8},
-            mangle: {safari10: true},
-            output: {ecma: 5, comments: false, ascii_only: true},
-            compress: {ecma: 5, inline: 2, warnings: false, comparisons: false},
-            keep_classnames: isProdProfile,
-            keep_fnames: isProdProfile,
-          },
+        // https://github.com/privatenumber/esbuild-loader#minifyplugin
+        new ESBuildMinifyPlugin({
+          target: 'es2015',
+          keepNames: isProdProfile,
         }),
       ],
     },
@@ -159,41 +134,10 @@ module.exports = function(webpackEnv) {
                 paths.appPkgGestureHandler,
                 paths.appPkgReanimated,
               ],
-              loader: require.resolve('babel-loader'),
+              loader: require.resolve('esbuild-loader'),
               options: {
-                cacheIdentifier,
-                compact: isProd,
-                babelrc: false,
-                configFile: false,
-                cacheDirectory: true,
-                cacheCompression: false,
-                customize: require.resolve('babel-preset-react-app/webpack-overrides'),
-                presets: [
-                  [
-                    require.resolve('babel-preset-react-app'), {
-                      runtime: hasJsxRuntime ? 'automatic' : 'classic',
-                    },
-                  ],
-                ],
-                plugins: [
-                  isDev && hasFastRefresh && require.resolve('react-refresh/babel'),
-                ].filter(Boolean),
-              },
-            },
-            {
-              test: /\.(js|mjs)$/,
-              exclude: /@babel(?:\/|\\{1,2})runtime/,
-              loader: require.resolve('babel-loader'),
-              options: {
-                cacheIdentifier,
-                compact: false,
-                babelrc: false,
-                configFile: false,
-                cacheDirectory: true,
-                cacheCompression: false,
-                sourceMaps: hasSourceMap,
-                inputSourceMap: hasSourceMap,
-                presets: [[require.resolve('babel-preset-react-app/dependencies'), {helpers: true}]],
+                loader: 'tsx',
+                target: 'es2015',
               },
             },
             // https://github.com/oblador/react-native-vector-icons#web-with-webpack
@@ -315,12 +259,14 @@ module.exports = function(webpackEnv) {
         baseConfig: {
           extends: [require.resolve('eslint-config-react-app/base')],
           rules: {
-            ...(!hasJsxRuntime && {
+            ...({
               'react/react-in-jsx-scope': 'error',
             }),
           },
         },
       }),
+      // https://github.com/privatenumber/esbuild-loader#loader
+      new ESBuildPlugin(),
     ].filter(Boolean),
     node: {
       module: 'empty',
