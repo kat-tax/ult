@@ -21,8 +21,8 @@ After everything installs, use `npm run [task]`
 | npm run web           | Start development on Web                            |
 | npm run ios           | Start development on iOS                            |
 | npm run macos         | Start development on MacOS                          |
-| npm run android       | Start development on Android                        |
 | npm run windows       | Start development on Windows                        |
+| npm run android       | Start development on Android                        |
 | npm run build-web     | Build a production Web bundle                       |
 | npm run build-ios     | Build a production iOS app                          |
 | npm run build-macos   | Build a production MacOS app                        |
