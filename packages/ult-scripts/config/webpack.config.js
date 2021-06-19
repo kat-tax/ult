@@ -125,6 +125,8 @@ module.exports = function(webpackEnv) {
         'react-native-webview': 'react-native-web-webview',
         'lottie-react-native': 'react-native-web-lottie',
         'recyclerlistview': 'recyclerlistview/web',
+        // WDYR profiling
+        'react-redux': isDev ? 'react-redux/lib' : 'react-redux',
         // ReactDevTools profiling
         ...(isProdProfile && {
           'react-dom$': 'react-dom/profiling',
