@@ -1,7 +1,7 @@
 {
   "name": "ult-scripts",
   "description": "Configuration and scripts for ULT",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "license": "MIT",
   "types": "./lib/ult.d.ts",
   "bin": {
@@ -54,14 +54,14 @@
     "workbox-webpack-plugin": "6.1.5"
   },
   "devDependencies": {
-    "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
   },
   "optionalDependencies": {
     "fsevents": "^2.3.2"
   },
   "peerDependencies": {
-    "react": ">= 16",
+    "react": "16.13.1",
     "typescript": "^3.2.1 || ^4"
   },
   "peerDependenciesMeta": {
