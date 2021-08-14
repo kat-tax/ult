@@ -1,35 +1,41 @@
+// Based on: https://github.com/facebook/create-react-app/blob/main/packages/react-scripts/config/webpack.config.js
+
 // Imports
-const path = require('path');
-const fs = require('fs-extra');
 const webpack = require('webpack');
 const resolve = require('resolve');
+const fs = require('fs-extra');
+const path = require('path');
 
 // React Dev Utils
-const getCacheIdentifier = require('ult-dev-utils/getCacheIdentifier');
-const typescriptFormatter = require('ult-dev-utils/typescriptFormatter');
 const InterpolateHtmlPlugin = require('ult-dev-utils/InterpolateHtmlPlugin');
-const ForkTsCheckerWebpackPlugin = require('ult-dev-utils/ForkTsCheckerWebpackPlugin');
-const WatchMissingNodeModulesPlugin = require('ult-dev-utils/WatchMissingNodeModulesPlugin');
 const ModuleNotFoundPlugin = require('ult-dev-utils/ModuleNotFoundPlugin');
 const ModuleScopePlugin = require('ult-dev-utils/ModuleScopePlugin');
-const webpackDevClientEntry = require.resolve('ult-dev-utils/webpackHotDevClient');
-const reactRefreshOverlayEntry = require.resolve('ult-dev-utils/refreshOverlayInterop');
+const getCacheIdentifier = require('ult-dev-utils/getCacheIdentifier');
+const ForkTsCheckerWebpackPlugin = process.env.TSC_COMPILE_ON_ERROR === 'true'
+  ? require('ult-dev-utils/ForkTsCheckerWarningWebpackPlugin')
+  : require('ult-dev-utils/ForkTsCheckerWebpackPlugin');
 
 // Plugins
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const {BugsnagBuildReporterPlugin, BugsnagSourceMapUploaderPlugin} = require('webpack-bugsnag-plugins');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
-const PnpWebpackPlugin = require('pnp-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
+// Runtime
+const reactRefreshRuntimeEntry = require.resolve('react-refresh/runtime');
+const reactRefreshWebpackPlugin = require.resolve('@pmmmwh/react-refresh-webpack-plugin');
+const babelRuntimeEntryHelpers = require.resolve('@babel/runtime/helpers/esm/assertThisInitialized');
+const babelRuntimeRegenerator = require.resolve('@babel/runtime/regenerator');
+const babelRuntimeEntry = require.resolve('babel-preset-ult-app');
+
 // Helpers
-const getClientEnvironment = require('../lib/env');
+const createEnvironmentHash = require('../lib/createEnvironmentHash');
+const getClientEnvironment = require('../lib/getClientEnvironment');
 const modules = require('../lib/modules');
 const paths = require('./paths');
-const app = require(paths.appPackageJson);
 const hasJsxRuntime = (() => {
   if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true')
     return false;
@@ -47,13 +53,11 @@ module.exports = function(webpackEnv) {
   const isProd = webpackEnv === 'production';
   const isProdProfile = isProd && process.argv.includes('--profile');
   const clientEnv = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
-
   const hasSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
   const hasBugsnagReporting = !!process.env.BUGSNAG_API_KEY;
   const hasFastRefresh = clientEnv.raw.FAST_REFRESH;
   const hasDisabledESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
   const hasDisabledESLintWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
-
   const cacheIdentifier = getCacheIdentifier(
     isProd ? 'production' : isDev && 'development', [
       'babel-preset-ult-app',
@@ -64,25 +68,18 @@ module.exports = function(webpackEnv) {
 
   return {
     // https://webpack.js.org/configuration/#options
-    mode: isProd ? 'production' : isDev && 'development',
-    entry: isDev && !hasFastRefresh
-      ? [
-        webpackDevClientEntry,
-        paths.appIndexJs,
-      ]
-      : paths.appIndexJs,
-    devtool: isProd
-      ? hasSourceMap
-        ? 'source-map'
-        : false
-      : isDev && 'cheap-module-source-map',
+    entry: paths.appIndexJs,
+    target: ['browserslist'],
     performance: false,
     bail: isProd,
+    mode: isProd
+      ? 'production'
+      : isDev && 'development',
+    devtool: isProd
+      ? hasSourceMap ? 'source-map' : false
+      : isDev && 'cheap-module-source-map',
     output: {
-      globalObject: 'this',
-      futureEmitAssets: true,
-      jsonpFunction: `webpackJsonp${app.name}`,
-      path: isProd ? paths.appBuild : undefined,
+      path: paths.appBuild,
       publicPath: paths.publicUrlOrPath,
       pathinfo: isDev,
       filename: isProd
@@ -91,18 +88,19 @@ module.exports = function(webpackEnv) {
       chunkFilename: isProd
         ? 'static/js/[name].[contenthash:8].chunk.js'
         : isDev && 'static/js/[name].chunk.js',
+      assetModuleFilename: 'static/media/[name].[hash][ext]',
       devtoolModuleFilenameTemplate: isProd
         ? info => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/')
         : isDev && (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
     },
+    infrastructureLogging: {
+      level: 'none',
+    },
     optimization: {
-      splitChunks: {chunks: 'all', name: false},
-      runtimeChunk: {name: entrypoint => `runtime-${entrypoint.name}`},
       minimize: isProd,
       minimizer: [
         new TerserPlugin({
           terserOptions: {
-            sourceMap: hasSourceMap,
             parse: {ecma: 8},
             mangle: {safari10: true},
             output: {ecma: 5, comments: false, ascii_only: true},
@@ -112,6 +110,20 @@ module.exports = function(webpackEnv) {
           },
         }),
       ],
+    },
+    cache: {
+      store: 'pack',
+      type: 'filesystem',
+      version: createEnvironmentHash(clientEnv.raw),
+      cacheDirectory: paths.appWebpackCache,
+      buildDependencies: {
+        defaultWebpack: ['webpack/lib/'],
+        config: [__filename],
+        tsconfig: [
+          paths.appTsConfig,
+          paths.appJsConfig,
+        ].filter(f => fs.existsSync(f)),
+      },
     },
     resolve: {
       modules: ['node_modules', paths.appNodeModules].concat(modules.additionalModulePaths || []),
@@ -135,22 +147,19 @@ module.exports = function(webpackEnv) {
         ...(modules.webpackAliases || {}),
       },
       plugins: [
-        PnpWebpackPlugin,
         new ModuleScopePlugin(paths.appSrc, [
           paths.appPackageJson,
-          reactRefreshOverlayEntry,
+          reactRefreshRuntimeEntry,
+          reactRefreshWebpackPlugin,
+          babelRuntimeEntry,
+          babelRuntimeEntryHelpers,
+          babelRuntimeRegenerator,
         ]),
-      ],
-    },
-    resolveLoader: {
-      plugins: [
-        PnpWebpackPlugin.moduleLoader(module),
       ],
     },
     module: {
       strictExportPresence: true,
       rules: [
-        { parser: { requireEnsure: false } },
         {
           oneOf: [
             {
@@ -205,14 +214,11 @@ module.exports = function(webpackEnv) {
               include: path.resolve(__dirname, 'node_modules/react-native-vector-icons'),
             },
             {
-              loader: require.resolve('file-loader'),
-              exclude: [/\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
-              options: {
-                name: 'static/media/[name].[hash:8].[ext]',
-              },
+              exclude: [/^$/, /\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+              type: 'asset/resource',
             },
             // ** STOP ** Are you adding a new loader?
-            // Make sure to add the new loader(s) before the "file" loader.
+            // Make sure to add the new loader(s) before the above loader.
           ],
         },
       ],
@@ -236,16 +242,8 @@ module.exports = function(webpackEnv) {
       new InterpolateHtmlPlugin(HtmlWebpackPlugin, clientEnv.raw),
       new ModuleNotFoundPlugin(paths.appPath),
       new webpack.DefinePlugin(clientEnv.stringified),
-      isDev && new WatchMissingNodeModulesPlugin(paths.appNodeModules),
-      isDev && new webpack.HotModuleReplacementPlugin(),
       // https://github.com/pmmmwh/react-refresh-webpack-plugin#options
-      isDev && hasFastRefresh && new ReactRefreshWebpackPlugin({
-        overlay: {
-          entry: webpackDevClientEntry,
-          module: reactRefreshOverlayEntry,
-          sockIntegration: false,
-        },
-      }),
+      isDev && hasFastRefresh && new ReactRefreshWebpackPlugin({overlay: false}),
       // https://github.com/danethurber/webpack-manifest-plugin#api
       new WebpackManifestPlugin({
         fileName: 'asset-manifest.json',
@@ -283,22 +281,42 @@ module.exports = function(webpackEnv) {
       // https://github.com/TypeStrong/fork-ts-checker-webpack-plugin#options
       new ForkTsCheckerWebpackPlugin({
         async: isDev,
-        tsconfig: paths.appTsConfig,
-        formatter: isProd ? typescriptFormatter : undefined,
-        typescript: resolve.sync('typescript', {basedir: paths.appNodeModules}),
-        resolveTypeReferenceDirectiveModule: process.versions.pnp ? `${__dirname}/pnp.js` : undefined,
-        resolveModuleNameModule: process.versions.pnp ? `${__dirname}/pnp.js` : undefined,
-        useTypescriptIncrementalApi: true,
-        checkSyntacticErrors: true,
-        silent: true,
-        reportFiles: [
-          '../**/src/**/*.{ts,tsx}',
-          '**/src/**/*.{ts,tsx}',
-          '!**/src/**/__tests__/**',
-          '!**/src/**/?(*.)(spec|test).*',
-          '!**/src/setupProxy.*',
-          '!**/src/setupTests.*',
-        ],
+        typescript: {
+          context: paths.appPath,
+          mode: 'write-references',
+          typescriptPath: resolve.sync('typescript', {
+            basedir: paths.appNodeModules,
+          }),
+          diagnosticOptions: {
+            syntactic: true,
+          },
+          configOverwrite: {
+            compilerOptions: {
+              tsBuildInfoFile: paths.appTsBuildInfoFile,
+              sourceMap: isProd ? shouldUseSourceMap : isDev,
+              inlineSourceMap: false,
+              declarationMap: false,
+              skipLibCheck: true,
+              incremental: true,
+              noEmit: true,
+            },
+          },
+        },
+        issue: {
+          include: [
+            {file: '../**/src/**/*.{ts,tsx}'},
+            {file: '**/src/**/*.{ts,tsx}'},
+          ],
+          exclude: [
+            {file: '**/src/**/__tests__/**'},
+            {file: '**/src/**/?(*.){spec|test}.*'},
+            {file: '**/src/setupProxy.*'},
+            {file: '**/src/setupTests.*'},
+          ],
+        },
+        logger: {
+          infrastructure: 'silent',
+        },
       }),
       // https://webpack.js.org/plugins/eslint-webpack-plugin/#options
       !hasDisabledESLintPlugin && new ESLintPlugin({
@@ -324,15 +342,5 @@ module.exports = function(webpackEnv) {
         },
       }),
     ].filter(Boolean),
-    node: {
-      module: 'empty',
-      dgram: 'empty',
-      dns: 'mock',
-      fs: 'empty',
-      http2: 'empty',
-      net: 'empty',
-      tls: 'empty',
-      child_process: 'empty',
-    },
   };
 };

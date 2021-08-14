@@ -1,7 +1,7 @@
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
 process.on('unhandledRejection', err => {throw err});
-require('../lib/env');
+require('../lib/getClientEnvironment');
 
 // Imports
 const bfj = require('bfj');
@@ -11,22 +11,19 @@ const webpack = require('webpack');
 
 // React Dev Utils
 const chalk = require('ult-dev-utils/chalk');
+const printBuildError = require('ult-dev-utils/printBuildError');
 const FileSizeReporter = require('ult-dev-utils/FileSizeReporter');
 const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
 const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild;
 const printHostingInstructions = require('ult-dev-utils/printHostingInstructions');
 const formatWebpackMessages = require('ult-dev-utils/formatWebpackMessages');
 const checkRequiredFiles = require('ult-dev-utils/checkRequiredFiles');
-const printBuildError = require('ult-dev-utils/printBuildError');
 const {checkBrowsers} = require('ult-dev-utils/browsersHelper');
 
 // Config
-const paths = require('../config/paths');
-const argv = process.argv.slice(2);
-const isInteractive = process.stdout.isTTY;
-const useYarn = fs.existsSync(paths.yarnLockFile);
-const writeStats = argv.indexOf('--stats') !== -1;
 const configFactory = require('../config/webpack.config');
+const config = configFactory('production');
+const paths = require('../config/paths');
 
 // Verification
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
@@ -34,9 +31,12 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 }
 
 // Setup
-const config = configFactory('production');
-const WARN_AFTER_BUNDLE_GZIP_SIZE = 512 * 1024;
-const WARN_AFTER_CHUNK_GZIP_SIZE = 1024 * 1024;
+const argv = process.argv.slice(2);
+const logStats = argv.indexOf('--stats') !== -1;
+const useYarn = fs.existsSync(paths.yarnLockFile);
+const isInteractive = process.stdout.isTTY;
+const WARN_BUNDLE_GZIP_SIZE = 512 * 1024;
+const WARN_CHUNK_GZIP_SIZE = 1024 * 1024;
 
 // Run
 checkBrowsers(paths.appPath, isInteractive)
@@ -54,7 +54,7 @@ checkBrowsers(paths.appPath, isInteractive)
       console.log(chalk.green('Compiled successfully.\n'));
     }
     console.log('File sizes after gzip:\n');
-    printFileSizesAfterBuild(stats, previousFileSizes, paths.appBuild, WARN_AFTER_BUNDLE_GZIP_SIZE, WARN_AFTER_CHUNK_GZIP_SIZE);
+    printFileSizesAfterBuild(stats, previousFileSizes, paths.appBuild, WARN_BUNDLE_GZIP_SIZE, WARN_CHUNK_GZIP_SIZE);
     console.log();
     const appPackage = require(paths.appPackageJson);
     const publicUrl = paths.publicUrlOrPath;
@@ -102,7 +102,7 @@ function build(previousFileSizes) {
         return reject(new Error(messages.warnings.join('\n\n')));
       }
       const resolveArgs = resolve({stats, previousFileSizes, warnings: messages.warnings});
-      if (writeStats) {
+      if (logStats) {
         return bfj
           .write(paths.appBuild + '/bundle-stats.json', stats.toJson())
           .then(() => resolve(resolveArgs))

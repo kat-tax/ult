@@ -1,6 +1,5 @@
 const fs = require('fs');
 const path = require('path');
-const getPublicUrlOrPath = require('ult-dev-utils/getPublicUrlOrPath');
 const appDirectory = fs.realpathSync(process.cwd());
 const moduleFileExtensions = [
   'js',
@@ -14,6 +13,7 @@ const moduleFileExtensions = [
   'json',
 ];
 
+const getPublicUrlOrPath = require('ult-dev-utils/getPublicUrlOrPath');
 
 const resolveApp = uri => path.resolve(appDirectory, uri);
 const resolveModule = (resolve, uri) => {
@@ -32,9 +32,11 @@ module.exports = {
   appTsConfig: resolveApp('tsconfig.json'),
   appPackageJson: resolveApp('package.json'),
   appNodeModules: resolveApp('node_modules'),
-  appPkgVectorIcons: resolveApp('node_modules/react-native-vector-icons'),
+  appWebpackCache: resolveApp('node_modules/.cache'),
+  appTsBuildInfoFile: resolveApp('node_modules/.cache/tsconfig.tsbuildinfo'),
   appPkgGestureHandler: resolveApp('node_modules/react-native-gesture-handler'),
   appPkgReanimated: resolveApp('node_modules/react-native-reanimated'),
+  appPkgVectorIcons: resolveApp('node_modules/react-native-vector-icons'),
   appTypeDeclarations: resolveApp('src/ult-app-env.d.ts'),
   appIndexJs: resolveModule(resolveApp, 'src/index'),
   testsSetup: resolveModule(resolveApp, 'src/setupTests'),

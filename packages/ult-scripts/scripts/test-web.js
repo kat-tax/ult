@@ -5,6 +5,7 @@ process.on('unhandledRejection', err => {throw err});
 require('../config/env');
 
 // Imports
+const path = require('path');
 const jest = require('jest');
 const execSync = require('child_process').execSync;
 let argv = process.argv.slice(2);
@@ -33,9 +34,10 @@ if (
   argv.push(isRepository() ? '--watch' : '--watchAll');
 }
 
-const createJestConfig = require('../lib/jest');
-const path = require('path');
 const paths = require('../config/paths');
+const createJestConfig = require('../lib/jest/createJestConfig');
+
+// Setup
 argv.push(
   '--config',
   JSON.stringify(
