@@ -1,6 +1,6 @@
 {
   "name": "ult-dev-utils",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "license": "MIT",
   "description": "Webpack utilities used by ULT",
   "repository": {
@@ -10,7 +10,7 @@
     "url": "https://github.com/kat-tax/ult/issues"
   },
   "engines": {
-    "node": ">=12"
+    "node": ">=14"
   },
   "files": [
     "browsersHelper.js",
@@ -23,6 +23,7 @@
     "evalSourceMapMiddleware.js",
     "FileSizeReporter.js",
     "ForkTsCheckerWebpackPlugin.js",
+    "ForkTsCheckerWarningWebpackPlugin.js",
     "formatWebpackMessages.js",
     "getCacheIdentifier.js",
     "getCSSModuleLocalIdent.js",
@@ -44,13 +45,11 @@
     "printHostingInstructions.js",
     "redirectServedPathMiddleware.js",
     "refreshOverlayInterop.js",
-    "typescriptFormatter.js",
-    "WatchMissingNodeModulesPlugin.js",
     "WebpackDevServerUtils.js",
     "webpackHotDevClient.js"
   ],
   "dependencies": {
-    "@babel/code-frame": "7.10.4",
+    "@babel/code-frame": "^7.10.4",
     "address": "1.1.2",
     "browserslist": "4.14.2",
     "chalk": "2.4.2",
@@ -59,11 +58,11 @@
     "escape-string-regexp": "2.0.0",
     "filesize": "6.1.0",
     "find-up": "4.1.0",
-    "fork-ts-checker-webpack-plugin": "4.1.6",
+    "fork-ts-checker-webpack-plugin": "6.0.5",
     "global-modules": "2.0.0",
     "globby": "11.0.1",
     "gzip-size": "5.1.1",
-    "immer": "8.0.1",
+    "immer": "8.0.4",
     "is-root": "2.1.0",
     "loader-utils": "2.0.0",
     "open": "^7.0.2",

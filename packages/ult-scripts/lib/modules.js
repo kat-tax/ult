@@ -1,24 +1,24 @@
+const resolve = require('resolve');
 const fs = require('fs');
 const path = require('path');
-const resolve = require('resolve');
 const chalk = require('ult-dev-utils/chalk');
 const paths = require('../config/paths');
 
 function getModules() {
-  const hasTsConfig = fs.existsSync(paths.appTsConfig);
   const ts = require(resolve.sync('typescript', {basedir: paths.appNodeModules}));
   const config = ts.readConfigFile(paths.appTsConfig, ts.sys.readFile).config;
   const options = config.compilerOptions || {};
   const additionalModulePaths = getAdditionalModulePaths(options);
   return {
-    hasTsConfig,
-    jestAliases: getJestAliases(options),
+    hasTsConfig: fs.existsSync(paths.appTsConfig),
     webpackAliases: getWebpackAliases(options),
+    jestAliases: getJestAliases(options),
     additionalModulePaths: additionalModulePaths,
   };
 }
 
 // Helpers
+
 function getAdditionalModulePaths(options = {}) {
   const baseUrl = options.baseUrl;
   const baseUrlResolved = path.resolve(paths.appPath, baseUrl);

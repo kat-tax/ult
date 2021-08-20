@@ -1,61 +1,58 @@
-const fs = require('fs');
+// Based on: https://github.com/facebook/create-react-app/blob/main/packages/react-scripts/config/webpackDevServer.config.js
 
-// React Dev Utils
+'use strict';
+
+const fs = require('fs');
+const paths = require('./paths');
+const getHttpsConfig = require('../lib/getHttpsConfig');
+
 const ignoredFiles = require('ult-dev-utils/ignoredFiles');
 const redirectServedPath = require('ult-dev-utils/redirectServedPathMiddleware');
-const noopServiceWorkerMiddleware = require('ult-dev-utils/noopServiceWorkerMiddleware');
 const evalSourceMapMiddleware = require('ult-dev-utils/evalSourceMapMiddleware');
-const errorOverlayMiddleware = require('ult-dev-utils/errorOverlayMiddleware');
+const noopServiceWorkerMiddleware = require('ult-dev-utils/noopServiceWorkerMiddleware');
 
-// Helpers
-const getHttpsConfig = require('../lib/https');
-const paths = require('./paths');
-
-// Setup
 const host = process.env.HOST || '0.0.0.0';
 const sockHost = process.env.WDS_SOCKET_HOST;
-const sockPath = process.env.WDS_SOCKET_PATH;
+const sockPath = process.env.WDS_SOCKET_PATH; // default: '/ws'
 const sockPort = process.env.WDS_SOCKET_PORT;
 
-// Config
-module.exports = function(proxy, allowedHost) {
+module.exports = function (proxy, allowedHost) {
+  const disableFirewall = !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true';
   return {
     host,
     proxy,
-    sockHost,
-    sockPath,
-    sockPort,
-    public: allowedHost,
-    disableHostCheck: !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true',
-    contentBasePublicPath: paths.publicUrlOrPath,
-    publicPath: paths.publicUrlOrPath.slice(0, -1),
-    contentBase: paths.appPublic,
-    https: getHttpsConfig(),
-    clientLogLevel: 'none',
-    transportMode: 'ws',
-    hot: true,
-    quiet: true,
     compress: true,
-    watchContentBase: true,
-    injectClient: false,
-    overlay: false,
+    https: getHttpsConfig(),
+    allowedHosts: disableFirewall ? 'all' : [allowedHost],
+    devMiddleware: {
+      publicPath: paths.publicUrlOrPath.slice(0, -1),
+    },
     historyApiFallback: {
       disableDotRule: true,
       index: paths.publicUrlOrPath,
     },
-    watchOptions: {
-      ignored: ignoredFiles(paths.appSrc),
+    static: {
+      directory: paths.appPublic,
+      publicPath: [paths.publicUrlOrPath],
+      watch: {ignored: ignoredFiles(paths.appSrc)},
     },
-    before(app, server) {
-      app.use(evalSourceMapMiddleware(server));
-      app.use(errorOverlayMiddleware());
+    client: {
+      overlay: true,
+      webSocketURL: {
+        hostname: sockHost,
+        pathname: sockPath,
+        port: sockPort,
+      },
+    },
+    onBeforeSetupMiddleware(devServer) {
+      devServer.app.use(evalSourceMapMiddleware(devServer));
       if (fs.existsSync(paths.proxySetup)) {
-        require(paths.proxySetup)(app);
+        require(paths.proxySetup)(devServer.app);
       }
     },
-    after(app) {
-      app.use(redirectServedPath(paths.publicUrlOrPath));
-      app.use(noopServiceWorkerMiddleware(paths.publicUrlOrPath));
+    onAfterSetupMiddleware(devServer) {
+      devServer.app.use(redirectServedPath(paths.publicUrlOrPath));
+      devServer.app.use(noopServiceWorkerMiddleware(paths.publicUrlOrPath));
     },
   };
 };

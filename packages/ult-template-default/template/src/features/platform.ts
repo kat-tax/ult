@@ -2,6 +2,14 @@ import {Platform} from 'react-ult';
 
 const _platform = Platform.getType();
 
+export function isDev() {
+  return process.env.ULT_APP_DEV == 'true';
+}
+
+export function isDebug() {
+  return process.env.ULT_APP_DEBUG == 'true';
+}
+
 export function isTouch() {
   switch (_platform) {
     case 'android': return true;
