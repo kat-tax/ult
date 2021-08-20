@@ -44,15 +44,15 @@ module.exports = function (proxy, allowedHost) {
         port: sockPort,
       },
     },
-    onBeforeSetupMiddleware(app, server) {
-      app.use(evalSourceMapMiddleware(server));
+    onBeforeSetupMiddleware(devServer) {
+      devServer.app.use(evalSourceMapMiddleware(devServer));
       if (fs.existsSync(paths.proxySetup)) {
-        require(paths.proxySetup)(app);
+        require(paths.proxySetup)(devServer.app);
       }
     },
-    onAfterSetupMiddleware(app) {
-      app.use(redirectServedPath(paths.publicUrlOrPath));
-      app.use(noopServiceWorkerMiddleware(paths.publicUrlOrPath));
+    onAfterSetupMiddleware(devServer) {
+      devServer.app.use(redirectServedPath(paths.publicUrlOrPath));
+      devServer.app.use(noopServiceWorkerMiddleware(paths.publicUrlOrPath));
     },
   };
 };

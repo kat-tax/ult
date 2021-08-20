@@ -47,7 +47,6 @@ checkBrowsers(paths.appPath, isInteractive)
     const urls = prepareUrls(protocol, host, port, paths.publicUrlOrPath.slice(0, -1));
     const proxySetting = require(paths.appPackageJson).proxy;
     const proxyConfig = prepareProxy(proxySetting, paths.appPublic, paths.publicUrlOrPath);
-    const serverConfig = createDevServerConfig(proxyConfig, urls.lanUrlForConfig);
     const compiler = createCompiler({
       urls,
       config,
@@ -56,10 +55,11 @@ checkBrowsers(paths.appPath, isInteractive)
       useYarn,
       useTypeScript: true,
     });
+  
+    const devConfig = createDevServerConfig(proxyConfig, urls.lanUrlForConfig);
+    const devServer = new WebpackDevServer({...devConfig, host, port}, compiler);
 
-    const devServer = new WebpackDevServer(compiler, serverConfig);
-    devServer.listen(port, host, err => {
-      if (err) return console.log(err);
+    devServer.startCallback(() => {
       if (isInteractive) clearConsole();
       console.log(chalk.cyan('Starting the development server...\n'));
       openBrowser(urls.localUrlForBrowser);

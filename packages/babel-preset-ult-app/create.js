@@ -97,7 +97,9 @@ module.exports = function (api, opts, env) {
           // behavior for any plugins that require one.
           ...(opts.runtime !== 'automatic' ? { useBuiltIns: true } : {}),
           runtime: opts.runtime || 'classic',
-          importSource: isEnvDevelopment ? '@welldone-software/why-did-you-render' : undefined,
+          importSource: isEnvDevelopment && opts.runtime === 'automatic'
+            ? '@welldone-software/why-did-you-render'
+            : undefined,
         },
       ],
       isTypeScriptEnabled && [require('@babel/preset-typescript').default],
@@ -161,6 +163,12 @@ module.exports = function (api, opts, env) {
       ],
       [
         require('@babel/plugin-proposal-private-methods').default,
+        {
+          loose: true,
+        },
+      ],
+      [
+        require('@babel/plugin-proposal-private-property-in-object').default,
         {
           loose: true,
         },
