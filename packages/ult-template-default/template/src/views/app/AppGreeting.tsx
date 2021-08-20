@@ -1,7 +1,7 @@
 import React from 'react';
 import {Styles, View, Text} from 'react-ult';
 
-export function AppFrame() {
+export function AppGreeting() {
   return (
     <View style={styles.root}>
       <Text selectable style={styles.welcome}>
