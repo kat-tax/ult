@@ -915,11 +915,46 @@ export interface TextInputPropsShared<C = React.Component> extends CommonProps<C
     // to true. iOS and Android only.
     allowFontScaling?: boolean;
 
+    // iOS-only prop to control if the return key should auto disable
+    // when the input is empty
+    enablesReturnKeyAutomatically?: boolean;
+
     // iOS-only prop for controlling the keyboard appearance
     keyboardAppearance?: 'default' | 'light' | 'dark';
 
     // iOS and Android prop for controlling return key type
     returnKeyType?: 'done' | 'go' | 'next' | 'search' | 'send';
+
+    // iOS and Android prop for controlling autocomplete
+    textContentType?:
+        | 'none'
+        | 'URL'
+        | 'addressCity'
+        | 'addressCityAndState'
+        | 'addressState'
+        | 'countryName'
+        | 'creditCardNumber'
+        | 'emailAddress'
+        | 'familyName'
+        | 'fullStreetAddress'
+        | 'givenName'
+        | 'jobTitle'
+        | 'location'
+        | 'middleName'
+        | 'name'
+        | 'namePrefix'
+        | 'nameSuffix'
+        | 'nickname'
+        | 'organizationName'
+        | 'postalCode'
+        | 'streetAddressLine1'
+        | 'streetAddressLine2'
+        | 'sublocality'
+        | 'telephoneNumber'
+        | 'username'
+        | 'password'
+        | 'newPassword'
+        | 'oneTimeCode';
 
     // Android-only prop for disabling full screen editor mode
     disableFullscreenUI?: boolean;

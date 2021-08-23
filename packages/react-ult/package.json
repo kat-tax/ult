@@ -1,6 +1,6 @@
 {
   "name": "react-ult",
-  "version": "2.2.3",
+  "version": "2.2.4",
   "description": "Cross-platform abstraction layer for ULT based on ReactXP",
   "types": "dist/ReactXP.d.ts",
   "license": "MIT",

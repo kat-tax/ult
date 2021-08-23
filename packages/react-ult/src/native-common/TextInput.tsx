@@ -87,11 +87,11 @@ export class TextInput extends React.Component<Types.TextInputProps, TextInputSt
             multiline: this.props.multiline,
             style: Styles.combine([_styles.defaultTextInput, this.props.style]) as RN.StyleProp<RN.TextStyle>,
             value: this.state.inputValue,
-
             autoCorrect: this.props.autoCorrect,
             spellCheck: this.props.spellCheck,
             autoCapitalize: this.props.autoCapitalize,
             keyboardType: this.props.keyboardType,
+            textContentType: this.props.textContentType,
             editable: editable,
             selectionColor: this.props.selectionColor,
             maxLength: this.props.maxLength,
@@ -108,7 +108,7 @@ export class TextInput extends React.Component<Types.TextInputProps, TextInputSt
             onScroll: this._onScroll,
             selection: this._selectionToSet,
             secureTextEntry: this.props.secureTextEntry,
-
+            enablesReturnKeyAutomatically: this.props.enablesReturnKeyAutomatically,
             keyboardAppearance: this.props.keyboardAppearance,
             returnKeyType: this.props.returnKeyType,
             disableFullscreenUI: this.props.disableFullscreenUI,
