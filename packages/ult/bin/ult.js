@@ -5,20 +5,31 @@ const path = require('path');
 const cmd = require('../lib/cmd');
 const val = require('../lib/val');
 
-// Constants
-const MACOS = '0.63.37';
-const WINDOWS = '0.63.36';
-const TEMPLATES = [
-  'default',
-  'minimal',
-];
-
 // User input
 const args = process.argv.slice(2);
 const opts = args.find(e => e.slice(0,2) !== '--');
 const flag = args.find(e => e.slice(0,2) === '--');
 const project = opts ? opts.trim() : undefined;
 const template = flag ? flag.substr(2) : 'default';
+
+// Constants
+const MACOS = '0.63.37';
+const WINDOWS = '0.63.36';
+const PLATFORMS = [
+  'web',
+  'ios',
+  'macos',
+  'android',
+  'windows',
+];
+
+const TEMPLATES = [
+  'default',
+  // 'minimal',
+  // 'redux-sagas',
+  // 'redux-observables',
+  // 'redux-observables+rxdb',
+];
 
 // Create project
 async function main() {
@@ -35,6 +46,11 @@ async function main() {
     message: 'Choose the project template',
     choices: TEMPLATES,
     initial: template ? TEMPLATES.indexOf(template) : 0,
+  }, {
+    type: 'multiselect',
+    name: 'template',
+    message: 'Pick which platforms to target',
+    choices: PLATFORMS,
   });
   // Installation
   try {
