@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 const prompt = require('prompt');
+const color = require('kleur');
 const path = require('path');
 const cmd = require('../lib/cmd');
 const val = require('../lib/val');
@@ -67,19 +68,19 @@ async function main() {
       await cmd.pod(project);
     }
     // Information
-    console.log(prompt.green(`\nSuccessfully created ${project}!\n`));
-    console.log(prompt.bold('1) Navigate to your project:'));
-    console.log(`$ ${prompt.yellow(`cd ${project.toLowerCase()}`)}\n`);
-    console.log(prompt.bold('2) Choose a command below:'));
-    console.log(`$ ${prompt.yellow('npm run web')}`);
-    console.log(`$ ${prompt.yellow('npm run ios')}`);
-    console.log(`$ ${prompt.yellow('npm run macos')}`);
-    console.log(`$ ${prompt.yellow('npm run windows')}`);
-    console.log(`$ ${prompt.yellow('npm run android')}`);
-    console.log(prompt.cyan('\nFor more details, visit https://docs.ult.dev\n'));
+    console.log(color.green(`\nSuccessfully created ${project}!\n`));
+    console.log(color.bold('1) Navigate to your project:'));
+    console.log(`$ ${color.yellow(`cd ${project.toLowerCase()}`)}\n`);
+    console.log(color.bold('2) Choose a command below:'));
+    console.log(`$ ${color.yellow('npm run web')}`);
+    console.log(`$ ${color.yellow('npm run ios')}`);
+    console.log(`$ ${color.yellow('npm run macos')}`);
+    console.log(`$ ${color.yellow('npm run windows')}`);
+    console.log(`$ ${color.yellow('npm run android')}`);
+    console.log(color.cyan('\nFor more details, visit https://docs.ult.dev\n'));
   // Exception
   } catch (e) {
-    console.log(prompt.red(`Failed to create project (${e})`));
+    console.log(color.red(`Failed to create project (${e})`));
   }
 }
 
