@@ -5,17 +5,23 @@
   "homepage": "https://ult.dev",
   "license": "MIT",
   "keywords": [
-    "ult",
-    "react",
-    "react-native",
+    "web",
+    "ios",
+    "macos",
+    "android",
+    "windows",
     "cross-platform",
-    "starter-kit"
+    "react-native",
+    "react",
+    "dev",
+    "kit",
+    "stack"
   ],
   "bin": {
     "ult": "./bin/ult.js"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "scripts": {
     "default": "node ./bin/ult.js"

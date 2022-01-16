@@ -1,9 +1,0 @@
-{
-  "name": "ult-template-default",
-  "description": "The default RN project template for ULT",
-  "version": "6.6.1",
-  "files": [
-    "template",
-    "template.config.js"
-  ]
-}
