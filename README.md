@@ -18,16 +18,28 @@ After everything installs, use `npm run [task]`
 
 | Command        | Description                                         |
 | ---------------| --------------------------------------------------- |
-| web            | Start development on Web                            |
-| ios            | Start development on iOS                            |
-| macos          | Start development on MacOS                          |
-| android        | Start development on Android                        |
-| windows        | Start development on Windows                        |
-| build-web      | Build a production Web bundle                       |
-| build-ios      | Build a production iOS app                          |
-| build-macos    | Build a production MacOS app                        |
-| build-windows  | Build a production Windows app                      |
-| build-android  | Build a production Android app                      |
+| web            | Start dev server for Web                            |
+| ios            | Start dev server for iOS                            |
+| macos          | Start dev server for MacOS                          |
+| android        | Start dev server for Android                        |
+| windows        | Start dev server for Windows                        |
+| build-web      | Build production Web bundle                       |
+| build-ios      | Build production iOS app                          |
+| build-macos    | Build production MacOS app                        |
+| build-windows  | Build production Windows app                      |
+| build-android  | Build production Android app                      |
+
+### Technologies
+ - [React](https://reactjs.org/) (view)
+ - [Redux](https://redux-toolkit.js.org/) (state)
+ - [LinguiJS](https://lingui.js.org/) (i18n)
+ - [Tamagui](https://tamagui.dev/) (styling)
+ - [TypeScript](https://www.typescriptlang.org/) (language)
+ - [React Navigation](https://reactnavigation.org/) (routing)
+ - [Webpack](https://webpack.js.org/) + [Metro](https://facebook.github.io/metro/) (building)
+ - [React Native Web](https://necolas.github.io/react-native-web) (web support)
+ - [RN](https://reactnative.dev/) + [Windows & macOS](https://microsoft.github.io/react-native-windows/) (native support)
+
 
 ### Features
 - ⚛ Native cross-platform UI
@@ -37,16 +49,6 @@ After everything installs, use `npm run [task]`
 - ✨ Typed styles
 - 🎥 Animations
 - 🧩 Extensions
-
-### Technologies
- - [React](https://reactjs.org/) (view)
- - [LinguiJS](https://lingui.js.org/) (i18n)
- - [TypeScript](https://www.typescriptlang.org/) (lang)
- - [Redux](./) + [RTK](https://redux-toolkit.js.org/) (state)
- - [Tamagui](https://tamagui.dev/) + [Exo](https://exo-ui.com) (style)
- - [React Navigation](https://reactnavigation.org/) (router)
- - [Webpack](https://webpack.js.org/) + [Metro](https://facebook.github.io/metro/) (bundlers)
- - [RN](https://reactnative.dev/) + [RNW](https://necolas.github.io/react-native-web) + [Windows & macOS](https://microsoft.github.io/react-native-windows/) (bridges)
 
 ### Community
 
