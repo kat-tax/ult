@@ -293,7 +293,7 @@ module.exports = function(webpackEnv) {
           configOverwrite: {
             compilerOptions: {
               tsBuildInfoFile: paths.appTsBuildInfoFile,
-              sourceMap: isProd ? shouldUseSourceMap : isDev,
+              sourceMap: isProd ? hasSourceMap : isDev,
               inlineSourceMap: false,
               declarationMap: false,
               skipLibCheck: true,

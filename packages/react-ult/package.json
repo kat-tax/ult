@@ -1,46 +1,46 @@
 {
-  "name": "react-ult",
-  "version": "2.2.3",
-  "description": "Cross-platform abstraction layer for ULT based on ReactXP",
-  "types": "dist/ReactXP.d.ts",
-  "license": "MIT",
+  "name": "exo",
+  "version": "1.0.0-alpha.0",
+  "sideEffects": [
+    "*.css"
+  ],
+  "source": "src/index.ts",
+  "typings": "types",
+  "main": "dist/cjs",
+  "module": "dist/esm",
+  "module:jsx": "dist/jsx",
+  "files": [
+    "types",
+    "dist"
+  ],
   "scripts": {
-    "build": "tsc",
-    "watch": "tsc --watch"
+    "build": "tamagui-build",
+    "watch": "tamagui-build --watch"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
-    "prop-types": "^15.7.2",
-    "rebound": "^0.1.0",
-    "subscribableevent": "^1.0.1"
-  },
-  "devDependencies": {
-    "@types/lodash": "^4.14.161",
-    "@types/react": "^16.14.14",
-    "@types/react-dom": "16.9.4",
-    "@types/react-native": "0.60.23",
-    "react": "16.13.1",
-    "typescript": "3.7.4"
+    "@react-aria/ssr": "^3.1.0",
+    "@react-aria/utils": "^3.10.0",
+    "@react-native-aria/focus": "^0.2.5",
+    "@react-native-aria/overlays": "^0.3.2",
+    "@react-native-community/blur": "^3.6.0",
+    "@tamagui/core": "^1.0.0-alpha.39",
+    "@tamagui/fake-react-native": "^1.0.0-alpha.17",
+    "@tamagui/helpers": "^1.0.0-alpha.39",
+    "@tamagui/use-debounce": "^1.0.0-alpha.39",
+    "@tamagui/use-force-update": "^1.0.0-alpha.39",
+    "expo-linear-gradient": "^10.0.3",
+    "normalize-css-color": "*",
+    "react": "*",
+    "react-dom": "*",
+    "react-native-safe-area-context": "^3.3.2"
   },
   "peerDependencies": {
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-native": "0.63",
-    "react-native-macos": "0.63",
-    "react-native-windows": "0.63"
+    "react-native-web": "*"
   },
-  "peerDependenciesMeta": {
-    "react-dom": {
-      "optional": true
-    },
-    "react-native": {
-      "optional": true
-    },
-    "react-native-macos": {
-      "optional": true
-    },
-    "react-native-windows": {
-      "optional": true
-    }
+  "devDependencies": {
+    "@tamagui/build": "^1.0.0-alpha.39",
+    "@types/node": "^16.11.9",
+    "@types/react": "^17.0.35",
+    "react-native-web": "^0.17.5"
   }
 }
