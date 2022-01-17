@@ -1,3 +1,3 @@
-# EXO
+# React ULT
 
-A component kit built with [Tamagui](https://tamagui.dev/)
+> An unstyled component kit built with [Tamagui](https://tamagui.dev/) for ULT
