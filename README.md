@@ -1,6 +1,6 @@
 # ULT · The Ultimate App Dev Kit
 
-> Create a native and web app with a single code base!
+> Create native and web with a single code base!
 
 To create a new project, run `npx ult [project]` 
 
