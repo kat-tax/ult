@@ -1,10 +1,6 @@
-# ULT · The Ultimate Dev Stack
+# ULT · The Ultimate App Dev Kit
 
-<a alt="ULT Website" href="https://ult.dev">
-  <img width="400" src="https://raw.githubusercontent.com/kat-tax/ult/master/_layouts/banner.png">
-</a>
-
-#### Cross-platform development with a single code base!
+> Create a native and web app with a single code base!
 
 To create a new project, run `npx ult [project]` 
 
@@ -14,20 +10,34 @@ After everything installs, use `npm run [task]`
 
 *If you have questions, [create an issue](https://github.com/kat-tax/ult/issues/new/choose)*
 
-### Tasks
+---
 
-| Command               | Description                                         |
-| ----------------------| --------------------------------------------------- |
-| npm run web           | Start development on Web                            |
-| npm run ios           | Start development on iOS                            |
-| npm run macos         | Start development on MacOS                          |
-| npm run android       | Start development on Android                        |
-| npm run windows       | Start development on Windows                        |
-| npm run build-web     | Build a production Web bundle                       |
-| npm run build-ios     | Build a production iOS app                          |
-| npm run build-macos   | Build a production MacOS app                        |
-| npm run build-windows | Build a production Windows app                      |
-| npm run build-android | Build a production Android app                      |
+| Tasks        | Description                                         |
+| ---------------| --------------------------------------------------- |
+| web            | Start dev server for Web                            |
+| ios            | Start dev server for iOS                            |
+| macos          | Start dev server for MacOS                          |
+| android        | Start dev server for Android                        |
+| windows        | Start dev server for Windows                        |
+| build-web      | Build production Web bundle                       |
+| build-ios      | Build production iOS app                          |
+| build-macos    | Build production MacOS app                        |
+| build-windows  | Build production Windows app                      |
+| build-android  | Build production Android app                      |
+
+---
+
+### Technologies
+ - [React](https://reactjs.org/) (view)
+ - [Redux](https://redux-toolkit.js.org/) (state)
+ - [LinguiJS](https://lingui.js.org/) (i18n)
+ - [Tamagui](https://tamagui.dev/) (styling)
+ - [TypeScript](https://www.typescriptlang.org/) (language)
+ - [React Navigation](https://reactnavigation.org/) (routing)
+ - [Webpack](https://webpack.js.org/) + [Metro](https://facebook.github.io/metro/) (building)
+ - [React Native Web](https://necolas.github.io/react-native-web) (web support)
+ - [RN](https://reactnative.dev/) + [Windows & macOS](https://microsoft.github.io/react-native-windows/) (native support)
+
 
 ### Features
 - ⚛ Native cross-platform UI
@@ -37,13 +47,6 @@ After everything installs, use `npm run [task]`
 - ✨ Typed styles
 - 🎥 Animations
 - 🧩 Extensions
-
-### Technologies
- - [TypeScript](https://www.typescriptlang.org/) (language)
- - [React](https://reactjs.org/) (view abstraction)
- - [Metro](https://facebook.github.io/metro/) & [Webpack](https://webpack.js.org/) (bundlers)
- - [RN](https://reactnative.dev/) + [Windows & macOS](https://microsoft.github.io/react-native-windows/) (bridges)
- - [ReactXP](https://microsoft.github.io/reactxp/) or [React Native Web](https://necolas.github.io/react-native-web) (compatibility)
 
 ### Community
 

@@ -1,0 +1,2 @@
+export declare const EnsureFlexed: import("@tamagui/core").StaticComponent<import("@tamagui/core").TextProps, void, import("@tamagui/core").StaticConfigParsed, any>;
+//# sourceMappingURL=EnsureFlexed.d.ts.map
