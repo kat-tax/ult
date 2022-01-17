@@ -1,10 +1,6 @@
 # ULT · The Ultimate App Dev Kit
 
-<a alt="ULT Website" href="https://ult.dev">
-  <img width="350" src="https://raw.githubusercontent.com/kat-tax/ult/master/_layouts/banner.png">
-</a>
-
-#### Cross-platform development with a single code base!
+> Create a native and web app with a single code base!
 
 To create a new project, run `npx ult [project]` 
 
@@ -14,9 +10,9 @@ After everything installs, use `npm run [task]`
 
 *If you have questions, [create an issue](https://github.com/kat-tax/ult/issues/new/choose)*
 
-### Tasks
+---
 
-| Command        | Description                                         |
+| Tasks        | Description                                         |
 | ---------------| --------------------------------------------------- |
 | web            | Start dev server for Web                            |
 | ios            | Start dev server for iOS                            |
@@ -28,6 +24,8 @@ After everything installs, use `npm run [task]`
 | build-macos    | Build production MacOS app                        |
 | build-windows  | Build production Windows app                      |
 | build-android  | Build production Android app                      |
+
+---
 
 ### Technologies
  - [React](https://reactjs.org/) (view)
