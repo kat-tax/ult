@@ -4,7 +4,7 @@
 
 To create your new app, run `npx ult [project name]` 
 
-Then, navigate to the folder and run `npm run [task]`
+Navigate to the folder and run `npm run [task]`
 
 *For more details, visit the [documentation](https://docs.ult.dev)*
 
