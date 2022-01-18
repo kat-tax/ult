@@ -1,10 +1,10 @@
 # ULT · The Ultimate App Dev Kit
 
-> One code base for mobile, desktop, and web!
+> One code base for native mobile, native desktop, and web!
 
 To create your new app, run `npx ult [project name]` 
 
-Then, navigate to the folder and run `npm run [task name]`
+Then, navigate to the folder and run `npm run [task]`
 
 *For more details, visit the [documentation](https://docs.ult.dev)*
 
