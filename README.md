@@ -1,10 +1,10 @@
 # ULT · The Ultimate App Dev Kit
 
-> Create native and web apps with a single code base!
+> One code base for mobile, desktop, and web!
 
-To create a new project, run `npx ult [project]` 
+To create your new app, run `npx ult [project name]` 
 
-After everything installs, use `npm run [task]`
+Then, navigate to the folder and run `npm run [task name]`
 
 *For more details, visit the [documentation](https://docs.ult.dev)*
 
@@ -12,18 +12,18 @@ After everything installs, use `npm run [task]`
 
 ---
 
-| Tasks        | Description                                         |
+| Task Name      | Description                                         |
 | ---------------| --------------------------------------------------- |
 | web            | Start dev server for Web                            |
 | ios            | Start dev server for iOS                            |
 | macos          | Start dev server for MacOS                          |
 | android        | Start dev server for Android                        |
 | windows        | Start dev server for Windows                        |
-| build-web      | Build production Web bundle                       |
-| build-ios      | Build production iOS app                          |
-| build-macos    | Build production MacOS app                        |
-| build-windows  | Build production Windows app                      |
-| build-android  | Build production Android app                      |
+| build-web      | Build production Web bundle                         |
+| build-ios      | Build production iOS app                            |
+| build-macos    | Build production MacOS app                          |
+| build-windows  | Build production Windows app                        |
+| build-android  | Build production Android app                        |
 
 ---
 

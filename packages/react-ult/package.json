@@ -1,6 +1,6 @@
 {
-  "name": "exo",
-  "version": "1.0.0-alpha.0",
+  "name": "react-ult",
+  "version": "3.0.0-alpha.0",
   "sideEffects": [
     "*.css"
   ],
