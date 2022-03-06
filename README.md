@@ -12,7 +12,7 @@ Navigate to the folder and run `yarn run [task]`
 
 ---
 
-| Task Name | Description                             |
+| Task      | Description                             |
 | ----------| ----------------------------------------|
 | web       | Run *web* dev app                       |
 | ios       | Run *iOS* dev app                       |
@@ -22,8 +22,8 @@ Navigate to the folder and run `yarn run [task]`
 | start     | Start dev servers                       |
 | build     | Build production apps                   |
 | deploy    | Deploy production apps                  |
-| lint      | Lint code style & optionally format     |
 | test      | Test code with & unit & e2e tests       |
+| lint      | Lint code style & optionally format     |
 | analyze   | Analyze bundle size & dependencies      |
 | generate  | Generate icons & other assets           |
 | translate | Extract & compile translations          |
