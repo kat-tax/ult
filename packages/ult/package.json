@@ -20,9 +20,6 @@
   "bin": {
     "ult": "./bin/ult.js"
   },
-  "scripts": {
-    "default": "node ./bin/ult.js"
-  },
   "engines": {
     "node": ">=16"
   },

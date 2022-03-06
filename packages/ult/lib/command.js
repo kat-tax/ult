@@ -22,4 +22,4 @@ function run(cmd, args, cwd, inherit) {
   });
 }
 
-module.exports = {npx, pod};
+module.exports = {npx, pod, run};
