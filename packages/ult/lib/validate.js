@@ -1,4 +1,4 @@
-const cfg = require('../config');
+const config = require('../config');
 
 function name(input) {
   if (!input)
@@ -11,13 +11,15 @@ function name(input) {
 }
 
 function base(input) {
-  if (!input)
-    return 'Project base is required!';
-  if (!cfg.bases.find(e => e.value === input)) 
-    return 'Project base does not exist!';
-  if (!input.match(/^[a-z0-9]+$/))
-    return 'Project base is invalid!';
+  if (!config.bases.find(e => e.value === input))
+    return 'Base does not exist!';
   return true;
 }
 
-module.exports = {name, base};
+function platform(input) {
+  if (input?.filter(i => !config.platforms.find(e => e.value === i)).length > 0)
+    return 'Platform does not exist!';
+  return true;
+}
+
+module.exports = {name, base, platform};
