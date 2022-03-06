@@ -12,13 +12,14 @@ function name(input) {
 
 function base(input) {
   if (!config.bases.find(e => e.value === input))
-    return 'Base does not exist!';
+    throw `Unsupported base: ${input}`;
   return true;
 }
 
 function platform(input) {
-  if (input?.filter(i => !config.platforms.find(e => e.value === i)).length > 0)
-    return 'Platform does not exist!';
+  const invalid = input?.filter(i => !config.platforms.find(e => e.value === i));
+  if (invalid.length > 0)
+    throw `Unsupported platforms: ${invalid.join(', ')}`;
   return true;
 }
 
