@@ -1,12 +1,18 @@
 /// <reference types="node"/>
 /// <reference types="react"/>
 /// <reference types="react-dom"/>
+/// <reference types="react-native"/>
 
 declare namespace NodeJS {
   interface ProcessEnv {
-    readonly NODE_ENV: 'development' | 'production';
+    readonly NODE_ENV: 'development' | 'production' | 'test';
     readonly PUBLIC_URL: string;
   }
+}
+
+declare module '*.avif' {
+  const src: string;
+  export default src;
 }
 
 declare module '*.bmp' {
@@ -39,7 +45,13 @@ declare module '*.webp' {
   export default src;
 }
 
-declare module '*.avif' {
+declare module '*.svg' {
+  import * as React from 'react';
+
+  export const ReactComponent: React.FunctionComponent<React.SVGProps<
+    SVGSVGElement
+  > & { title?: string }>;
+
   const src: string;
   export default src;
 }

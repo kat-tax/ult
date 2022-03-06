@@ -1,18 +1,18 @@
 {
   "name": "ult",
   "version": "2.0.0",
-  "description": "The Ultimate Dev Stack",
+  "description": "The Ultimate App Dev Kit",
   "homepage": "https://ult.dev",
   "license": "MIT",
   "keywords": [
     "web",
-    "ios",
-    "macos",
     "android",
     "windows",
-    "cross-platform",
-    "react-native",
+    "macos",
+    "ios",
     "react",
+    "react-native",
+    "cross-platform",
     "dev",
     "kit",
     "stack"
@@ -20,11 +20,11 @@
   "bin": {
     "ult": "./bin/ult.js"
   },
-  "engines": {
-    "node": ">=16"
-  },
   "scripts": {
     "default": "node ./bin/ult.js"
+  },
+  "engines": {
+    "node": ">=16"
   },
   "dependencies": {
     "prompts": "^2.4.2"

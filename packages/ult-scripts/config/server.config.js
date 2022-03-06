@@ -6,10 +6,11 @@ const fs = require('fs');
 const paths = require('./paths');
 const getHttpsConfig = require('../lib/getHttpsConfig');
 
-const ignoredFiles = require('ult-dev-utils/ignoredFiles');
-const redirectServedPath = require('ult-dev-utils/redirectServedPathMiddleware');
-const evalSourceMapMiddleware = require('ult-dev-utils/evalSourceMapMiddleware');
-const noopServiceWorkerMiddleware = require('ult-dev-utils/noopServiceWorkerMiddleware');
+// React Dev Utils
+const ignoredFiles = require('react-dev-utils/ignoredFiles');
+const redirectServedPath = require('react-dev-utils/redirectServedPathMiddleware');
+const evalSourceMapMiddleware = require('react-dev-utils/evalSourceMapMiddleware');
+const noopServiceWorkerMiddleware = require('react-dev-utils/noopServiceWorkerMiddleware');
 
 const host = process.env.HOST || '0.0.0.0';
 const sockHost = process.env.WDS_SOCKET_HOST;
@@ -24,6 +25,11 @@ module.exports = function (proxy, allowedHost) {
     compress: true,
     https: getHttpsConfig(),
     allowedHosts: disableFirewall ? 'all' : [allowedHost],
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': '*',
+      'Access-Control-Allow-Headers': '*',
+    },
     devMiddleware: {
       publicPath: paths.publicUrlOrPath.slice(0, -1),
     },
@@ -37,7 +43,10 @@ module.exports = function (proxy, allowedHost) {
       watch: {ignored: ignoredFiles(paths.appSrc)},
     },
     client: {
-      overlay: true,
+      overlay: {
+        errors: true,
+        warnings: false,
+      },
       webSocketURL: {
         hostname: sockHost,
         pathname: sockPath,

@@ -9,12 +9,12 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 
 // React Dev Utils
-const chalk = require('ult-dev-utils/chalk');
-const {checkBrowsers} = require('ult-dev-utils/browsersHelper');
-const {choosePort, createCompiler, prepareProxy, prepareUrls} = require('ult-dev-utils/WebpackDevServerUtils');
-const checkRequiredFiles = require('ult-dev-utils/checkRequiredFiles');
-const clearConsole = require('ult-dev-utils/clearConsole');
-const openBrowser = require('ult-dev-utils/openBrowser');
+const chalk = require('react-dev-utils/chalk');
+const {checkBrowsers} = require('react-dev-utils/browsersHelper');
+const {choosePort, createCompiler, prepareProxy, prepareUrls} = require('react-dev-utils/WebpackDevServerUtils');
+const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
+const clearConsole = require('react-dev-utils/clearConsole');
+const openBrowser = require('react-dev-utils/openBrowser');
 
 // Config
 const createDevServerConfig = require('../config/server.config');

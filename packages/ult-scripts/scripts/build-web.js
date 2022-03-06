@@ -10,15 +10,15 @@ const fs = require('fs-extra');
 const webpack = require('webpack');
 
 // React Dev Utils
-const chalk = require('ult-dev-utils/chalk');
-const printBuildError = require('ult-dev-utils/printBuildError');
-const FileSizeReporter = require('ult-dev-utils/FileSizeReporter');
+const chalk = require('react-dev-utils/chalk');
+const printBuildError = require('react-dev-utils/printBuildError');
+const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
 const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
 const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild;
-const printHostingInstructions = require('ult-dev-utils/printHostingInstructions');
-const formatWebpackMessages = require('ult-dev-utils/formatWebpackMessages');
-const checkRequiredFiles = require('ult-dev-utils/checkRequiredFiles');
-const {checkBrowsers} = require('ult-dev-utils/browsersHelper');
+const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
+const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
+const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
+const {checkBrowsers} = require('react-dev-utils/browsersHelper');
 
 // Config
 const configFactory = require('../config/webpack.config');

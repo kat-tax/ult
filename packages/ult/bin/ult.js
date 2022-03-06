@@ -5,40 +5,35 @@ const color = require('kleur');
 const path = require('path');
 const cmd = require('../lib/cmd');
 const val = require('../lib/val');
-
-const args = process.argv.slice(2);
-const opts = args.find(e => e.slice(0,2) !== '--');
-
-const TEMPLATES = [
-  {value: 'production', title: 'Production', description: 'all the fixins'},
-  {value: 'minimal', title: 'Minimal', description: 'the bare minimum'},
-  {value: 'web', title: 'Web Only', description: 'no native platforms'},
+const name = process.argv.slice(2).find(e => e.slice(0,2) !== '--');
+const prompt = [
+  {
+    name: 'project',
+    type: 'text',
+    message: 'Enter the project name',
+    initial: val.project(name) === true ? name.trim() : undefined,
+    validate: val.project,
+  },
+  {
+    name: 'base',
+    type: 'select',
+    message: 'Choose your base',
+    initial: 'production',
+    choices: [
+      {value: 'production', title: 'Production', description: 'all the fixins'},
+      {value: 'minimal', title: 'Minimal', description: 'the bare minimum'},
+    ],
+  },
 ];
 
-async function main() {
-  const input = await prompts([{
-    type: 'text',
-    name: 'project',
-    message: 'What is the project name?',
-    validate: val.project,
-    initial: opts ? opts.trim() : undefined,
-  }, {
-    type: 'select',
-    name: 'template',
-    message: 'Choose your adventure',
-    choices: TEMPLATES,
-  },
-]);
-
-  if (!input.project || !input.compat) {
-    console.log(color.red('Project creation aborted!'));
-    return;
-  }
-
+(async function() {
+  const input = await prompts(prompt);
+  if (!input.project || !input.base)
+    return console.log(color.red('Project creation aborted!'));
   try {
     const cwd = path.resolve(process.cwd(), input.project.toLowerCase());
     console.log('Creating project, please wait...\n');
-    await cmd.npx(['react-native', 'init', input.project, '--template', `ult-template-${input.template}`], undefined, true);
+    await cmd.npx(['react-native', 'init', input.project, '--template', `ult-template-${input.base}`], undefined, true);
     console.log('Initializing Windows project...');
     await cmd.npx(['react-native-windows-init', '--overwrite', '--no-telemetry'], cwd);
     if (process.platform === 'darwin') {
@@ -58,6 +53,4 @@ async function main() {
   } catch (e) {
     console.log(color.red(`Failed to create project (${e})`));
   }
-}
-
-main();
+})();
