@@ -4,7 +4,7 @@
 
 To create your new app, run `npx ult [project name]`
 
-Navigate to the folder and run `yarn run [task]`
+Navigate to the folder, then run `yarn run [task]`
 
 *For more details, visit the [documentation](https://docs.ult.dev)*
 
@@ -14,16 +14,16 @@ Navigate to the folder and run `yarn run [task]`
 
 | Task      | Description                             |
 | ----------| ----------------------------------------|
-| web       | Run *web* dev app                       |
-| ios       | Run *iOS* dev app                       |
-| macos     | Run *MacOS* dev app                     |
-| android   | Run *Android* dev app                   |
-| windows   | Run *Windows* dev app                   |
+| web       | Run __Web__ app                         |
+| ios       | Run __iOS__ app                         |
+| macos     | Run __MacOS__ app                       |
+| android   | Run __Android__ app                     |
+| windows   | Run __Windows__ app                     |
 | start     | Start dev servers                       |
 | build     | Build production apps                   |
 | deploy    | Deploy production apps                  |
-| test      | Test code with & unit & e2e tests       |
 | lint      | Lint code style & optionally format     |
+| test      | Test code with e2e & unit tests         |
 | analyze   | Analyze bundle size & dependencies      |
 | generate  | Generate icons & other assets           |
 | translate | Extract & compile translations          |
@@ -37,8 +37,8 @@ Navigate to the folder and run `yarn run [task]`
  - [TypeScript](https://www.typescriptlang.org/) (language)
  - [React Navigation](https://reactnavigation.org/) (routing)
  - [Webpack](https://webpack.js.org/) + [Metro](https://facebook.github.io/metro/) (building)
- - [React Native Web](https://necolas.github.io/react-native-web) (web support)
- - [RN](https://reactnative.dev/) + [Windows & macOS](https://microsoft.github.io/react-native-windows/) (native support)
+ - [React Native Web](https://necolas.github.io/react-native-web) (web bridge)
+ - [RN](https://reactnative.dev/) + [Windows & macOS](https://microsoft.github.io/react-native-windows/) (native bridge)
 
 ### Features
 - ⚛ Native cross-platform UI
