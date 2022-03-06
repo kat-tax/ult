@@ -2,7 +2,7 @@
 
 > One code base for native mobile, native desktop, and web!
 
-To create your new app, run `npx ult [project name]` 
+To create your new app, run `npx ult [project name]`
 
 Navigate to the folder and run `yarn run [task]`
 
@@ -14,12 +14,12 @@ Navigate to the folder and run `yarn run [task]`
 
 | Task Name | Description                             |
 | ----------| ----------------------------------------|
-| web       | Run development Web app                 |
-| ios       | Run development iOS app                 |
-| macos     | Run development MacOS app               |
-| android   | Run development Android app             |
-| windows   | Run development Windows app             |
-| start     | Start development servers               |
+| web       | Run *web* dev app                       |
+| ios       | Run *iOS* dev app                       |
+| macos     | Run *MacOS* dev app                     |
+| android   | Run *Android* dev app                   |
+| windows   | Run *Windows* dev app                   |
+| start     | Start dev servers                       |
 | build     | Build production apps                   |
 | deploy    | Deploy production apps                  |
 | lint      | Lint code style & optionally format     |
