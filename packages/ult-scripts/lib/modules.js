@@ -1,7 +1,7 @@
 const resolve = require('resolve');
 const fs = require('fs');
 const path = require('path');
-const chalk = require('ult-dev-utils/chalk');
+const chalk = require('react-dev-utils/chalk');
 const paths = require('../config/paths');
 
 function getModules() {

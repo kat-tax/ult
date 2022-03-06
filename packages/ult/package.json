@@ -1,18 +1,18 @@
 {
   "name": "ult",
-  "version": "1.5.0",
-  "description": "The Ultimate Dev Stack",
+  "version": "2.0.0-alpha.1",
+  "description": "The Ultimate App Dev Kit",
   "homepage": "https://ult.dev",
   "license": "MIT",
   "keywords": [
     "web",
-    "ios",
-    "macos",
     "android",
     "windows",
-    "cross-platform",
-    "react-native",
+    "macos",
+    "ios",
     "react",
+    "react-native",
+    "cross-platform",
     "dev",
     "kit",
     "stack"
@@ -23,12 +23,8 @@
   "engines": {
     "node": ">=16"
   },
-  "scripts": {
-    "default": "node ./bin/ult.js"
-  },
   "dependencies": {
-    "chalk": "^4.1.2",
-    "replace-in-file": "^6.2.0"
+    "prompts": "^2.4.2"
   },
   "repository": {
     "url": "https://github.com/kat-tax/ult.git"

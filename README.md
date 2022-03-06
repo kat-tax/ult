@@ -1,52 +1,45 @@
 # ULT · The Ultimate App Dev Kit
 
-> Create a native and web app with a single code base!
+> One codebase for native mobile, native desktop and web!
 
-To create a new project, run `npx ult [project]` 
+To create your new app, run `npx ult [project name]`
 
-After everything installs, use `npm run [task]`
+Navigate to the folder, then run `yarn run [task]`
 
 *For more details, visit the [documentation](https://docs.ult.dev)*
 
-*If you have questions, [create an issue](https://github.com/kat-tax/ult/issues/new/choose)*
+*If you have a problem, [create an issue](https://github.com/kat-tax/ult/issues/new/choose)*
 
 ---
 
-| Tasks        | Description                                         |
-| ---------------| --------------------------------------------------- |
-| web            | Start dev server for Web                            |
-| ios            | Start dev server for iOS                            |
-| macos          | Start dev server for MacOS                          |
-| android        | Start dev server for Android                        |
-| windows        | Start dev server for Windows                        |
-| build-web      | Build production Web bundle                       |
-| build-ios      | Build production iOS app                          |
-| build-macos    | Build production MacOS app                        |
-| build-windows  | Build production Windows app                      |
-| build-android  | Build production Android app                      |
+| Task      | Description                             |
+| ----------| ----------------------------------------|
+| web       | Run __Web__ app                         |
+| android   | Run __Android__ app                     |
+| windows   | Run __Windows__ app                     |
+| macos     | Run __MacOS__ app                       |
+| ios       | Run __iOS__ app                         |
+| start     | Start dev servers                       |
+| build     | Build production apps                   |
+| deploy    | Deploy production apps                  |
+| test      | Run e2e and unit tests                  |
+| lint      | Lint source code                        |
+| format    | Format source code                      |
+| analyze   | Analyze javascript bundle               |
+| generate  | Generate icons & other assets           |
+| translate | Extract & compile translations          |
 
 ---
 
-### Technologies
- - [React](https://reactjs.org/) (view)
- - [Redux](https://redux-toolkit.js.org/) (state)
- - [LinguiJS](https://lingui.js.org/) (i18n)
- - [Tamagui](https://tamagui.dev/) (styling)
- - [TypeScript](https://www.typescriptlang.org/) (language)
- - [React Navigation](https://reactnavigation.org/) (routing)
- - [Webpack](https://webpack.js.org/) + [Metro](https://facebook.github.io/metro/) (building)
- - [React Native Web](https://necolas.github.io/react-native-web) (web support)
- - [RN](https://reactnative.dev/) + [Windows & macOS](https://microsoft.github.io/react-native-windows/) (native support)
-
-
-### Features
-- ⚛ Native cross-platform UI
-- ♾ Flexible architecture
-- ♿ Great accessibility
-- 📦 Small bundle size
-- ✨ Typed styles
-- 🎥 Animations
-- 🧩 Extensions
+### Tech Stack
+ - [React](https://reactjs.org) (view)
+ - [Redux](https://redux-toolkit.js.org) (state)
+ - [LinguiJS](https://lingui.js.org) (i18n)
+ - [TypeScript](https://www.typescriptlang.org) (language)
+ - [React Navigation](https://reactnavigation.org) (routing)
+ - [Webpack](https://webpack.js.org) + [Metro](https://facebook.github.io/metro) (building)
+ - [React Native Web](https://necolas.github.io/react-native-web) (web bridge)
+ - [React Native](https://reactnative.dev) + [Windows](https://microsoft.github.io/react-native-windows) (native bridge)
 
 ### Community
 

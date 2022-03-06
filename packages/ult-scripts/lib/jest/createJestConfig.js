@@ -21,7 +21,6 @@ module.exports = (resolve, rootDir) => {
       '<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}',
     ],
     testEnvironment: 'jsdom',
-    testRunner: require.resolve('jest-circus/runner'),
     transform: {
       '^.+\\.(js|jsx|mjs|cjs|ts|tsx)$': resolve('./babelTransform.js'),
       '^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)': resolve('./fileTransform.js'),
