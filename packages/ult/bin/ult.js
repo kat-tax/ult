@@ -31,7 +31,7 @@ async function main() {
 ]);
 
   if (!input.project || !input.compat) {
-    console.log(color.red(`Project creation aborted!`));
+    console.log(color.red('Project creation aborted!'));
     return;
   }
 
@@ -50,10 +50,10 @@ async function main() {
     console.log(`$ ${color.yellow(`cd ${input.project.toLowerCase()}`)}\n`);
     console.log(color.bold('2) Run the app on a platform:'));
     console.log(`$ ${color.yellow('yarn run web')}`);
-    console.log(`$ ${color.yellow('yarn run ios')}`);
-    console.log(`$ ${color.yellow('yarn run macos')}`);
-    console.log(`$ ${color.yellow('yarn run windows')}`);
     console.log(`$ ${color.yellow('yarn run android')}`);
+    console.log(`$ ${color.yellow('yarn run windows')}`);
+    console.log(`$ ${color.yellow('yarn run macos')}`);
+    console.log(`$ ${color.yellow('yarn run ios')}`);
     console.log(color.cyan('\nFor more details, visit https://docs.ult.dev\n'));
   } catch (e) {
     console.log(color.red(`Failed to create project (${e})`));
