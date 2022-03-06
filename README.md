@@ -4,26 +4,29 @@
 
 To create your new app, run `npx ult [project name]` 
 
-Navigate to the folder and run `npm run [task]`
+Navigate to the folder and run `yarn run [task]`
 
 *For more details, visit the [documentation](https://docs.ult.dev)*
 
-*If you have questions, [create an issue](https://github.com/kat-tax/ult/issues/new/choose)*
+*If you have a problem, [create an issue](https://github.com/kat-tax/ult/issues/new/choose)*
 
 ---
 
-| Task Name      | Description                                         |
-| ---------------| --------------------------------------------------- |
-| web            | Start dev server for Web                            |
-| ios            | Start dev server for iOS                            |
-| macos          | Start dev server for MacOS                          |
-| android        | Start dev server for Android                        |
-| windows        | Start dev server for Windows                        |
-| build-web      | Build production Web bundle                         |
-| build-ios      | Build production iOS app                            |
-| build-macos    | Build production MacOS app                          |
-| build-windows  | Build production Windows app                        |
-| build-android  | Build production Android app                        |
+| Task Name | Description                             |
+| ----------| ----------------------------------------|
+| web       | Run development Web app                 |
+| ios       | Run development iOS app                 |
+| macos     | Run development MacOS app               |
+| android   | Run development Android app             |
+| windows   | Run development Windows app             |
+| start     | Start development servers               |
+| build     | Build production apps                   |
+| deploy    | Deploy production apps                  |
+| lint      | Lint code style & optionally format     |
+| test      | Test code with & unit & e2e tests       |
+| analyze   | Analyze bundle size & dependencies      |
+| generate  | Generate icons & other assets           |
+| translate | Extract & compile translations          |
 
 ---
 
@@ -31,13 +34,11 @@ Navigate to the folder and run `npm run [task]`
  - [React](https://reactjs.org/) (view)
  - [Redux](https://redux-toolkit.js.org/) (state)
  - [LinguiJS](https://lingui.js.org/) (i18n)
- - [Tamagui](https://tamagui.dev/) (styling)
  - [TypeScript](https://www.typescriptlang.org/) (language)
  - [React Navigation](https://reactnavigation.org/) (routing)
  - [Webpack](https://webpack.js.org/) + [Metro](https://facebook.github.io/metro/) (building)
  - [React Native Web](https://necolas.github.io/react-native-web) (web support)
  - [RN](https://reactnative.dev/) + [Windows & macOS](https://microsoft.github.io/react-native-windows/) (native support)
-
 
 ### Features
 - ⚛ Native cross-platform UI

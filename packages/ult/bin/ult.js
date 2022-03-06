@@ -6,60 +6,54 @@ const path = require('path');
 const cmd = require('../lib/cmd');
 const val = require('../lib/val');
 
-// User input
 const args = process.argv.slice(2);
 const opts = args.find(e => e.slice(0,2) !== '--');
 
-const VERSION_MACOS = '0.63.37';
-const VERSION_WINDOWS = '0.63.36';
-
-const EFFECTS = [
-  {value: 'thunks', title: 'Thunks', description: 'Procedural side-effects using functions'},
-  {value: 'sagas', title: 'Sagas', description: 'Procedural side-effects using generators'},
-  {value: 'observables', title: 'Observables', description: 'Reactive side-effects using observables'},
+const TEMPLATES = [
+  {value: 'production', title: 'Production', description: 'all the fixins'},
+  {value: 'minimal', title: 'Minimal', description: 'the bare minimum'},
+  {value: 'web', title: 'Web Only', description: 'no native platforms'},
 ];
 
 async function main() {
   const input = await prompts([{
     type: 'text',
-    name: 'name',
+    name: 'project',
     message: 'What is the project name?',
     validate: val.project,
     initial: opts ? opts.trim() : undefined,
   }, {
     type: 'select',
-    name: 'effects',
-    message: 'Choose the side effects layer',
-    choices: EFFECTS,
+    name: 'template',
+    message: 'Choose your adventure',
+    choices: TEMPLATES,
   },
 ]);
 
-  if (!input.name || !input.compat) {
+  if (!input.project || !input.compat) {
     console.log(color.red(`Project creation aborted!`));
     return;
   }
 
   try {
-    const cwd = path.resolve(process.cwd(), input.name.toLowerCase());
+    const cwd = path.resolve(process.cwd(), input.project.toLowerCase());
     console.log('Creating project, please wait...\n');
-    await cmd.npx(['react-native', 'init', input.name, '--template', `ult-template-${input.template}`], undefined, true);
+    await cmd.npx(['react-native', 'init', input.project, '--template', `ult-template-${input.template}`], undefined, true);
     console.log('Initializing Windows project...');
-    await cmd.npx(['react-native-windows-init', '--overwrite', '--version', VERSION_WINDOWS, '--no-telemetry'], cwd);
-    console.log('Initializing MacOS project...');
-    await cmd.npx(['react-native-macos-init', '--overwrite', '--version', VERSION_MACOS], cwd);
+    await cmd.npx(['react-native-windows-init', '--overwrite', '--no-telemetry'], cwd);
     if (process.platform === 'darwin') {
       console.log('Installing pods...');
-      await cmd.pod(input.name);
+      await cmd.pod(input.project);
     }
-    console.log(color.green(`\nSuccessfully created ${input.name}!\n`));
+    console.log(color.green(`\nSuccessfully created ${input.project}!\n`));
     console.log(color.bold('1) Navigate to your project:'));
-    console.log(`$ ${color.yellow(`cd ${input.name.toLowerCase()}`)}\n`);
-    console.log(color.bold('2) Choose a command below:'));
-    console.log(`$ ${color.yellow('npm run web')}`);
-    console.log(`$ ${color.yellow('npm run ios')}`);
-    console.log(`$ ${color.yellow('npm run macos')}`);
-    console.log(`$ ${color.yellow('npm run windows')}`);
-    console.log(`$ ${color.yellow('npm run android')}`);
+    console.log(`$ ${color.yellow(`cd ${input.project.toLowerCase()}`)}\n`);
+    console.log(color.bold('2) Run the app on a platform:'));
+    console.log(`$ ${color.yellow('yarn run web')}`);
+    console.log(`$ ${color.yellow('yarn run ios')}`);
+    console.log(`$ ${color.yellow('yarn run macos')}`);
+    console.log(`$ ${color.yellow('yarn run windows')}`);
+    console.log(`$ ${color.yellow('yarn run android')}`);
     console.log(color.cyan('\nFor more details, visit https://docs.ult.dev\n'));
   } catch (e) {
     console.log(color.red(`Failed to create project (${e})`));
