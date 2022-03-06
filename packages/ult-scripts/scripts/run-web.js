@@ -47,15 +47,7 @@ checkBrowsers(paths.appPath, isInteractive)
     const urls = prepareUrls(protocol, host, port, paths.publicUrlOrPath.slice(0, -1));
     const proxySetting = require(paths.appPackageJson).proxy;
     const proxyConfig = prepareProxy(proxySetting, paths.appPublic, paths.publicUrlOrPath);
-    const compiler = createCompiler({
-      urls,
-      config,
-      appName,
-      webpack,
-      useYarn,
-      useTypeScript: true,
-    });
-  
+    const compiler = createCompiler({urls, config, appName, webpack, useYarn, useTypeScript: true});
     const devConfig = createDevServerConfig(proxyConfig, urls.lanUrlForConfig);
     const devServer = new WebpackDevServer({...devConfig, host, port}, compiler);
 

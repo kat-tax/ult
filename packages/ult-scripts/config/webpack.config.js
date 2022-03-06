@@ -158,8 +158,40 @@ module.exports = function(webpackEnv) {
     module: {
       strictExportPresence: true,
       rules: [
+        hasSourceMap && {
+          enforce: 'pre',
+          exclude: /@babel(?:\/|\\{1,2})runtime/,
+          test: /\.(js|mjs|jsx|ts|tsx|css)$/,
+          loader: require.resolve('source-map-loader'),
+        },
         {
           oneOf: [
+            {
+              test: /\.svg$/,
+              use: [
+                {
+                  loader: require.resolve('@svgr/webpack'),
+                  options: {
+                    ref: true,
+                    titleProp: true,
+                    prettier: false,
+                    svgo: false,
+                    svgoConfig: {
+                      plugins: [{removeViewBox: false}],
+                    },
+                  },
+                },
+                {
+                  loader: require.resolve('file-loader'),
+                  options: {
+                    name: 'static/media/[name].[hash].[ext]',
+                  },
+                },
+              ],
+              issuer: {
+                and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
+              },
+            },
             {
               test: /\.(js|mjs|jsx|ts|tsx)$/,
               include: [
@@ -323,20 +355,13 @@ module.exports = function(webpackEnv) {
         eslintPath: require.resolve('eslint'),
         failOnError: !(isDev && hasDisabledESLintWarnings),
         context: paths.appSrc,
-        cache: true,
-        cacheLocation: path.resolve(
-          paths.appNodeModules,
-          '.cache/.eslintcache'
-        ),
         cwd: paths.appPath,
+        cache: true,
+        cacheLocation: path.resolve(paths.appNodeModules, '.cache/.eslintcache'),
         resolvePluginsRelativeTo: __dirname,
         baseConfig: {
           extends: [require.resolve('eslint-config-react-app/base')],
-          rules: {
-            ...(!hasJsxRuntime && {
-              'react/react-in-jsx-scope': 'error',
-            }),
-          },
+          rules: {...(!hasJsxRuntime && {'react/react-in-jsx-scope': 'error'})},
         },
       }),
     ].filter(Boolean),
