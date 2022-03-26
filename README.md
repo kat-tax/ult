@@ -1,6 +1,6 @@
 # ULT · The Ultimate App Dev Kit
 
-> One codebase for native mobile, native desktop and web!
+> One code base for native mobile, native desktop and web!
 
 To create your new app, run `npx ult [project name]`
 
@@ -12,22 +12,22 @@ Navigate to the folder, then run `yarn run [task]`
 
 ---
 
-| Task      | Description                             |
-| ----------| ----------------------------------------|
-| web       | Run __Web__ app                         |
-| android   | Run __Android__ app                     |
-| windows   | Run __Windows__ app                     |
-| macos     | Run __MacOS__ app                       |
-| ios       | Run __iOS__ app                         |
-| start     | Start dev servers                       |
-| build     | Build production apps                   |
-| deploy    | Deploy production apps                  |
-| test      | Run e2e and unit tests                  |
-| lint      | Lint source code                        |
-| format    | Format source code                      |
-| analyze   | Analyze javascript bundle               |
-| generate  | Generate icons & other assets           |
-| translate | Extract & compile translations          |
+| Task      | Description                        |
+| ----------| -----------------------------------|
+| web       | Run __Web__ app                    |
+| android   | Run __Android__ app                |
+| windows   | Run __Windows__ app                |
+| macos     | Run __MacOS__ app                  |
+| ios       | Run __iOS__ app                    |
+| start     | Start dev servers                  |
+| build     | Build production apps              |
+| deploy    | Deploy production apps             |
+| test      | Run e2e and unit tests             |
+| lint      | Lint source code                   |
+| format    | Format source code                 |
+| analyze   | Analyze javascript bundle          |
+| generate  | Generate icons & other assets      |
+| translate | Extract & compile translations     |
 
 ---
 
@@ -43,8 +43,8 @@ Navigate to the folder, then run `yarn run [task]`
 
 ### Community
 
-Join the discussion in [Discord](https://discord.gg/TzhDRyj)!
+> Join our [discord channel](https://discord.gg/TzhDRyj) or create a [github dicussion](https://github.com/kat-tax/ult/discussions).
 
 ### Sponsors
 
-Fund development by being a [Sponsor](https://github.com/sponsors/Cavitt)!
+> Support development by becoming a [sponsor](https://github.com/sponsors/Cavitt).

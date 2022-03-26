@@ -1,2 +1,20 @@
-theme: jekyll-theme-cayman
-title: ULT
+name: ULT
+title: ULT · The Ultimate App Dev Kit
+tagline: The Ultimate App Dev Kit
+description: One code base for native mobile, native desktop and web!
+url: https://ult.dev
+color: '#000000'
+theme: minima
+readme_index:
+  enabled: true
+  remove_originals: true
+exclude:
+  - .jekyll-cache/
+  - .sass-cache/
+  - packages/
+  - Gemfile
+  - Gemfile.lock
+  - package.json
+  - LICENSE
+  - CNAME
+  - TODO.md

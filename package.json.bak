@@ -1,4 +1,0 @@
-{
-  "workspaces": ["packages/*"],
-  "private": true
-}
