@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+{%- include head.html -%}
+<body>
+{%- include header.html -%}
+<style>
+  body {
+    background-color: rgb(25, 25, 25);
+    color: rgb(220, 220, 220);
+  }
+
+  a, a:visited, a:hover {
+    color: #9e8cfc;
+  }
+
+  blockquote {
+    color: #ffffff;
+    border: 0;
+    padding-left: 0;
+    font-size: 18px;
+    letter-spacing: 0;
+    font-style: normal;
+    font-weight: 500;
+  }
+
+  hr {
+    opacity: 0;
+    margin-bottom: 2em;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  code {
+    padding: 6px 12px;
+    margin: 0 3px;
+    border: 1px solid #000;
+    background-color: #000;
+    border-radius: 3em;
+  }
+
+  p {
+    line-height: 1.75em;
+  }
+
+  main {
+    padding: 2.5rem;
+    margin: 0 auto;
+    text-align: center;
+    /* 
+    background-color: rgb(20 20 20); */
+  }
+
+  #ult--the-ultimate-dev-stack {
+    display: none;
+  }
+</style>
+<main>
+{{ content }}
+</main>
+</body>
+</html>

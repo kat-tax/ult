@@ -1,27 +1,25 @@
-# ULT · The Ultimate App Dev Kit
+# ULT · The Ultimate Dev Stack
 
 > One code base for native mobile, native desktop and web!
 
 To create your new app, run `npx ult [project name]`
 
-Navigate to the folder, then run `yarn run [task]`
+Navigate to the folder, then run `yarn [task]`
 
 *For more details, visit the [documentation](https://docs.ult.dev)*
-
-*If you have a problem, [create an issue](https://github.com/kat-tax/ult/issues/new/choose)*
 
 ---
 
 | Task      | Description                        |
 | ----------| -----------------------------------|
-| web       | Run __Web__ app                    |
-| android   | Run __Android__ app                |
-| windows   | Run __Windows__ app                |
-| macos     | Run __MacOS__ app                  |
-| ios       | Run __iOS__ app                    |
+| web       | Run the __Web__ app                |
+| android   | Run the __Android__ app            |
+| windows   | Run the __Windows__ app            |
+| macos     | Run the __MacOS__ app              |
+| ios       | Run the __iOS__ app                |
 | start     | Start dev servers                  |
-| build     | Build production apps              |
-| deploy    | Deploy production apps             |
+| build     | Build all apps                     |
+| deploy    | Deploy all apps                    |
 | test      | Run e2e and unit tests             |
 | lint      | Lint source code                   |
 | format    | Format source code                 |
