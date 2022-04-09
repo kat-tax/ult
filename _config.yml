@@ -1,7 +1,7 @@
 title: ULT
 origin: https://ult.dev
 tagline: The Ultimate Dev Stack
-description: One code base for native mobile, native desktop and web!
+description: One code base for native mobile, native desktop, and web!
 theme: 'minima'
 color: '#000000'
 exclude:
