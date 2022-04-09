@@ -7,10 +7,10 @@ async function prompt(steps) {
   prompts.override({
     name,
     ...Object.fromEntries(flags.map(flag => {
-      const [k, v] = flag.split('=');
+      const [key, value] = flag.split('=');
       return [
-        k.slice(2),
-        k === '--platforms' ? v.split(',') : v
+        key.slice(2),
+        key === '--platforms' ? value.split(',') : value
       ];
     }))
   });
