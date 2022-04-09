@@ -74,22 +74,22 @@
 <header>
   <h1>{{ site.title }}</h1>
   <h2>{{ site.tagline }}</h2>
-  <input autofocus readonly type="text" value="" id="cli"/>
+  <input autofocus readonly type="text" value="" id="input"/>
   <noscript>
-    <input autofocus readonly type="text" value="npx ult Demo"/>
+    <input autofocus readonly type="text" value="npx ult HelloWorld"/>
     <style>#cli {display: none}</style>
   </noscript>
   <a href="https://docs.ult.dev">Documentation</a>
   <a href="{{ site.github.repository_url }}">GitHub</a>
-  <a href="{{ site.github.repository_url }}">Discord</a>
+  <a href="https://discord.gg/TzhDRyj" target="_blank">Discord</a>
   <script src="https://unpkg.com/typeit@8.4.0/dist/index.umd.js"></script>
   <script>
     try {
-      const cli = document.getElementById('cli');
       const delay = 1500;
-      const select = () => cli.setSelectionRange(0, 7);
-      cli.addEventListener('focus', () => setTimeout(select, 10));
-      new TypeIt(cli, {loop: true, loopDelay: 0, speed: 35})
+      const input = document.getElementById('input');
+      const select = () => input.setSelectionRange(0, 7);
+      input.addEventListener('focus', () => setTimeout(select, 10));
+      new TypeIt(input, {loop: true, loopDelay: 0, speed: 35})
         .type('npx ult HelloWorld').exec(select).pause(delay).delete(10)
         .type('Demo --minimal').exec(select).pause(delay).delete(14)
         .type('EncryptedChat').exec(select).pause(delay).delete(13)
