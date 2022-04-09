@@ -1,6 +1,6 @@
 # ULT · The Ultimate Dev Stack
 
-> One code base for native mobile, native desktop and web!
+> One code base for native mobile, native desktop, and web!
 
 To create your new app, run `npx ult [project name]`
 

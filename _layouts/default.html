@@ -9,8 +9,16 @@
     color: rgb(220, 220, 220);
   }
 
+  * {
+    outline-color: transparent;
+  }
+
   a, a:visited, a:hover {
     color: #9e8cfc;
+  }
+
+  ::selection {
+    background-color: #504589;
   }
 
   blockquote {
@@ -23,6 +31,17 @@
     font-weight: 500;
   }
 
+  h3 {
+    font-size: 1.25em;
+    font-weight: 500;
+    margin-top: 2em;
+    color: #6e6e6e;
+  }
+
+  h3:first-of-type {
+    margin-top: 0;
+  }
+
   hr {
     opacity: 0;
     margin-bottom: 2em;
@@ -30,6 +49,9 @@
 
   ul {
     list-style: none;
+    margin-left: 0;
+    font-size: 1em;
+    line-height: 1.65em;
   }
 
   code {
@@ -48,8 +70,40 @@
     padding: 2.5rem;
     margin: 0 auto;
     text-align: center;
-    /* 
-    background-color: rgb(20 20 20); */
+  }
+
+  table {
+    border: 0;
+    color: rgb(200, 200, 200);
+    box-shadow: 0 10px 7px rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+  }
+
+  table td {
+    border: 0;
+  }
+
+  table th {
+    border: 0;
+    background-color: #000000;
+    color: white;
+    font-weight: 400;
+  }
+
+  table th:first-child {
+    border-top-left-radius: 20px;
+  }
+
+  table th:last-child {
+    border-top-right-radius: 20px;
+  }
+
+  table tr:nth-child(even) {
+    background-color: #141414;
+  }
+
+  table tr > td:first-child {
+    border-right: 2px solid #000;
   }
 
   #ult--the-ultimate-dev-stack {

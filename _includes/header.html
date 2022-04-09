@@ -2,6 +2,7 @@
   header {
     padding: 2em 0;
     background: #000;
+    border-bottom: 1px solid #262626;
     text-align: center;
     color: #fff;
   }
@@ -20,7 +21,7 @@
   header input {
     display: block;
     box-sizing: border-box;
-    padding: 0.75em 1.5em;
+    padding: 0.75em 1.35em;
     margin: 1.5em auto;
     min-width: 16em;
     max-width: 20em;
@@ -30,6 +31,10 @@
     color: #9e8cfc;
     font-size: 1em;
     font-family: monospace;
+  }
+
+  header input::selection {
+    background-color: #000;
   }
 
   header a {
@@ -69,8 +74,28 @@
 <header>
   <h1>{{ site.title }}</h1>
   <h2>{{ site.tagline }}</h2>
-  <input readonly type="text" value="npx ult Demo"/>
+  <input autofocus readonly type="text" value="" id="cli"/>
+  <noscript>
+    <input autofocus readonly type="text" value="npx ult Demo"/>
+    <style>#cli {display: none}</style>
+  </noscript>
   <a href="https://docs.ult.dev">Documentation</a>
   <a href="{{ site.github.repository_url }}">GitHub</a>
   <a href="{{ site.github.repository_url }}">Discord</a>
+  <script src="https://unpkg.com/typeit@8.4.0/dist/index.umd.js"></script>
+  <script>
+    try {
+      const cli = document.getElementById('cli');
+      const delay = 1500;
+      const select = () => cli.setSelectionRange(0, 7);
+      cli.addEventListener('focus', () => setTimeout(select, 10));
+      new TypeIt(cli, {loop: true, loopDelay: 0, speed: 35})
+        .type('npx ult HelloWorld').exec(select).pause(delay).delete(10)
+        .type('Demo --minimal').exec(select).pause(delay).delete(14)
+        .type('EncryptedChat').exec(select).pause(delay).delete(13)
+        .type('TwitterKiller').exec(select).pause(delay).delete(13)
+        .type('MyCoolNewApp').exec(select).pause(delay).delete(12)
+        .go();
+    } catch (e) {}
+  </script>
 </header>
