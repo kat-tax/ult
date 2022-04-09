@@ -1,2 +1,16 @@
-theme: jekyll-theme-cayman
 title: ULT
+origin: https://ult.dev
+tagline: The Ultimate Dev Stack
+description: One code base for native mobile, native desktop and web!
+theme: 'minima'
+color: '#000000'
+exclude:
+  - .jekyll-cache/
+  - .sass-cache/
+  - packages/
+  - Gemfile
+  - Gemfile.lock
+  - package.json
+  - LICENSE
+  - CNAME
+  - TODO.md

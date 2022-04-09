@@ -1,5 +1,5 @@
 const bases = [
-  {title: 'Default', value: 'default', description: 'translations, routing, and more'},
+  {title: 'Default', value: 'default', description: 'production ready'},
   {title: 'Minimal', value: 'minimal', description: 'the bare minimum'},
 ];
 

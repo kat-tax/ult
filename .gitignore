@@ -1,6 +1,19 @@
-.DS_Store
-.vscode/
-.npm/
+# Project
+TODO.md
+.vscode
 dist
-node_modules/
+
+# General
+.DS_Store
+
+# Node
+.npm
+node_modules
 npm-debug.log*
+
+# Jekyll
+_site
+vendor
+.sass-cache
+.jekyll-cache
+.jekyll-metadata

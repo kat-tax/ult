@@ -1,7 +1,7 @@
 {
   "name": "ult-scripts",
   "description": "Configuration and scripts for ULT",
-  "version": "2.0.0-alpha.1",
+  "version": "2.0.0",
   "license": "MIT",
   "types": "./lib/ult.d.ts",
   "bin": {
@@ -32,10 +32,6 @@
     "dotenv-expand": "^8.0.1",
     "eslint": "^8.10.0",
     "eslint-config-react-app": "^7.0.0",
-    "eslint-plugin-import": "^2.25.4",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-react": "^7.29.3",
-    "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-webpack-plugin": "^3.1.1",
     "file-loader": "^6.2.0",
     "fs-extra": "^10.0.1",
