@@ -1,82 +1,9 @@
-<style>
-  header {
-    padding: 2em 0;
-    background: #000;
-    border-bottom: 1px solid #262626;
-    text-align: center;
-    color: #fff;
-  }
-
-  header h1 {
-    font-size: 2.75em;
-    font-weight: 500;
-    margin-bottom: 0.15em;
-  }
-
-  header h2 {
-    font-size: 1.15em;
-    font-weight: 200;
-  }
-
-  header input {
-    display: block;
-    box-sizing: border-box;
-    padding: 0.75em 1.35em;
-    margin: 1.5em auto;
-    min-width: 16em;
-    max-width: 20em;
-    background-color: rgb(25, 25, 25);
-    border: 1px solid rgb(50, 50, 50);
-    border-radius: 3em;
-    color: #9e8cfc;
-    font-size: 1em;
-    font-family: monospace;
-  }
-
-  header input::selection {
-    background-color: #000;
-  }
-
-  header a {
-    display: inline-block;
-    box-sizing: border-box;
-    padding: 0.75em 1em;
-    max-width: 20em;
-    margin-bottom: 1em;
-    border-radius: 3em;
-    border: 1px solid rgb(50, 50, 50);
-    background-color: rgb(0, 0, 0);
-    color: rgb(150, 150, 150);
-    transition: color 0.2s, background-color 0.2s, border-color 0.2s;
-  }
-
-  header a:hover {
-    color: rgb(255, 255, 255);
-    background-color: rgb(25, 25, 25);
-    text-decoration: none;
-  }
-
-  header a:visited {
-    color: rgb(150, 150, 150);
-  }
-
-  header a + a {
-    margin-left: 0.75em;
-  }
-
-  @media screen and (max-width: 475px) {
-    header > a {
-      width: 100%;
-      margin-left: 0 !important;
-    }
-  }
-</style>
 <header>
   <h1>{{ site.title }}</h1>
   <h2>{{ site.tagline }}</h2>
   <input autofocus readonly type="text" value="" id="input"/>
   <noscript>
-    <input autofocus readonly type="text" value="npx ult HelloWorld"/>
+    <input autofocus readonly type="text" value="{{ site.example }}"/>
     <style>#cli {display: none}</style>
   </noscript>
   <a href="https://docs.ult.dev">Documentation</a>
@@ -90,12 +17,14 @@
       const select = () => input.setSelectionRange(0, 7);
       input.addEventListener('focus', () => setTimeout(select, 10));
       new TypeIt(input, {loop: true, loopDelay: 0, speed: 35})
-        .type('npx ult HelloWorld').exec(select).pause(delay).delete(10)
+        .type('{{ site.example }}').exec(select).pause(delay).delete(10)
         .type('Demo --minimal').exec(select).pause(delay).delete(14)
         .type('EncryptedChat').exec(select).pause(delay).delete(13)
         .type('TwitterKiller').exec(select).pause(delay).delete(13)
         .type('MyCoolNewApp').exec(select).pause(delay).delete(12)
         .go();
-    } catch (e) {}
+    } catch (e) {
+      document.getElementById('input').value = '{{ site.example }}';
+    }
   </script>
 </header>
