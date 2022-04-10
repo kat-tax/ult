@@ -46,11 +46,10 @@ Navigate to the folder, then run `yarn [task]`
 
 ### Funding
 
-> You can [sponsor](https://github.com/sponsors/Cavitt) development or donate to addresses below:
+> You can [sponsor](https://github.com/sponsors/Cavitt) development or donate to an address below
 
 ```
-BTC xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-XMR xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-ETH xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-BAT xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+BTC 3MxrqVM7S8FGb7UwKMLxQ9gG1B2n24Y1NP
+ETH 0x6F373884D766803Eb8BC5969804Be4FAf77BC335
+XMR 86tDLzweVEmUunPeucZpRmW4MZ4RoTQUfjZ4KZATdYZBUkH3biwiLF3X1LhMkzvThZMQxGfGZFFwxRRWA7M5sVfv7AMPjsD
 ```

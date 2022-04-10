@@ -51,9 +51,16 @@ ul {
 }
 
 pre {
-  color: #fff;
-  border: 1px solid #323232;
+  position: absolute;
+  overflow: scroll;
+  padding: 2em;
+  right: 0;
+  left: 0;
+  border: 0;
+  border-top: 1px solid #323232;
   background-color: #000;
+  text-align: left;
+  color: #fff;
 }
 
 code {
