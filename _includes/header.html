@@ -4,27 +4,29 @@
   <input autofocus readonly type="text" value="" id="input"/>
   <noscript>
     <input autofocus readonly type="text" value="{{ site.example }}"/>
-    <style>#cli {display: none}</style>
+    <style>#input {display: none}</style>
   </noscript>
-  <a href="https://docs.ult.dev">Documentation</a>
-  <a href="{{ site.github.repository_url }}">GitHub</a>
+  <a href="https://docs.ult.dev">Docs</a>
+  <a href="{{ site.github.repository_url }}">Source</a>
+  <a href="https://github.com/orgs/kat-tax/projects/4">Roadmap</a>
   <a href="https://discord.gg/TzhDRyj" target="_blank">Discord</a>
-  <script src="https://unpkg.com/typeit@8.4.0/dist/index.umd.js"></script>
+  <script async src="https://unpkg.com/typeit@8.4.0/dist/index.umd.js" onload="init()"></script>
   <script>
-    try {
-      const delay = 1500;
-      const input = document.getElementById('input');
-      const select = () => input.setSelectionRange(0, 7);
-      input.addEventListener('focus', () => setTimeout(select, 10));
-      new TypeIt(input, {loop: true, loopDelay: 0, speed: 35})
-        .type('{{ site.example }}').exec(select).pause(delay).delete(10)
-        .type('Demo --minimal').exec(select).pause(delay).delete(14)
-        .type('EncryptedChat').exec(select).pause(delay).delete(13)
-        .type('TwitterKiller').exec(select).pause(delay).delete(13)
-        .type('MyCoolNewApp').exec(select).pause(delay).delete(12)
-        .go();
-    } catch (e) {
-      document.getElementById('input').value = '{{ site.example }}';
+    function init() {
+      try {
+        const delay = 1500;
+        const input = document.getElementById('input');
+        const select = () => input.setSelectionRange(0, 7);
+        input.addEventListener('focus', () => setTimeout(select, 10));
+        new TypeIt(input, {loop: true, loopDelay: 0, speed: 35})
+          .type('{{ site.example }}').exec(select).pause(delay).delete(10)
+          .type('Demo --minimal').exec(select).pause(delay).delete(14)
+          .type('EncryptedChat').exec(select).pause(delay).delete(13)
+          .type('TodoList').exec(select).pause(delay).delete(8)
+          .go();
+      } catch (e) {
+        document.getElementById('input').value = '{{ site.example }}';
+      }
     }
   </script>
 </header>
