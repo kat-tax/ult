@@ -211,12 +211,14 @@ module.exports = function(webpackEnv) {
                 customize: require.resolve('babel-preset-react-app/webpack-overrides'),
                 presets: [
                   [
+                    'module:metro-react-native-babel-preset',
                     require.resolve('babel-preset-react-app'), {
                       runtime: hasJsxRuntime ? 'automatic' : 'classic',
                     },
                   ],
                 ],
                 plugins: [
+                  'react-native-web',
                   isDev && hasFastRefresh && require.resolve('react-refresh/babel'),
                 ].filter(Boolean),
               },

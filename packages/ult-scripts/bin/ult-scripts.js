@@ -1,9 +1,24 @@
 #!/usr/bin/env node
 
 const scripts = [
+  // Run
   'run-web',
+  'run-android',
+  'run-windows',
+  'run-macos',
+  'run-ios',
+  // Build
   'build-web',
+  'build-android',
+  'build-windows',
+  'build-macos',
+  'build-ios',
+  // Test
   'test-web',
+  'test-android',
+  'test-windows',
+  'test-macos',
+  'test-ios',
 ];
 
 // React Dev Utils

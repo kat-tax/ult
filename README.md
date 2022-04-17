@@ -1,3 +1,4 @@
+<!-- HEADER -->
 <h1 align="center">
   <a href="https://ult.dev">ULT</a>
 </h1>
@@ -29,6 +30,8 @@
 
 -------------
 
+<!--img align="right" src="images/terminal.svg"-->
+
 | Task      | Description                        |
 | ----------| -----------------------------------|
 | web       | Run the __Web__ app                |
@@ -48,7 +51,8 @@
 -------------
 
 
-### Tech Stack
+## Tech Stack
+
  - [React](https://reactjs.org) (view)
  - [Redux](https://redux-toolkit.js.org) (state)
  - [LinguiJS](https://lingui.js.org) (i18n)
@@ -58,11 +62,12 @@
  - [React Native Web](https://necolas.github.io/react-native-web) (web bridge)
  - [React Native](https://reactnative.dev) + [Windows](https://microsoft.github.io/react-native-windows) (native bridge)
 
-### Community
+
+## Community
 
 > Join our [discord channel](https://discord.gg/TzhDRyj) or create a [github dicussion](https://github.com/kat-tax/ult/discussions)
 
-### Funding
+## Funding
 
 > You can [sponsor](https://github.com/sponsors/Cavitt) development or donate to an address below
 

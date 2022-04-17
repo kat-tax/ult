@@ -1,23 +1,23 @@
 <header>
   <h1>{{ site.title }}</h1>
   <h2>{{ site.tagline }}</h2>
-  <input autofocus readonly type="text" value="" id="input"/>
+  <input autofocus readonly type="text" value="" id="cli"/>
   <noscript>
     <input autofocus readonly type="text" value="{{ site.example }}"/>
-    <style>#input {display: none}</style>
+    <style>#cli {display: none}</style>
   </noscript>
   <a href="https://docs.ult.dev">Docs</a>
   <a href="{{ site.github.repository_url }}">Source</a>
   <a href="https://github.com/orgs/kat-tax/projects/4">Roadmap</a>
   <a href="https://discord.gg/TzhDRyj" target="_blank">Discord</a>
-  <script async src="https://unpkg.com/typeit@8.4.0/dist/index.umd.js" onload="init()"></script>
+  <script async id="typeit" src="https://unpkg.com/typeit@8.4.0/dist/index.umd.js"></script>
   <script>
-    function init() {
+    document.getElementById('typeit').addEventListener('load', function() {
       try {
-        const delay = 1500;
-        const input = document.getElementById('input');
-        const select = () => input.setSelectionRange(0, 7);
-        input.addEventListener('focus', () => setTimeout(select, 10));
+        var delay = 1500;
+        var input = document.getElementById('cli');
+        var select = function() { input.setSelectionRange(0, 7); };
+        input.addEventListener('focus', function() { setTimeout(select, 10); });
         new TypeIt(input, {loop: true, loopDelay: 0, speed: 35})
           .type('{{ site.example }}').exec(select).pause(delay).delete(10)
           .type('Demo --minimal').exec(select).pause(delay).delete(14)
@@ -25,8 +25,8 @@
           .type('TodoList').exec(select).pause(delay).delete(8)
           .go();
       } catch (e) {
-        document.getElementById('input').value = '{{ site.example }}';
+        document.getElementById('cli').value = '{{ site.example }}';
       }
-    }
+    });
   </script>
 </header>
