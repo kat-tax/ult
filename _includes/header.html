@@ -1,11 +1,16 @@
 <header>
   <h1>{{ site.title }}</h1>
   <h2>{{ site.tagline }}</h2>
-  <input autofocus readonly type="text" value="" id="cli"/>
-  <noscript>
-    <input autofocus readonly type="text" value="{{ site.example }}"/>
-    <style>#cli {display: none}</style>
-  </noscript>
+  <div>
+    <input autofocus readonly type="text" value="" id="cli"/>
+    <noscript>
+      <input autofocus readonly type="text" value="{{ site.example }}"/>
+      <style>#cli {display: none}</style>
+    </noscript>
+    <button title="Copy command" id="clipboard">
+      <img alt="copy" src="images/icon-copy.svg"/>
+    </button>
+  </div>
   <a href="https://docs.ult.dev">Docs</a>
   <a href="{{ site.github.repository_url }}">Source</a>
   <a href="https://github.com/orgs/kat-tax/projects/4">Roadmap</a>
@@ -26,6 +31,16 @@
           .go();
       } catch (e) {
         document.getElementById('cli').value = '{{ site.example }}';
+      }
+    });
+  </script>
+  <script>
+    document.getElementById('clipboard').addEventListener('click', function() {
+      try {
+        navigator.clipboard.writeText('npx ult ');
+        alert('Copied to clipboard!');
+      } catch (e) {
+        prompt('Run this command in the terminal:', 'npx ult ');
       }
     });
   </script>

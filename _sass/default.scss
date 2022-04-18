@@ -1,30 +1,19 @@
-body {
-  background-color: rgb(25, 25, 25);
-  color: rgb(220, 220, 220);
-  font-size: 16px;
+::selection {
+  background-color: #504589;
 }
 
 * {
   outline-color: transparent;
 }
 
+body {
+  background-color: rgb(25, 25, 25);
+  color: rgb(220, 220, 220);
+  font-size: 16px;
+}
+
 a, a:visited, a:hover {
   color: #9e8cfc;
-}
-
-::selection {
-  background-color: #504589;
-}
-
-blockquote {
-  color: #ffffff;
-  border: 0;
-  padding-left: 0;
-  font-size: 18px;
-  letter-spacing: 0;
-  font-style: normal;
-  font-weight: 500;
-  margin-bottom: 1em;
 }
 
 h3 {
@@ -48,6 +37,10 @@ ul {
   margin-left: 0;
   font-size: 1em;
   line-height: 1.65em;
+}
+
+p {
+  line-height: 1.75em;
 }
 
 pre {
@@ -76,14 +69,15 @@ p > code {
   white-space: nowrap;
 }
 
-p {
-  line-height: 1.75em;
-}
-
-main {
-  padding: 2rem;
-  margin: 0 auto;
-  text-align: center;
+blockquote {
+  color: #ffffff;
+  border: 0;
+  padding-left: 0;
+  font-size: 18px;
+  letter-spacing: 0;
+  font-style: normal;
+  font-weight: 500;
+  margin-bottom: 1em;
 }
 
 table {
@@ -113,6 +107,18 @@ table {
   }
 }
 
+main {
+  padding: 2rem;
+  margin: 0 auto;
+  text-align: center;
+  h1, h3 {
+    display: none;
+  }
+  p:first-of-type {
+    display: none;
+  }
+}
+
 header {
   padding: 1.5em 0;
   background: #000;
@@ -131,19 +137,39 @@ header {
     font-weight: 200;
   }
 
-  input {
-    display: block;
-    box-sizing: border-box;
-    padding: 0.75em 1.35em;
+  div {
+    position: relative;
     margin: 1.5em auto 1.7em;
     min-width: 17.5em;
     max-width: 20em;
+  }
+
+  button {
+    position: absolute;
+    top: 0;
+    right: 8px;
+    padding: 14px;
+    background: none;
+    border: none;
+    border-radius: 1em;
+  }
+
+  img {
+    height: 15px;
+    width: 15px;
+  }
+
+  input {
+    width: 100%;
+    display: block;
+    padding: 0.75em 1.35em;
     background-color: rgb(25, 25, 25);
     border: 1px solid rgb(50, 50, 50);
     border-radius: 3em;
     color: #9e8cfc;
     font-size: 1em;
     font-family: monospace;
+    box-sizing: border-box;
   }
   
   input::selection {
@@ -184,9 +210,4 @@ header {
     max-width: 17.5em;
     margin-left: 0 !important;
   }
-}
-
-img[alt="chat"] {
-  width: 180px;
-  margin-bottom: 0.25em;
 }
