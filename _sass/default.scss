@@ -114,7 +114,7 @@ main {
   h1, h3 {
     display: none;
   }
-  p:first-of-type {
+  p:nth-child(3) {
     display: none;
   }
 }
@@ -207,7 +207,7 @@ header {
 @media screen and (max-width: 425px) {
   header > a {
     width: 100%;
-    max-width: 17.5em;
+    max-width: 20em;
     margin-left: 0 !important;
   }
 }
