@@ -141,7 +141,7 @@ header {
     position: relative;
     margin: 1.5em auto 1.7em;
     min-width: 17.5em;
-    max-width: 20em;
+    max-width: 18em;
   }
 
   button {
@@ -180,7 +180,7 @@ header {
     display: inline-block;
     box-sizing: border-box;
     padding: 0.75em 1em;
-    max-width: 20em;
+    max-width: 18em;
     margin-bottom: 1em;
     border-radius: 3em;
     border: 1px solid rgb(50, 50, 50);
@@ -207,7 +207,7 @@ header {
 @media screen and (max-width: 425px) {
   header > a {
     width: 100%;
-    max-width: 20em;
+    max-width: 18em;
     margin-left: 0 !important;
   }
 }
