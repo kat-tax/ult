@@ -16,17 +16,6 @@ a, a:visited, a:hover {
   color: #9e8cfc;
 }
 
-h2 {
-  font-size: 1.25em;
-  font-weight: 500;
-  margin-top: 2em;
-  color: #919191;
-}
-
-h3:first-of-type {
-  margin-top: 0;
-}
-
 hr {
   opacity: 0;
   margin-bottom: 1em;
@@ -111,9 +100,18 @@ main {
   padding: 2rem;
   margin: 0 auto;
   text-align: center;
+
+  h2 {
+    font-size: 1.25em;
+    font-weight: 500;
+    margin-top: 2em;
+    color: #919191;
+  }
+
   h1, h3 {
     display: none;
   }
+  
   p:nth-child(3) {
     display: none;
   }
