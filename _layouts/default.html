@@ -2,9 +2,50 @@
 <html lang="{{ page.lang | default: site.lang | default: 'en' }}">
 {%- include head.html -%}
 <body>
+<script>
+  window.pkgManager;
+  try {
+    window.pkgManager = localStorage.getItem('pkg_manager');
+  } catch(e) {
+    window.pkgManager = 'npm';
+  }
+</script>
 {%- include header.html -%}
 <main>
 {{ content }}
 </main>
+<aside>
+  <button id="npm">
+    <img alt="NPM" src="images/icon-npm.svg"/>
+  </button>
+  <button id="yarn">
+    <img alt="Yarn" src="images/icon-yarn.svg"/>
+  </button>
+</aside>
+<script>
+  document.body.className = window.pkgManager;
+  document.getElementById('npm').onclick = setPkgManager('npm');
+  document.getElementById('yarn').onclick = setPkgManager('yarn');
+  document.querySelectorAll('main *').forEach(function(node) {
+    if (window.pkgManager === 'yarn') {
+      node.innerHTML = node.innerHTML
+        .replace(/{{ site.cmd_npm }}/g, '{{ site.cmd_yarn }}')
+        .replace(/npm run/g, 'yarn');
+    } else {
+      node.innerHTML = node.innerHTML
+        .replace(/{{ site.cmd_yarn }}/g, '{{ site.cmd_npm }}')
+        .replace(/yarn/g, 'npm run');
+    }
+  });
+
+  function setPkgManager(name) {
+    return function() {
+      try {
+        localStorage.setItem('pkg_manager', name);
+        location.reload();
+      } catch(e) {}
+    }
+  }
+</script>
 </body>
 </html>

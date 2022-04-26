@@ -1,3 +1,5 @@
+/** Custom styles */
+
 ::selection {
   background-color: #504589;
 }
@@ -96,6 +98,32 @@ table {
   }
 }
 
+aside {
+  position: absolute;
+  top: 1em;
+  right: 1em;
+
+  button {
+    cursor: pointer;
+    display: block;
+    height: 3em;
+    width: 5em;
+    margin-bottom: 0.5em;
+    background: #191919;
+    border: 1px solid #323232;
+    border-radius: 3em;
+
+    img {
+      width: 3em;
+    }
+
+    [alt="Yarn"] {
+      opacity: 0.8;
+      filter: grayscale(100%);
+    }
+  }
+}
+
 main {
   padding: 2rem;
   margin: 0 auto;
@@ -138,29 +166,28 @@ header {
   div {
     position: relative;
     margin: 1.5em auto 1.7em;
-    min-width: 17.5em;
-    max-width: 18em;
+    width: 17em;
   }
 
   button {
     position: absolute;
     top: 0;
-    right: 8px;
+    right: 4px;
     padding: 14px;
     background: none;
     border: none;
-    border-radius: 1em;
+    border-radius: 3em;
   }
 
   img {
-    height: 15px;
-    width: 15px;
+    height: 16px;
+    width: 16px;
   }
 
   input {
     width: 100%;
     display: block;
-    padding: 0.75em 1.35em;
+    padding: 0.75em 1em;
     background-color: rgb(25, 25, 25);
     border: 1px solid rgb(50, 50, 50);
     border-radius: 3em;
@@ -177,8 +204,9 @@ header {
   a {
     display: inline-block;
     box-sizing: border-box;
-    padding: 0.75em 1em;
-    max-width: 18em;
+    padding: 12px;
+    width: 52px;
+    height: 52px;
     margin-bottom: 1em;
     border-radius: 3em;
     border: 1px solid rgb(50, 50, 50);
@@ -198,14 +226,30 @@ header {
   }
   
   a + a {
-    margin-left: 0.75em;
+    margin-left: 0.5em;
+  }
+}
+
+body.yarn {
+  header div {
+    width: 20em;
+  }
+
+  aside {
+    [alt="NPM"] {
+      opacity: 0.5;
+      filter: grayscale(100%);
+    }
+
+    [alt="Yarn"] {
+      opacity: 1;
+      filter: initial;
+    }
   }
 }
 
 @media screen and (max-width: 425px) {
-  header > a {
-    width: 100%;
-    max-width: 18em;
-    margin-left: 0 !important;
+  header > a + a {
+    margin-left: 0.2em;
   }
 }

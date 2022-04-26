@@ -3,7 +3,12 @@ author: ΚΛΤΤΛΧ
 origin: https://ult.dev
 tagline: The Ultimate Dev Stack
 description: One code base for native mobile, native desktop, and web!
-example: npx ult HelloWorld
+cmd_npm: npx ult
+cmd_yarn: yarn create ult
+cmd_sample_1: ' HelloWorld'
+cmd_sample_2: ' TodoList'
+cmd_sample_3: ' MyCoolApp'
+cmd_delay: 2000
 theme: 'minima'
 color: '#000000'
 exclude:
