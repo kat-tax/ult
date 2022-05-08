@@ -161,7 +161,7 @@ module.exports = function(webpackEnv) {
         hasSourceMap && {
           enforce: 'pre',
           exclude: /@babel(?:\/|\\{1,2})runtime/,
-          test: /\.(ts|tsx|js|jsx|mjs|css)$/,
+          test: /\.(ts|tsx|js|jsx|mjs|cjs|css)$/,
           loader: require.resolve('source-map-loader'),
         },
         {
@@ -193,7 +193,7 @@ module.exports = function(webpackEnv) {
               },
             },
             {
-              test: /\.(ts|tsx|js|jsx|mjs)$/,
+              test: /\.(ts|tsx|js|jsx|mjs|cjs)$/,
               include: [
                 paths.appSrc,
               ],
@@ -260,7 +260,7 @@ module.exports = function(webpackEnv) {
               include: path.resolve(__dirname, 'node_modules/react-native-vector-icons'),
             },
             {
-              exclude: [/^$/, /\.(ts|tsx|js|jsx|mjs)$/, /\.html$/, /\.json$/],
+              exclude: [/^$/, /\.(ts|tsx|js|jsx|mjs|cjs)$/, /\.html$/, /\.json$/],
               type: 'asset/resource',
             },
             // ** STOP ** Are you adding a new loader?
