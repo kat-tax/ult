@@ -70,6 +70,7 @@
 
 > Join our [discord channel](https://discord.gg/TzhDRyj) or create a [github dicussion](https://github.com/kat-tax/ult/discussions)
 
+
 ## Funding
 
 > You can [sponsor](https://github.com/sponsors/Cavitt) development or donate to an address below

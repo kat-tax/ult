@@ -1,7 +1,7 @@
 {
   "name": "ult-scripts",
   "description": "Configuration and scripts for ULT",
-  "version": "2.0.2-alpha.8",
+  "version": "2.0.2-alpha.9",
   "license": "MIT",
   "types": "./lib/ult.d.ts",
   "bin": {

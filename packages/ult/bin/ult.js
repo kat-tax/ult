@@ -23,14 +23,14 @@ const validate = require('../lib/validate');
         choices: config.bases,
         validate: validate.base,
       },
-      {
+      /*{
         name: 'platforms',
         type: 'multiselect',
         message: 'Select target platforms',
         instructions: color.gray('- Space to select. Return to submit'),
         choices: config.platforms,
         validate: validate.platform,
-      }
+      }*/
     ]);
     console.log('Creating project, please wait...\n');
     await command.npx(['react-native', 'init', input.name, '--template', `ult-template-${input.base}`], undefined, true);
