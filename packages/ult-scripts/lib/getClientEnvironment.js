@@ -28,11 +28,11 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
   .map(folder => path.resolve(appDirectory, folder))
   .join(path.delimiter);
 
-const ULT_APP = /^ULT_APP_/i;
+const REACT_APP = /^REACT_APP_/i;
 
 function getClientEnvironment(publicUrl) {
   const raw = Object.keys(process.env)
-    .filter(key => ULT_APP.test(key))
+    .filter(key => REACT_APP.test(key))
     .reduce((env, key) => {
       env[key] = process.env[key];
       return env;
@@ -45,6 +45,7 @@ function getClientEnvironment(publicUrl) {
       WDS_SOCKET_PORT: process.env.WDS_SOCKET_PORT,
     });
   const stringified = {
+    '__DEV__': NODE_ENV === 'development',
     'process.env': Object.keys(raw).reduce((env, key) => {
       env[key] = JSON.stringify(raw[key]);
       return env;

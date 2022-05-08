@@ -8,17 +8,18 @@
   <meta name="twitter:image:src" content="{{ '/assets/banner.png' | absolute_url }}">
   <meta name="twitter:description" content="{{ site.description }}">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@github">
+  <meta name="twitter:site" content="{{ site.author }}">
   <meta property="og:url" content="{{ site.url }}">
   <meta property="og:title" content="{{ site.title }}">
   <meta property="og:image" content="{{ '/assets/banner.png' | absolute_url }}">
   <meta property="og:description" content="{{ site.description }}">
-  <meta property="og:site_name" content="GitHub">
+  <meta property="og:site_name" content="{{ site.author }}">
   <meta property="og:type" content="object">
   <link rel="icon" href="{{ '/assets/favicon.ico' | relative_url }}" type="image/favicon">
   <link rel="apple-touch-icon" href="{{ '/assets/icon-180.png' | relative_url }}" sizes="180x180">
   <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
   {%- feed_meta -%}
+  <script async id="typeit" src="https://unpkg.com/typeit@8.4.0/dist/index.umd.js"></script>
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}
   {%- endif -%}

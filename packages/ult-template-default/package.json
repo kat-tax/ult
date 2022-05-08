@@ -1,0 +1,9 @@
+{
+  "name": "ult-template-default",
+  "description": "A production-ready base for ULT projects",
+  "version": "2.1.0",
+  "files": [
+    "template",
+    "template.config.js"
+  ]
+}

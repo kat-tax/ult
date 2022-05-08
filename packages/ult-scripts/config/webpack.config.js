@@ -68,7 +68,7 @@ module.exports = function(webpackEnv) {
 
   return {
     // https://webpack.js.org/configuration/#options
-    entry: paths.appIndexJs,
+    entry: ['babel-polyfill', paths.appIndexJs],
     target: ['browserslist'],
     performance: false,
     bail: isProd,
@@ -161,7 +161,7 @@ module.exports = function(webpackEnv) {
         hasSourceMap && {
           enforce: 'pre',
           exclude: /@babel(?:\/|\\{1,2})runtime/,
-          test: /\.(js|mjs|jsx|ts|tsx|css)$/,
+          test: /\.(ts|tsx|js|jsx|mjs|cjs|css)$/,
           loader: require.resolve('source-map-loader'),
         },
         {
@@ -193,12 +193,9 @@ module.exports = function(webpackEnv) {
               },
             },
             {
-              test: /\.(js|mjs|jsx|ts|tsx)$/,
+              test: /\.(ts|tsx|js|jsx|mjs|cjs)$/,
               include: [
                 paths.appSrc,
-                paths.appPkgVectorIcons,
-                paths.appPkgGestureHandler,
-                paths.appPkgReanimated,
               ],
               loader: require.resolve('babel-loader'),
               options: {
@@ -218,8 +215,27 @@ module.exports = function(webpackEnv) {
                 ],
                 plugins: [
                   isDev && hasFastRefresh && require.resolve('react-refresh/babel'),
+                  'react-native-web',
                 ].filter(Boolean),
               },
+            },
+            // Support React Native uncompiled libraries
+            // https://github.com/babel/babel/discussions/11694#discussioncomment-84474
+            {
+              test: /(@?react-(navigation|native)).*\.(ts|js)x?$/,
+              exclude: [/react-native-web/, /\.(native|ios|android)\.(ts|js)x?$/],
+              loader: require.resolve('babel-loader'),
+              options: {
+                cacheIdentifier,
+                cacheDirectory: true,
+                cacheCompression: false,
+                sourceMaps: hasSourceMap,
+                inputSourceMap: hasSourceMap,
+                presets: [
+                  [require.resolve('babel-preset-react-app/dependencies'), {helpers: true}],
+                  ['babel-preset-react-app'],
+                ],
+              }
             },
             {
               test: /\.(js|mjs)$/,
@@ -244,7 +260,7 @@ module.exports = function(webpackEnv) {
               include: path.resolve(__dirname, 'node_modules/react-native-vector-icons'),
             },
             {
-              exclude: [/^$/, /\.(js|mjs|jsx|ts|tsx)$/, /\.html$/, /\.json$/],
+              exclude: [/^$/, /\.(ts|tsx|js|jsx|mjs|cjs)$/, /\.html$/, /\.json$/],
               type: 'asset/resource',
             },
             // ** STOP ** Are you adding a new loader?
@@ -350,7 +366,7 @@ module.exports = function(webpackEnv) {
       }),
       // https://webpack.js.org/plugins/eslint-webpack-plugin/#options
       !hasDisabledESLintPlugin && new ESLintPlugin({
-        extensions: ['js', 'mjs', 'jsx', 'ts', 'tsx'],
+        extensions: ['ts', 'tsx', 'js', 'jsx', 'mjs'],
         formatter: require.resolve('react-dev-utils/eslintFormatter'),
         eslintPath: require.resolve('eslint'),
         failOnError: !(isDev && hasDisabledESLintWarnings),

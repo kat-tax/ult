@@ -23,14 +23,14 @@ const validate = require('../lib/validate');
         choices: config.bases,
         validate: validate.base,
       },
-      {
+      /*{
         name: 'platforms',
         type: 'multiselect',
         message: 'Select target platforms',
         instructions: color.gray('- Space to select. Return to submit'),
         choices: config.platforms,
         validate: validate.platform,
-      }
+      }*/
     ]);
     console.log('Creating project, please wait...\n');
     await command.npx(['react-native', 'init', input.name, '--template', `ult-template-${input.base}`], undefined, true);
@@ -45,11 +45,11 @@ const validate = require('../lib/validate');
     console.log(color.bold('1) Navigate to your project:'));
     console.log(`$ ${color.yellow(`cd ${input.name.toLowerCase()}`)}\n`);
     console.log(color.bold('2) Run the app on a platform:'));
-    console.log(`$ ${color.yellow('yarn run web')}`);
-    console.log(`$ ${color.yellow('yarn run android')}`);
-    console.log(`$ ${color.yellow('yarn run windows')}`);
-    console.log(`$ ${color.yellow('yarn run macos')}`);
-    console.log(`$ ${color.yellow('yarn run ios')}`);
+    console.log(`$ ${color.yellow('yarn web')}`);
+    console.log(`$ ${color.yellow('yarn android')}`);
+    console.log(`$ ${color.yellow('yarn windows')}`);
+    console.log(`$ ${color.yellow('yarn macos')}`);
+    console.log(`$ ${color.yellow('yarn ios')}`);
     console.log(color.cyan('\nFor more details, visit https://docs.ult.dev\n'));
   } catch (error) {
     console.error(color.red(error));

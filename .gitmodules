@@ -1,0 +1,3 @@
+[submodule "packages/ult-template-default/template"]
+	path = packages/ult-template-default/template
+	url = git@github.com:kat-tax/ult-template-default.git
