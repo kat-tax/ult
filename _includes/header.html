@@ -2,11 +2,7 @@
   <h1>{{ site.title }}</h1>
   <h2>{{ site.tagline }}</h2>
   <div>
-    <input autofocus readonly type="text" value="{{ site.cmd_npm }} {{ site.cmd_sample_1 }}" id="cli"/>
-    <noscript>
-      <input autofocus readonly type="text" value="{{ site.cmd_npm }} {{ site.cmd_sample_1 }}"/>
-      <style>#cli {display: none}</style>
-    </noscript>
+    <input title="Command line input" autofocus readonly type="text" value="{{ site.cmd_npm }} {{ site.cmd_sample_1 }}" id="input"/>
     <button title="Copy input" id="clipboard">
       <img alt="Copy" src="images/icon-clipboard.svg"/>
     </button>
@@ -30,76 +26,70 @@
     <img alt="Twitter" src="images/icon-twitter.svg"/>
   </a>
   <script>
-    window.updateHeader = function() {
-      var cli = document.getElementById('cli');
-      var typeit = document.getElementById('typeit');
-      var clipboard = document.getElementById('clipboard');
-      var interval = parseInt('{{ site.cmd_delay }}', 10);
-      var sample1 = '{{ site.cmd_sample_1 }}';
-      var sample2 = '{{ site.cmd_sample_2 }}';
-      var sample3 = '{{ site.cmd_sample_3 }}';   
-      var command = window.pkgManager === 'yarn'
-        ? '{{ site.cmd_yarn }}'
-        : '{{ site.cmd_npm }}';
+    var input = document.getElementById('input');
+    var typeit = document.getElementById('typeit');
+    var clipboard = document.getElementById('clipboard');
+    var interval = parseInt('{{ site.cmd_delay }}', 10);
+    var sample1 = '{{ site.cmd_sample_1 }}';
+    var sample2 = '{{ site.cmd_sample_2 }}';
+    var sample3 = '{{ site.cmd_sample_3 }}';   
+    var command = window.pkgManager === 'yarn' ? '{{ site.cmd_yarn }}' : '{{ site.cmd_npm }}';
 
-      cli.value = command + sample1;
-      cli.onfocus = select;
-      typeit.onload = type;
-      typeit.onerror = fallback;
-      clipboard.onclick = copy;
-    
-      function type() {
-        try {
-          new TypeIt(cli, {speed: 30}).exec(select).pause(interval).delete(sample1.length)
-            .type(sample2).exec(select).pause(interval).delete(sample2.length)
-            .type(sample3).exec(select).pause(interval).delete(sample3.length)
-            .type(sample1).exec(select)
-            .go();
-        } catch (e) {
-          fallback();
-        }
-      }
-
-      function fallback() {
-        select();
-        setTimeout(function() {
-          cli.value = command + sample2;
-          select();
-          setTimeout(function() {
-            cli.value = command + sample3;
-            select();
-            setTimeout(function() {
-              cli.value = command + sample1;
-              select();
-            }, interval);
-          }, interval);
-        }, interval);
-      }
-
-      function select() {
-        setTimeout(function() {
-          cli.setSelectionRange(0, command.length);
-        }, 10);
-      }
-
-      function copy() {
-        var success = function() { alert('Copied command to clipboard!'); };
-        var failure = function() { prompt('Copy and run this command in the terminal:', command); };
-        try {
-          navigator.clipboard.writeText(command);
-          setTimeout(success, 50);
-        } catch (e) {
-          try {
-            select();
-            document.execCommand('Copy');
-            setTimeout(success, 50);
-          } catch(e) {
-            failure();
-          }
-        }
+    input.value = command + sample1;
+    input.onfocus = select;
+    typeit.onload = type;
+    typeit.onerror = fallback;
+    clipboard.onclick = copy;
+  
+    function type() {
+      try {
+        new TypeIt(cli, {speed: 30}).exec(select).pause(interval).delete(sample1.length)
+          .type(sample2).exec(select).pause(interval).delete(sample2.length)
+          .type(sample3).exec(select).pause(interval).delete(sample3.length)
+          .type(sample1).exec(select)
+          .go();
+      } catch (e) {
+        fallback();
       }
     }
 
-    updateHeader(true);
+    function fallback() {
+      select();
+      setTimeout(function() {
+        input.value = command + sample2;
+        select();
+        setTimeout(function() {
+          input.value = command + sample3;
+          select();
+          setTimeout(function() {
+            input.value = command + sample1;
+            select();
+          }, interval);
+        }, interval);
+      }, interval);
+    }
+
+    function select() {
+      setTimeout(function() {
+        input.setSelectionRange(0, command.length);
+      }, 10);
+    }
+
+    function copy() {
+      var success = function() { alert('Copied command to clipboard!'); };
+      var failure = function() { prompt('Copy and run this command in the terminal:', command); };
+      try {
+        navigator.clipboard.writeText(command);
+        setTimeout(success, 50);
+      } catch (e) {
+        try {
+          select();
+          document.execCommand('Copy');
+          setTimeout(success, 50);
+        } catch(e) {
+          failure();
+        }
+      }
+    }
   </script>
 </header>
