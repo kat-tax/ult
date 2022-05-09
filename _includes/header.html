@@ -43,7 +43,7 @@
   
     function type() {
       try {
-        new TypeIt(cli, {speed: 30}).exec(select).pause(interval).delete(sample1.length)
+        new TypeIt(input, {speed: 30}).exec(select).pause(interval).delete(sample1.length)
           .type(sample2).exec(select).pause(interval).delete(sample2.length)
           .type(sample3).exec(select).pause(interval).delete(sample3.length)
           .type(sample1).exec(select)
