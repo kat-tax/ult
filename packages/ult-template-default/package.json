@@ -1,7 +1,10 @@
 {
   "name": "ult-template-default",
   "description": "A production-ready base for ULT projects",
-  "version": "2.1.0",
+  "version": "2.1.1",
+  "scripts": {
+    "prepublish": "git submodule update --remote"
+  },
   "files": [
     "template",
     "template.config.js"
