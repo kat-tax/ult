@@ -6,7 +6,7 @@
     "prepublish": "git submodule update --remote"
   },
   "files": [
-    "template",
+    "hello-world",
     "template.config.js"
   ]
 }
