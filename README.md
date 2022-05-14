@@ -7,8 +7,8 @@
 </h3>
 <p align="center">
     <a href="https://docs.ult.dev">Documentation</a>
+  | <a href="https://try.ult.dev">Sandbox</a>
   | <a href="https://github.com/orgs/kat-tax/projects/4">Roadmap</a>
-  | <a href="https://codesandbox.io/s/ult-erbh1">Sandbox</a>
   | <a href="https://discord.gg/TzhDRyj">Discord</a>
 </p>
 <blockquote align="center">
