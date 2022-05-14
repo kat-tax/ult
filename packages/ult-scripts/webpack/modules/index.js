@@ -2,24 +2,13 @@ const resolve = require('resolve');
 const fs = require('fs');
 const path = require('path');
 const chalk = require('react-dev-utils/chalk');
-const paths = require('../config/paths');
+const paths = require('../webpack/paths');
 
-function getModules() {
-  const ts = require(resolve.sync('typescript', {basedir: paths.appNodeModules}));
-  const config = ts.readConfigFile(paths.appTsConfig, ts.sys.readFile).config;
-  const options = config.compilerOptions || {};
-  const additionalModulePaths = getAdditionalModulePaths(options);
-  return {
-    hasTsConfig: fs.existsSync(paths.appTsConfig),
-    webpackAliases: getWebpackAliases(options),
-    jestAliases: getJestAliases(options),
-    additionalModulePaths: additionalModulePaths,
-  };
-}
+const ts = require(resolve.sync('typescript', {basedir: paths.appNodeModules}));
+const config = ts.readConfigFile(paths.appTypescriptConfig, ts.sys.readFile).config;
+const options = config.compilerOptions || {};
 
-// Helpers
-
-function getAdditionalModulePaths(options = {}) {
+const getAdditionalModulePaths = (options = {}) => {
   const baseUrl = options.baseUrl;
   const baseUrlResolved = path.resolve(paths.appPath, baseUrl);
   if (path.relative(paths.appNodeModules, baseUrlResolved) === '')
@@ -31,7 +20,7 @@ function getAdditionalModulePaths(options = {}) {
   throw new Error(chalk.red.bold("Your project's `baseUrl` can only be set to `src` or `node_modules`."));
 }
 
-function getJestAliases(options = {}) {
+const getJestAliases = (options = {}) => {
   const baseUrl = options.baseUrl;
   if (!baseUrl) return {};
   const baseUrlResolved = path.resolve(paths.appPath, baseUrl);
@@ -39,7 +28,7 @@ function getJestAliases(options = {}) {
     return {'^src/(.*)$': '<rootDir>/src/$1'};
 }
 
-function getWebpackAliases(options = {}) {
+const getWebpackAliases = (options = {}) => {
   const baseUrl = options.baseUrl;
   if (!baseUrl) return {};
   const baseUrlResolved = path.resolve(paths.appPath, baseUrl);
@@ -47,4 +36,9 @@ function getWebpackAliases(options = {}) {
     return {src: paths.appSrc};
 }
 
-module.exports = getModules();
+module.exports = {
+  hasTsConfig: fs.existsSync(paths.appTypescriptConfig),
+  additionalModulePaths: getAdditionalModulePaths(options),
+  webpackAliases: getWebpackAliases(options),
+  jestAliases: getJestAliases(options),
+};

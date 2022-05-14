@@ -11,19 +11,19 @@ const webpack = require('webpack');
 
 // React Dev Utils
 const chalk = require('react-dev-utils/chalk');
-const printBuildError = require('react-dev-utils/printBuildError');
 const FileSizeReporter = require('react-dev-utils/FileSizeReporter');
-const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
 const measureFileSizesBeforeBuild = FileSizeReporter.measureFileSizesBeforeBuild;
+const printFileSizesAfterBuild = FileSizeReporter.printFileSizesAfterBuild;
+const printBuildError = require('react-dev-utils/printBuildError');
 const printHostingInstructions = require('react-dev-utils/printHostingInstructions');
 const formatWebpackMessages = require('react-dev-utils/formatWebpackMessages');
 const checkRequiredFiles = require('react-dev-utils/checkRequiredFiles');
 const {checkBrowsers} = require('react-dev-utils/browsersHelper');
 
 // Config
-const configFactory = require('../config/webpack.config');
+const configFactory = require('../webpack/config');
 const config = configFactory('production');
-const paths = require('../config/paths');
+const paths = require('../webpack/paths');
 
 // Verification
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {

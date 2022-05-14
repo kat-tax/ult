@@ -1,10 +1,6 @@
-// Based on: https://github.com/facebook/create-react-app/blob/main/packages/react-scripts/config/webpackDevServer.config.js
-
-'use strict';
-
 const fs = require('fs');
 const paths = require('./paths');
-const getHttpsConfig = require('../lib/getHttpsConfig');
+const getHttpsConfig = require('../../lib/getHttpsConfig');
 
 // React Dev Utils
 const ignoredFiles = require('react-dev-utils/ignoredFiles');

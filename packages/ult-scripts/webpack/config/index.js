@@ -1,27 +1,21 @@
-// Based on: https://github.com/facebook/create-react-app/blob/main/packages/react-scripts/config/webpack.config.js
-
-// Imports
-const webpack = require('webpack');
-const resolve = require('resolve');
 const fs = require('fs-extra');
 const path = require('path');
+const {merge} = require('webpack-merge');
+const webpack = require('webpack');
+const resolve = require('resolve');
 
 // React Dev Utils
-const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
-const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getCacheIdentifier = require('react-dev-utils/getCacheIdentifier');
+const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
+const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
+const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
 const ForkTsCheckerWebpackPlugin = process.env.TSC_COMPILE_ON_ERROR === 'true'
   ? require('react-dev-utils/ForkTsCheckerWarningWebpackPlugin')
   : require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 
 // Plugins
-const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
-const {BugsnagBuildReporterPlugin, BugsnagSourceMapUploaderPlugin} = require('webpack-bugsnag-plugins');
-const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 // Runtime
@@ -30,12 +24,6 @@ const babelRuntimeRegenerator = require.resolve('@babel/runtime/regenerator', {p
 const babelRuntimeEntryHelpers = require.resolve('@babel/runtime/helpers/esm/assertThisInitialized', {paths: [babelRuntimeEntry]});
 const reactRefreshWebpackPlugin = require.resolve('@pmmmwh/react-refresh-webpack-plugin');
 const reactRefreshRuntimeEntry = require.resolve('react-refresh/runtime');
-
-// Helpers
-const createEnvironmentHash = require('../lib/createEnvironmentHash');
-const getClientEnvironment = require('../lib/getClientEnvironment');
-const modules = require('../lib/modules');
-const paths = require('./paths');
 const hasJsxRuntime = (() => {
   if (process.env.DISABLE_NEW_JSX_TRANSFORM === 'true')
     return false;
@@ -47,15 +35,18 @@ const hasJsxRuntime = (() => {
   }
 })();
 
+// Environment
+const createEnvironmentHash = require('../../lib/createEnvironmentHash');
+const getClientEnvironment = require('../../lib/getClientEnvironment');
+const modules = require('../modules');
+const paths = require('../paths');
+
 // Config
-module.exports = function(webpackEnv) {
-  const isDev = webpackEnv === 'development';
-  const isProd = webpackEnv === 'production';
-  const isProdProfile = isProd && process.argv.includes('--profile');
+module.exports = function(env, args) {
+  const isDev = args.mode ?? env === 'development';
+  const isProd = args.mode ?? env === 'production';
   const clientEnv = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
   const hasSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
-  const hasBugsnagReporting = !!process.env.BUGSNAG_API_KEY;
-  const hasFastRefresh = clientEnv.raw.FAST_REFRESH;
   const hasDisabledESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
   const hasDisabledESLintWarnings = process.env.ESLINT_NO_DEV_ERRORS === 'true';
   const cacheIdentifier = getCacheIdentifier(
@@ -66,50 +57,20 @@ module.exports = function(webpackEnv) {
     ]
   );
 
-  return {
-    // https://webpack.js.org/configuration/#options
+  const custom = fs.existsSync(paths.appWebpackConfig)
+    ? require(paths.appWebpackConfig)
+    : {};
+
+  const environment = isDev
+    ? require('./development')
+    : require('./production');
+
+  const common = {
     entry: ['babel-polyfill', paths.appIndexJs],
     target: ['browserslist'],
-    performance: false,
-    bail: isProd,
-    mode: isProd
-      ? 'production'
-      : isDev && 'development',
-    devtool: isProd
-      ? hasSourceMap ? 'source-map' : false
-      : isDev && 'cheap-module-source-map',
     output: {
       path: paths.appBuild,
       publicPath: paths.publicUrlOrPath,
-      pathinfo: isDev,
-      filename: isProd
-        ? 'static/js/[name].[contenthash:8].js'
-        : isDev && 'static/js/bundle.js',
-      chunkFilename: isProd
-        ? 'static/js/[name].[contenthash:8].chunk.js'
-        : isDev && 'static/js/[name].chunk.js',
-      assetModuleFilename: 'static/media/[name].[hash][ext]',
-      devtoolModuleFilenameTemplate: isProd
-        ? info => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/')
-        : isDev && (info => path.resolve(info.absoluteResourcePath).replace(/\\/g, '/')),
-    },
-    infrastructureLogging: {
-      level: 'none',
-    },
-    optimization: {
-      minimize: isProd,
-      minimizer: [
-        new TerserPlugin({
-          terserOptions: {
-            parse: {ecma: 8},
-            mangle: {safari10: true},
-            output: {ecma: 5, comments: false, ascii_only: true},
-            compress: {ecma: 5, inline: 2, warnings: false, comparisons: false},
-            keep_classnames: isProdProfile,
-            keep_fnames: isProdProfile,
-          },
-        }),
-      ],
     },
     cache: {
       store: 'pack',
@@ -120,8 +81,7 @@ module.exports = function(webpackEnv) {
         defaultWebpack: ['webpack/lib/'],
         config: [__filename],
         tsconfig: [
-          paths.appTsConfig,
-          paths.appJsConfig,
+          paths.appTypescriptConfig,
         ].filter(f => fs.existsSync(f)),
       },
     },
@@ -137,12 +97,6 @@ module.exports = function(webpackEnv) {
         'react-native-webview': 'react-native-web-webview',
         'lottie-react-native': 'react-native-web-lottie',
         'recyclerlistview': 'recyclerlistview/web',
-        // ReactDevTools profiling
-        ...(isProdProfile && {
-          'react-dom$': 'react-dom/profiling',
-          'scheduler/tracing': 'scheduler/tracing-profiling',
-        }),
-        ...(modules.webpackAliases || {}),
       },
       plugins: [
         new ModuleScopePlugin(paths.appSrc, [
@@ -214,7 +168,7 @@ module.exports = function(webpackEnv) {
                   ],
                 ],
                 plugins: [
-                  isDev && hasFastRefresh && require.resolve('react-refresh/babel'),
+                  isDev && require.resolve('react-refresh/babel'),
                   'react-native-web',
                 ].filter(Boolean),
               },
@@ -288,8 +242,6 @@ module.exports = function(webpackEnv) {
       new InterpolateHtmlPlugin(HtmlWebpackPlugin, clientEnv.raw),
       new ModuleNotFoundPlugin(paths.appPath),
       new webpack.DefinePlugin(clientEnv.stringified),
-      // https://github.com/pmmmwh/react-refresh-webpack-plugin#options
-      isDev && hasFastRefresh && new ReactRefreshWebpackPlugin({overlay: false}),
       // https://github.com/danethurber/webpack-manifest-plugin#api
       new WebpackManifestPlugin({
         fileName: 'asset-manifest.json',
@@ -303,26 +255,6 @@ module.exports = function(webpackEnv) {
             }, seed),
           };
         },
-      }),
-      // https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin.GenerateSW#GenerateSW
-      isProd && fs.existsSync(paths.swSrc) && new WorkboxWebpackPlugin.InjectManifest({
-        swSrc: paths.swSrc,
-        dontCacheBustURLsMatching: /\.[0-9a-f]{8}\./,
-        exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE/],
-        maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
-      }),
-      // https://docs.bugsnag.com/build-integrations/webpack/#build-reporter
-      isProd && hasBugsnagReporting && new BugsnagBuildReporterPlugin({
-        apiKey: process.env.BUGSNAG_API_KEY,
-        appVersion: process.env.APP_VERSION,
-        releaseStage: process.env.APP_STAGE,
-      }),
-      // https://docs.bugsnag.com/build-integrations/webpack/#source-map-uploader
-      isProd && hasBugsnagReporting && hasSourceMap && new BugsnagSourceMapUploaderPlugin({
-        apiKey: process.env.BUGSNAG_API_KEY,
-        appVersion: process.env.APP_VERSION,
-        publicPath: paths.publicUrlOrPath,
-        overwrite: true,
       }),
       // https://github.com/TypeStrong/fork-ts-checker-webpack-plugin#options
       new ForkTsCheckerWebpackPlugin({
@@ -381,5 +313,11 @@ module.exports = function(webpackEnv) {
         },
       }),
     ].filter(Boolean),
+    performance: false,
+    infrastructureLogging: {
+      level: 'none',
+    },
   };
+
+  return merge(common, environment, custom);
 };

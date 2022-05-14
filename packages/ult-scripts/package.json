@@ -1,7 +1,7 @@
 {
   "name": "ult-scripts",
   "description": "Configuration and scripts for ULT",
-  "version": "2.0.2-alpha.9",
+  "version": "2.3.0",
   "license": "MIT",
   "types": "./lib/ult.d.ts",
   "bin": {
@@ -17,42 +17,41 @@
     "scripts"
   ],
   "dependencies": {
-    "@babel/core": "^7.17.9",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.5",
+    "@babel/core": "^7.17.10",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.6",
     "@svgr/webpack": "^6.2.1",
-    "@typescript-eslint/eslint-plugin": "^5.19.0",
-    "@typescript-eslint/parser": "^5.19.0",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
     "babel-eslint": "^10.1.0",
-    "babel-jest": "^27.5.1",
-    "babel-loader": "^8.2.4",
+    "babel-jest": "^28.1.0",
+    "babel-loader": "^8.2.5",
     "babel-plugin-react-native-web": "^0.17.7",
     "babel-polyfill": "^6.26.0",
-    "babel-preset-expo": "^9.0.2",
     "babel-preset-react-app": "^10.0.1",
     "bfj": "^7.0.2",
-    "browserslist": "^4.20.2",
-    "dotenv": "^16.0.0",
+    "browserslist": "^4.20.3",
+    "dotenv": "^16.0.1",
     "dotenv-expand": "^5.1.0",
-    "eslint": "^8.13.0",
+    "eslint": "^8.15.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-webpack-plugin": "^3.1.1",
     "file-loader": "^6.2.0",
     "fs-extra": "^10.1.0",
     "html-webpack-plugin": "^5.5.0",
     "identity-obj-proxy": "^3.0.0",
-    "jest": "^27.5.1",
-    "jest-resolve": "^27.5.1",
-    "jest-watch-typeahead": "^1.0.0",
-    "metro-react-native-babel-preset": "^0.70.1",
+    "jest": "^28.1.0",
+    "jest-resolve": "^28.1.0",
+    "jest-watch-typeahead": "^1.1.0",
+    "metro-react-native-babel-preset": "^0.70.3",
     "react-app-polyfill": "^3.0.0",
     "react-dev-utils": "^12.0.1",
-    "react-refresh": "^0.12.0",
+    "react-refresh": "^0.13.0",
     "resolve": "^1.22.0",
     "source-map-loader": "^3.0.1",
     "terser-webpack-plugin": "^5.3.1",
-    "webpack": "^5.72.0",
+    "webpack": "^5.72.1",
     "webpack-bugsnag-plugins": "^1.8.0",
-    "webpack-dev-server": "^4.8.1",
+    "webpack-dev-server": "^4.9.0",
     "webpack-manifest-plugin": "^4.1.1",
     "workbox-webpack-plugin": "^6.5.3"
   },
@@ -64,10 +63,11 @@
     "fsevents": "^2.3.2"
   },
   "peerDependencies": {
-    "react": "^17",
-    "react-dom": "^17",
-    "react-native": "*",
-    "react-native-windows": "*",
+    "react": "^17 || ^18",
+    "react-dom": "^17 || ^18",
+    "react-native": "^0.68",
+    "react-native-macos": "^0.66",
+    "react-native-windows": "^0.68",
     "typescript": "^4"
   },
   "peerDependenciesMeta": {
@@ -75,6 +75,9 @@
       "optional": true
     },
     "react-native": {
+      "optional": true
+    },
+    "react-native-macos": {
       "optional": true
     },
     "react-native-windows": {

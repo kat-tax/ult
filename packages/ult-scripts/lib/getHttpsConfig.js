@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 const chalk = require('react-dev-utils/chalk');
-const paths = require('../config/paths');
+const paths = require('../webpack/paths');
 
 function getHttpsConfig() {
   const {SSL_CRT_FILE, SSL_KEY_FILE, HTTPS} = process.env;

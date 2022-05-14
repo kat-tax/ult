@@ -1,5 +1,9 @@
 const fs = require('fs');
 const path = require('path');
+
+// React Dev Utils
+const getPublicUrlOrPath = require('react-dev-utils/getPublicUrlOrPath');
+
 const appDirectory = fs.realpathSync(process.cwd());
 const moduleFileExtensions = [
   'web.ts',
@@ -13,10 +17,6 @@ const moduleFileExtensions = [
   'json',
 ];
 
-// React Dev Utils
-const getPublicUrlOrPath = require('react-dev-utils/getPublicUrlOrPath');
-
-// Path Resolution
 const resolveApp = uri => path.resolve(appDirectory, uri);
 const resolveModule = (resolve, uri) => {
   const extension = moduleFileExtensions.find(ext =>
@@ -31,8 +31,9 @@ module.exports = {
   appPublic: resolveApp('web'),
   appBuild: resolveApp('build/web'),
   appHtml: resolveApp('web/index.html'),
-  appTsConfig: resolveApp('tsconfig.json'),
   appPackageJson: resolveApp('package.json'),
+  appWebpackConfig: resolveApp('webpack.config.js'),
+  appTypescriptConfig: resolveApp('tsconfig.json'),
   appNodeModules: resolveApp('node_modules'),
   appWebpackCache: resolveApp('node_modules/.cache'),
   appTsBuildInfoFile: resolveApp('node_modules/.cache/tsconfig.tsbuildinfo'),
