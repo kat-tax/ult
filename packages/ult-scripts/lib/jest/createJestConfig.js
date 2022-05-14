@@ -1,7 +1,7 @@
 const fs = require('fs');
 const chalk = require('chalk');
-const modules = require('../modules');
-const paths = require('../../config/paths');
+const paths = require('../../webpack/paths');
+const modules = require('../../webpack/modules');
 
 module.exports = (resolve, rootDir) => {
   const setupTestsMatches = paths.testsSetup.match(/src[/\\]setupTests\.(.+)/);

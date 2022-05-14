@@ -17,9 +17,9 @@ const clearConsole = require('react-dev-utils/clearConsole');
 const openBrowser = require('react-dev-utils/openBrowser');
 
 // Config
-const createDevServerConfig = require('../config/server.config');
-const configFactory = require('../config/webpack.config');
-const paths = require('../config/paths');
+const createDevServerConfig = require('../webpack/config/server');
+const configFactory = require('../webpack/config');
+const paths = require('../webpack/paths');
 
 // Verification
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {

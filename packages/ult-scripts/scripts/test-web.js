@@ -2,7 +2,7 @@ process.env.BABEL_ENV = 'test';
 process.env.NODE_ENV = 'test';
 process.env.PUBLIC_URL = '';
 process.on('unhandledRejection', err => {throw err});
-require('../config/env');
+require('../webpack/env');
 
 // Imports
 const path = require('path');
@@ -34,7 +34,7 @@ if (
   argv.push(isRepository() ? '--watch' : '--watchAll');
 }
 
-const paths = require('../config/paths');
+const paths = require('../webpack/paths');
 const createJestConfig = require('../lib/jest/createJestConfig');
 
 // Setup
