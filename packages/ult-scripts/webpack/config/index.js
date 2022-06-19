@@ -14,8 +14,8 @@ const ForkTsCheckerWebpackPlugin = process.env.TSC_COMPILE_ON_ERROR === 'true'
   : require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 
 // Plugins
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const {WebpackManifestPlugin} = require('webpack-manifest-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
 
 // Runtime
@@ -42,9 +42,9 @@ const modules = require('../modules');
 const paths = require('../paths');
 
 // Config
-module.exports = function(env, args) {
-  const isDev = args.mode ?? env === 'development';
-  const isProd = args.mode ?? env === 'production';
+module.exports = function(env) {
+  const isDev = env === 'development';
+  const isProd = env === 'production';
   const clientEnv = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
   const hasSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
   const hasDisabledESLintPlugin = process.env.DISABLE_ESLINT_PLUGIN === 'true';
@@ -66,7 +66,7 @@ module.exports = function(env, args) {
     : require('./production');
 
   const common = {
-    entry: ['babel-polyfill', paths.appIndexJs],
+    entry: [paths.appIndexJs],
     target: ['browserslist'],
     output: {
       path: paths.appBuild,

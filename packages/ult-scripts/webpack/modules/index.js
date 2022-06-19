@@ -2,7 +2,7 @@ const resolve = require('resolve');
 const fs = require('fs');
 const path = require('path');
 const chalk = require('react-dev-utils/chalk');
-const paths = require('../webpack/paths');
+const paths = require('../paths');
 
 const ts = require(resolve.sync('typescript', {basedir: paths.appNodeModules}));
 const config = ts.readConfigFile(paths.appTypescriptConfig, ts.sys.readFile).config;

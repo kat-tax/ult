@@ -1,5 +1,5 @@
 const fs = require('fs');
-const paths = require('./paths');
+const paths = require('../paths');
 const getHttpsConfig = require('../../lib/getHttpsConfig');
 
 // React Dev Utils
@@ -49,15 +49,13 @@ module.exports = function (proxy, allowedHost) {
         port: sockPort,
       },
     },
-    onBeforeSetupMiddleware(devServer) {
-      devServer.app.use(evalSourceMapMiddleware(devServer));
-      if (fs.existsSync(paths.proxySetup)) {
+    setupMiddlewares: (middlewares, devServer) => {
+      middlewares.unshift(evalSourceMapMiddleware(devServer));
+      middlewares.push(redirectServedPath(paths.publicUrlOrPath));
+      middlewares.push(noopServiceWorkerMiddleware(paths.publicUrlOrPath));
+      if (fs.existsSync(paths.proxySetup))
         require(paths.proxySetup)(devServer.app);
-      }
-    },
-    onAfterSetupMiddleware(devServer) {
-      devServer.app.use(redirectServedPath(paths.publicUrlOrPath));
-      devServer.app.use(noopServiceWorkerMiddleware(paths.publicUrlOrPath));
+      return middlewares;
     },
   };
 };

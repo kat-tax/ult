@@ -12,7 +12,7 @@ function getClientEnvironment(publicUrl) {
       WDS_SOCKET_PORT: process.env.WDS_SOCKET_PORT,
     });
   const stringified = {
-    '__DEV__': NODE_ENV === 'development',
+    '__DEV__': process.env.NODE_ENV === 'development',
     'process.env': Object.keys(raw).reduce((env, key) => {
       env[key] = JSON.stringify(raw[key]);
       return env;
