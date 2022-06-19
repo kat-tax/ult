@@ -92,7 +92,6 @@ module.exports = function(env, args) {
         // React Native Web support
         'react-native$': 'react-native-web',
         // Alias popular RNW packages
-        'react-native-svg': 'react-native-svg-web',
         'react-native-maps': 'react-native-web-maps',
         'react-native-webview': 'react-native-web-webview',
         'lottie-react-native': 'react-native-web-lottie',
@@ -145,6 +144,15 @@ module.exports = function(env, args) {
               issuer: {
                 and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
               },
+            },
+            {
+              test: /postMock.html$/,
+              use: {
+                loader: 'file-loader',
+                options: {
+                  name: '[name].[ext]',
+                },
+              }
             },
             {
               test: /\.(ts|tsx|js|jsx|mjs|cjs)$/,
