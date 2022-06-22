@@ -24,6 +24,7 @@ module.exports = {
     },
   },
   plugins: [
+    // Experimental hot reloading for React
     // https://github.com/pmmmwh/react-refresh-webpack-plugin#options
     new ReactRefreshWebpackPlugin({overlay: false}),
   ].filter(Boolean),

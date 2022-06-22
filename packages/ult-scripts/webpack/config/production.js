@@ -59,6 +59,8 @@ module.exports = {
     },
   },
   plugins: [
+    // Generate a service worker script that will pre-cache assets
+    // Keeps the HTML & assets that are part of the webpack build up-to-date
     // https://developers.google.com/web/tools/workbox/reference-docs/latest/module-workbox-webpack-plugin.GenerateSW#GenerateSW
     fs.existsSync(paths.swSrc) && new WorkboxWebpackPlugin.InjectManifest({
       swSrc: paths.swSrc,
@@ -66,12 +68,14 @@ module.exports = {
       exclude: [/\.map$/, /asset-manifest\.json$/, /LICENSE/],
       maximumFileSizeToCacheInBytes: 5 * 1024 * 1024,
     }),
+    // Bugsnag build version & stage reporting
     // https://docs.bugsnag.com/build-integrations/webpack/#build-reporter
     hasBugsnagReporting && new BugsnagPlugins.BugsnagBuildReporterPlugin({
       apiKey: process.env.BUGSNAG_API_KEY,
       appVersion: process.env.APP_VERSION,
       releaseStage: process.env.APP_STAGE,
     }),
+    // Bugsnag source maps uploading
     // https://docs.bugsnag.com/build-integrations/webpack/#source-map-uploader
     hasBugsnagReporting && hasSourceMap && new BugsnagPlugins.BugsnagSourceMapUploaderPlugin({
       apiKey: process.env.BUGSNAG_API_KEY,

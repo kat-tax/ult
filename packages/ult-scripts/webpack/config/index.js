@@ -68,6 +68,7 @@ module.exports = function(env) {
   const common = {
     entry: [paths.appIndexJs],
     target: ['browserslist'],
+    stats: 'errors-warnings',
     output: {
       path: paths.appBuild,
       publicPath: paths.publicUrlOrPath,
@@ -119,6 +120,8 @@ module.exports = function(env) {
         },
         {
           oneOf: [
+            // Support importing SVGs
+            // https://react-svgr.com/docs/webpack/
             {
               test: /\.svg$/,
               use: [
@@ -145,6 +148,15 @@ module.exports = function(env) {
                 and: [/\.(ts|tsx|js|jsx|md|mdx)$/],
               },
             },
+            // Support React Native Vector Icons
+            // https://github.com/oblador/react-native-vector-icons#web-with-webpack
+            {
+              test: /\.ttf$/,
+              loader: require.resolve('file-loader'),
+              include: path.resolve(__dirname, 'node_modules/react-native-vector-icons'),
+            },
+            // Support React Native Web Webview
+            // https://github.com/react-native-web-community/react-native-web-webview#getting-started
             {
               test: /postMock.html$/,
               use: {
@@ -154,6 +166,26 @@ module.exports = function(env) {
                 },
               }
             },
+            // Support React Native uncompiled libraries
+            // https://github.com/babel/babel/discussions/11694#discussioncomment-84474
+            {
+              test: /(@?react-(navigation|native)).*\.(ts|js)x?$/,
+              exclude: [/react-native-web/, /\.(native|ios|android)\.(ts|js)x?$/],
+              loader: require.resolve('babel-loader'),
+              options: {
+                cacheIdentifier,
+                cacheDirectory: true,
+                cacheCompression: false,
+                sourceMaps: hasSourceMap,
+                inputSourceMap: hasSourceMap,
+                presets: [
+                  [require.resolve('babel-preset-react-app/dependencies'), {helpers: true}],
+                  ['babel-preset-react-app'],
+                ],
+              }
+            },
+            // Process application JS with Babel
+            // The preset includes JSX, Flow, TypeScript, and some ESnext features
             {
               test: /\.(ts|tsx|js|jsx|mjs|cjs)$/,
               include: [
@@ -181,24 +213,8 @@ module.exports = function(env) {
                 ].filter(Boolean),
               },
             },
-            // Support React Native uncompiled libraries
-            // https://github.com/babel/babel/discussions/11694#discussioncomment-84474
-            {
-              test: /(@?react-(navigation|native)).*\.(ts|js)x?$/,
-              exclude: [/react-native-web/, /\.(native|ios|android)\.(ts|js)x?$/],
-              loader: require.resolve('babel-loader'),
-              options: {
-                cacheIdentifier,
-                cacheDirectory: true,
-                cacheCompression: false,
-                sourceMaps: hasSourceMap,
-                inputSourceMap: hasSourceMap,
-                presets: [
-                  [require.resolve('babel-preset-react-app/dependencies'), {helpers: true}],
-                  ['babel-preset-react-app'],
-                ],
-              }
-            },
+            // Process outside JS with Babel
+            // Unlike the application JS, we only compile the standard ES features
             {
               test: /\.(js|mjs)$/,
               exclude: /@babel(?:\/|\\{1,2})runtime/,
@@ -215,23 +231,23 @@ module.exports = function(env) {
                 presets: [[require.resolve('babel-preset-react-app/dependencies'), {helpers: true}]],
               },
             },
-            // https://github.com/oblador/react-native-vector-icons#web-with-webpack
-            {
-              test: /\.ttf$/,
-              loader: require.resolve('file-loader'),
-              include: path.resolve(__dirname, 'node_modules/react-native-vector-icons'),
-            },
+            // This loader makes sure static assets get served by WebpackDevServer
+            // When you `import` an asset, you get its (virtual) filename
+            // In production, they would get copied to the `build` folder
+            // This loader doesn't use "test" so it will catch all modules that fall through
             {
               exclude: [/^$/, /\.(ts|tsx|js|jsx|mjs|cjs)$/, /\.html$/, /\.json$/],
               type: 'asset/resource',
             },
-            // ** STOP ** Are you adding a new loader?
-            // Make sure to add the new loader(s) before the above loader.
+            // !!!!STOP!!!! Are you adding a new loader?
+            // Make sure to add the new loader(s) before the loader above
+            // You can also use webpack.config.js in your root to extend the default config
           ],
         },
       ],
     },
     plugins: [
+      // Generates an `index.html` file with the <script> injected
       // https://github.com/jantimon/html-webpack-plugin#options
       new HtmlWebpackPlugin(Object.assign({}, {inject: true, template: paths.appHtml}, isProd ? {
         minify: {
@@ -247,9 +263,19 @@ module.exports = function(env) {
           minifyURLs: true,
         },
       } : undefined)),
+      // Makes some environment variables available in index.html
+      // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
+      // <link rel="icon" href="%PUBLIC_URL%/favicon.ico">
+      // It will be an empty string unless you specify "homepage"
+      // in `package.json`, in which case it will be the pathname of that URL
       new InterpolateHtmlPlugin(HtmlWebpackPlugin, clientEnv.raw),
+      // This gives some necessary context to module not found errors
       new ModuleNotFoundPlugin(paths.appPath),
+      // Makes some environment variables available to the JS code
+      // It is essential that NODE_ENV is set to production for production builds
+      // Otherwise React will be compiled in the very slow development mode
       new webpack.DefinePlugin(clientEnv.stringified),
+      // Generate an asset manifest file for caching purposes
       // https://github.com/danethurber/webpack-manifest-plugin#api
       new WebpackManifestPlugin({
         fileName: 'asset-manifest.json',
@@ -264,6 +290,12 @@ module.exports = function(env) {
           };
         },
       }),
+      // Prevent importing the React Native Reanimated package on web
+      // this is due to it's large size and it's usually not needed on web
+      new webpack.IgnorePlugin({
+        resourceRegExp: /react-native-reanimated$/,
+      }),
+      // Type checking
       // https://github.com/TypeStrong/fork-ts-checker-webpack-plugin#options
       new ForkTsCheckerWebpackPlugin({
         async: isDev,
@@ -304,6 +336,7 @@ module.exports = function(env) {
           infrastructure: 'silent',
         },
       }),
+      // Source linting
       // https://webpack.js.org/plugins/eslint-webpack-plugin/#options
       !hasDisabledESLintPlugin && new ESLintPlugin({
         extensions: ['ts', 'tsx', 'js', 'jsx', 'mjs'],

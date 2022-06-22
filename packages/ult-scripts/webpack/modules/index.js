@@ -1,5 +1,4 @@
 const resolve = require('resolve');
-const fs = require('fs');
 const path = require('path');
 const chalk = require('react-dev-utils/chalk');
 const paths = require('../paths');
@@ -37,7 +36,6 @@ const getWebpackAliases = (options = {}) => {
 }
 
 module.exports = {
-  hasTsConfig: fs.existsSync(paths.appTypescriptConfig),
   additionalModulePaths: getAdditionalModulePaths(options),
   webpackAliases: getWebpackAliases(options),
   jestAliases: getJestAliases(options),
