@@ -16,4 +16,4 @@ function run(cmd, args, cwd, inherit) {
   });
 }
 
-module.exports = {npx, pod, run};
+module.exports = {npx, run};
