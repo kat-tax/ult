@@ -1,7 +1,7 @@
 {
   "name": "ult-template-default",
   "description": "A production-ready base for ULT projects",
-  "version": "2.4.1",
+  "version": "2.4.2",
   "scripts": {
     "prepublish": "git submodule update --remote"
   },
