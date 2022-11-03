@@ -6,6 +6,7 @@ const config = require('../config');
 const prompt = require('../lib/prompt');
 const command = require('../lib/command');
 const validate = require('../lib/validate');
+const hasPlatformChoice = false;
 
 (async function() {
   try {
@@ -23,7 +24,7 @@ const validate = require('../lib/validate');
         choices: config.bases,
         validate: validate.base,
       },
-      false && {
+      hasPlatformChoice && {
         name: 'platforms',
         type: 'multiselect',
         message: 'Select target platforms',
@@ -39,7 +40,7 @@ const validate = require('../lib/validate');
     await command.npx(['react-native-windows-init', '--overwrite', '--no-telemetry'], cwd);
     if (process.platform === 'darwin') {
       console.log('Installing pods...');
-      await command.pod(input.name);
+      await command.run('pod', 'install', '--project-directory', 'ios');
     }
     console.log(color.green(`\nSuccessfully created ${input.name}!\n`));
     console.log(color.bold('1) Navigate to your project:'));

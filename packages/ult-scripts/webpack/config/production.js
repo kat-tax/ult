@@ -20,8 +20,8 @@ module.exports = {
   bail: true,
   output: {
     pathinfo: false,
-    filename: 'static/js/[name].[contenthash:8].js',
-    chunkFilename: 'static/js/[name].[contenthash:8].chunk.js',
+    filename: 'static/js/[name].[contenthash].js',
+    chunkFilename: 'static/js/chunk.[contenthash].js',
     assetModuleFilename: 'static/media/[name].[hash][ext]',
     devtoolModuleFilenameTemplate: info => path.relative(paths.appSrc, info.absoluteResourcePath).replace(/\\/g, '/'),
   },

@@ -7,12 +7,6 @@ function npx(args, cwd, inherit) {
   return run(cmd, args, cwd, inherit);
 };
 
-// Run the "pod" cli tool
-function pod(project) {
-  const cwd = path.resolve(process.cwd(), project.toLowerCase(), 'ios');
-  return run('pod', ['install'], cwd);
-};
-
 // Run any command
 function run(cmd, args, cwd, inherit) {
   return new Promise((resolve, reject) => {

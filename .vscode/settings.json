@@ -1,9 +1,0 @@
-{
-  "editor.tabSize": 2,
-  "typescript.format.semicolons": "insert",
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingEmptyBraces": false,
-  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": false,
-  "typescript.preferences.jsxAttributeCompletionStyle": "braces",
-  "typescript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.preferences.importModuleSpecifierEnding": "minimal",
-}
