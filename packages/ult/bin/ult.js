@@ -38,10 +38,6 @@ const hasPlatformChoice = false;
     console.log('Initializing Windows project...');
     const cwd = path.resolve(process.cwd(), input.name.toLowerCase());
     await command.npx(['react-native-windows-init', '--overwrite', '--no-telemetry'], cwd);
-    if (process.platform === 'darwin') {
-      console.log('Installing pods...');
-      await command.run('pod', 'install', '--project-directory', 'ios');
-    }
     console.log(color.green(`\nSuccessfully created ${input.name}!\n`));
     console.log(color.bold('1) Navigate to your project:'));
     console.log(`$ ${color.yellow(`cd ${input.name.toLowerCase()}`)}\n`);
