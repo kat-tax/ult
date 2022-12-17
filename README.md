@@ -73,7 +73,7 @@
 
 ## Funding
 
-> You can [sponsor](https://github.com/sponsors/Cavitt) development or donate to an address below
+> You can [sponsor](https://github.com/sponsors/TheUltDev) development or donate to an address below
 
 ```
 BTC 3MxrqVM7S8FGb7UwKMLxQ9gG1B2n24Y1NP
