@@ -2,27 +2,34 @@
   <h1>{{ site.title }}</h1>
   <h2>{{ site.tagline }}</h2>
   <div>
-    <input title="Command line input" autofocus readonly type="text" value="{{ site.cmd_npm }} {{ site.cmd_sample_1 }}" id="input"/>
+    <input
+      readonly
+      autofocus
+      id="input"
+      type="text"
+      title="Command line input"
+      value="{{ site.cmd_npm }} {{ site.cmd_sample_1 }}"
+    />
     <button title="Copy input" id="clipboard">
       <img alt="Copy" src="images/icon-clipboard.svg"/>
     </button>
   </div>
+  <a title="Run ULT" href="https://run.ult.dev" target="_blank">
+    <img alt="Run ULT" src="images/icon-play.svg"/>
+  </a>
+  <a title="Source Code" href="{{ site.github.repository_url }}" target="_blank">
+    <img alt="Source Code" src="images/icon-git.svg"/>
+  </a>
   <a title="Documentation" href="https://docs.ult.dev" target="_blank">
     <img alt="Documentation" src="images/icon-note.svg"/>
-  </a>
-  <a title="Source" href="{{ site.github.repository_url }}" target="_blank">
-    <img alt="Source" src="images/icon-git.svg"/>
   </a>
   <a title="Roadmap" href="https://github.com/orgs/kat-tax/projects/4" target="_blank">
     <img alt="Roadmap" src="images/icon-sign.svg"/>
   </a>
-  <a title="Run" href="https://run.ult.dev" target="_blank">
-    <img alt="Run" src="images/icon-play.svg"/>
+  <a title="Discord" href="https://discord.gg/TzhDRyj" target="_blank">
+    <img alt="Discord" src="images/icon-chat.svg"/>
   </a>
-  <a title="Chat" href="https://discord.gg/TzhDRyj" target="_blank">
-    <img alt="Chat" src="images/icon-chat.svg"/>
-  </a>
-  <a title="TheUltDev" href="https://linktr.ee/theultdev" target="_blank">
+  <a title="TheUltDev" href="https://the.ult.dev" target="_blank">
     <img alt="TheUltDev" src="images/icon-face.svg"/>
   </a>
   <script>
@@ -33,7 +40,9 @@
     var sample1 = '{{ site.cmd_sample_1 }}';
     var sample2 = '{{ site.cmd_sample_2 }}';
     var sample3 = '{{ site.cmd_sample_3 }}';   
-    var command = window.pkgManager === 'yarn' ? '{{ site.cmd_yarn }}' : '{{ site.cmd_npm }}';
+    var command = window.packageManager === 'yarn'
+      ? '{{ site.cmd_yarn }}'
+      : '{{ site.cmd_npm }}';
 
     input.value = command + sample1;
     input.onfocus = select;

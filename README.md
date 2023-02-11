@@ -59,11 +59,11 @@
  - [React](https://reactjs.org) (view)
  - [Redux](https://redux-toolkit.js.org) (state)
  - [LinguiJS](https://lingui.js.org) (i18n)
- - [TypeScript](https://www.typescriptlang.org) (language)
- - [React Navigation](https://reactnavigation.org) (routing)
+ - [TypeScript](https://www.typescriptlang.org) (lang)
+ - [React Router](https://reactrouter.com) (routing)
  - [Webpack](https://webpack.js.org) + [Metro](https://facebook.github.io/metro) (building)
- - [React Native Web](https://necolas.github.io/react-native-web) (web bridge)
- - [React Native](https://reactnative.dev) + [Windows](https://microsoft.github.io/react-native-windows) (native bridge)
+ - [React Native Web](https://necolas.github.io/react-native-web) (web platform)
+ - [React Native](https://reactnative.dev) + [Windows](https://microsoft.github.io/react-native-windows) (native platform)
 
 
 ## Community

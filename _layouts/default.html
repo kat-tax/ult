@@ -3,11 +3,11 @@
 {%- include head.html -%}
 <body>
 <script>
-  window.pkgManager;
+  window.packageManager;
   try {
-    window.pkgManager = localStorage.getItem('pkg_manager');
+    window.packageManager = localStorage.getItem('package_manager');
   } catch(e) {
-    window.pkgManager = 'npm';
+    window.packageManager = 'npm';
   }
 </script>
 {%- include header.html -%}
@@ -23,11 +23,11 @@
   </button>
 </aside>
 <script>
-  document.body.className = window.pkgManager;
-  document.getElementById('npm').onclick = setPkgManager('npm');
-  document.getElementById('yarn').onclick = setPkgManager('yarn');
+  document.body.className = window.packageManager;
+  document.getElementById('npm').onclick = setPackageManager('npm');
+  document.getElementById('yarn').onclick = setPackageManager('yarn');
   document.querySelectorAll('main *').forEach(function(node) {
-    if (window.pkgManager === 'yarn') {
+    if (window.packageManager === 'yarn') {
       node.innerHTML = node.innerHTML
         .replace(/{{ site.cmd_npm }}/g, '{{ site.cmd_yarn }}')
         .replace(/npm run/g, 'yarn');
@@ -38,10 +38,10 @@
     }
   });
 
-  function setPkgManager(name) {
+  function setPackageManager(name) {
     return function() {
       try {
-        localStorage.setItem('pkg_manager', name);
+        localStorage.setItem('package_manager', name);
         location.reload();
       } catch(e) {}
     }
