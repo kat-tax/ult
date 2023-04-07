@@ -7,8 +7,8 @@
 </h3>
 <p align="center">
     <a href="https://docs.ult.dev">Documentation</a>
-  | <a href="https://try.ult.dev">Sandbox</a>
   | <a href="https://github.com/orgs/kat-tax/projects/4">Roadmap</a>
+  | <a href="https://github.com/kat-tax/hello-world">Template</a>
   | <a href="https://discord.gg/TzhDRyj">Discord</a>
 </p>
 <blockquote align="center">
@@ -30,26 +30,35 @@
   <img src="https://img.shields.io/npm/v/ult?color=000&style=flat-square">
   <img src="https://img.shields.io/node/v/ult?color=000&style=flat-square">
 </p>
+<p align="center">
+  <a href="https://stackblitz.com/fork/github/kat-tax/hello-world/web-only">
+    <img
+      alt="Open in StackBlitz"
+      src="https://developer.stackblitz.com/img/open_in_stackblitz_small.svg"
+    />
+  </a>
+</p>
 
 -------------
 
 <!--img align="right" src="images/terminal.svg"-->
 
-| Task      | Description                        |
-| ----------| -----------------------------------|
-| web       | Run the __Web__ app                |
-| android   | Run the __Android__ app            |
-| windows   | Run the __Windows__ app            |
-| macos     | Run the __MacOS__ app              |
-| ios       | Run the __iOS__ app                |
-| start     | Start dev servers                  |
-| build     | Build all platforms                |
-| deploy    | Deploy all platforms               |
-| test      | Test e2e & unit specs              |
-| lint      | Lint source code style             |
-| analyze   | Analyze javascript bundle          |
-| generate  | Generate icons & other assets      |
-| translate | Extract & compile translations     |
+| Task        | Description                        |
+| ------------| -----------------------------------|
+| web         | Run the __Web__ app                |
+| android     | Run the __Android__ app            |
+| windows     | Run the __Windows__ app            |
+| macos       | Run the __MacOS__ app              |
+| ios         | Run the __iOS__ app                |
+| doc         | Build documentation                |
+| lint        | Lint source code style             |
+| test        | Test e2e & unit tests              |
+| build       | Build web bundle                   |
+| start       | Start dev servers                  |
+| deploy      | Deploy all platforms               |
+| generate    | Generate icons & other assets      |
+| translate   | Extract & compile translations     |
+| storybook   | Run storybook in development       |
 
 -------------
 
