@@ -14,9 +14,6 @@
       <img alt="Copy" src="images/icon-clipboard.svg"/>
     </button>
   </div>
-  <a title="Run ULT" href="https://run.ult.dev" target="_blank">
-    <img alt="Run ULT" src="images/icon-play.svg"/>
-  </a>
   <a title="Source Code" href="{{ site.github.repository_url }}" target="_blank">
     <img alt="Source Code" src="images/icon-git.svg"/>
   </a>
@@ -25,6 +22,9 @@
   </a>
   <a title="Roadmap" href="https://github.com/orgs/kat-tax/projects/4" target="_blank">
     <img alt="Roadmap" src="images/icon-sign.svg"/>
+  </a>
+  <a title="Twitter" href="https://twitter.com/TheUltDev" target="_blank">
+    <img alt="Twitter" src="images/icon-twitter.svg"/>
   </a>
   <a title="Discord" href="https://discord.gg/TzhDRyj" target="_blank">
     <img alt="Discord" src="images/icon-chat.svg"/>
@@ -39,10 +39,12 @@
     var interval = parseInt('{{ site.cmd_delay }}', 10);
     var sample1 = '{{ site.cmd_sample_1 }}';
     var sample2 = '{{ site.cmd_sample_2 }}';
-    var sample3 = '{{ site.cmd_sample_3 }}';   
+    var sample3 = '{{ site.cmd_sample_3 }}';
     var command = window.packageManager === 'yarn'
       ? '{{ site.cmd_yarn }}'
-      : '{{ site.cmd_npm }}';
+      :  window.packageManager === 'pnpm'
+        ? '{{ site.cmd_pnpm }}'
+        : '{{ site.cmd_npm }}';
 
     input.value = command + sample1;
     input.onfocus = select;

@@ -18,6 +18,9 @@
   <button id="npm">
     <img alt="NPM" src="images/icon-npm.svg"/>
   </button>
+  <button id="pnpm">
+    <img alt="PNPM" src="images/icon-pnpm.svg"/>
+  </button>
   <button id="yarn">
     <img alt="Yarn" src="images/icon-yarn.svg"/>
   </button>
@@ -26,15 +29,20 @@
   document.body.className = window.packageManager;
   document.getElementById('npm').onclick = setPackageManager('npm');
   document.getElementById('yarn').onclick = setPackageManager('yarn');
+  document.getElementById('pnpm').onclick = setPackageManager('pnpm');
   document.querySelectorAll('main *').forEach(function(node) {
     if (window.packageManager === 'yarn') {
       node.innerHTML = node.innerHTML
-        .replace(/{{ site.cmd_npm }}/g, '{{ site.cmd_yarn }}')
-        .replace(/npm run/g, 'yarn');
+        .replace(/({{ site.cmd_npm }}|{{ site.cmd_pnpm }})/g, '{{ site.cmd_yarn }}')
+        .replace(/(npm run|pnpm run)/g, 'yarn');
+    } else if (window.packageManager === 'pnpm') {
+      node.innerHTML = node.innerHTML
+        .replace(/({{ site.cmd_npm }}|{{ site.cmd_yarn }})/g, '{{ site.cmd_pnpm }}')
+        .replace(/(npm run|yarn)/g, 'pnpm run');
     } else {
       node.innerHTML = node.innerHTML
-        .replace(/{{ site.cmd_yarn }}/g, '{{ site.cmd_npm }}')
-        .replace(/yarn/g, 'npm run');
+        .replace(/({{ site.cmd_pnpm }}|{{ site.cmd_yarn }})/g, '{{ site.cmd_npm }}')
+        .replace(/(pnpm run|yarn)/g, 'npm run');
     }
   });
 
