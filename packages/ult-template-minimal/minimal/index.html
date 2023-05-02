@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+  <meta charSet="utf-8"/>
+  <meta httpEquiv="x-ua-compatible" content="ie=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes"/>
+  <title>Hello App Display Name</title>
+  <style>
+    html {
+      font-family: proxima-nova, "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    }
+
+    html, body, #root {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      display: flex;
+      background: #000;
+      overflow-y: hidden;
+      -webkit-tap-highlight-color: transparent;
+      -webkit-font-smoothing: antialiased;
+      -webkit-text-size-adjust: 100%;
+          -ms-text-size-adjust: 100%;
+      -webkit-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+    }
+
+    a {text-decoration: none}
+    svg {display: block}
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="./src/index.web.ts"></script>
+</body>
+</html>
