@@ -114,11 +114,17 @@ aside {
     border-radius: 3em;
 
     img {
-      width: 3em;
+      max-height: 1.8em;
+      max-width: 3em;
     }
 
     [alt="Yarn"] {
-      opacity: 0.8;
+      opacity: 0.5;
+      filter: grayscale(100%);
+    }
+
+    [alt="PNPM"] {
+      opacity: 0.5;
       filter: grayscale(100%);
     }
   }
@@ -231,20 +237,48 @@ header {
   }
 }
 
+body.pnpm {
+  header div {
+    width: 19em;
+  }
+
+  aside {
+    [alt="PNPM"] {
+      opacity: 1;
+      filter: initial;
+    }
+
+    [alt="NPM"] {
+      opacity: 0.5;
+      filter: grayscale(100%);
+    }
+
+    [alt="YARN"] {
+      opacity: 0.5;
+      filter: grayscale(100%);
+    }
+  }
+}
+
 body.yarn {
   header div {
     width: 20em;
   }
 
   aside {
+    [alt="Yarn"] {
+      opacity: 1;
+      filter: initial;
+    }
+
     [alt="NPM"] {
       opacity: 0.5;
       filter: grayscale(100%);
     }
 
-    [alt="Yarn"] {
-      opacity: 1;
-      filter: initial;
+    [alt="PNPM"] {
+      opacity: 0.5;
+      filter: grayscale(100%);
     }
   }
 }

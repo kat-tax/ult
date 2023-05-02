@@ -31,11 +31,8 @@
   <img src="https://img.shields.io/node/v/ult?color=000&style=flat-square">
 </p>
 <p align="center">
-  <a href="https://stackblitz.com/fork/github/kat-tax/hello-world/web-only">
-    <img
-      alt="Open in StackBlitz"
-      src="https://developer.stackblitz.com/img/open_in_stackblitz_small.svg"
-    />
+  <a href="https://run.ult.dev/">
+    <img alt="Open in StackBlitz" src="https://developer.stackblitz.com/img/open_in_stackblitz_small.svg"/>
   </a>
 </p>
 

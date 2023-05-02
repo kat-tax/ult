@@ -4,6 +4,7 @@ origin: https://ult.dev
 tagline: The Ultimate Dev Stack
 description: One code base for native mobile, native desktop, and web!
 cmd_npm: npx ult
+cmd_pnpm: pnpm dlx ult
 cmd_yarn: yarn create ult
 cmd_sample_1: ' HelloWorld'
 cmd_sample_2: ' TodoList'

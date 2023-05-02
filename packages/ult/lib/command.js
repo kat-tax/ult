@@ -1,5 +1,5 @@
 const path = require('path');
-const spawn = require('child_process').spawn;
+const {spawn, execSync} = require('child_process');
 
 // Run the "npx" cli tool
 function npx(args, cwd, inherit) {
@@ -16,4 +16,23 @@ function run(cmd, args, cwd, inherit) {
   });
 }
 
-module.exports = {npx, run};
+// Get the preferred packaged manager
+function getPackageManager() {
+  if (isInstalled('pnpm'))
+    return 'pnpm';
+  if (isInstalled('yarn'))
+    return 'yarn';
+  return 'npm';
+}
+
+// Check if a program is installed
+function isInstalled(program) {
+  try {
+    execSync(`which ${program}`, {stdio: 'ignore'});
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
+module.exports = {npx, run, getPackageManager};
