@@ -1,6 +1,6 @@
 {
   "name": "react-ult-ext-imagesvg",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Plugin for ULT that provides support for SVG (scalable vector graphics) for all platforms",
   "types": "dist/web/PluginBase.d.ts",
   "license": "MIT",
@@ -13,11 +13,11 @@
     "react-native-svg": "^9.13.3"
   },
   "peerDependencies": {
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-native": "^0.61.5",
-    "react-native-windows": "^0.61.5",
-    "react-ult": "^2.1.3"
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-native": "^0.63.4",
+    "react-native-windows": "^0.63.27",
+    "react-ult": "^2.2.1-reup"
   },
   "devDependencies": {
     "@types/react-native": "^0.62.4",
