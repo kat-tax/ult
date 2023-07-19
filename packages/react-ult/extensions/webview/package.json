@@ -1,6 +1,6 @@
 {
   "name": "react-ult-ext-webview",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Plugin for ULT that provides a control that allows the display of an independent web page",
   "types": "dist/web/PluginBase.d.ts",
   "license": "MIT",

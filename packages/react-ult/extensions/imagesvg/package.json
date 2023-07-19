@@ -1,6 +1,6 @@
 {
   "name": "react-ult-ext-imagesvg",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Plugin for ULT that provides support for SVG (scalable vector graphics) for all platforms",
   "types": "dist/web/PluginBase.d.ts",
   "license": "MIT",

@@ -1,6 +1,6 @@
 {
   "name": "react-ult-ext-virtuallistview",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Plugin for ULT that provides performant scrolling in a virtualized list view",
   "types": "dist/VirtualListView.d.ts",
   "license": "MIT",

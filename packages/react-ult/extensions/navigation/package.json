@@ -1,6 +1,6 @@
 {
   "name": "react-ult-ext-navigation",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "description": "Plugin for ULT that provides a navigation framework",
   "types": "dist/web/Navigator.d.ts",
   "license": "MIT",
