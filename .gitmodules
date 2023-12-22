@@ -1,3 +1,0 @@
-[submodule "packages/ult-template-default/hello-world"]
-	path = packages/ult-template-default/hello-world
-	url = git@github.com:kat-tax/hello-world.git
