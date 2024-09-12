@@ -9,7 +9,7 @@
     <a href="https://docs.ult.dev">Documentation</a>
   | <a href="https://github.com/orgs/kat-tax/projects/4">Roadmap</a>
   | <a href="https://github.com/kat-tax/hello-world">Template</a>
-  | <a href="https://discord.gg/TzhDRyj">Discord</a>
+  | <a href="https://discord.kat.tax">Discord</a>
 </p>
 <blockquote align="center">
   One code base for native mobile, native desktop, and web!
@@ -74,7 +74,7 @@
 
 ## Community
 
-> Join our [discord channel](https://discord.gg/TzhDRyj) or create a [github dicussion](https://github.com/kat-tax/ult/discussions)
+> Join our [discord channel](https://discord.kat.tax) or create a [github dicussion](https://github.com/kat-tax/ult/discussions)
 
 
 ## Funding
