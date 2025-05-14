@@ -1,0 +1,9 @@
+{
+  "lineWidth": 200,
+  "excludes": [
+    "npm/"
+  ],
+  "plugins": [
+    "https://plugins.dprint.dev/typescript-0.85.1.wasm"
+  ]
+}

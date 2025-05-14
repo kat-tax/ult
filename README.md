@@ -43,10 +43,10 @@
 | Task        | Description                        |
 | ------------| -----------------------------------|
 | web         | Run the __Web__ app                |
-| android     | Run the __Android__ app            |
-| windows     | Run the __Windows__ app            |
-| macos       | Run the __MacOS__ app              |
 | ios         | Run the __iOS__ app                |
+| macos       | Run the __MacOS__ app              |
+| windows     | Run the __Windows__ app            |
+| android     | Run the __Android__ app            |
 | doc         | Build documentation                |
 | lint        | Lint source code style             |
 | test        | Test e2e & unit tests              |

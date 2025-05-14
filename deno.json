@@ -1,6 +1,5 @@
 {
-  "private": true,
-  "scripts": {
+  "tasks": {
     "build": "bundle exec jekyll build --verbose",
     "start": "bundle exec jekyll serve --livereload --incremental"
   }

@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "start": "deno run -A ./mod.ts",
+    "build": "deno run -A ./npm.ts"
+  },
+  "exclude": [
+    "npm"
+  ]
+}
